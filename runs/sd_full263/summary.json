@@ -1,0 +1,21 @@
+{
+  "tag": "sd_full263",
+  "split_file": "splits/full263__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "pretrained": true,
+  "best_epoch": 176,
+  "params_M": 3.802,
+  "val": {
+    "top1": 0.2354,
+    "top5": 0.5349,
+    "balanced": 0.2522,
+    "n": 888
+  },
+  "test": {
+    "top1": 0.2208,
+    "top5": 0.5139,
+    "balanced": 0.2518,
+    "n": 1010
+  }
+}

@@ -1,0 +1,98 @@
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1786152564.208573    2228 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.239975   20392 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1786152564.248066   21116 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.248169   29088 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.248590    2228 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.280326   21116 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.283013    6360 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1786152564.366353   13216 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.366363   23540 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786152564.406110   27048 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.414951    8864 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.414954   27312 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.415857   13216 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.442925   25664 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.445309   17792 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1786152564.478889   29460 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.519844   24488 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.526612   29460 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.527929   27312 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786152564.528066   24488 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.528720    9124 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.556591   28960 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.562172   24488 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.566806    6928 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1786152564.594475   28528 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.597429    2800 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.640712   22304 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.649646    4904 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.649793    1848 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.652353   22304 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.658049   19432 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786152564.686182   25952 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.686745    1848 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152564.768618   13352 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786152565.057984   10748 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152565.087461    3152 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152565.147838    8592 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152565.154184   12072 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152565.179382   13972 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786152565.185495   12072 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+4257 videos -> cache128\crops.npy (4257, 16, 3, 128, 128, 3) (10.04 GB), 4 workers, mode=w+
+4257 videos still to process (4257 not yet cached)
+  [100/4257] 1.1 clips/s  eta 61.9 min  coverage 100.0%  failures 0
+  [200/4257] 1.1 clips/s  eta 59.5 min  coverage 100.0%  failures 0
+  [300/4257] 1.2 clips/s  eta 56.8 min  coverage 100.0%  failures 0
+  [400/4257] 1.2 clips/s  eta 55.1 min  coverage 100.0%  failures 0
+  [500/4257] 1.2 clips/s  eta 53.3 min  coverage 100.0%  failures 0
+  [600/4257] 1.2 clips/s  eta 52.1 min  coverage 100.0%  failures 0
+  [700/4257] 1.2 clips/s  eta 49.8 min  coverage 100.0%  failures 0
+  [800/4257] 1.2 clips/s  eta 48.8 min  coverage 100.0%  failures 0
+  [900/4257] 1.2 clips/s  eta 47.9 min  coverage 100.0%  failures 0
+  [1000/4257] 1.2 clips/s  eta 46.8 min  coverage 100.0%  failures 0
+  [1100/4257] 1.2 clips/s  eta 45.5 min  coverage 100.0%  failures 0
+  [1200/4257] 1.2 clips/s  eta 44.0 min  coverage 100.0%  failures 0
+  [1300/4257] 1.2 clips/s  eta 42.5 min  coverage 100.0%  failures 0
+  [1400/4257] 1.2 clips/s  eta 40.9 min  coverage 100.0%  failures 0
+  [1500/4257] 1.2 clips/s  eta 39.3 min  coverage 100.0%  failures 0
+  [1600/4257] 1.2 clips/s  eta 37.9 min  coverage 100.0%  failures 0
+  [1700/4257] 1.2 clips/s  eta 36.3 min  coverage 100.0%  failures 0
+  [1800/4257] 1.2 clips/s  eta 34.9 min  coverage 100.0%  failures 0
+  [1900/4257] 1.2 clips/s  eta 33.5 min  coverage 100.0%  failures 0
+  [2000/4257] 1.2 clips/s  eta 32.0 min  coverage 100.0%  failures 0
+  [2100/4257] 1.2 clips/s  eta 30.8 min  coverage 100.0%  failures 0
+  [2200/4257] 1.2 clips/s  eta 29.4 min  coverage 100.0%  failures 0
+  [2300/4257] 1.2 clips/s  eta 28.1 min  coverage 100.0%  failures 0
+  [2400/4257] 1.2 clips/s  eta 26.7 min  coverage 100.0%  failures 0
+  [2500/4257] 1.2 clips/s  eta 25.2 min  coverage 100.0%  failures 0
+  [2600/4257] 1.2 clips/s  eta 23.9 min  coverage 100.0%  failures 0
+  [2700/4257] 1.2 clips/s  eta 22.5 min  coverage 100.0%  failures 0
+  [2800/4257] 1.1 clips/s  eta 21.3 min  coverage 100.0%  failures 0
+  [2900/4257] 1.1 clips/s  eta 19.9 min  coverage 100.0%  failures 0
+  [3000/4257] 1.1 clips/s  eta 18.3 min  coverage 100.0%  failures 0
+  [3100/4257] 1.1 clips/s  eta 16.8 min  coverage 100.0%  failures 0
+  [3200/4257] 1.1 clips/s  eta 15.4 min  coverage 100.0%  failures 0
+  [3300/4257] 1.1 clips/s  eta 14.0 min  coverage 100.0%  failures 0
+  [3400/4257] 1.1 clips/s  eta 12.6 min  coverage 100.0%  failures 0
+  [3500/4257] 1.1 clips/s  eta 11.1 min  coverage 100.0%  failures 0
+  [3600/4257] 1.1 clips/s  eta 9.7 min  coverage 100.0%  failures 0
+  [3700/4257] 1.1 clips/s  eta 8.2 min  coverage 100.0%  failures 0
+  [3800/4257] 1.1 clips/s  eta 6.8 min  coverage 100.0%  failures 0
+  [3900/4257] 1.1 clips/s  eta 5.3 min  coverage 100.0%  failures 0
+  [4000/4257] 1.1 clips/s  eta 3.8 min  coverage 100.0%  failures 0
+  [4100/4257] 1.1 clips/s  eta 2.4 min  coverage 100.0%  failures 0
+  [4200/4257] 1.1 clips/s  eta 0.9 min  coverage 100.0%  failures 0
+  [4257/4257] 1.1 clips/s  eta 0.0 min  coverage 100.0%  failures 0
+
+Cached 4257/4257 videos in 64.1 min
+  left_hand   direct=81.4% roi=9.9% interp=8.6% missing=0.1%
+  right_hand  direct=70.3% roi=15.1% interp=14.6% missing=0.0%
+  face        direct=99.9% roi=0.0% interp=0.1% missing=0.0%

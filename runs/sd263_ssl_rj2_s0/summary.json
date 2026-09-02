@@ -1,0 +1,29 @@
+{
+  "tag": "sd263_ssl_rj2_s0",
+  "split_file": "splits/full263__session-disjoint-foldval.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": "ssl:cislr_mim_rj",
+  "seed": 0,
+  "best_epoch": 249,
+  "params_M": 3.802,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.4317,
+    "top5": 0.7168,
+    "balanced": 0.4488,
+    "n": 1010
+  },
+  "test_tta": {
+    "top1": 0.4535,
+    "top5": 0.7485,
+    "balanced": 0.4748,
+    "n": 1010
+  }
+}

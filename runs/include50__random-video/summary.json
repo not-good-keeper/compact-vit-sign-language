@@ -1,0 +1,20 @@
+{
+  "tag": "include50__random-video",
+  "split_file": "splits/include50__random-video.csv",
+  "pretrained": true,
+  "best_epoch": 107,
+  "params_M": 3.761,
+  "val": {
+    "top1": 0.9339,
+    "top5": 1.0,
+    "balanced": 0.94,
+    "n": 121
+  },
+  "test": {
+    "top1": 0.9247,
+    "top5": 0.9839,
+    "balanced": 0.9283,
+    "n": 186
+  },
+  "cache": "cache"
+}

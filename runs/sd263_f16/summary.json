@@ -1,0 +1,22 @@
+{
+  "tag": "sd263_f16",
+  "split_file": "splits/full263__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 16,
+  "pretrained": true,
+  "best_epoch": 134,
+  "params_M": 3.803,
+  "val": {
+    "top1": 0.2793,
+    "top5": 0.5631,
+    "balanced": 0.2981,
+    "n": 888
+  },
+  "test": {
+    "top1": 0.2267,
+    "top5": 0.5366,
+    "balanced": 0.2539,
+    "n": 1010
+  }
+}

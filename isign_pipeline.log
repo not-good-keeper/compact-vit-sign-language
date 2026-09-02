@@ -1,0 +1,567 @@
+waiting for iSign video download to finish...
+download complete.
+
+=========== EXTRACT: diverse subset from the split zip ===========
+127237 labelled segments in the metadata (label unused -- pretraining only)
+127237 mp4 entries in the archive
+  0 entries had no matching metadata row, skipped
+  18139 distinct source videos/signers available
+selected 18000 clips from 18000 source videos (cap 4/video)
+  extracted 500/18000
+  extracted 1000/18000
+  extracted 1500/18000
+  extracted 2000/18000
+  extracted 2500/18000
+  extracted 3000/18000
+  extracted 3500/18000
+  extracted 4000/18000
+  extracted 4500/18000
+  extracted 5000/18000
+  extracted 5500/18000
+  extracted 6000/18000
+  extracted 6500/18000
+  extracted 7000/18000
+  extracted 7500/18000
+  extracted 8000/18000
+  extracted 8500/18000
+  extracted 9000/18000
+  extracted 9500/18000
+  extracted 10000/18000
+  extracted 10500/18000
+  extracted 11000/18000
+  extracted 11500/18000
+  extracted 12000/18000
+  extracted 12500/18000
+  extracted 13000/18000
+  extracted 13500/18000
+  extracted 14000/18000
+  extracted 14500/18000
+  extracted 15000/18000
+  extracted 15500/18000
+  extracted 16000/18000
+  extracted 16500/18000
+  extracted 17000/18000
+  extracted 17500/18000
+  extracted 18000/18000
+done: 18000 clips in iSign_videos/
+verified 18000 clips on disk before touching the zip
+extraction done, freeing the 54 GB zip before cropping needs the headroom
+D:              432G  353G   79G  82% /d
+
+=========== CROP: smoke test (300 clips) before committing hours to the full run ===========
+INFO: INFO: Created TensorFlow Lite XNNPACK delegate for CPU.Created TensorFlow Lite XNNPACK delegate for CPU.INFO: 
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.INFO: INFO: 
+Created TensorFlow Lite XNNPACK delegate for CPU.Created TensorFlow Lite XNNPACK delegate for CPU.Created TensorFlow Lite XNNPACK delegate for CPU.
+
+
+
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339603.090328   31280 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339603.090338   24120 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339603.090382    8520 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339603.097163   25716 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339603.116451   19264 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.116839   30096 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.116977   18308 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.117725   31280 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.122631   30636 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.122936   22504 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.122926   18764 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.123249    3344 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.124105   10448 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.124274   28476 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.124718   26640 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.124739   23696 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339603.125110   26008 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.125595   15776 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.125729   27956 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.130749   28560 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.131359   25716 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.131567    9204 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.156202    8176 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.158124   22504 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.160157   31280 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.160718   25572 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.161919   18308 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.163721   11832 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.163885    3344 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.163891   31732 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.164162   20528 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.169184   23364 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.169377    9780 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.170414   26356 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.171761   23304 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.178347    5808 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.178844   11204 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.179223   29644 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.193639   26632 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.194747   26356 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.203359   11204 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.204783    5808 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.241662   17892 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339603.244866   28560 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339603.248364   29676 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339603.248456   11580 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339603.285891   18636 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339603.286224   16888 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339603.384054   22488 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.415430   29840 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.517399    3472 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339603.541718    3472 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339604.718991   26216 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339604.751132    8200 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339605.091103   24040 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339605.105502   24040 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339607.394344   10320 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339607.417699   21092 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339607.443450   23152 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339607.467053   26932 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+300 videos -> cache_isign\crops.npy (300, 16, 3, 128, 128, 3) (0.71 GB), 6 workers, mode=r+
+250 videos still to process (250 not yet cached)
+  [100/250] 1.8 clips/s  eta 1.4 min  coverage 99.1%  failures 0
+  [200/250] 1.9 clips/s  eta 0.4 min  coverage 99.3%  failures 0
+  [250/250] 2.0 clips/s  eta 0.0 min  coverage 99.4%  failures 0
+
+Cached 300/300 videos in 2.1 min
+  left_hand   direct=73.2% roi=14.5% interp=12.0% missing=0.3%
+  right_hand  direct=76.2% roi=12.3% interp=11.2% missing=0.3%
+  face        direct=97.5% roi=0.0% interp=1.5% missing=1.0%
+smoke test passed (300/300 cached), proceeding to the full 18,000-clip extraction
+
+=========== CROP: MediaPipe hand+face extraction ===========
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339727.678701   26032 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339727.682874   19148 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339727.694535    7936 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.698618    8340 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.699715   19420 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339727.702497   26924 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.704117   28772 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.704101   25296 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.704095   25884 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.705936   19420 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.705977    1800 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.706427   15080 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339727.714576   10280 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1787339727.726320   10168 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.726672   29340 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.728095    1800 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.728186   25092 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.729555   19420 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.730274   19148 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.732767   29340 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.732946    7936 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.733410    8648 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.736818   15848 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.743351    9812 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.743565   24588 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.743574   25940 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.749483    3352 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.753615   10324 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.755032   30232 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.756378   13556 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.756611    8308 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.756973    8648 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.758821   25376 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.764668   29604 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.764746   25376 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.764903   24660 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.766726    9812 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.768466   27420 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.780130   13556 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.780168   30232 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.787584   29932 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.787957   10168 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.800083   31456 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339727.800901   18688 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339727.843996   20360 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339727.846116   24748 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339727.874515   30232 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339727.875121   28120 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1787339727.928367   25964 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339727.954213   29388 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339728.033655     816 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339728.055613   24388 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339728.174140   25816 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339728.176927   18612 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339728.212659    9044 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339728.213460   18276 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339728.795587   16500 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339728.824417   23632 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339730.679370   25716 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787339730.720198    9204 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+18000 videos -> cache_isign\crops.npy (18000, 16, 3, 128, 128, 3) (42.47 GB), 6 workers, mode=w+
+18000 videos still to process (18000 not yet cached)
+  [100/18000] 1.8 clips/s  eta 167.2 min  coverage 99.3%  failures 0
+  [200/18000] 2.0 clips/s  eta 152.1 min  coverage 99.7%  failures 0
+  [300/18000] 2.0 clips/s  eta 146.2 min  coverage 99.6%  failures 0
+  [400/18000] 2.1 clips/s  eta 141.3 min  coverage 99.7%  failures 0
+  [500/18000] 2.1 clips/s  eta 137.7 min  coverage 99.7%  failures 0
+  [600/18000] 2.1 clips/s  eta 139.3 min  coverage 99.8%  failures 0
+  [700/18000] 2.1 clips/s  eta 136.4 min  coverage 99.8%  failures 0
+  [800/18000] 2.1 clips/s  eta 134.3 min  coverage 99.8%  failures 0
+  [900/18000] 2.1 clips/s  eta 133.6 min  coverage 99.7%  failures 0
+  [1000/18000] 2.1 clips/s  eta 132.7 min  coverage 99.7%  failures 0
+  [1100/18000] 2.2 clips/s  eta 130.8 min  coverage 99.7%  failures 0
+  [1200/18000] 2.1 clips/s  eta 130.6 min  coverage 99.6%  failures 0
+  [1300/18000] 2.2 clips/s  eta 129.2 min  coverage 99.6%  failures 0
+  [1400/18000] 2.2 clips/s  eta 128.0 min  coverage 99.6%  failures 0
+  [1500/18000] 2.2 clips/s  eta 126.1 min  coverage 99.7%  failures 0
+  [1600/18000] 2.2 clips/s  eta 124.6 min  coverage 99.7%  failures 0
+  [1700/18000] 2.2 clips/s  eta 123.6 min  coverage 99.7%  failures 0
+  [1800/18000] 2.2 clips/s  eta 123.1 min  coverage 99.7%  failures 0
+  [1900/18000] 2.2 clips/s  eta 121.8 min  coverage 99.7%  failures 0
+  [2000/18000] 2.2 clips/s  eta 121.0 min  coverage 99.7%  failures 0
+  [2100/18000] 2.2 clips/s  eta 119.6 min  coverage 99.7%  failures 0
+  [2200/18000] 2.2 clips/s  eta 119.0 min  coverage 99.7%  failures 0
+  [2300/18000] 2.2 clips/s  eta 118.3 min  coverage 99.7%  failures 0
+  [2400/18000] 2.2 clips/s  eta 117.2 min  coverage 99.8%  failures 0
+  [2500/18000] 2.2 clips/s  eta 116.4 min  coverage 99.8%  failures 0
+  [2600/18000] 2.2 clips/s  eta 115.5 min  coverage 99.8%  failures 0
+  [2700/18000] 2.2 clips/s  eta 114.8 min  coverage 99.8%  failures 0
+  [2800/18000] 2.2 clips/s  eta 114.0 min  coverage 99.8%  failures 0
+  [2900/18000] 2.2 clips/s  eta 113.0 min  coverage 99.8%  failures 0
+  [3000/18000] 2.2 clips/s  eta 112.4 min  coverage 99.8%  failures 0
+  [3100/18000] 2.2 clips/s  eta 111.5 min  coverage 99.8%  failures 0
+  [3200/18000] 2.2 clips/s  eta 110.7 min  coverage 99.8%  failures 0
+  [3300/18000] 2.2 clips/s  eta 109.8 min  coverage 99.7%  failures 0
+  [3400/18000] 2.2 clips/s  eta 109.1 min  coverage 99.7%  failures 0
+  [3500/18000] 2.2 clips/s  eta 108.3 min  coverage 99.7%  failures 0
+  [3600/18000] 2.2 clips/s  eta 107.5 min  coverage 99.6%  failures 0
+  [3700/18000] 2.2 clips/s  eta 106.6 min  coverage 99.6%  failures 0
+  [3800/18000] 2.2 clips/s  eta 106.1 min  coverage 99.6%  failures 0
+  [3900/18000] 2.2 clips/s  eta 105.4 min  coverage 99.6%  failures 0
+  [4000/18000] 2.2 clips/s  eta 104.6 min  coverage 99.6%  failures 0
+  [4100/18000] 2.2 clips/s  eta 103.7 min  coverage 99.6%  failures 0
+  [4200/18000] 2.2 clips/s  eta 102.9 min  coverage 99.6%  failures 0
+  [4300/18000] 2.2 clips/s  eta 102.2 min  coverage 99.6%  failures 0
+  [4400/18000] 2.2 clips/s  eta 101.5 min  coverage 99.7%  failures 0
+  [4500/18000] 2.2 clips/s  eta 100.6 min  coverage 99.7%  failures 0
+  [4600/18000] 2.2 clips/s  eta 99.8 min  coverage 99.7%  failures 0
+  [4700/18000] 2.2 clips/s  eta 99.1 min  coverage 99.7%  failures 0
+  [4800/18000] 2.2 clips/s  eta 98.2 min  coverage 99.7%  failures 0
+  [4900/18000] 2.2 clips/s  eta 97.4 min  coverage 99.7%  failures 0
+  [5000/18000] 2.2 clips/s  eta 96.6 min  coverage 99.7%  failures 0
+  [5100/18000] 2.2 clips/s  eta 95.8 min  coverage 99.7%  failures 0
+  [5200/18000] 2.2 clips/s  eta 95.0 min  coverage 99.7%  failures 0
+  [5300/18000] 2.2 clips/s  eta 94.3 min  coverage 99.7%  failures 0
+  [5400/18000] 2.2 clips/s  eta 93.5 min  coverage 99.7%  failures 0
+  [5500/18000] 2.2 clips/s  eta 92.8 min  coverage 99.7%  failures 0
+  [5600/18000] 2.2 clips/s  eta 92.0 min  coverage 99.7%  failures 0
+  [5700/18000] 2.2 clips/s  eta 91.4 min  coverage 99.7%  failures 0
+  [5800/18000] 2.2 clips/s  eta 90.8 min  coverage 99.7%  failures 0
+  [5900/18000] 2.2 clips/s  eta 90.1 min  coverage 99.7%  failures 0
+  [6000/18000] 2.2 clips/s  eta 89.3 min  coverage 99.7%  failures 0
+  [6100/18000] 2.2 clips/s  eta 88.6 min  coverage 99.7%  failures 0
+  [6200/18000] 2.2 clips/s  eta 87.9 min  coverage 99.6%  failures 0
+  [6300/18000] 2.2 clips/s  eta 87.3 min  coverage 99.6%  failures 0
+  [6400/18000] 2.2 clips/s  eta 86.6 min  coverage 99.6%  failures 0
+  [6500/18000] 2.2 clips/s  eta 85.8 min  coverage 99.6%  failures 0
+  [6600/18000] 2.2 clips/s  eta 85.0 min  coverage 99.6%  failures 0
+  [6700/18000] 2.2 clips/s  eta 84.1 min  coverage 99.6%  failures 0
+  [6800/18000] 2.2 clips/s  eta 83.3 min  coverage 99.6%  failures 0
+  [6900/18000] 2.2 clips/s  eta 82.6 min  coverage 99.6%  failures 0
+  [7000/18000] 2.2 clips/s  eta 81.9 min  coverage 99.6%  failures 0
+  [7100/18000] 2.2 clips/s  eta 81.1 min  coverage 99.6%  failures 0
+  [7200/18000] 2.2 clips/s  eta 80.3 min  coverage 99.6%  failures 0
+  [7300/18000] 2.2 clips/s  eta 79.6 min  coverage 99.6%  failures 0
+  [7400/18000] 2.2 clips/s  eta 78.8 min  coverage 99.6%  failures 0
+  [7500/18000] 2.2 clips/s  eta 78.0 min  coverage 99.6%  failures 0
+  [7600/18000] 2.2 clips/s  eta 77.2 min  coverage 99.7%  failures 0
+  [7700/18000] 2.2 clips/s  eta 76.5 min  coverage 99.7%  failures 0
+  [7800/18000] 2.2 clips/s  eta 75.7 min  coverage 99.7%  failures 0
+  [7900/18000] 2.2 clips/s  eta 74.9 min  coverage 99.7%  failures 0
+  [8000/18000] 2.2 clips/s  eta 74.2 min  coverage 99.7%  failures 0
+  [8100/18000] 2.2 clips/s  eta 73.4 min  coverage 99.7%  failures 0
+  [8200/18000] 2.2 clips/s  eta 72.7 min  coverage 99.7%  failures 0
+  [8300/18000] 2.2 clips/s  eta 71.9 min  coverage 99.7%  failures 0
+  [8400/18000] 2.2 clips/s  eta 71.1 min  coverage 99.7%  failures 0
+  [8500/18000] 2.2 clips/s  eta 70.4 min  coverage 99.7%  failures 0
+  [8600/18000] 2.3 clips/s  eta 69.6 min  coverage 99.7%  failures 0
+  [8700/18000] 2.3 clips/s  eta 68.8 min  coverage 99.7%  failures 0
+  [8800/18000] 2.3 clips/s  eta 68.1 min  coverage 99.6%  failures 0
+  [8900/18000] 2.3 clips/s  eta 67.3 min  coverage 99.6%  failures 0
+  [9000/18000] 2.3 clips/s  eta 66.6 min  coverage 99.6%  failures 0
+  [9100/18000] 2.3 clips/s  eta 65.8 min  coverage 99.7%  failures 0
+  [9200/18000] 2.3 clips/s  eta 65.1 min  coverage 99.6%  failures 0
+  [9300/18000] 2.3 clips/s  eta 64.3 min  coverage 99.6%  failures 0
+  [9400/18000] 2.3 clips/s  eta 63.6 min  coverage 99.6%  failures 0
+  [9500/18000] 2.3 clips/s  eta 62.8 min  coverage 99.6%  failures 0
+  [9600/18000] 2.3 clips/s  eta 62.1 min  coverage 99.6%  failures 0
+  [9700/18000] 2.3 clips/s  eta 61.3 min  coverage 99.6%  failures 0
+  [9800/18000] 2.3 clips/s  eta 60.6 min  coverage 99.6%  failures 0
+  [9900/18000] 2.3 clips/s  eta 59.8 min  coverage 99.6%  failures 0
+  [10000/18000] 2.3 clips/s  eta 59.1 min  coverage 99.6%  failures 0
+  [10100/18000] 2.3 clips/s  eta 58.3 min  coverage 99.7%  failures 0
+  [10200/18000] 2.3 clips/s  eta 57.6 min  coverage 99.7%  failures 0
+  [10300/18000] 2.3 clips/s  eta 56.8 min  coverage 99.7%  failures 0
+  [10400/18000] 2.3 clips/s  eta 56.1 min  coverage 99.7%  failures 0
+  [10500/18000] 2.3 clips/s  eta 55.3 min  coverage 99.7%  failures 0
+  [10600/18000] 2.3 clips/s  eta 54.6 min  coverage 99.7%  failures 0
+  [10700/18000] 2.3 clips/s  eta 53.8 min  coverage 99.7%  failures 0
+  [10800/18000] 2.3 clips/s  eta 53.1 min  coverage 99.7%  failures 0
+  [10900/18000] 2.3 clips/s  eta 52.3 min  coverage 99.7%  failures 0
+  [11000/18000] 2.3 clips/s  eta 51.6 min  coverage 99.7%  failures 0
+  [11100/18000] 2.3 clips/s  eta 50.9 min  coverage 99.7%  failures 0
+  [11200/18000] 2.3 clips/s  eta 50.1 min  coverage 99.7%  failures 0
+  [11300/18000] 2.3 clips/s  eta 49.4 min  coverage 99.7%  failures 0
+  [11400/18000] 2.3 clips/s  eta 48.6 min  coverage 99.7%  failures 0
+  [11500/18000] 2.3 clips/s  eta 47.9 min  coverage 99.7%  failures 0
+  [11600/18000] 2.3 clips/s  eta 47.1 min  coverage 99.7%  failures 0
+  [11700/18000] 2.3 clips/s  eta 46.4 min  coverage 99.6%  failures 0
+  [11800/18000] 2.3 clips/s  eta 45.6 min  coverage 99.6%  failures 0
+  [11900/18000] 2.3 clips/s  eta 44.9 min  coverage 99.6%  failures 0
+  [12000/18000] 2.3 clips/s  eta 44.1 min  coverage 99.7%  failures 0
+  [12100/18000] 2.3 clips/s  eta 43.4 min  coverage 99.7%  failures 0
+  [12200/18000] 2.3 clips/s  eta 42.7 min  coverage 99.6%  failures 0
+  [12300/18000] 2.3 clips/s  eta 41.9 min  coverage 99.7%  failures 0
+  [12400/18000] 2.3 clips/s  eta 41.2 min  coverage 99.7%  failures 0
+  [12500/18000] 2.3 clips/s  eta 40.5 min  coverage 99.7%  failures 0
+  [12600/18000] 2.3 clips/s  eta 39.7 min  coverage 99.7%  failures 0
+  [12700/18000] 2.3 clips/s  eta 39.0 min  coverage 99.7%  failures 0
+  [12800/18000] 2.3 clips/s  eta 38.3 min  coverage 99.7%  failures 0
+  [12900/18000] 2.3 clips/s  eta 37.5 min  coverage 99.7%  failures 0
+  [13000/18000] 2.3 clips/s  eta 36.8 min  coverage 99.7%  failures 0
+  [13100/18000] 2.3 clips/s  eta 36.1 min  coverage 99.7%  failures 0
+  [13200/18000] 2.3 clips/s  eta 35.3 min  coverage 99.7%  failures 0
+  [13300/18000] 2.3 clips/s  eta 34.6 min  coverage 99.7%  failures 0
+  [13400/18000] 2.3 clips/s  eta 33.8 min  coverage 99.7%  failures 0
+  [13500/18000] 2.3 clips/s  eta 33.1 min  coverage 99.7%  failures 0
+  [13600/18000] 2.3 clips/s  eta 32.4 min  coverage 99.7%  failures 0
+  [13700/18000] 2.3 clips/s  eta 31.6 min  coverage 99.7%  failures 0
+  [13800/18000] 2.3 clips/s  eta 30.9 min  coverage 99.7%  failures 0
+  [13900/18000] 2.3 clips/s  eta 30.2 min  coverage 99.7%  failures 0
+  [14000/18000] 2.3 clips/s  eta 29.4 min  coverage 99.7%  failures 0
+  [14100/18000] 2.3 clips/s  eta 28.7 min  coverage 99.7%  failures 0
+  [14200/18000] 2.3 clips/s  eta 27.9 min  coverage 99.7%  failures 0
+  [14300/18000] 2.3 clips/s  eta 27.2 min  coverage 99.7%  failures 0
+  [14400/18000] 2.3 clips/s  eta 26.5 min  coverage 99.7%  failures 0
+  [14500/18000] 2.3 clips/s  eta 25.7 min  coverage 99.7%  failures 0
+  [14600/18000] 2.3 clips/s  eta 25.0 min  coverage 99.7%  failures 0
+  [14700/18000] 2.3 clips/s  eta 24.3 min  coverage 99.7%  failures 0
+  [14800/18000] 2.3 clips/s  eta 23.5 min  coverage 99.7%  failures 0
+  [14900/18000] 2.3 clips/s  eta 22.8 min  coverage 99.7%  failures 0
+  [15000/18000] 2.3 clips/s  eta 22.0 min  coverage 99.7%  failures 0
+  [15100/18000] 2.3 clips/s  eta 21.3 min  coverage 99.7%  failures 0
+  [15200/18000] 2.3 clips/s  eta 20.6 min  coverage 99.7%  failures 0
+  [15300/18000] 2.3 clips/s  eta 19.8 min  coverage 99.7%  failures 0
+  [15400/18000] 2.3 clips/s  eta 19.1 min  coverage 99.7%  failures 0
+  [15500/18000] 2.3 clips/s  eta 18.4 min  coverage 99.6%  failures 0
+  [15600/18000] 2.3 clips/s  eta 17.6 min  coverage 99.6%  failures 0
+  [15700/18000] 2.3 clips/s  eta 16.9 min  coverage 99.6%  failures 0
+  [15800/18000] 2.3 clips/s  eta 16.2 min  coverage 99.6%  failures 0
+  [15900/18000] 2.3 clips/s  eta 15.4 min  coverage 99.6%  failures 0
+  [16000/18000] 2.3 clips/s  eta 14.7 min  coverage 99.6%  failures 0
+  [16100/18000] 2.3 clips/s  eta 14.0 min  coverage 99.6%  failures 0
+  [16200/18000] 2.3 clips/s  eta 13.2 min  coverage 99.7%  failures 0
+  [16300/18000] 2.3 clips/s  eta 12.5 min  coverage 99.7%  failures 0
+  [16400/18000] 2.3 clips/s  eta 11.7 min  coverage 99.7%  failures 0
+  [16500/18000] 2.3 clips/s  eta 11.0 min  coverage 99.7%  failures 0
+  [16600/18000] 2.3 clips/s  eta 10.3 min  coverage 99.7%  failures 0
+  [16700/18000] 2.3 clips/s  eta 9.6 min  coverage 99.7%  failures 0
+  [16800/18000] 2.3 clips/s  eta 8.8 min  coverage 99.7%  failures 0
+  [16900/18000] 2.3 clips/s  eta 8.1 min  coverage 99.7%  failures 0
+  [17000/18000] 2.3 clips/s  eta 7.4 min  coverage 99.7%  failures 0
+  [17100/18000] 2.3 clips/s  eta 6.6 min  coverage 99.6%  failures 0
+  [17200/18000] 2.3 clips/s  eta 5.9 min  coverage 99.6%  failures 0
+  [17300/18000] 2.3 clips/s  eta 5.2 min  coverage 99.6%  failures 0
+  [17400/18000] 2.3 clips/s  eta 4.4 min  coverage 99.6%  failures 0
+  [17500/18000] 2.3 clips/s  eta 3.7 min  coverage 99.6%  failures 0
+  [17600/18000] 2.3 clips/s  eta 2.9 min  coverage 99.7%  failures 0
+  [17700/18000] 2.3 clips/s  eta 2.2 min  coverage 99.7%  failures 0
+  [17800/18000] 2.3 clips/s  eta 1.5 min  coverage 99.7%  failures 0
+  [17900/18000] 2.3 clips/s  eta 0.7 min  coverage 99.6%  failures 0
+  [18000/18000] 2.3 clips/s  eta 0.0 min  coverage 99.7%  failures 0
+
+Cached 18000/18000 videos in 132.7 min
+  left_hand   direct=82.6% roi=8.7% interp=8.4% missing=0.3%
+  right_hand  direct=82.4% roi=9.9% interp=7.5% missing=0.2%
+  face        direct=98.2% roi=0.0% interp=1.2% missing=0.6%
+verified 18000 cached clips before deleting the raw mp4s
+cropping done, freeing the extracted mp4 subset (crops are cached, raw is redundant)
+D:              432G  386G   46G  90% /d
+
+=========== PRETRAIN: masked reconstruction on iSign ===========
+  pretrain set: 17896 of 18000 cached clips (genuine hand detection >= 25%, median kept 96.9%)
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+[isign_mim] 17896 clips, 279 steps/epoch, device=cuda
+  epoch   1/100  loss 1.1516  scored 70.8%  86.0s
+  epoch   5/100  loss 0.6313  scored 70.8%  82.5s
+  epoch  10/100  loss 0.5122  scored 70.8%  81.6s
+  epoch  15/100  loss 0.4567  scored 70.8%  86.6s
+  epoch  20/100  loss 0.4309  scored 70.8%  87.8s
+  epoch  25/100  loss 0.4109  scored 70.8%  82.8s
+  epoch  30/100  loss 0.3986  scored 70.8%  80.1s
+  epoch  35/100  loss 0.3890  scored 70.8%  79.1s
+  epoch  40/100  loss 0.3822  scored 70.8%  80.7s
+  epoch  45/100  loss 0.3764  scored 70.8%  84.9s
+  epoch  50/100  loss 0.3706  scored 70.8%  81.4s
+  epoch  55/100  loss 0.3658  scored 70.8%  80.4s
+  epoch  60/100  loss 0.3626  scored 70.8%  85.4s
+  epoch  65/100  loss 0.3599  scored 70.8%  81.6s
+  epoch  70/100  loss 0.3577  scored 70.8%  81.6s
+  epoch  75/100  loss 0.3562  scored 70.8%  79.3s
+  epoch  80/100  loss 0.3526  scored 70.8%  81.2s
+  epoch  85/100  loss 0.3523  scored 70.8%  81.0s
+  epoch  90/100  loss 0.3511  scored 70.8%  74.2s
+  epoch  95/100  loss 0.3510  scored 70.8%  81.3s
+  epoch 100/100  loss 0.3510  scored 70.8%  84.8s
+[isign_mim] done. backbone -> runs\isign_mim\pretrained.pt
+
+=========== finetune: iSign SSL init + resolution jitter, seed 0 ===========
+[sd263_isign_rj_s0] classes=262 train=2845 val=0 test=1010
+  init from runs/isign_mim/pretrained.pt (epoch 100): 112 tensors, 2 missing, 0 unexpected
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.573  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  30s
+  ep  10  loss 3.941  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  20  loss 2.773  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  30  loss 2.083  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  40  loss 1.663  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  50  loss 1.490  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  60  loss 1.386  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  70  loss 1.333  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep  80  loss 1.385  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  90  loss 1.445  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 100  loss 1.117  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 110  loss 1.083  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 120  loss 1.038  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 130  loss 1.096  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 140  loss 1.015  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 150  loss 1.167  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 160  loss 1.087  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 170  loss 1.025  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 180  loss 0.843  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 190  loss 0.900  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 200  loss 1.187  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 210  loss 1.018  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 220  loss 1.015  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 230  loss 0.831  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 240  loss 0.904  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 249  loss 0.870  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  13s
+
+[sd263_isign_rj_s0] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 41.8%  top5 70.0%  balanced 42.8%  (n=1010)
+[sd263_isign_rj_s0] 6 views on splits/full263__session-disjoint-foldval.csv
+  plain  top1 41.8%  top5 70.0%  balanced 42.8%
+  TTA    top1 43.7%  top5 73.7%  balanced 44.2%
+  delta  top1 +1.9  top5 +3.7  balanced +1.4  (pts)
+  wrote test_tta to runs\sd263_isign_rj_s0\summary.json
+
+=========== finetune: iSign SSL init + resolution jitter, seed 1 ===========
+[sd263_isign_rj_s1] classes=262 train=2845 val=0 test=1010
+  init from runs/isign_mim/pretrained.pt (epoch 100): 112 tensors, 2 missing, 0 unexpected
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.573  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  24s
+  ep  10  loss 3.918  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  20  loss 2.689  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  30  loss 2.084  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  40  loss 1.664  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  50  loss 1.521  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep  60  loss 1.746  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  70  loss 1.316  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  80  loss 1.295  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  90  loss 1.320  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 100  loss 1.320  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 110  loss 1.212  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 120  loss 1.128  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 130  loss 1.221  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 140  loss 1.036  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 150  loss 1.136  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 160  loss 0.999  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 170  loss 1.099  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 180  loss 0.793  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 190  loss 1.017  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 200  loss 1.001  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 210  loss 1.208  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 220  loss 0.915  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 230  loss 0.831  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 240  loss 1.025  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 249  loss 0.964  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+
+[sd263_isign_rj_s1] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 42.4%  top5 69.7%  balanced 42.9%  (n=1010)
+[sd263_isign_rj_s1] 6 views on splits/full263__session-disjoint-foldval.csv
+  plain  top1 42.2%  top5 69.7%  balanced 42.8%
+  TTA    top1 44.3%  top5 73.1%  balanced 44.4%
+  delta  top1 +2.1  top5 +3.4  balanced +1.7  (pts)
+  wrote test_tta to runs\sd263_isign_rj_s1\summary.json
+
+=========== SUMMARY ===========
+run                            split             extra   cache     pre   test top1    top5  balanced     n
+----------------------------------------------------------------------------------------------------------
+full263__random-video          random-video              cache     yes      95.4%  98.5%    95.5%   872
+full263_v2__random-video       random-video              cache128  yes      94.5%  99.1%    94.7%   872
+full263__take-group            take-group                cache     yes      24.6%  61.3%    26.7%   878
+full263_v2__take-group         take-group                cache128  yes      29.3%  64.1%    32.0%   878
+tg263_ssl_foldval              take-group        -foldval cache128  ssl      44.1%  79.3%    46.3%   878
+sd263_cislr                    session-disjoint  +cislr  cache128  yes      23.2%  52.2%    25.2%  1010
+sd263_f16                      session-disjoint          cache128  yes      22.7%  53.7%    25.4%  1010
+sd263_f4                       session-disjoint          cache128  yes      12.7%  36.8%    14.2%  1010
+sd263_foldval                  session-disjoint  -foldval cache128  yes      33.0%  62.7%    33.5%  1010
+sd263_isign_rj_s0              session-disjoint  -foldval cache128  ssl      41.8%  70.0%    42.8%  1010
+sd263_isign_rj_s1              session-disjoint  -foldval cache128  ssl      42.4%  69.7%    42.9%  1010
+sd263_lastsel                  session-disjoint          cache128  yes      25.4%  51.1%    29.3%  1010
+sd263_rj_s0                    session-disjoint  -foldval cache128  yes      31.0%  61.6%    33.3%  1010
+sd263_rj_s1                    session-disjoint  -foldval cache128  yes      29.9%  58.9%    32.5%  1010
+sd263_ssl                      session-disjoint          cache128  ssl      29.7%  57.4%    32.2%  1010
+sd263_ssl_cislr                session-disjoint  +cislr  cache128  ssl      31.1%  60.3%    31.6%  1010
+sd263_ssl_foldval              session-disjoint  -foldval cache128  ssl      34.8%  65.9%    36.9%  1010
+sd263_ssl_foldval_s1           session-disjoint  -foldval cache128  ssl      33.2%  64.5%    36.9%  1010
+sd263_ssl_foldval_s2           session-disjoint  -foldval cache128  ssl      38.0%  68.2%    40.2%  1010
+sd263_ssl_foldval_s3           session-disjoint  -foldval cache128  ssl      33.9%  65.7%    39.5%  1010
+sd263_ssl_foldval_s4           session-disjoint  -foldval cache128  ssl      35.0%  65.0%    38.8%  1010
+sd263_ssl_rj2_s0               session-disjoint  -foldval cache128  ssl      43.2%  71.7%    44.9%  1010
+sd263_ssl_rj2_s1               session-disjoint  -foldval cache128  ssl      36.8%  66.0%    39.2%  1010
+sd263_ssl_rj2_s2               session-disjoint  -foldval cache128  ssl      34.6%  62.1%    38.1%  1010
+sd263_ssl_rj2_s3               session-disjoint  -foldval cache128  ssl      34.1%  64.5%    37.1%  1010
+sd263_ssl_rj_s0                session-disjoint  -foldval cache128  ssl      39.9%  68.3%    42.0%  1010
+sd263_ssl_rj_s1                session-disjoint  -foldval cache128  ssl      39.8%  68.1%    42.2%  1010
+sd_full263                     session-disjoint          cache128  yes      22.1%  51.4%    25.2%  1010
+include50__official            official                  cache     yes      88.0% 100.0%    89.6%   191
+include50_v2__official         official                  cache     yes      95.3%  99.5%    97.0%   191
+include50__random-video        random-video              cache     yes      92.5%  98.4%    92.8%   186
+include50_v2__random-video     random-video              cache     yes      95.7%  99.5%    95.8%   186
+abl112__take-group             take-group                cache128  yes      46.5%  82.4%    49.7%   159
+abl128__take-group             take-group                cache128  yes      44.0%  84.9%    45.2%   159
+abl64__take-group              take-group                cache128  yes      46.5%  86.2%    49.9%   159
+include50__take-group          take-group                cache     yes      29.6%  76.1%    31.6%   159
+include50_take-group_scratch   take-group                cache     no       23.3%  69.8%    25.4%   159
+include50_v2__take-group       take-group                cache     yes      42.1%  85.5%    46.9%   159
+frames12__sd                   session-disjoint          cache128  yes      12.3%  46.8%    26.9%   252
+frames16__sd                   session-disjoint          cache128  yes      22.2%  62.7%    35.3%   252
+frames4__sd                    session-disjoint          cache128  yes      21.8%  48.8%    34.1%   252
+frames8__sd                    session-disjoint          cache128  yes      14.3%  50.4%    31.3%   252
+
+seed replicates:
+  sd263_isign_rj               n=2  mean 42.1%  sd 0.4%  range 41.8%-42.4%
+  sd263_rj                     n=2  mean 30.4%  sd 0.8%  range 29.9%-31.0%
+  sd263_ssl_foldval            n=5  mean 35.0%  sd 1.9%  range 33.2%-38.0%
+  sd263_ssl_rj                 n=2  mean 39.9%  sd 0.1%  range 39.8%-39.9%
+  sd263_ssl_rj2                n=4  mean 37.2%  sd 4.2%  range 34.1%-43.2%
+
+full263: strictest protocol is session-disjoint -> 42.1%  [sd263_isign_rj (mean of 2 seeds)]
+  random-video      95.4%  ->  +53.3 pts of leakage   [full263__random-video]
+  take-group        44.1%  ->  +2.0 pts of leakage   [tg263_ssl_foldval]
+
+include50: strictest protocol is session-disjoint -> 22.2%  [frames16__sd]
+  official          95.3%  ->  +73.1 pts of leakage   [include50_v2__official]
+  random-video      95.7%  ->  +73.5 pts of leakage   [include50_v2__random-video]
+  take-group        46.5%  ->  +24.3 pts of leakage   [abl112__take-group]

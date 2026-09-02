@@ -1,0 +1,29 @@
+waiting for the GPU to clear...
+
+=========== long2000_s1  (epochs=2000 seed=1 wd=0.05) ===========
+[long2000_s1] best epoch 1999
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 57.4%  top5 79.7%  balanced 56.2%  (n=472)
+  TTA    top1 62.1%  top5 83.3%  balanced 60.8%
+
+=========== long750_s0  (epochs=750 seed=0 wd=0.05) ===========
+[long750_s0] best epoch 749
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 55.7%  top5 83.1%  balanced 54.9%  (n=472)
+  TTA    top1 57.4%  top5 83.9%  balanced 56.6%
+
+=========== long2000_wd5  (epochs=2000 seed=0 wd=0.5) ===========
+[long2000_wd5] best epoch 1999
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 58.7%  top5 83.3%  balanced 57.8%  (n=472)
+  TTA    top1 60.0%  top5 85.8%  balanced 59.0%
+
+=========== SUMMARY ===========
+             run  epochs    wd  final(last-10)    peak     TTA
+      grok_wd005    2000  0.05          61.6%   64.0%     n/a
+     long2000_s1    2000  0.05          57.5%   63.1%   62.1%
+      long750_s0     750  0.05          55.2%   57.0%   57.4%
+    long2000_wd5    2000   0.5          57.7%   60.8%   60.0%
+
+250-epoch reference at 50 words: 51.7% plain (2 seeds, sd 3.3), 56.2% TTA
+=========== DONE ===========

@@ -1,0 +1,20 @@
+{
+  "tag": "abl112__take-group",
+  "split_file": "splits/include50__take-group.csv",
+  "pretrained": true,
+  "best_epoch": 173,
+  "params_M": 3.767,
+  "val": {
+    "top1": 0.5,
+    "top5": 0.8063,
+    "balanced": 0.51,
+    "n": 160
+  },
+  "test": {
+    "top1": 0.4654,
+    "top5": 0.8239,
+    "balanced": 0.4969,
+    "n": 159
+  },
+  "cache": "cache128"
+}

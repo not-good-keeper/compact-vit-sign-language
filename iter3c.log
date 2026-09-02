@@ -1,0 +1,76 @@
+waiting for training and TTA to clear the GPU...
+
+=================== CONTROL: last-epoch selection, original split ===================
+[sd263_lastsel] classes=262 train=1957 val=888 test=1010
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.573  val 0.5% (top5 1.7%, bal 0.5%)  ema 0.3%  38s
+  ep  10  loss 5.027  val 0.8% (top5 4.3%, bal 0.8%)  ema 0.3%  16s
+  ep  20  loss 4.050  val 0.2% (top5 5.3%, bal 0.3%)  ema 0.2%  13s
+  ep  30  loss 3.358  val 4.2% (top5 15.8%, bal 4.0%)  ema 3.7%  13s
+  ep  40  loss 2.774  val 9.9% (top5 31.0%, bal 10.0%)  ema 7.4%  13s
+  ep  50  loss 2.269  val 13.1% (top5 38.6%, bal 14.4%)  ema 11.8%  13s
+  ep  60  loss 1.431  val 19.3% (top5 47.0%, bal 21.0%)  ema 17.5%  13s
+  ep  70  loss 1.313  val 19.7% (top5 46.1%, bal 21.4%)  ema 19.4%  13s
+  ep  80  loss 1.411  val 20.2% (top5 49.2%, bal 22.1%)  ema 21.3%  13s
+  ep  90  loss 1.234  val 19.7% (top5 50.3%, bal 21.2%)  ema 21.5%  13s
+  ep 100  loss 1.246  val 21.1% (top5 49.9%, bal 22.6%)  ema 21.6%  13s
+  ep 110  loss 1.059  val 22.4% (top5 50.7%, bal 23.7%)  ema 22.7%  13s
+  ep 120  loss 0.871  val 21.5% (top5 51.6%, bal 23.2%)  ema 23.0%  13s
+  ep 130  loss 1.255  val 21.3% (top5 50.8%, bal 23.1%)  ema 22.5%  13s
+  ep 140  loss 1.009  val 22.1% (top5 50.2%, bal 24.1%)  ema 21.7%  13s
+  ep 150  loss 1.252  val 22.7% (top5 51.8%, bal 24.4%)  ema 21.4%  13s
+  ep 160  loss 0.883  val 22.0% (top5 53.2%, bal 23.4%)  ema 22.7%  13s
+  ep 170  loss 1.193  val 21.8% (top5 53.4%, bal 23.5%)  ema 22.1%  13s
+  ep 180  loss 1.088  val 21.8% (top5 50.2%, bal 23.5%)  ema 22.5%  13s
+  ep 190  loss 0.742  val 22.3% (top5 53.5%, bal 24.4%)  ema 22.3%  13s
+  ep 200  loss 0.984  val 22.5% (top5 54.1%, bal 24.2%)  ema 22.9%  13s
+  ep 210  loss 1.236  val 22.4% (top5 54.1%, bal 24.2%)  ema 22.3%  13s
+  ep 220  loss 0.959  val 22.9% (top5 53.5%, bal 24.6%)  ema 22.4%  13s
+  ep 230  loss 1.089  val 22.2% (top5 54.2%, bal 23.8%)  ema 22.3%  13s
+  ep 240  loss 0.959  val 22.9% (top5 53.8%, bal 24.6%)  ema 22.6%  13s
+  ep 249  loss 0.972  val 22.5% (top5 54.4%, bal 24.2%)  ema 22.5%  13s
+
+[sd263_lastsel] best epoch 249
+  val  top1 22.5%  top5 54.3%  balanced 24.2%
+  TEST top1 25.3%  top5 51.1%  balanced 29.3%  (n=1010)
+
+=================== SUMMARY ===================
+run                            split             extra   cache     pre   test top1    top5  balanced     n
+----------------------------------------------------------------------------------------------------------
+full263__random-video          random-video              cache     yes      95.4%  98.5%    95.5%   872
+full263_v2__random-video       random-video              cache128  yes      94.5%  99.1%    94.7%   872
+full263__take-group            take-group                cache     yes      24.6%  61.3%    26.7%   878
+full263_v2__take-group         take-group                cache128  yes      29.3%  64.1%    32.0%   878
+sd263_cislr                    session-disjoint  +cislr  cache128  yes      23.2%  52.2%    25.2%  1010
+sd263_f16                      session-disjoint          cache128  yes      22.7%  53.7%    25.4%  1010
+sd263_f4                       session-disjoint          cache128  yes      12.7%  36.8%    14.2%  1010
+sd263_foldval                  session-disjoint  -foldval cache128  yes      33.0%  62.7%    33.5%  1010
+sd263_lastsel                  session-disjoint          cache128  yes      25.4%  51.1%    29.3%  1010
+sd263_ssl                      session-disjoint          cache128  ssl      29.7%  57.4%    32.2%  1010
+sd263_ssl_cislr                session-disjoint  +cislr  cache128  ssl      31.1%  60.3%    31.6%  1010
+sd263_ssl_foldval              session-disjoint  -foldval cache128  ssl      34.8%  65.9%    36.9%  1010
+sd_full263                     session-disjoint          cache128  yes      22.1%  51.4%    25.2%  1010
+include50__official            official                  cache     yes      88.0% 100.0%    89.6%   191
+include50_v2__official         official                  cache     yes      95.3%  99.5%    97.0%   191
+include50__random-video        random-video              cache     yes      92.5%  98.4%    92.8%   186
+include50_v2__random-video     random-video              cache     yes      95.7%  99.5%    95.8%   186
+abl112__take-group             take-group                cache128  yes      46.5%  82.4%    49.7%   159
+abl128__take-group             take-group                cache128  yes      44.0%  84.9%    45.2%   159
+abl64__take-group              take-group                cache128  yes      46.5%  86.2%    49.9%   159
+include50__take-group          take-group                cache     yes      29.6%  76.1%    31.6%   159
+include50_take-group_scratch   take-group                cache     no       23.3%  69.8%    25.4%   159
+include50_v2__take-group       take-group                cache     yes      42.1%  85.5%    46.9%   159
+frames12__sd                   session-disjoint          cache128  yes      12.3%  46.8%    26.9%   252
+frames16__sd                   session-disjoint          cache128  yes      22.2%  62.7%    35.3%   252
+frames4__sd                    session-disjoint          cache128  yes      21.8%  48.8%    34.1%   252
+frames8__sd                    session-disjoint          cache128  yes      14.3%  50.4%    31.3%   252
+
+full263: strictest protocol is session-disjoint -> 34.8%  [sd263_ssl_foldval]
+  random-video      95.4%  ->  +60.6 pts of leakage   [full263__random-video]
+  take-group        29.3%  ->  -5.6 pts BELOW   [full263_v2__take-group]
+
+include50: strictest protocol is session-disjoint -> 22.2%  [frames16__sd]
+  official          95.3%  ->  +73.1 pts of leakage   [include50_v2__official]
+  random-video      95.7%  ->  +73.5 pts of leakage   [include50_v2__random-video]
+  take-group        46.5%  ->  +24.3 pts of leakage   [abl112__take-group]

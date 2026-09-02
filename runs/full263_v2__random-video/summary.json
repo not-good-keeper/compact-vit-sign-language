@@ -1,0 +1,20 @@
+{
+  "tag": "full263_v2__random-video",
+  "split_file": "splits/full263__random-video.csv",
+  "pretrained": true,
+  "best_epoch": 135,
+  "params_M": 3.802,
+  "val": {
+    "top1": 0.9668,
+    "top5": 0.9945,
+    "balanced": 0.9695,
+    "n": 542
+  },
+  "test": {
+    "top1": 0.945,
+    "top5": 0.9908,
+    "balanced": 0.9472,
+    "n": 872
+  },
+  "cache": "cache128"
+}

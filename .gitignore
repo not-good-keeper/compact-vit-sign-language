@@ -1,0 +1,44 @@
+# ── Datasets (never redistribute; see README for download instructions) ────────
+INCLUDE_raw/
+INCLUDE_480p/
+CISLR/
+ISL_CSLTR/
+iSign_meta/
+
+# ── Preprocessed crop caches (~80 GB, regenerable via islvit.data.crops) ──────
+cache128/
+cache128_f32/
+cache_cislr/
+cache_isign/
+
+# ── Virtualenv ────────────────────────────────────────────────────────────────
+nndlvit/
+__pycache__/
+*.pyc
+
+# ── Training artefacts: keep summary.json + history.csv, drop checkpoints ─────
+*.pt
+*.pth
+*.ckpt
+
+# ── Third-party model binaries (MediaPipe .task, downloaded separately) ───────
+models/
+
+# ── Local scratch / agent state ───────────────────────────────────────────────
+scratch/
+.agents/
+.include_state/
+.f16_seen
+.f16_announced
+
+# ── Dataset frame dumps (contain identifiable signers) ────────────────────────
+cislr_sample.png
+cislr_crops.png
+
+# ── Duplicate log copies ──────────────────────────────────────────────────────
+logs_*.txt
+
+# Assistant/editor state
+.claude/
+.cursor/
+*.code-workspace

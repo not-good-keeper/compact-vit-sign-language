@@ -1,0 +1,108 @@
+=================== A: ImageNet init + folded val (isolates the data) ===================
+[sd263_foldval] classes=262 train=2845 val=0 test=1010
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.578  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  31s
+  ep  10  loss 4.715  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  15s
+  ep  20  loss 4.157  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  14s
+  ep  30  loss 3.243  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  14s
+  ep  40  loss 2.288  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  13s
+  ep  50  loss 1.785  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  14s
+  ep  60  loss 1.459  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  13s
+  ep  70  loss 1.360  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  14s
+  ep  80  loss 1.433  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  90  loss 1.455  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 100  loss 1.147  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 110  loss 1.093  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 120  loss 1.054  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 130  loss 1.085  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 140  loss 1.017  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 150  loss 1.174  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 160  loss 1.077  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 170  loss 1.007  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 180  loss 0.835  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 190  loss 0.898  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 200  loss 1.192  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 210  loss 1.025  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 220  loss 1.005  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 230  loss 0.838  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 240  loss 0.895  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 249  loss 0.867  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+
+[sd263_foldval] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 33.0%  top5 62.7%  balanced 33.5%  (n=1010)
+
+=================== B: SSL init + folded val (headline candidate) ===================
+[sd263_ssl_foldval] classes=262 train=2845 val=0 test=1010
+  init from runs/cislr_mim/pretrained.pt (epoch 100): 112 tensors, 2 missing, 0 unexpected
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.575  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  24s
+  ep  10  loss 4.292  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  20  loss 3.151  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  30  loss 2.423  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  40  loss 1.850  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  50  loss 1.639  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  60  loss 1.462  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  70  loss 1.358  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  80  loss 1.419  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  90  loss 1.451  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 100  loss 1.176  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 110  loss 1.132  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 120  loss 1.044  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 130  loss 1.139  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 140  loss 1.009  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  10s
+  ep 150  loss 1.193  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  10s
+  ep 160  loss 1.129  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 170  loss 1.040  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  10s
+  ep 180  loss 0.860  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 190  loss 0.918  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  12s
+  ep 200  loss 1.210  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 210  loss 1.026  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 220  loss 1.023  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 230  loss 0.836  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 240  loss 0.924  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 249  loss 0.898  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+
+[sd263_ssl_foldval] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 34.9%  top5 65.9%  balanced 36.9%  (n=1010)
+
+=================== SUMMARY ===================
+run                            split             extra   cache     pre   test top1    top5  balanced     n
+----------------------------------------------------------------------------------------------------------
+full263__random-video          random-video              cache     yes      95.4%  98.5%    95.5%   872
+full263_v2__random-video       random-video              cache128  yes      94.5%  99.1%    94.7%   872
+full263__take-group            take-group                cache     yes      24.6%  61.3%    26.7%   878
+full263_v2__take-group         take-group                cache128  yes      29.3%  64.1%    32.0%   878
+sd263_cislr                    session-disjoint  +cislr  cache128  yes      23.2%  52.2%    25.2%  1010
+sd263_f16                      session-disjoint          cache128  yes      22.7%  53.7%    25.4%  1010
+sd263_f4                       session-disjoint          cache128  yes      12.7%  36.8%    14.2%  1010
+sd263_ssl                      session-disjoint          cache128  ssl      29.7%  57.4%    32.2%  1010
+sd263_ssl_cislr                session-disjoint  +cislr  cache128  ssl      31.1%  60.3%    31.6%  1010
+sd_full263                     session-disjoint          cache128  yes      22.1%  51.4%    25.2%  1010
+sd263_foldval                  session-disjoint-foldval         cache128  yes      33.0%  62.7%    33.5%  1010
+sd263_ssl_foldval              session-disjoint-foldval         cache128  ssl      34.8%  65.9%    36.9%  1010
+include50__official            official                  cache     yes      88.0% 100.0%    89.6%   191
+include50_v2__official         official                  cache     yes      95.3%  99.5%    97.0%   191
+include50__random-video        random-video              cache     yes      92.5%  98.4%    92.8%   186
+include50_v2__random-video     random-video              cache     yes      95.7%  99.5%    95.8%   186
+abl112__take-group             take-group                cache128  yes      46.5%  82.4%    49.7%   159
+abl128__take-group             take-group                cache128  yes      44.0%  84.9%    45.2%   159
+abl64__take-group              take-group                cache128  yes      46.5%  86.2%    49.9%   159
+include50__take-group          take-group                cache     yes      29.6%  76.1%    31.6%   159
+include50_take-group_scratch   take-group                cache     no       23.3%  69.8%    25.4%   159
+include50_v2__take-group       take-group                cache     yes      42.1%  85.5%    46.9%   159
+frames12__sd                   session-disjoint          cache128  yes      12.3%  46.8%    26.9%   252
+frames16__sd                   session-disjoint          cache128  yes      22.2%  62.7%    35.3%   252
+frames4__sd                    session-disjoint          cache128  yes      21.8%  48.8%    34.1%   252
+frames8__sd                    session-disjoint          cache128  yes      14.3%  50.4%    31.3%   252
+
+full263: strictest protocol is session-disjoint -> 31.1%  [sd263_ssl_cislr]
+  random-video      95.4%  ->  +64.3 pts of leakage   [full263__random-video]
+  take-group        29.3%  ->  -1.8 pts BELOW   [full263_v2__take-group]
+
+include50: strictest protocol is session-disjoint -> 22.2%  [frames16__sd]
+  official          95.3%  ->  +73.1 pts of leakage   [include50_v2__official]
+  random-video      95.7%  ->  +73.5 pts of leakage   [include50_v2__random-video]
+  take-group        46.5%  ->  +24.3 pts of leakage   [abl112__take-group]

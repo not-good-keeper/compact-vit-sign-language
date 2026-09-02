@@ -1,0 +1,38 @@
+# ISL-ViT-Tiny on INCLUDE-50. Development config: 50 classes iterate fast enough
+# to ablate properly before committing to the full 263.
+split_file: splits/include50__take-group.csv
+
+# Data
+n_frames: 8            # sampled from the 16 cached, with temporal jitter
+img_size: 128
+patch_size: 16         # 4x4 = 16 tokens per crop; keeps DeiT-Tiny weights loadable
+flip_prob: 0.5         # mirrors image, geometry AND swaps the hand streams
+color_jitter: 0.4
+stream_dropout: 0.15
+num_workers: 4
+
+# Model -- width pinned to 192 so ImageNet DeiT-Tiny loads directly
+dim: 192
+spatial_depth: 4
+temporal_depth: 4
+heads: 3
+drop_path: 0.1
+pretrained: true
+
+# Optimisation
+epochs: 320
+batch_size: 64
+lr: 0.0005
+backbone_lr_scale: 0.1   # refine the pretrained encoder, do not erase it
+weight_decay: 0.05
+warmup_epochs: 15
+label_smoothing: 0.1
+mixup: 0.2
+mixup_prob: 0.5
+grad_clip: 1.0
+ema: true
+ema_decay: 0.99
+
+seed: 0
+log_every: 5
+grayscale_prob: 0.15

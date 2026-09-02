@@ -1,0 +1,9 @@
+{
+  "tag": "cislr_mim_rj",
+  "cache": "cache_cislr",
+  "clips": 6096,
+  "epochs": 100,
+  "final_loss": 0.3162572948556197,
+  "mask_ratio": 0.75,
+  "min_genuine": 0.25
+}

@@ -1,0 +1,28 @@
+{
+  "tag": "sd263_ssl_foldval",
+  "split_file": "splits/full263__session-disjoint-foldval.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": "ssl:cislr_mim",
+  "best_epoch": 249,
+  "params_M": 3.802,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.3485,
+    "top5": 0.6594,
+    "balanced": 0.3694,
+    "n": 1010
+  },
+  "test_tta": {
+    "top1": 0.3683,
+    "top5": 0.697,
+    "balanced": 0.3962,
+    "n": 1010
+  }
+}

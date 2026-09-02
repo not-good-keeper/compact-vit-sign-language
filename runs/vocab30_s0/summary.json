@@ -1,0 +1,29 @@
+{
+  "tag": "vocab30_s0",
+  "split_file": "splits/vocab30+cislr__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": "ssl:isign_mim",
+  "seed": 0,
+  "best_epoch": 249,
+  "params_M": 3.757,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.4424,
+    "top5": 0.8417,
+    "balanced": 0.4313,
+    "n": 278
+  },
+  "test_tta": {
+    "top1": 0.4784,
+    "top5": 0.8633,
+    "balanced": 0.4676,
+    "n": 278
+  }
+}

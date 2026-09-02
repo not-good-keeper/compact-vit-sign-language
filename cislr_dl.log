@@ -1,0 +1,58 @@
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\utils\_http.py", line 795, in hf_raise_for_status
+    response.raise_for_status()
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\httpx\_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '403 Forbidden' for url 'https://huggingface.co/datasets/Exploration-Lab/CISLR/resolve/feda67dd9368fec5f188fd4bd1917ea5c2803c7c/dataset.csv'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\utils\_validators.py", line 88, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\_snapshot_download.py", line 522, in snapshot_download
+    hf_thread_map(
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\utils\tqdm.py", line 441, in hf_thread_map
+    results[future_to_index[future]] = future.result()
+                                       ^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\_snapshot_download.py", line 502, in _inner_hf_hub_download
+    hf_hub_download(  # type: ignore
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\utils\_validators.py", line 88, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\file_download.py", line 998, in hf_hub_download
+    return _hf_hub_download_to_local_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\file_download.py", line 1372, in _hf_hub_download_to_local_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\file_download.py", line 1876, in _raise_on_head_call_error
+    raise head_call_error
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\file_download.py", line 1713, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\utils\_validators.py", line 88, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\file_download.py", line 1621, in get_hf_file_metadata
+    response = _httpx_follow_relative_redirects_with_backoff(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\utils\_http.py", line 726, in _httpx_follow_relative_redirects_with_backoff
+    hf_raise_for_status(response)
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\huggingface_hub\utils\_http.py", line 821, in hf_raise_for_status
+    raise _format(GatedRepoError, message, response, repo_type=repo_type, repo_id=repo_id) from e
+huggingface_hub.errors.GatedRepoError: 403 Client Error. (Request ID: Root=1-6a76bed1-27b366ab0efd1953264e356b;087151fb-feae-46b9-810d-64189a4f87e6)
+
+Cannot access gated repo for url https://huggingface.co/datasets/Exploration-Lab/CISLR/resolve/feda67dd9368fec5f188fd4bd1917ea5c2803c7c/dataset.csv.
+Access to dataset Exploration-Lab/CISLR is restricted and you are not in the authorized list. Visit https://huggingface.co/datasets/Exploration-Lab/CISLR to ask for access.

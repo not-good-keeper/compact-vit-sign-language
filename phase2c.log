@@ -1,0 +1,181 @@
+[include50_v2__random-video] classes=50 train=636 val=121 test=186
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+  params total=3.76M spatial=1.93M temporal=1.83M
+  ep   0  loss 3.922  val 3.3% (top5 13.2%, bal 2.7%)  ema 3.3%  13s *
+  ep   5  loss 3.866  val 1.7% (top5 14.9%, bal 2.0%)  ema 3.3%  3s
+  ep  10  loss 3.756  val 2.5% (top5 15.7%, bal 2.7%)  ema 3.3%  3s
+  ep  15  loss 3.665  val 3.3% (top5 28.1%, bal 3.3%)  ema 5.0%  3s
+  ep  20  loss 3.535  val 6.6% (top5 36.4%, bal 5.3%)  ema 7.4%  3s
+  ep  25  loss 3.305  val 14.0% (top5 51.2%, bal 14.7%)  ema 9.9%  3s *
+  ep  30  loss 3.189  val 15.7% (top5 50.4%, bal 15.7%)  ema 16.5%  3s *
+  ep  35  loss 3.022  val 12.4% (top5 52.1%, bal 13.0%)  ema 14.9%  3s
+  ep  40  loss 2.844  val 19.8% (top5 64.5%, bal 20.3%)  ema 18.2%  3s *
+  ep  45  loss 2.763  val 27.3% (top5 66.9%, bal 28.0%)  ema 21.5%  3s *
+  ep  50  loss 2.534  val 28.1% (top5 76.9%, bal 27.7%)  ema 28.1%  3s
+  ep  55  loss 2.532  val 41.3% (top5 83.5%, bal 41.7%)  ema 32.2%  3s *
+  ep  60  loss 2.195  val 43.0% (top5 88.4%, bal 44.7%)  ema 40.5%  3s
+  ep  65  loss 2.147  val 50.4% (top5 92.6%, bal 50.3%)  ema 47.9%  10s
+  ep  70  loss 2.079  val 59.5% (top5 93.4%, bal 59.0%)  ema 52.9%  10s
+  ep  75  loss 1.864  val 66.9% (top5 93.4%, bal 67.0%)  ema 61.2%  10s *
+  ep  80  loss 1.962  val 65.3% (top5 95.9%, bal 66.0%)  ema 64.5%  10s
+  ep  85  loss 1.646  val 72.7% (top5 96.7%, bal 73.7%)  ema 69.4%  10s *
+  ep  90  loss 1.612  val 78.5% (top5 98.3%, bal 78.3%)  ema 71.1%  10s *
+  ep  95  loss 1.534  val 76.0% (top5 99.2%, bal 77.0%)  ema 76.0%  10s
+  ep 100  loss 1.571  val 79.3% (top5 97.5%, bal 81.0%)  ema 79.3%  10s
+  ep 105  loss 1.265  val 85.1% (top5 100.0%, bal 85.7%)  ema 81.8%  11s *
+  ep 110  loss 1.235  val 86.0% (top5 99.2%, bal 86.3%)  ema 83.5%  11s *
+  ep 115  loss 1.294  val 86.8% (top5 99.2%, bal 86.3%)  ema 85.1%  10s
+  ep 120  loss 1.402  val 89.3% (top5 100.0%, bal 89.3%)  ema 86.0%  10s *
+  ep 125  loss 1.427  val 86.0% (top5 100.0%, bal 86.3%)  ema 87.6%  10s
+  ep 130  loss 0.802  val 88.4% (top5 100.0%, bal 89.7%)  ema 87.6%  10s
+  ep 135  loss 1.157  val 92.6% (top5 99.2%, bal 92.3%)  ema 88.4%  10s *
+  ep 140  loss 1.250  val 87.6% (top5 100.0%, bal 88.0%)  ema 90.1%  10s
+  ep 145  loss 0.950  val 90.9% (top5 100.0%, bal 91.3%)  ema 90.9%  10s
+  ep 150  loss 0.952  val 94.2% (top5 99.2%, bal 93.7%)  ema 92.6%  10s
+  ep 155  loss 1.243  val 91.7% (top5 100.0%, bal 91.7%)  ema 92.6%  10s
+  ep 160  loss 0.717  val 90.1% (top5 99.2%, bal 90.7%)  ema 94.2%  10s
+  ep 165  loss 1.320  val 95.9% (top5 100.0%, bal 96.0%)  ema 95.9%  10s
+  ep 170  loss 0.915  val 92.6% (top5 100.0%, bal 92.3%)  ema 95.9%  10s
+  ep 175  loss 0.776  val 91.7% (top5 100.0%, bal 92.0%)  ema 94.2%  10s
+  ep 180  loss 0.910  val 93.4% (top5 100.0%, bal 93.3%)  ema 92.6%  10s
+  ep 185  loss 0.875  val 92.6% (top5 100.0%, bal 92.0%)  ema 93.4%  9s
+  ep 190  loss 1.301  val 93.4% (top5 100.0%, bal 93.0%)  ema 94.2%  10s
+  ep 195  loss 0.861  val 94.2% (top5 100.0%, bal 94.3%)  ema 94.2%  9s
+  ep 200  loss 0.717  val 94.2% (top5 100.0%, bal 94.3%)  ema 94.2%  10s
+  ep 205  loss 0.931  val 92.6% (top5 99.2%, bal 92.7%)  ema 95.0%  9s
+  ep 210  loss 0.607  val 94.2% (top5 100.0%, bal 94.3%)  ema 95.0%  10s
+  ep 215  loss 0.941  val 93.4% (top5 100.0%, bal 93.7%)  ema 94.2%  10s
+  ep 220  loss 0.901  val 95.9% (top5 100.0%, bal 95.7%)  ema 95.0%  10s
+  ep 225  loss 1.106  val 98.3% (top5 100.0%, bal 98.0%)  ema 95.9%  11s
+  ep 230  loss 0.677  val 95.9% (top5 100.0%, bal 96.0%)  ema 95.9%  10s
+  ep 235  loss 0.727  val 94.2% (top5 100.0%, bal 93.7%)  ema 96.7%  9s
+  ep 240  loss 1.073  val 93.4% (top5 100.0%, bal 93.7%)  ema 95.0%  10s
+  ep 245  loss 0.736  val 95.9% (top5 100.0%, bal 95.7%)  ema 95.9%  9s
+  ep 250  loss 0.732  val 97.5% (top5 100.0%, bal 97.3%)  ema 96.7%  9s
+  ep 255  loss 0.661  val 98.3% (top5 100.0%, bal 98.7%)  ema 96.7%  9s
+  ep 260  loss 1.008  val 95.9% (top5 100.0%, bal 95.7%)  ema 96.7%  10s
+  ep 265  loss 1.061  val 95.0% (top5 100.0%, bal 95.0%)  ema 96.7%  10s
+  ep 270  loss 0.610  val 97.5% (top5 100.0%, bal 97.3%)  ema 96.7%  9s
+  ep 275  loss 0.904  val 97.5% (top5 100.0%, bal 97.3%)  ema 97.5%  10s
+  ep 280  loss 1.080  val 96.7% (top5 100.0%, bal 96.3%)  ema 97.5%  9s
+  ep 285  loss 0.821  val 97.5% (top5 100.0%, bal 97.3%)  ema 97.5%  10s
+  ep 290  loss 0.749  val 97.5% (top5 100.0%, bal 97.3%)  ema 97.5%  10s
+  ep 295  loss 0.921  val 95.9% (top5 100.0%, bal 96.0%)  ema 97.5%  10s
+  ep 300  loss 0.971  val 95.9% (top5 100.0%, bal 96.0%)  ema 97.5%  10s
+  ep 305  loss 0.470  val 97.5% (top5 100.0%, bal 97.3%)  ema 97.5%  10s
+  ep 310  loss 0.673  val 97.5% (top5 100.0%, bal 97.3%)  ema 97.5%  11s
+  ep 315  loss 0.932  val 97.5% (top5 100.0%, bal 97.3%)  ema 97.5%  11s
+  ep 319  loss 0.669  val 97.5% (top5 100.0%, bal 97.3%)  ema 97.5%  11s
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\nn_dl_prac\islvit\train.py", line 347, in <module>
+    if __name__ == "__main__":
+        ^^^^^^
+  File "D:\nn_dl_prac\islvit\train.py", line 327, in main
+    model.load_state_dict(checkpoint["model"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\torch\utils\_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\nn_dl_prac\islvit\train.py", line 119, in evaluate
+    for batch in loader:
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\torch\utils\data\dataloader.py", line 708, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\torch\utils\data\dataloader.py", line 1480, in _next_data
+    return self._process_data(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\torch\utils\data\dataloader.py", line 1505, in _process_data
+    data.reraise()
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\torch\_utils.py", line 733, in reraise
+    raise exception
+AttributeError: Caught AttributeError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\torch\utils\data\_utils\worker.py", line 349, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\anaconda3\envs\islvit\Lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "D:\nn_dl_prac\islvit\data\dataset.py", line 161, in __getitem__
+    window = int(round(source_size * (1 + self.crop_scale) / 2))
+                                          ^^^^^^^^^^^^^^^
+AttributeError: 'IncludeCrops' object has no attribute 'crop_scale'
+
+[include50_v2__official] classes=50 train=675 val=77 test=191
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+  params total=3.76M spatial=1.93M temporal=1.83M
+  ep   0  loss 3.924  val 2.6% (top5 10.4%, bal 2.0%)  ema 2.6%  56s *
+  ep   5  loss 3.865  val 2.6% (top5 19.5%, bal 2.0%)  ema 3.9%  11s
+  ep  10  loss 3.752  val 6.5% (top5 22.1%, bal 6.0%)  ema 7.8%  11s *
+  ep  15  loss 3.582  val 7.8% (top5 36.4%, bal 6.0%)  ema 6.5%  10s
+  ep  20  loss 3.482  val 7.8% (top5 40.3%, bal 6.0%)  ema 7.8%  10s
+  ep  25  loss 3.266  val 11.7% (top5 53.2%, bal 9.0%)  ema 11.7%  10s
+  ep  30  loss 3.166  val 11.7% (top5 57.1%, bal 10.0%)  ema 9.1%  10s
+  ep  35  loss 2.954  val 15.6% (top5 64.9%, bal 13.0%)  ema 13.0%  10s
+  ep  40  loss 2.731  val 26.0% (top5 75.3%, bal 23.0%)  ema 18.2%  10s *
+  ep  45  loss 2.546  val 27.3% (top5 81.8%, bal 26.0%)  ema 27.3%  10s
+  ep  50  loss 2.366  val 32.5% (top5 84.4%, bal 30.0%)  ema 32.5%  10s
+  ep  55  loss 2.243  val 37.7% (top5 90.9%, bal 39.0%)  ema 39.0%  10s
+  ep  60  loss 2.210  val 51.9% (top5 93.5%, bal 54.0%)  ema 51.9%  10s *
+  ep  65  loss 2.332  val 50.6% (top5 97.4%, bal 50.0%)  ema 55.8%  10s
+  ep  70  loss 1.918  val 62.3% (top5 96.1%, bal 63.0%)  ema 58.4%  10s
+  ep  75  loss 1.921  val 63.6% (top5 100.0%, bal 63.0%)  ema 63.6%  11s
+  ep  80  loss 1.743  val 71.4% (top5 100.0%, bal 72.0%)  ema 72.7%  10s
+  ep  85  loss 1.450  val 81.8% (top5 100.0%, bal 83.0%)  ema 76.6%  10s
+  ep  90  loss 1.800  val 70.1% (top5 100.0%, bal 71.0%)  ema 80.5%  10s
+  ep  95  loss 1.193  val 85.7% (top5 100.0%, bal 87.0%)  ema 85.7%  10s
+  ep 100  loss 1.143  val 89.6% (top5 100.0%, bal 91.0%)  ema 87.0%  10s
+  ep 105  loss 1.077  val 90.9% (top5 100.0%, bal 91.0%)  ema 90.9%  10s
+  ep 110  loss 1.034  val 90.9% (top5 100.0%, bal 91.0%)  ema 92.2%  9s
+  ep 115  loss 0.965  val 92.2% (top5 100.0%, bal 93.0%)  ema 93.5%  3s
+  ep 120  loss 1.254  val 90.9% (top5 100.0%, bal 92.0%)  ema 94.8%  3s *
+  ep 125  loss 1.227  val 89.6% (top5 100.0%, bal 91.0%)  ema 94.8%  3s
+  ep 130  loss 0.927  val 96.1% (top5 100.0%, bal 97.0%)  ema 94.8%  3s *
+  ep 135  loss 0.892  val 90.9% (top5 100.0%, bal 93.0%)  ema 94.8%  3s
+  ep 140  loss 1.165  val 96.1% (top5 100.0%, bal 97.0%)  ema 92.2%  3s
+  ep 145  loss 1.271  val 93.5% (top5 100.0%, bal 94.0%)  ema 92.2%  3s
+  ep 150  loss 1.183  val 92.2% (top5 100.0%, bal 92.0%)  ema 93.5%  3s
+  ep 155  loss 1.030  val 93.5% (top5 100.0%, bal 94.0%)  ema 94.8%  3s
+  ep 160  loss 0.964  val 96.1% (top5 100.0%, bal 97.0%)  ema 94.8%  3s
+  ep 165  loss 0.821  val 97.4% (top5 100.0%, bal 98.0%)  ema 96.1%  3s
+  ep 170  loss 0.980  val 96.1% (top5 100.0%, bal 97.0%)  ema 96.1%  3s
+  ep 175  loss 0.779  val 98.7% (top5 100.0%, bal 99.0%)  ema 97.4%  3s
+  ep 180  loss 0.730  val 94.8% (top5 100.0%, bal 95.0%)  ema 97.4%  3s
+  ep 185  loss 0.677  val 96.1% (top5 100.0%, bal 97.0%)  ema 97.4%  3s
+  ep 190  loss 0.579  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 195  loss 1.384  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 200  loss 0.987  val 98.7% (top5 100.0%, bal 99.0%)  ema 97.4%  3s
+  ep 205  loss 0.693  val 98.7% (top5 100.0%, bal 99.0%)  ema 97.4%  3s
+  ep 210  loss 0.909  val 96.1% (top5 100.0%, bal 97.0%)  ema 97.4%  3s
+  ep 215  loss 0.822  val 97.4% (top5 100.0%, bal 98.0%)  ema 96.1%  3s
+  ep 220  loss 0.844  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 225  loss 0.657  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 230  loss 0.694  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 235  loss 0.912  val 98.7% (top5 100.0%, bal 99.0%)  ema 97.4%  3s
+  ep 240  loss 0.880  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 245  loss 0.889  val 98.7% (top5 100.0%, bal 99.0%)  ema 97.4%  3s
+  ep 250  loss 0.786  val 97.4% (top5 100.0%, bal 98.0%)  ema 96.1%  3s
+  ep 255  loss 0.859  val 97.4% (top5 100.0%, bal 98.0%)  ema 96.1%  3s
+  ep 260  loss 0.828  val 96.1% (top5 100.0%, bal 97.0%)  ema 96.1%  3s
+  ep 265  loss 0.919  val 98.7% (top5 100.0%, bal 99.0%)  ema 96.1%  3s
+  ep 270  loss 0.945  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 275  loss 0.483  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 280  loss 0.754  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 285  loss 0.774  val 97.4% (top5 100.0%, bal 98.0%)  ema 98.7%  3s
+  ep 290  loss 0.796  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 295  loss 0.744  val 97.4% (top5 100.0%, bal 98.0%)  ema 97.4%  3s
+  ep 300  loss 1.102  val 98.7% (top5 100.0%, bal 99.0%)  ema 97.4%  3s
+  ep 305  loss 0.882  val 98.7% (top5 100.0%, bal 99.0%)  ema 98.7%  3s
+  ep 310  loss 0.662  val 98.7% (top5 100.0%, bal 99.0%)  ema 98.7%  3s
+  ep 315  loss 0.644  val 98.7% (top5 100.0%, bal 99.0%)  ema 98.7%  3s
+  ep 319  loss 0.731  val 97.4% (top5 100.0%, bal 98.0%)  ema 98.7%  3s
+
+[include50_v2__official] best epoch 168
+  val  top1 98.7%  top5 100.0%  balanced 99.0%
+  TEST top1 95.3%  top5 99.5%  balanced 97.0%  (n=191)
+########## v2 COMPARISON DONE ##########

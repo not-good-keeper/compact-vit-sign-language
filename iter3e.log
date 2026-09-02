@@ -1,0 +1,95 @@
+waiting for the seed-2 TTA pass to clear the GPU...
+
+=================== best config, seed 3 ===================
+[sd263_ssl_foldval_s3] classes=262 train=2845 val=0 test=1010
+  init from runs/cislr_mim/pretrained.pt (epoch 100): 112 tensors, 2 missing, 0 unexpected
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.573  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep  10  loss 4.396  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  20  loss 3.559  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  30  loss 2.903  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  40  loss 2.188  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  50  loss 1.862  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  60  loss 1.629  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  70  loss 1.503  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  80  loss 1.164  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  90  loss 1.295  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 100  loss 1.363  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 110  loss 1.216  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 120  loss 1.287  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 130  loss 1.238  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 140  loss 1.141  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 150  loss 0.995  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 160  loss 1.026  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 170  loss 1.025  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 180  loss 0.991  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 190  loss 1.110  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 200  loss 0.994  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 210  loss 0.935  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 220  loss 1.094  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 230  loss 1.036  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 240  loss 1.235  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 249  loss 1.081  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+
+[sd263_ssl_foldval_s3] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 33.9%  top5 65.7%  balanced 39.4%  (n=1010)
+[sd263_ssl_foldval_s3] 6 views on splits/full263__session-disjoint-foldval.csv
+  plain  top1 33.9%  top5 65.7%  balanced 39.4%
+  TTA    top1 36.0%  top5 70.3%  balanced 40.1%
+  delta  top1 +2.2  top5 +4.6  balanced +0.6  (pts)
+  wrote test_tta to runs\sd263_ssl_foldval_s3\summary.json
+
+=================== best config, seed 4 ===================
+[sd263_ssl_foldval_s4] classes=262 train=2845 val=0 test=1010
+  init from runs/cislr_mim/pretrained.pt (epoch 100): 112 tensors, 2 missing, 0 unexpected
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.571  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep  10  loss 4.326  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  20  loss 3.458  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  30  loss 2.551  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  40  loss 2.033  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  50  loss 1.862  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  60  loss 1.705  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  70  loss 1.282  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  80  loss 1.371  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep  90  loss 1.269  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 100  loss 1.049  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 110  loss 1.317  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 120  loss 1.082  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 130  loss 1.125  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 140  loss 1.165  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 150  loss 1.090  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 160  loss 1.025  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 170  loss 0.893  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 180  loss 1.287  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 190  loss 1.019  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 200  loss 0.988  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 210  loss 1.015  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 220  loss 0.858  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 230  loss 0.903  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 240  loss 1.050  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+  ep 249  loss 0.937  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  11s
+
+[sd263_ssl_foldval_s4] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 35.0%  top5 65.0%  balanced 38.8%  (n=1010)
+[sd263_ssl_foldval_s4] 6 views on splits/full263__session-disjoint-foldval.csv
+  plain  top1 35.0%  top5 65.0%  balanced 38.8%
+  TTA    top1 38.0%  top5 68.2%  balanced 40.9%
+  delta  top1 +3.0  top5 +3.3  balanced +2.2  (pts)
+  wrote test_tta to runs\sd263_ssl_foldval_s4\summary.json
+
+=================== SEED SPREAD ===================
+run                             top1    top5  balanced  top1+TTA
+sd263_ssl_foldval             34.8%  65.9%    36.9%    36.8%
+sd263_ssl_foldval_s1          33.2%  64.5%    36.9%    35.6%
+sd263_ssl_foldval_s2          38.0%  68.2%    40.2%    41.0%
+sd263_ssl_foldval_s3          33.9%  65.7%    39.5%    36.0%
+sd263_ssl_foldval_s4          35.0%  65.0%    38.8%    38.0%
+
+top1: n=5  mean 35.0%  sd 1.9%  range 33.2%-38.0%
+
+balanced: n=5  mean 38.4%  sd 1.5%  range 36.9%-40.2%
+
+top1+TTA: n=5  mean 37.5%  sd 2.2%  range 35.6%-41.0%

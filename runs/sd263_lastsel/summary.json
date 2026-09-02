@@ -1,0 +1,22 @@
+{
+  "tag": "sd263_lastsel",
+  "split_file": "splits/full263__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": true,
+  "best_epoch": 249,
+  "params_M": 3.802,
+  "val": {
+    "top1": 0.2252,
+    "top5": 0.5428,
+    "balanced": 0.2417,
+    "n": 888
+  },
+  "test": {
+    "top1": 0.2535,
+    "top5": 0.5109,
+    "balanced": 0.2928,
+    "n": 1010
+  }
+}

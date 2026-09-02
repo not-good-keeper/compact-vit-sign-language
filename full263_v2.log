@@ -1,0 +1,67 @@
+[full263_v2__take-group] classes=262 train=2656 val=723 test=878
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.572  val 0.4% (top5 1.7%, bal 0.4%)  ema 0.4%  34s *
+  ep  10  loss 5.030  val 1.2% (top5 4.3%, bal 1.3%)  ema 1.0%  15s
+  ep  20  loss 4.085  val 1.4% (top5 8.7%, bal 1.4%)  ema 0.3%  12s
+  ep  30  loss 3.291  val 8.2% (top5 35.8%, bal 8.2%)  ema 9.8%  12s
+  ep  40  loss 2.164  val 21.0% (top5 50.5%, bal 23.2%)  ema 19.6%  12s
+  ep  50  loss 1.649  val 28.5% (top5 61.0%, bal 32.3%)  ema 26.3%  13s *
+  ep  60  loss 1.382  val 25.3% (top5 66.9%, bal 28.2%)  ema 29.2%  12s
+  ep  70  loss 1.409  val 33.1% (top5 67.5%, bal 36.5%)  ema 32.9%  12s *
+  ep  80  loss 1.124  val 32.4% (top5 67.2%, bal 35.9%)  ema 33.6%  12s
+  ep  90  loss 1.260  val 32.5% (top5 69.7%, bal 35.9%)  ema 34.0%  12s
+  ep 100  loss 1.253  val 32.5% (top5 72.2%, bal 36.0%)  ema 32.9%  15s
+  ep 110  loss 1.183  val 33.1% (top5 71.9%, bal 36.2%)  ema 32.5%  17s
+  ep 120  loss 1.116  val 32.9% (top5 69.2%, bal 36.4%)  ema 31.8%  15s
+  ep 130  loss 1.051  val 33.6% (top5 72.3%, bal 37.3%)  ema 34.6%  20s
+  ep 140  loss 1.097  val 34.3% (top5 72.1%, bal 38.2%)  ema 34.4%  16s
+  ep 150  loss 0.971  val 33.1% (top5 71.5%, bal 37.2%)  ema 33.6%  15s
+  ep 160  loss 1.024  val 32.8% (top5 71.0%, bal 36.9%)  ema 34.7%  17s
+  ep 170  loss 0.964  val 33.6% (top5 72.8%, bal 37.2%)  ema 34.3%  15s
+  ep 180  loss 1.108  val 34.2% (top5 74.4%, bal 37.9%)  ema 33.7%  16s
+  ep 190  loss 1.084  val 32.2% (top5 71.6%, bal 36.3%)  ema 32.9%  12s
+  ep 200  loss 0.773  val 34.4% (top5 74.3%, bal 38.5%)  ema 34.2%  12s
+  ep 210  loss 0.933  val 33.9% (top5 74.3%, bal 37.6%)  ema 34.4%  12s
+  ep 220  loss 0.903  val 33.3% (top5 74.6%, bal 37.4%)  ema 33.5%  12s
+  ep 230  loss 1.048  val 33.2% (top5 74.0%, bal 37.3%)  ema 32.8%  12s
+  ep 240  loss 0.977  val 33.5% (top5 73.6%, bal 37.5%)  ema 33.9%  12s
+  ep 249  loss 1.141  val 33.5% (top5 73.4%, bal 37.6%)  ema 33.6%  12s
+
+[full263_v2__take-group] best epoch 142
+  val  top1 37.5%  top5 74.4%  balanced 41.1%
+  TEST top1 29.3%  top5 64.1%  balanced 32.0%  (n=878)
+[full263_v2__random-video] classes=262 train=2843 val=542 test=872
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.576  val 0.6% (top5 2.4%, bal 0.6%)  ema 0.4%  28s *
+  ep  10  loss 5.101  val 2.0% (top5 8.5%, bal 1.8%)  ema 1.7%  13s *
+  ep  20  loss 4.277  val 5.9% (top5 23.1%, bal 5.7%)  ema 4.6%  13s *
+  ep  30  loss 3.347  val 31.5% (top5 73.4%, bal 30.2%)  ema 28.4%  12s *
+  ep  40  loss 2.511  val 57.6% (top5 91.3%, bal 56.3%)  ema 62.2%  13s *
+  ep  50  loss 2.013  val 79.5% (top5 97.4%, bal 78.8%)  ema 81.7%  12s *
+  ep  60  loss 1.632  val 88.0% (top5 98.5%, bal 87.9%)  ema 88.6%  12s
+  ep  70  loss 1.501  val 90.2% (top5 99.1%, bal 90.0%)  ema 89.9%  12s
+  ep  80  loss 1.556  val 93.7% (top5 99.3%, bal 94.1%)  ema 94.1%  12s *
+  ep  90  loss 1.553  val 92.1% (top5 99.3%, bal 92.6%)  ema 93.9%  12s
+  ep 100  loss 1.218  val 94.8% (top5 99.3%, bal 95.2%)  ema 95.0%  12s
+  ep 110  loss 1.171  val 95.9% (top5 99.3%, bal 96.2%)  ema 95.8%  12s
+  ep 120  loss 1.119  val 94.3% (top5 99.1%, bal 94.8%)  ema 95.2%  12s
+  ep 130  loss 1.166  val 95.9% (top5 99.4%, bal 95.9%)  ema 96.1%  12s
+  ep 140  loss 1.069  val 94.8% (top5 99.1%, bal 95.3%)  ema 95.2%  12s
+  ep 150  loss 1.215  val 94.8% (top5 99.3%, bal 95.3%)  ema 95.6%  12s
+  ep 160  loss 1.136  val 95.2% (top5 99.3%, bal 95.5%)  ema 95.2%  13s
+  ep 170  loss 1.074  val 95.0% (top5 99.3%, bal 95.4%)  ema 94.6%  13s
+  ep 180  loss 0.877  val 94.8% (top5 99.4%, bal 95.3%)  ema 95.4%  12s
+  ep 190  loss 0.936  val 95.8% (top5 99.4%, bal 96.1%)  ema 95.2%  14s
+  ep 200  loss 1.257  val 94.8% (top5 99.4%, bal 95.2%)  ema 94.5%  14s
+  ep 210  loss 1.064  val 95.0% (top5 99.3%, bal 95.5%)  ema 94.6%  15s
+  ep 220  loss 1.040  val 95.8% (top5 99.4%, bal 96.1%)  ema 95.4%  15s
+  ep 230  loss 0.873  val 96.1% (top5 99.3%, bal 96.4%)  ema 95.4%  14s
+  ep 240  loss 0.947  val 95.6% (top5 99.1%, bal 96.0%)  ema 95.4%  13s
+  ep 249  loss 0.912  val 95.2% (top5 99.1%, bal 95.6%)  ema 95.2%  12s
+
+[full263_v2__random-video] best epoch 135
+  val  top1 96.7%  top5 99.4%  balanced 96.9%
+  TEST top1 94.5%  top5 99.1%  balanced 94.7%  (n=872)
+########## FULL263 V2 DONE ##########

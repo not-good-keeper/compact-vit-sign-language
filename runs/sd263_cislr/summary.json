@@ -1,0 +1,22 @@
+{
+  "tag": "sd263_cislr",
+  "split_file": "splits/full263__session-disjoint+cislr.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": true,
+  "best_epoch": 92,
+  "params_M": 3.802,
+  "val": {
+    "top1": 0.2264,
+    "top5": 0.5101,
+    "balanced": 0.2417,
+    "n": 888
+  },
+  "test": {
+    "top1": 0.2317,
+    "top5": 0.5218,
+    "balanced": 0.2524,
+    "n": 1010
+  }
+}

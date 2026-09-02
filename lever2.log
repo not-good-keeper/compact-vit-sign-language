@@ -1,0 +1,112 @@
+waiting for sd263_cislr to finish...
+
+=================== PRETRAIN (masked crops, all CISLR) ===================
+  pretrain set: 6096 of 7050 cached clips (genuine hand detection >= 25%, median kept 43.8%)
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+[cislr_mim] 6096 clips, 95 steps/epoch, device=cuda
+  epoch   1/100  loss 1.2311  scored 47.6%  54.7s
+  epoch   5/100  loss 0.6320  scored 47.6%  61.6s
+  epoch  10/100  loss 0.5416  scored 47.6%  58.6s
+  epoch  15/100  loss 0.4788  scored 47.5%  47.3s
+  epoch  20/100  loss 0.4413  scored 47.6%  57.4s
+  epoch  25/100  loss 0.4166  scored 47.6%  55.1s
+  epoch  30/100  loss 0.4005  scored 47.6%  45.5s
+  epoch  35/100  loss 0.3859  scored 47.5%  46.4s
+  epoch  40/100  loss 0.3780  scored 47.6%  45.6s
+  epoch  45/100  loss 0.3697  scored 47.6%  45.1s
+  epoch  50/100  loss 0.3624  scored 47.6%  46.8s
+  epoch  55/100  loss 0.3571  scored 47.6%  46.1s
+  epoch  60/100  loss 0.3533  scored 47.6%  45.4s
+  epoch  65/100  loss 0.3495  scored 47.6%  45.7s
+  epoch  70/100  loss 0.3430  scored 47.5%  46.6s
+  epoch  75/100  loss 0.3394  scored 47.6%  46.1s
+  epoch  80/100  loss 0.3405  scored 47.5%  45.4s
+  epoch  85/100  loss 0.3376  scored 47.5%  46.3s
+  epoch  90/100  loss 0.3373  scored 47.5%  46.2s
+  epoch  95/100  loss 0.3370  scored 47.5%  45.7s
+  epoch 100/100  loss 0.3353  scored 47.6%  45.8s
+[cislr_mim] done. backbone -> runs\cislr_mim\pretrained.pt
+
+=================== FINETUNE A: ssl init, INCLUDE-263 only ===================
+[sd263_ssl] classes=262 train=1957 val=888 test=1010
+  init from runs/cislr_mim/pretrained.pt (epoch 100): 112 tensors, 2 missing, 0 unexpected
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.577  val 0.2% (top5 2.6%, bal 0.3%)  ema 0.3%  43s *
+  ep  10  loss 4.556  val 3.0% (top5 12.3%, bal 3.2%)  ema 3.0%  24s
+  ep  20  loss 3.273  val 7.5% (top5 25.3%, bal 7.9%)  ema 7.2%  23s
+  ep  30  loss 2.515  val 12.5% (top5 36.7%, bal 13.4%)  ema 11.8%  24s
+  ep  40  loss 2.275  val 14.9% (top5 39.6%, bal 15.9%)  ema 15.5%  27s *
+  ep  50  loss 2.106  val 18.0% (top5 43.6%, bal 18.7%)  ema 17.5%  28s *
+  ep  60  loss 1.364  val 19.0% (top5 49.5%, bal 20.7%)  ema 18.6%  28s
+  ep  70  loss 1.287  val 20.6% (top5 52.9%, bal 22.0%)  ema 19.7%  25s *
+  ep  80  loss 1.418  val 17.8% (top5 53.0%, bal 19.4%)  ema 20.5%  28s
+  ep  90  loss 1.264  val 17.9% (top5 54.1%, bal 20.0%)  ema 19.5%  24s
+  ep 100  loss 1.236  val 19.4% (top5 52.7%, bal 20.5%)  ema 21.1%  23s
+  ep 110  loss 1.114  val 19.3% (top5 55.1%, bal 21.1%)  ema 20.5%  28s
+  ep 120  loss 0.905  val 20.6% (top5 55.0%, bal 22.2%)  ema 20.2%  25s
+  ep 130  loss 1.311  val 20.7% (top5 53.4%, bal 22.1%)  ema 20.9%  29s
+  ep 140  loss 1.042  val 22.1% (top5 57.0%, bal 23.8%)  ema 21.4%  31s
+  ep 150  loss 1.259  val 21.5% (top5 55.1%, bal 23.2%)  ema 21.8%  29s
+  ep 160  loss 0.931  val 20.8% (top5 57.4%, bal 22.5%)  ema 21.2%  28s
+  ep 170  loss 1.223  val 20.8% (top5 57.7%, bal 22.3%)  ema 20.3%  35s
+  ep 180  loss 1.113  val 19.6% (top5 55.5%, bal 21.1%)  ema 19.8%  28s
+  ep 190  loss 0.754  val 20.4% (top5 56.6%, bal 22.3%)  ema 20.6%  23s
+  ep 200  loss 0.997  val 20.8% (top5 57.5%, bal 22.5%)  ema 20.7%  23s
+  ep 210  loss 1.262  val 21.4% (top5 58.7%, bal 22.9%)  ema 21.4%  24s
+  ep 220  loss 0.981  val 21.6% (top5 58.6%, bal 23.2%)  ema 20.9%  23s
+  ep 230  loss 1.110  val 20.9% (top5 58.3%, bal 22.5%)  ema 21.2%  23s
+  ep 240  loss 0.980  val 21.2% (top5 58.9%, bal 22.8%)  ema 20.7%  24s
+  ep 249  loss 0.975  val 20.8% (top5 58.2%, bal 22.4%)  ema 21.3%  23s
+
+[sd263_ssl] best epoch 105
+  val  top1 22.7%  top5 55.6%  balanced 24.1%
+  TEST top1 29.7%  top5 57.4%  balanced 32.2%  (n=1010)
+
+=================== FINETUNE B: ssl init + merged CISLR clips ===================
+  [train] corpora: {'cislr': 493, 'include': 1957}
+[sd263_ssl_cislr] classes=262 train=2450 val=888 test=1010
+  init from runs/cislr_mim/pretrained.pt (epoch 100): 112 tensors, 2 missing, 0 unexpected
+  params total=3.80M spatial=1.93M temporal=1.87M
+  ep   0  loss 5.574  val 0.5% (top5 2.7%, bal 0.4%)  ema 0.5%  47s *
+  ep  10  loss 4.598  val 5.1% (top5 16.0%, bal 5.1%)  ema 4.6%  28s *
+  ep  20  loss 3.445  val 8.8% (top5 28.6%, bal 9.3%)  ema 9.2%  28s *
+  ep  30  loss 2.462  val 15.0% (top5 39.5%, bal 16.2%)  ema 14.8%  28s
+  ep  40  loss 2.127  val 17.8% (top5 44.6%, bal 18.7%)  ema 19.0%  28s
+  ep  50  loss 1.628  val 20.0% (top5 48.0%, bal 21.3%)  ema 20.3%  28s *
+  ep  60  loss 1.427  val 18.8% (top5 49.7%, bal 20.1%)  ema 20.5%  27s
+  ep  70  loss 1.437  val 21.1% (top5 49.8%, bal 22.4%)  ema 22.2%  28s *
+  ep  80  loss 1.370  val 19.9% (top5 52.4%, bal 21.4%)  ema 21.2%  37s
+  ep  90  loss 1.197  val 21.7% (top5 54.3%, bal 23.1%)  ema 21.3%  29s
+  ep 100  loss 1.179  val 21.3% (top5 55.4%, bal 22.9%)  ema 21.5%  28s
+  ep 110  loss 1.192  val 22.7% (top5 53.9%, bal 24.3%)  ema 22.3%  27s
+  ep 120  loss 0.930  val 19.0% (top5 52.7%, bal 20.6%)  ema 21.4%  27s
+  ep 130  loss 1.212  val 21.2% (top5 55.4%, bal 22.7%)  ema 22.7%  28s
+  ep 140  loss 0.964  val 21.4% (top5 57.4%, bal 22.5%)  ema 22.9%  28s
+  ep 150  loss 0.884  val 20.3% (top5 54.5%, bal 21.5%)  ema 21.5%  28s
+  ep 160  loss 0.893  val 19.9% (top5 55.4%, bal 21.7%)  ema 21.4%  28s
+  ep 170  loss 1.004  val 22.3% (top5 58.7%, bal 24.0%)  ema 22.7%  28s
+  ep 180  loss 0.913  val 20.8% (top5 56.9%, bal 22.6%)  ema 22.0%  28s
+  ep 190  loss 0.973  val 21.7% (top5 58.3%, bal 23.0%)  ema 22.1%  27s
+  ep 200  loss 0.904  val 22.5% (top5 56.8%, bal 23.9%)  ema 21.8%  29s
+  ep 210  loss 0.810  val 21.4% (top5 58.2%, bal 22.9%)  ema 21.6%  28s
+  ep 220  loss 0.893  val 20.4% (top5 57.2%, bal 21.6%)  ema 21.3%  27s
+  ep 230  loss 0.849  val 20.9% (top5 57.3%, bal 22.3%)  ema 21.1%  28s
+  ep 240  loss 1.328  val 20.6% (top5 56.6%, bal 22.0%)  ema 20.7%  27s
+  ep 249  loss 1.122  val 21.1% (top5 56.3%, bal 22.5%)  ema 20.9%  28s
+
+[sd263_ssl_cislr] best epoch 113
+  val  top1 23.5%  top5 58.0%  balanced 24.9%
+  TEST top1 31.1%  top5 60.3%  balanced 31.6%  (n=1010)
+
+=================== SUMMARY ===================
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\nn_dl_prac\islvit\report.py", line 98, in <module>
+    main()
+  File "D:\nn_dl_prac\islvit\report.py", line 54, in main
+    summaries.sort(
+  File "D:\nn_dl_prac\islvit\report.py", line 55, in <lambda>
+    key=lambda s: (benchmark_of(s["split_file"]), SCHEME_ORDER.get(scheme_of(s["split_file"]), 9), s["tag"])
+                                ~^^^^^^^^^^^^^^
+KeyError: 'split_file'

@@ -1,0 +1,20 @@
+{
+  "tag": "full263_v2__take-group",
+  "split_file": "splits/full263__take-group.csv",
+  "pretrained": true,
+  "best_epoch": 142,
+  "params_M": 3.802,
+  "val": {
+    "top1": 0.3748,
+    "top5": 0.7441,
+    "balanced": 0.4112,
+    "n": 723
+  },
+  "test": {
+    "top1": 0.2927,
+    "top5": 0.6412,
+    "balanced": 0.3197,
+    "n": 878
+  },
+  "cache": "cache128"
+}

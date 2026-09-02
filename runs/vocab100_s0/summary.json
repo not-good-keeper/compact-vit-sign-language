@@ -1,0 +1,29 @@
+{
+  "tag": "vocab100_s0",
+  "split_file": "splits/vocab100+cislr__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": "ssl:isign_mim",
+  "seed": 0,
+  "best_epoch": 249,
+  "params_M": 3.77,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.5017,
+    "top5": 0.7861,
+    "balanced": 0.484,
+    "n": 865
+  },
+  "test_tta": {
+    "top1": 0.541,
+    "top5": 0.8127,
+    "balanced": 0.52,
+    "n": 865
+  }
+}

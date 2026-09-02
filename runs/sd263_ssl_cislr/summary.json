@@ -1,0 +1,28 @@
+{
+  "tag": "sd263_ssl_cislr",
+  "split_file": "splits/full263__session-disjoint+cislr.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": "ssl:cislr_mim",
+  "best_epoch": 113,
+  "params_M": 3.802,
+  "val": {
+    "top1": 0.2354,
+    "top5": 0.58,
+    "balanced": 0.249,
+    "n": 888
+  },
+  "test": {
+    "top1": 0.3109,
+    "top5": 0.603,
+    "balanced": 0.3162,
+    "n": 1010
+  },
+  "test_tta": {
+    "top1": 0.3465,
+    "top5": 0.6366,
+    "balanced": 0.3538,
+    "n": 1010
+  }
+}

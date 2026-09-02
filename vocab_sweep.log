@@ -1,0 +1,67 @@
+waiting for the GPU to clear...
+
+=========== 137 words, seed 0 ===========
+[vocab137_s0] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 45.4%  top5 75.8%  balanced 44.1%  (n=976)
+  TTA    top1 50.5%  top5 80.1%  balanced 47.8%
+  delta  top1 +5.2  top5 +4.2  balanced +3.9  (pts)
+
+=========== 137 words, seed 1 ===========
+[vocab137_s1] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 46.2%  top5 76.1%  balanced 44.9%  (n=976)
+  TTA    top1 51.5%  top5 78.9%  balanced 49.5%
+  delta  top1 +5.5  top5 +2.8  balanced +4.8  (pts)
+
+=========== 100 words, seed 0 ===========
+[vocab100_s0] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 50.2%  top5 78.6%  balanced 48.4%  (n=865)
+  TTA    top1 54.1%  top5 81.3%  balanced 52.0%
+  delta  top1 +3.9  top5 +2.8  balanced +3.6  (pts)
+
+=========== 100 words, seed 1 ===========
+[vocab100_s1] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 49.0%  top5 75.6%  balanced 48.1%  (n=865)
+  TTA    top1 52.4%  top5 80.5%  balanced 51.2%
+  delta  top1 +3.4  top5 +4.9  balanced +3.1  (pts)
+
+=========== 50 words, seed 0 ===========
+[vocab50_s0] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 49.4%  top5 81.6%  balanced 48.6%  (n=472)
+  TTA    top1 54.7%  top5 84.3%  balanced 53.7%
+  delta  top1 +5.3  top5 +2.8  balanced +5.2  (pts)
+
+=========== 50 words, seed 1 ===========
+[vocab50_s1] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 54.0%  top5 81.4%  balanced 53.3%  (n=472)
+  TTA    top1 57.8%  top5 84.3%  balanced 56.8%
+  delta  top1 +3.8  top5 +3.0  balanced +3.5  (pts)
+
+=========== 30 words, seed 0 ===========
+[vocab30_s0] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 44.2%  top5 84.2%  balanced 43.1%  (n=278)
+  TTA    top1 47.8%  top5 86.3%  balanced 46.8%
+  delta  top1 +3.6  top5 +2.2  balanced +3.6  (pts)
+
+=========== 30 words, seed 1 ===========
+[vocab30_s1] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 38.1%  top5 74.8%  balanced 36.8%  (n=278)
+  TTA    top1 43.9%  top5 79.5%  balanced 42.7%
+  delta  top1 +5.8  top5 +4.7  balanced +5.9  (pts)
+
+=========== ACCURACY vs VOCABULARY ===========
+ words seeds             top1         top1+TTA  balanced
+   137     2      45.8% +-0.6            51.0%     44.5%
+   100     2      49.6% +-0.8            53.2%     48.3%
+    50     2      51.7% +-3.3            56.2%     50.9%
+    30     2      41.2% +-4.3            45.9%     40.0%
+
+reference: 262 words = 42.1% top-1, ~44% with TTA
+=========== DONE ===========

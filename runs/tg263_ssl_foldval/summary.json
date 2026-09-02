@@ -1,0 +1,28 @@
+{
+  "tag": "tg263_ssl_foldval",
+  "split_file": "splits/full263__take-group-foldval.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": "ssl:cislr_mim",
+  "best_epoch": 249,
+  "params_M": 3.802,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.4408,
+    "top5": 0.7927,
+    "balanced": 0.4629,
+    "n": 878
+  },
+  "test_tta": {
+    "top1": 0.459,
+    "top5": 0.7961,
+    "balanced": 0.4798,
+    "n": 878
+  }
+}

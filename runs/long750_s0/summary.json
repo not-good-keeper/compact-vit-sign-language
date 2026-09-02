@@ -1,0 +1,29 @@
+{
+  "tag": "long750_s0",
+  "split_file": "splits/vocab50+cislr__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": "ssl:isign_mim",
+  "seed": 0,
+  "best_epoch": 749,
+  "params_M": 3.761,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.5572,
+    "top5": 0.8305,
+    "balanced": 0.5489,
+    "n": 472
+  },
+  "test_tta": {
+    "top1": 0.5742,
+    "top5": 0.839,
+    "balanced": 0.5656,
+    "n": 472
+  }
+}

@@ -1,0 +1,23 @@
+Re-fetching 9 archives (10.5 GB) to restore 1080p sources
+
+[1/9] Adjectives_3of8.zip (1.43 GB)
+  extracted 104 videos
+[2/9] Adjectives_4of8.zip (1.21 GB)
+  extracted 101 videos
+[3/9] Adjectives_5of8.zip (1.31 GB)
+  extracted 106 videos
+[4/9] Adjectives_6of8.zip (1.25 GB)
+  extracted 104 videos
+[5/9] Adjectives_7of8.zip (1.25 GB)
+  extracted 105 videos
+[6/9] Adjectives_8of8.zip (0.83 GB)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\nn_dl_prac\islvit\data\refetch_raw.py", line 113, in <module>
+    main()
+  File "D:\nn_dl_prac\islvit\data\refetch_raw.py", line 101, in main
+    download(item["links"]["self"], archive_path, item["size"])
+  File "D:\nn_dl_prac\islvit\data\refetch_raw.py", line 60, in download
+    raise RuntimeError(f"size mismatch for {destination.name}: {actual} != {expected_size}")
+RuntimeError: size mismatch for Adjectives_8of8.zip: 44457856 != 834989744

@@ -1,0 +1,245 @@
+
+=================== img_size=64 ===================
+[abl64__take-group] classes=50 train=624 val=160 test=159
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+  params total=3.76M spatial=1.93M temporal=1.83M
+  ep   0  loss 3.921  val 0.0% (top5 11.2%, bal 0.0%)  ema 0.0%  20s *
+  ep   5  loss 3.852  val 0.6% (top5 11.9%, bal 0.7%)  ema 2.5%  4s
+  ep  10  loss 3.717  val 0.6% (top5 11.9%, bal 0.7%)  ema 0.6%  4s
+  ep  15  loss 3.541  val 0.6% (top5 18.1%, bal 0.7%)  ema 0.0%  4s
+  ep  20  loss 3.461  val 7.5% (top5 26.2%, bal 8.0%)  ema 3.8%  4s *
+  ep  25  loss 3.252  val 5.0% (top5 31.2%, bal 5.3%)  ema 5.0%  4s
+  ep  30  loss 3.028  val 5.6% (top5 31.9%, bal 5.1%)  ema 4.4%  4s
+  ep  35  loss 2.764  val 5.6% (top5 39.4%, bal 5.3%)  ema 1.9%  4s
+  ep  40  loss 2.562  val 7.5% (top5 48.1%, bal 7.7%)  ema 1.9%  4s
+  ep  45  loss 2.436  val 6.9% (top5 50.6%, bal 8.3%)  ema 3.8%  4s
+  ep  50  loss 2.181  val 11.9% (top5 54.4%, bal 12.0%)  ema 8.8%  4s
+  ep  55  loss 2.156  val 16.9% (top5 54.4%, bal 17.2%)  ema 8.1%  4s *
+  ep  60  loss 1.724  val 15.6% (top5 71.2%, bal 16.8%)  ema 13.1%  4s
+  ep  65  loss 1.717  val 20.6% (top5 65.6%, bal 20.4%)  ema 16.2%  4s
+  ep  70  loss 1.682  val 25.6% (top5 74.4%, bal 24.5%)  ema 18.1%  4s
+  ep  75  loss 1.428  val 28.1% (top5 76.2%, bal 28.9%)  ema 24.4%  4s
+  ep  80  loss 1.618  val 33.1% (top5 81.2%, bal 31.1%)  ema 26.9%  4s
+  ep  85  loss 1.328  val 39.4% (top5 78.1%, bal 38.7%)  ema 30.6%  4s *
+  ep  90  loss 1.285  val 33.1% (top5 77.5%, bal 31.0%)  ema 33.1%  3s
+  ep  95  loss 1.195  val 38.8% (top5 81.9%, bal 36.7%)  ema 37.5%  4s
+  ep 100  loss 1.325  val 33.1% (top5 82.5%, bal 34.1%)  ema 38.1%  4s
+  ep 105  loss 0.964  val 38.1% (top5 81.2%, bal 36.5%)  ema 39.4%  4s
+  ep 110  loss 1.009  val 38.8% (top5 83.8%, bal 38.5%)  ema 40.0%  5s
+  ep 115  loss 1.044  val 39.4% (top5 78.8%, bal 38.5%)  ema 40.0%  4s
+  ep 120  loss 1.248  val 39.4% (top5 78.8%, bal 37.7%)  ema 40.0%  4s
+  ep 125  loss 1.171  val 41.9% (top5 78.8%, bal 40.0%)  ema 43.1%  4s
+  ep 130  loss 0.612  val 46.9% (top5 74.4%, bal 44.7%)  ema 43.8%  4s *
+  ep 135  loss 0.985  val 40.0% (top5 83.8%, bal 39.0%)  ema 44.4%  4s
+  ep 140  loss 1.066  val 41.9% (top5 81.2%, bal 41.3%)  ema 46.9%  5s
+  ep 145  loss 0.804  val 43.1% (top5 81.9%, bal 42.0%)  ema 48.1%  4s
+  ep 150  loss 0.797  val 41.9% (top5 80.6%, bal 40.0%)  ema 47.5%  4s
+  ep 155  loss 1.081  val 43.1% (top5 78.1%, bal 41.4%)  ema 48.1%  4s
+  ep 160  loss 0.638  val 46.9% (top5 78.1%, bal 46.9%)  ema 46.9%  4s
+  ep 165  loss 1.160  val 44.4% (top5 79.4%, bal 43.8%)  ema 48.1%  4s
+  ep 170  loss 0.789  val 45.0% (top5 82.5%, bal 44.6%)  ema 48.1%  4s
+  ep 175  loss 0.650  val 48.8% (top5 86.2%, bal 46.2%)  ema 50.6%  4s
+  ep 180  loss 0.823  val 50.6% (top5 85.0%, bal 50.0%)  ema 51.9%  4s
+  ep 185  loss 0.768  val 42.5% (top5 85.0%, bal 42.0%)  ema 51.2%  4s
+  ep 190  loss 1.232  val 46.9% (top5 83.1%, bal 46.2%)  ema 49.4%  4s
+  ep 195  loss 0.752  val 44.4% (top5 84.4%, bal 43.5%)  ema 49.4%  4s
+  ep 200  loss 0.599  val 50.6% (top5 85.6%, bal 48.0%)  ema 49.4%  4s
+  ep 205  loss 0.847  val 49.4% (top5 83.8%, bal 46.8%)  ema 50.6%  4s
+  ep 210  loss 0.491  val 51.9% (top5 80.6%, bal 51.3%)  ema 51.2%  4s
+  ep 215  loss 0.816  val 51.2% (top5 78.1%, bal 50.8%)  ema 51.9%  4s
+  ep 220  loss 0.868  val 47.5% (top5 78.1%, bal 46.8%)  ema 51.9%  4s
+  ep 225  loss 1.052  val 48.8% (top5 79.4%, bal 48.2%)  ema 51.2%  4s
+  ep 230  loss 0.593  val 50.0% (top5 82.5%, bal 49.0%)  ema 51.2%  4s
+  ep 235  loss 0.660  val 48.8% (top5 80.6%, bal 48.0%)  ema 50.6%  4s
+  ep 240  loss 0.977  val 49.4% (top5 80.0%, bal 48.5%)  ema 51.9%  4s
+  ep 245  loss 0.675  val 45.6% (top5 81.2%, bal 44.8%)  ema 51.9%  4s
+  ep 250  loss 0.622  val 50.0% (top5 82.5%, bal 49.2%)  ema 51.2%  4s
+  ep 255  loss 0.606  val 50.6% (top5 82.5%, bal 50.0%)  ema 51.2%  4s
+  ep 260  loss 0.935  val 50.0% (top5 80.6%, bal 49.5%)  ema 51.2%  4s
+  ep 265  loss 0.975  val 48.8% (top5 83.1%, bal 48.0%)  ema 49.4%  4s
+  ep 270  loss 0.521  val 48.8% (top5 83.1%, bal 47.7%)  ema 48.8%  4s
+  ep 275  loss 0.796  val 50.0% (top5 81.2%, bal 49.0%)  ema 48.8%  4s
+  ep 280  loss 1.020  val 51.2% (top5 83.1%, bal 50.3%)  ema 49.4%  4s
+  ep 285  loss 0.756  val 51.2% (top5 81.2%, bal 50.3%)  ema 51.2%  4s
+  ep 290  loss 0.682  val 51.9% (top5 81.9%, bal 51.0%)  ema 51.9%  4s
+  ep 295  loss 0.878  val 50.0% (top5 81.9%, bal 49.2%)  ema 51.9%  4s
+  ep 300  loss 0.884  val 50.6% (top5 81.9%, bal 49.8%)  ema 51.2%  4s
+  ep 305  loss 0.381  val 50.6% (top5 81.9%, bal 49.8%)  ema 50.6%  4s
+  ep 310  loss 0.618  val 50.6% (top5 81.9%, bal 49.8%)  ema 50.6%  4s
+  ep 315  loss 0.866  val 51.2% (top5 81.9%, bal 50.5%)  ema 50.6%  4s
+  ep 319  loss 0.569  val 51.2% (top5 81.9%, bal 50.7%)  ema 51.2%  4s
+
+[abl64__take-group] best epoch 183
+  val  top1 53.1%  top5 86.9%  balanced 52.2%
+  TEST top1 46.5%  top5 86.2%  balanced 49.9%  (n=159)
+
+=================== img_size=112 ===================
+[abl112__take-group] classes=50 train=624 val=160 test=159
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+  params total=3.77M spatial=1.94M temporal=1.83M
+  ep   0  loss 3.923  val 0.6% (top5 10.6%, bal 2.0%)  ema 1.2%  26s *
+  ep   5  loss 3.845  val 3.1% (top5 10.6%, bal 3.3%)  ema 3.8%  10s
+  ep  10  loss 3.665  val 1.9% (top5 11.2%, bal 2.0%)  ema 2.5%  10s
+  ep  15  loss 3.448  val 6.9% (top5 20.0%, bal 7.3%)  ema 1.9%  10s *
+  ep  20  loss 3.209  val 4.4% (top5 18.8%, bal 4.3%)  ema 2.5%  10s
+  ep  25  loss 2.940  val 5.0% (top5 36.2%, bal 5.3%)  ema 5.0%  10s
+  ep  30  loss 2.711  val 7.5% (top5 48.1%, bal 7.7%)  ema 6.2%  10s
+  ep  35  loss 2.459  val 8.8% (top5 56.2%, bal 9.3%)  ema 6.2%  11s
+  ep  40  loss 2.163  val 15.0% (top5 58.1%, bal 15.5%)  ema 10.0%  11s
+  ep  45  loss 2.080  val 18.8% (top5 61.3%, bal 19.1%)  ema 13.1%  10s
+  ep  50  loss 1.801  val 13.1% (top5 66.9%, bal 13.7%)  ema 16.9%  10s
+  ep  55  loss 1.931  val 18.1% (top5 65.6%, bal 19.4%)  ema 20.0%  10s
+  ep  60  loss 1.356  val 25.6% (top5 70.0%, bal 24.8%)  ema 22.5%  10s
+  ep  65  loss 1.404  val 28.7% (top5 73.8%, bal 27.8%)  ema 23.1%  10s
+  ep  70  loss 1.449  val 28.7% (top5 71.9%, bal 29.5%)  ema 23.8%  10s
+  ep  75  loss 1.200  val 28.7% (top5 66.2%, bal 30.0%)  ema 28.1%  10s
+  ep  80  loss 1.482  val 28.1% (top5 74.4%, bal 27.5%)  ema 29.4%  10s
+  ep  85  loss 1.139  val 28.1% (top5 71.2%, bal 27.9%)  ema 30.6%  11s
+  ep  90  loss 1.163  val 38.1% (top5 71.9%, bal 37.8%)  ema 30.6%  10s *
+  ep  95  loss 1.144  val 34.4% (top5 70.0%, bal 35.7%)  ema 33.1%  10s
+  ep 100  loss 1.246  val 38.1% (top5 75.6%, bal 37.5%)  ema 33.8%  10s
+  ep 105  loss 0.941  val 36.2% (top5 82.5%, bal 34.5%)  ema 34.4%  13s
+  ep 110  loss 0.935  val 36.2% (top5 75.6%, bal 36.3%)  ema 33.8%  13s
+  ep 115  loss 0.967  val 40.0% (top5 76.9%, bal 40.8%)  ema 34.4%  12s
+  ep 120  loss 1.129  val 38.8% (top5 79.4%, bal 38.7%)  ema 36.9%  14s
+  ep 125  loss 1.140  val 37.5% (top5 74.4%, bal 35.9%)  ema 40.6%  13s
+  ep 130  loss 0.559  val 42.5% (top5 77.5%, bal 43.9%)  ema 40.0%  13s
+  ep 135  loss 0.914  val 45.0% (top5 80.0%, bal 45.3%)  ema 39.4%  13s
+  ep 140  loss 1.021  val 36.2% (top5 80.0%, bal 38.7%)  ema 40.6%  13s
+  ep 145  loss 0.749  val 37.5% (top5 78.1%, bal 39.8%)  ema 43.1%  12s
+  ep 150  loss 0.743  val 41.2% (top5 75.0%, bal 42.9%)  ema 42.5%  14s
+  ep 155  loss 1.085  val 47.5% (top5 80.6%, bal 47.4%)  ema 44.4%  14s
+  ep 160  loss 0.592  val 41.2% (top5 79.4%, bal 40.9%)  ema 46.9%  13s
+  ep 165  loss 1.114  val 40.0% (top5 78.8%, bal 41.8%)  ema 45.6%  13s
+  ep 170  loss 0.720  val 47.5% (top5 84.4%, bal 46.9%)  ema 45.0%  13s
+  ep 175  loss 0.635  val 47.5% (top5 83.1%, bal 48.3%)  ema 48.8%  14s
+  ep 180  loss 0.783  val 41.9% (top5 79.4%, bal 43.4%)  ema 46.2%  14s
+  ep 185  loss 0.766  val 42.5% (top5 77.5%, bal 42.6%)  ema 46.2%  13s
+  ep 190  loss 1.239  val 41.2% (top5 81.2%, bal 39.8%)  ema 45.0%  14s
+  ep 195  loss 0.728  val 44.4% (top5 78.8%, bal 42.5%)  ema 43.1%  13s
+  ep 200  loss 0.609  val 49.4% (top5 80.0%, bal 50.0%)  ema 45.0%  12s
+  ep 205  loss 0.817  val 45.0% (top5 78.8%, bal 44.4%)  ema 45.0%  13s
+  ep 210  loss 0.490  val 40.6% (top5 76.2%, bal 42.3%)  ema 46.9%  12s
+  ep 215  loss 0.800  val 42.5% (top5 80.0%, bal 42.9%)  ema 44.4%  10s
+  ep 220  loss 0.811  val 42.5% (top5 76.9%, bal 41.5%)  ema 42.5%  10s
+  ep 225  loss 0.990  val 41.9% (top5 81.9%, bal 42.2%)  ema 42.5%  10s
+  ep 230  loss 0.595  val 40.6% (top5 83.1%, bal 41.3%)  ema 42.5%  10s
+  ep 235  loss 0.624  val 43.8% (top5 81.9%, bal 44.8%)  ema 43.1%  13s
+  ep 240  loss 0.957  val 46.2% (top5 82.5%, bal 45.8%)  ema 42.5%  10s
+  ep 245  loss 0.645  val 41.9% (top5 81.2%, bal 42.8%)  ema 41.9%  11s
+  ep 250  loss 0.595  val 42.5% (top5 82.5%, bal 43.1%)  ema 42.5%  10s
+  ep 255  loss 0.585  val 42.5% (top5 80.6%, bal 42.4%)  ema 42.5%  10s
+  ep 260  loss 0.882  val 46.9% (top5 81.2%, bal 47.7%)  ema 44.4%  10s
+  ep 265  loss 0.937  val 42.5% (top5 81.9%, bal 42.3%)  ema 44.4%  10s
+  ep 270  loss 0.528  val 43.8% (top5 81.2%, bal 43.2%)  ema 46.2%  10s
+  ep 275  loss 0.792  val 43.8% (top5 79.4%, bal 45.4%)  ema 45.6%  13s
+  ep 280  loss 1.014  val 43.8% (top5 81.9%, bal 44.9%)  ema 45.0%  14s
+  ep 285  loss 0.720  val 45.0% (top5 82.5%, bal 46.6%)  ema 44.4%  13s
+  ep 290  loss 0.656  val 43.8% (top5 81.9%, bal 45.3%)  ema 45.6%  11s
+  ep 295  loss 0.834  val 44.4% (top5 80.6%, bal 45.5%)  ema 45.0%  11s
+  ep 300  loss 0.927  val 45.6% (top5 81.2%, bal 46.7%)  ema 44.4%  10s
+  ep 305  loss 0.359  val 44.4% (top5 81.2%, bal 45.9%)  ema 44.4%  10s
+  ep 310  loss 0.626  val 43.8% (top5 81.2%, bal 45.3%)  ema 45.0%  10s
+  ep 315  loss 0.843  val 44.4% (top5 81.9%, bal 45.9%)  ema 44.4%  10s
+  ep 319  loss 0.557  val 45.0% (top5 81.9%, bal 46.6%)  ema 44.4%  10s
+
+[abl112__take-group] best epoch 173
+  val  top1 50.0%  top5 80.6%  balanced 51.0%
+  TEST top1 46.5%  top5 82.4%  balanced 49.7%  (n=159)
+
+=================== img_size=128 ===================
+[abl128__take-group] classes=50 train=624 val=160 test=159
+Loaded DeiT-Tiny into spatial encoder: 8 groups, 0 skipped
+  params total=3.77M spatial=1.94M temporal=1.83M
+  ep   0  loss 3.930  val 1.9% (top5 10.0%, bal 2.0%)  ema 1.9%  29s *
+  ep   5  loss 3.865  val 3.8% (top5 11.9%, bal 5.3%)  ema 0.6%  13s
+  ep  10  loss 3.686  val 1.9% (top5 13.8%, bal 2.0%)  ema 3.1%  13s
+  ep  15  loss 3.544  val 0.6% (top5 10.6%, bal 2.0%)  ema 3.1%  13s
+  ep  20  loss 3.319  val 3.1% (top5 27.5%, bal 3.3%)  ema 3.1%  13s
+  ep  25  loss 3.102  val 5.6% (top5 31.9%, bal 4.7%)  ema 5.0%  13s
+  ep  30  loss 2.773  val 2.5% (top5 45.0%, bal 2.7%)  ema 0.6%  13s
+  ep  35  loss 2.491  val 8.8% (top5 56.9%, bal 9.3%)  ema 5.6%  13s
+  ep  40  loss 2.299  val 15.0% (top5 59.4%, bal 15.2%)  ema 8.8%  13s *
+  ep  45  loss 2.182  val 15.6% (top5 63.1%, bal 14.7%)  ema 14.4%  13s
+  ep  50  loss 1.869  val 19.4% (top5 64.4%, bal 18.9%)  ema 18.1%  13s
+  ep  55  loss 1.840  val 20.6% (top5 71.9%, bal 19.8%)  ema 18.8%  13s
+  ep  60  loss 1.453  val 20.0% (top5 71.2%, bal 18.0%)  ema 21.2%  13s
+  ep  65  loss 1.506  val 28.1% (top5 75.6%, bal 28.0%)  ema 23.8%  13s *
+  ep  70  loss 1.365  val 31.2% (top5 80.6%, bal 33.4%)  ema 26.9%  13s
+  ep  75  loss 1.245  val 35.0% (top5 76.9%, bal 34.9%)  ema 30.6%  13s *
+  ep  80  loss 1.398  val 38.8% (top5 83.1%, bal 39.0%)  ema 35.6%  13s
+  ep  85  loss 1.062  val 37.5% (top5 84.4%, bal 37.1%)  ema 38.8%  13s
+  ep  90  loss 1.156  val 46.2% (top5 84.4%, bal 45.9%)  ema 41.2%  13s *
+  ep  95  loss 1.055  val 40.0% (top5 81.2%, bal 39.4%)  ema 43.1%  13s
+  ep 100  loss 1.199  val 40.6% (top5 82.5%, bal 41.6%)  ema 42.5%  13s
+  ep 105  loss 0.931  val 53.1% (top5 84.4%, bal 51.9%)  ema 45.0%  13s *
+  ep 110  loss 0.920  val 45.0% (top5 82.5%, bal 45.0%)  ema 44.4%  13s
+  ep 115  loss 0.999  val 43.8% (top5 80.6%, bal 40.4%)  ema 45.6%  13s
+  ep 120  loss 1.137  val 41.9% (top5 80.6%, bal 40.7%)  ema 44.4%  13s
+  ep 125  loss 1.093  val 41.2% (top5 80.0%, bal 39.7%)  ema 45.0%  13s
+  ep 130  loss 0.560  val 44.4% (top5 80.6%, bal 43.9%)  ema 46.2%  13s
+  ep 135  loss 0.946  val 52.5% (top5 86.2%, bal 51.7%)  ema 47.5%  13s
+  ep 140  loss 1.025  val 49.4% (top5 83.8%, bal 49.7%)  ema 48.8%  13s
+  ep 145  loss 0.747  val 43.1% (top5 76.2%, bal 42.7%)  ema 47.5%  15s
+  ep 150  loss 0.724  val 50.0% (top5 83.1%, bal 51.0%)  ema 48.8%  19s
+  ep 155  loss 1.065  val 43.8% (top5 78.8%, bal 44.5%)  ema 48.1%  16s
+  ep 160  loss 0.553  val 46.2% (top5 81.9%, bal 45.4%)  ema 48.8%  13s
+  ep 165  loss 1.131  val 45.0% (top5 82.5%, bal 45.3%)  ema 46.2%  16s
+  ep 170  loss 0.775  val 50.6% (top5 82.5%, bal 50.0%)  ema 50.6%  16s
+  ep 175  loss 0.656  val 46.2% (top5 83.8%, bal 46.7%)  ema 51.2%  15s
+  ep 180  loss 0.740  val 51.9% (top5 83.1%, bal 52.0%)  ema 51.2%  16s
+  ep 185  loss 0.751  val 48.1% (top5 84.4%, bal 48.2%)  ema 51.2%  17s
+  ep 190  loss 1.231  val 48.1% (top5 83.1%, bal 48.9%)  ema 50.0%  17s
+  ep 195  loss 0.736  val 47.5% (top5 80.0%, bal 48.5%)  ema 49.4%  17s
+  ep 200  loss 0.567  val 48.8% (top5 83.8%, bal 48.8%)  ema 48.1%  17s
+  ep 205  loss 0.803  val 47.5% (top5 81.9%, bal 47.2%)  ema 48.8%  16s
+  ep 210  loss 0.490  val 46.9% (top5 76.9%, bal 47.5%)  ema 48.1%  16s
+  ep 215  loss 0.790  val 46.9% (top5 80.0%, bal 47.8%)  ema 49.4%  14s
+  ep 220  loss 0.824  val 48.1% (top5 81.2%, bal 49.6%)  ema 50.6%  17s
+  ep 225  loss 0.972  val 48.8% (top5 78.1%, bal 48.4%)  ema 50.6%  15s
+  ep 230  loss 0.555  val 45.0% (top5 80.6%, bal 46.2%)  ema 50.0%  13s
+  ep 235  loss 0.609  val 44.4% (top5 82.5%, bal 45.4%)  ema 49.4%  13s
+  ep 240  loss 0.957  val 44.4% (top5 80.0%, bal 45.4%)  ema 48.8%  13s
+  ep 245  loss 0.656  val 45.6% (top5 80.6%, bal 46.8%)  ema 46.2%  13s
+  ep 250  loss 0.610  val 46.2% (top5 83.8%, bal 47.8%)  ema 44.4%  13s
+  ep 255  loss 0.588  val 46.9% (top5 81.9%, bal 47.9%)  ema 45.6%  13s
+  ep 260  loss 0.902  val 46.2% (top5 80.6%, bal 47.6%)  ema 45.6%  19s
+  ep 265  loss 0.971  val 46.2% (top5 78.8%, bal 47.4%)  ema 45.6%  16s
+  ep 270  loss 0.511  val 44.4% (top5 79.4%, bal 45.8%)  ema 44.4%  16s
+  ep 275  loss 0.802  val 43.8% (top5 81.2%, bal 45.1%)  ema 43.8%  16s
+  ep 280  loss 0.962  val 43.8% (top5 79.4%, bal 45.3%)  ema 43.8%  14s
+  ep 285  loss 0.719  val 45.0% (top5 78.1%, bal 46.3%)  ema 43.8%  14s
+  ep 290  loss 0.656  val 45.0% (top5 78.1%, bal 46.3%)  ema 43.8%  17s
+  ep 295  loss 0.822  val 43.8% (top5 78.1%, bal 44.9%)  ema 43.8%  16s
+  ep 300  loss 0.876  val 43.8% (top5 80.0%, bal 44.9%)  ema 43.8%  17s
+  ep 305  loss 0.388  val 43.8% (top5 80.0%, bal 44.9%)  ema 43.8%  17s
+  ep 310  loss 0.601  val 43.8% (top5 82.5%, bal 44.9%)  ema 43.8%  19s
+  ep 315  loss 0.838  val 44.4% (top5 79.4%, bal 45.6%)  ema 43.8%  20s
+  ep 319  loss 0.527  val 44.4% (top5 80.6%, bal 45.6%)  ema 43.8%  17s
+
+[abl128__take-group] best epoch 151
+  val  top1 53.8%  top5 84.4%  balanced 54.7%
+  TEST top1 44.0%  top5 84.9%  balanced 45.2%  (n=159)
+
+=================== SUMMARY ===================
+run                                    split          pre   test top1    top5  balanced     n
+---------------------------------------------------------------------------------------------
+full263__random-video                  random-video   yes      95.4%  98.5%    95.5%   872
+full263__take-group                    take-group     yes      24.6%  61.3%    26.7%   878
+include50__official                    official       yes      88.0% 100.0%    89.6%   191
+include50_v2__official                 official       yes      95.3%  99.5%    97.0%   191
+include50__random-video                random-video   yes      92.5%  98.4%    92.8%   186
+include50_v2__random-video             random-video   yes      95.7%  99.5%    95.8%   186
+abl112__take-group                     take-group     yes      46.5%  82.4%    49.7%   159
+abl128__take-group                     take-group     yes      44.0%  84.9%    45.2%   159
+abl64__take-group                      take-group     yes      46.5%  86.2%    49.9%   159
+include50__take-group                  take-group     yes      29.6%  76.1%    31.6%   159
+include50_take-group_scratch           take-group     no       23.3%  69.8%    25.4%   159
+include50_v2__take-group               take-group     yes      42.1%  85.5%    46.9%   159
+
+full263: take-group is the honest number (24.6%)
+  random-video   95.4%  ->  +70.8 pts from take leakage
+
+include50: take-group is the honest number (42.1%)
+  official       95.3%  ->  +53.1 pts from take leakage
+  random-video   95.7%  ->  +53.6 pts from take leakage

@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\nn_dl_prac\download_include_compressed.py", line 234, in <module>
+    main()
+  File "D:\nn_dl_prac\download_include_compressed.py", line 228, in main
+    process_existing_archives()
+  File "D:\nn_dl_prac\download_include_compressed.py", line 199, in process_existing_archives
+    process_archive(archive_path, archive_path.name)
+  File "D:\nn_dl_prac\download_include_compressed.py", line 171, in process_archive
+    with zipfile.ZipFile(archive_path, "r") as zip_ref:
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\lib\zipfile.py", line 1266, in __init__
+    self._RealGetContents()
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\lib\zipfile.py", line 1333, in _RealGetContents
+    raise BadZipFile("File is not a zip file")
+zipfile.BadZipFile: File is not a zip file

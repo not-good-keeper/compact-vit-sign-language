@@ -1,0 +1,20 @@
+{
+  "tag": "include50_v2__take-group",
+  "split_file": "splits/include50__take-group.csv",
+  "pretrained": true,
+  "best_epoch": 141,
+  "params_M": 3.761,
+  "val": {
+    "top1": 0.4938,
+    "top5": 0.7812,
+    "balanced": 0.4867,
+    "n": 160
+  },
+  "test": {
+    "top1": 0.4214,
+    "top5": 0.8553,
+    "balanced": 0.4695,
+    "n": 159
+  },
+  "cache": "cache"
+}

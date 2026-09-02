@@ -1,0 +1,22 @@
+{
+  "tag": "sd263_f4",
+  "split_file": "splits/full263__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 4,
+  "pretrained": true,
+  "best_epoch": 120,
+  "params_M": 3.801,
+  "val": {
+    "top1": 0.1565,
+    "top5": 0.3998,
+    "balanced": 0.1719,
+    "n": 888
+  },
+  "test": {
+    "top1": 0.1267,
+    "top5": 0.3683,
+    "balanced": 0.1425,
+    "n": 1010
+  }
+}

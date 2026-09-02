@@ -1,0 +1,29 @@
+{
+  "tag": "long2000_s1",
+  "split_file": "splits/vocab50+cislr__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": "ssl:isign_mim",
+  "seed": 1,
+  "best_epoch": 1999,
+  "params_M": 3.761,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.5742,
+    "top5": 0.7966,
+    "balanced": 0.5616,
+    "n": 472
+  },
+  "test_tta": {
+    "top1": 0.6208,
+    "top5": 0.8326,
+    "balanced": 0.6076,
+    "n": 472
+  }
+}

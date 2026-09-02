@@ -1,0 +1,29 @@
+{
+  "tag": "grok_wd005",
+  "split_file": "splits/vocab50+cislr__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "n_frames": 8,
+  "pretrained": "ssl:isign_mim",
+  "seed": 0,
+  "best_epoch": 1999,
+  "params_M": 3.761,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.6186,
+    "top5": 0.839,
+    "balanced": 0.614,
+    "n": 472
+  },
+  "test_tta": {
+    "top1": 0.6462,
+    "top5": 0.8644,
+    "balanced": 0.6423,
+    "n": 472
+  }
+}

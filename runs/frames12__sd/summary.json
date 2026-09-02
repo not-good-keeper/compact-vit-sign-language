@@ -1,0 +1,21 @@
+{
+  "tag": "frames12__sd",
+  "split_file": "splits/include50__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "pretrained": true,
+  "best_epoch": 170,
+  "params_M": 3.762,
+  "val": {
+    "top1": 0.3916,
+    "top5": 0.6988,
+    "balanced": 0.405,
+    "n": 166
+  },
+  "test": {
+    "top1": 0.123,
+    "top5": 0.4683,
+    "balanced": 0.2685,
+    "n": 252
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "tag": "include50__official",
+  "split_file": "splits/include50__official.csv",
+  "pretrained": true,
+  "best_epoch": 78,
+  "params_M": 3.761,
+  "val": {
+    "top1": 0.9481,
+    "top5": 1.0,
+    "balanced": 0.96,
+    "n": 77
+  },
+  "test": {
+    "top1": 0.8796,
+    "top5": 1.0,
+    "balanced": 0.8958,
+    "n": 191
+  },
+  "cache": "cache"
+}

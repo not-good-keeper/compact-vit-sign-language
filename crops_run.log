@@ -1,0 +1,115 @@
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: Logging before InitGoogle() is written to STDERR
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1786099739.798298    6024 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.798299    9752 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1786099739.799164    7288 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1786099739.801021    8656 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1786099739.801884   10592 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1786099739.805548    2040 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.828549    6024 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.828577   25296 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.830102   14224 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.830142    5864 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.833740   24784 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.835386   11496 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.835677    8248 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.835921   14224 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.836853    8656 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.837115   15500 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.837725   12880 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.839676   17632 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.841239    5864 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.841806   27404 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.842277    7288 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.850121    7920 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.850309    9752 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.853741   10592 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.854755    7216 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.854762    6232 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.862757    4180 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.878204   24744 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.878452   16712 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.881473    4180 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.889035    8656 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.890304   12160 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.890753   12880 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.892506    8248 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.894850   20628 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.897283   15500 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.900627   25668 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.900729   14224 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.905727    6232 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.910788    2792 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.913662   24744 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099739.916867   16712 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.003821   10592 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786099740.010203   25736 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786099740.015944    8236 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786099740.017124   10600 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786099740.018057    9752 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786099740.021253   27440 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+W0000 00:00:1786099740.361122   22000 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.397321   22000 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.460619    2832 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.500552    2428 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.564688   23776 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.595272    9844 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.628332    7440 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.639727    5140 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.649360   13260 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.666849   25652 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.691082   12124 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1786099740.727128   15860 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+4257 videos -> cache\crops.npy (4257, 16, 3, 80, 80, 3) (3.92 GB), 6 workers, mode=r+
+--require-raw: deferring 819 clips that have no 1080p source yet
+3438 videos still to process (4257 not yet cached)
+  [100/3438] 0.9 clips/s  eta 59.0 min  coverage 100.0%  failures 0
+  [200/3438] 1.1 clips/s  eta 51.3 min  coverage 100.0%  failures 0
+  [300/3438] 1.0 clips/s  eta 50.1 min  coverage 100.0%  failures 0
+  [400/3438] 1.0 clips/s  eta 48.3 min  coverage 99.9%  failures 0
+  [500/3438] 1.1 clips/s  eta 45.8 min  coverage 99.9%  failures 0
+  [600/3438] 1.1 clips/s  eta 43.9 min  coverage 99.9%  failures 0
+  [700/3438] 1.1 clips/s  eta 41.5 min  coverage 100.0%  failures 0
+  [800/3438] 1.1 clips/s  eta 39.6 min  coverage 100.0%  failures 0
+  [900/3438] 1.1 clips/s  eta 37.8 min  coverage 100.0%  failures 0
+  [1000/3438] 1.1 clips/s  eta 36.2 min  coverage 100.0%  failures 0
+  [1100/3438] 1.1 clips/s  eta 34.6 min  coverage 100.0%  failures 0
+  [1200/3438] 1.1 clips/s  eta 33.0 min  coverage 100.0%  failures 0
+  [1300/3438] 1.1 clips/s  eta 31.4 min  coverage 100.0%  failures 0
+  [1400/3438] 1.1 clips/s  eta 29.9 min  coverage 100.0%  failures 0
+  [1500/3438] 1.1 clips/s  eta 28.5 min  coverage 100.0%  failures 0
+  [1600/3438] 1.1 clips/s  eta 27.0 min  coverage 100.0%  failures 0
+  [1700/3438] 1.1 clips/s  eta 25.6 min  coverage 100.0%  failures 0
+  [1800/3438] 1.1 clips/s  eta 24.1 min  coverage 100.0%  failures 0
+  [1900/3438] 1.1 clips/s  eta 22.7 min  coverage 100.0%  failures 0
+  [2000/3438] 1.1 clips/s  eta 21.2 min  coverage 100.0%  failures 0
+  [2100/3438] 1.1 clips/s  eta 20.0 min  coverage 100.0%  failures 0
+  [2200/3438] 1.1 clips/s  eta 18.5 min  coverage 99.9%  failures 0
+  [2300/3438] 1.1 clips/s  eta 16.9 min  coverage 99.9%  failures 0
+  [2400/3438] 1.1 clips/s  eta 15.4 min  coverage 99.9%  failures 0
+  [2500/3438] 1.1 clips/s  eta 13.9 min  coverage 99.9%  failures 0
+  [2600/3438] 1.1 clips/s  eta 12.4 min  coverage 99.9%  failures 0
+  [2700/3438] 1.1 clips/s  eta 10.9 min  coverage 100.0%  failures 0
+  [2800/3438] 1.1 clips/s  eta 9.4 min  coverage 100.0%  failures 0
+  [2900/3438] 1.1 clips/s  eta 7.9 min  coverage 100.0%  failures 0
+  [3000/3438] 1.1 clips/s  eta 6.4 min  coverage 100.0%  failures 0
+  [3100/3438] 1.1 clips/s  eta 4.9 min  coverage 100.0%  failures 0
+  [3200/3438] 1.1 clips/s  eta 3.5 min  coverage 100.0%  failures 0
+  [3300/3438] 1.2 clips/s  eta 2.0 min  coverage 100.0%  failures 0
+  [3400/3438] 1.2 clips/s  eta 0.5 min  coverage 100.0%  failures 0
+  [3438/3438] 1.2 clips/s  eta 0.0 min  coverage 100.0%  failures 0
+
+Cached 3438/4257 videos in 49.6 min
+  left_hand   direct=80.8% roi=10.4% interp=8.7% missing=0.1%
+  right_hand  direct=69.7% roi=15.7% interp=14.6% missing=0.0%
+  face        direct=99.9% roi=0.0% interp=0.1% missing=0.0%

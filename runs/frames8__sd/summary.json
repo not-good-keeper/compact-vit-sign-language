@@ -1,0 +1,21 @@
+{
+  "tag": "frames8__sd",
+  "split_file": "splits/include50__session-disjoint.csv",
+  "cache": "cache128",
+  "img_size": 64,
+  "pretrained": true,
+  "best_epoch": 143,
+  "params_M": 3.761,
+  "val": {
+    "top1": 0.3193,
+    "top5": 0.6627,
+    "balanced": 0.3417,
+    "n": 166
+  },
+  "test": {
+    "top1": 0.1429,
+    "top5": 0.504,
+    "balanced": 0.313,
+    "n": 252
+  }
+}

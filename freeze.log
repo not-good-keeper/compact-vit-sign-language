@@ -1,0 +1,20 @@
+waiting for the GPU to clear...
+
+=========== backbone_lr_scale=0.0 ===========
+
+[frz00_isign] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 31.8%  top5 61.4%  balanced 32.7%  (n=1010)
+-- T-B cross-corpus --
+  TEST top1 1.0%  top5 2.6%  balanced 0.8%  (n=609)
+
+=========== backbone_lr_scale=0.01 ===========
+
+[frz001_isign] best epoch 249
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 38.7%  top5 66.1%  balanced 39.7%  (n=1010)
+-- T-B cross-corpus --
+  TEST top1 0.7%  top5 3.4%  balanced 0.5%  (n=609)
+
+reference: backbone_lr_scale=0.1 (current default) gave T-A 41.8% / T-B 1.3%
+=========== DONE ===========
