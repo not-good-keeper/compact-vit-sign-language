@@ -33,6 +33,11 @@ Published INCLUDE numbers sit around 94–95 %. This model reproduces that. It i
 
 INCLUDE is recorded as back-to-back takes within shared studio sessions, so a random split puts near-duplicate frames of the same take on both sides of the train/test boundary. Building take-group and session-disjoint protocols to remove that:
 
+![Test top-1 by split protocol, INCLUDE-50 and INCLUDE-263](docs/figures/fig02_leakage_ladder.png)
+
+*The same model and the same training recipe throughout — only the split file changes.*
+
+
 | Protocol | What it removes | INCLUDE-50 | INCLUDE-263 |
 |---|---|---|---|
 | `random-video` | nothing | 95.7 % | 94.5 % |
