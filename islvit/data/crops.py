@@ -82,6 +82,8 @@ HOLISTIC_MODEL = Path("models/holistic_landmarker.task")
 HAND_MODEL = Path("models/hand_landmarker.task")
 
 FRAMES_PER_CLIP = 16
+# Optional CSV of video_path values to extract; None means the whole corpus.
+RESTRICT_TO = None
 CROP_SIZE = 80
 STREAMS = ("left_hand", "right_hand", "face")
 N_STREAMS = len(STREAMS)
@@ -503,6 +505,21 @@ def write_index(videos: list[tuple[str, str]], sources_cache: np.ndarray, done: 
 
 def load_video_list() -> list[tuple[str, str]]:
     """All videos in canonical (sorted) row order, as (video_path, label)."""
+    clips = _corpus_video_list()
+    if RESTRICT_TO:
+        with Path(RESTRICT_TO).open(encoding="utf-8") as handle:
+            wanted = {row["video_path"] for row in csv.DictReader(handle)}
+        kept = [clip for clip in clips if clip[0] in wanted]
+        missing = wanted - {clip[0] for clip in clips}
+        if not kept:
+            raise SystemExit(f"--restrict-to {RESTRICT_TO} matched none of {len(clips)} {CORPUS} clips")
+        print(f"restricted to {len(kept)} of {len(clips)} clips"
+              + (f" ({len(missing)} requested paths are not in this corpus)" if missing else ""))
+        return kept
+    return clips
+
+
+def _corpus_video_list() -> list[tuple[str, str]]:
     if CORPUS == "cislr":
         # 7,050 clips over 4,765 glosses -- roughly 1.5 clips per word, which is
         # useless for supervised classification and is exactly why this corpus is
@@ -541,7 +558,7 @@ def load_video_list() -> list[tuple[str, str]]:
 
 
 def main() -> None:
-    global CACHE_DIR, CROP_SIZE, CORPUS, FRAMES_PER_CLIP
+    global CACHE_DIR, CROP_SIZE, CORPUS, FRAMES_PER_CLIP, RESTRICT_TO
 
     parser = argparse.ArgumentParser(description="Extract INCLUDE hand/face crops")
     parser.add_argument("--limit", type=int, default=0, help="only process the first N videos")
@@ -554,6 +571,14 @@ def main() -> None:
     )
     parser.add_argument("--cache-dir", type=str, default=None, help="output dir (default: cache/)")
     parser.add_argument("--crop-size", type=int, default=None, help="crop pixels (default: 80)")
+    parser.add_argument(
+        "--restrict-to",
+        type=str,
+        default=None,
+        help="CSV with a video_path column; extract only those clips. Re-extracting a "
+        "subset at a new frame count is otherwise all-or-nothing -- CISLR is 7,050 clips "
+        "of which 609 are actually referenced by any split.",
+    )
     parser.add_argument(
         "--frames",
         type=int,
@@ -578,6 +603,7 @@ def main() -> None:
         CROP_SIZE = args.crop_size
     if args.frames:
         FRAMES_PER_CLIP = args.frames
+    RESTRICT_TO = args.restrict_to
     CORPUS = args.corpus
 
     missing_models = [path for path in (HOLISTIC_MODEL, HAND_MODEL) if not path.exists()]

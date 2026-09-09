@@ -40,7 +40,16 @@ FLIP_PERMUTATION = (1, 0, 2)
 # Where each corpus's crops live. A split file may carry a `corpus` column when
 # clips come from more than one source (see islvit.data.merge_cislr); rows without
 # one are INCLUDE, which keeps every pre-existing split file working unchanged.
-CORPUS_CACHES = {"cislr": Path("cache_cislr"), "custom": Path("cache_custom"), "isign": Path("cache_isign")}
+# Per-corpus caches, each overridable by environment variable. The CISLR one has
+# to be switchable because frame depth must match across corpora in a single
+# split: a 16-frame CISLR clip mixed into a 32-frame INCLUDE run gets sampled with
+# no temporal jitter while every INCLUDE clip gets 2x headroom, which silently
+# makes the two corpora different augmentation regimes rather than different data.
+CORPUS_CACHES = {
+    "cislr": Path(os.environ.get("ISLVIT_CACHE_CISLR", "cache_cislr")),
+    "custom": Path(os.environ.get("ISLVIT_CACHE_CUSTOM", "cache_custom")),
+    "isign": Path(os.environ.get("ISLVIT_CACHE_ISIGN", "cache_isign")),
+}
 
 
 def cache_dir_for(corpus: str) -> Path:
