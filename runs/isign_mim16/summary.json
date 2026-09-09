@@ -1,0 +1,9 @@
+{
+  "tag": "isign_mim16",
+  "cache": "cache_isign",
+  "clips": 17896,
+  "epochs": 100,
+  "final_loss": 0.32238526754481817,
+  "mask_ratio": 0.75,
+  "min_genuine": 0.25
+}

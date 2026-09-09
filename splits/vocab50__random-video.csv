@@ -1,0 +1,1044 @@
+video_path,label,parent_label,take_group,split,corpus
+Adjectives/1. loud/MVI_5177.MOV,1. loud,Adjectives,1. loud#0,train,include
+Adjectives/1. loud/MVI_5178.MOV,1. loud,Adjectives,1. loud#0,train,include
+Adjectives/1. loud/MVI_5179.MOV,1. loud,Adjectives,1. loud#0,train,include
+Adjectives/1. loud/MVI_5257.MOV,1. loud,Adjectives,1. loud#1,train,include
+Adjectives/1. loud/MVI_5258.MOV,1. loud,Adjectives,1. loud#1,test,include
+Adjectives/1. loud/MVI_5259.MOV,1. loud,Adjectives,1. loud#1,test,include
+Adjectives/1. loud/MVI_5335.MOV,1. loud,Adjectives,1. loud#2,train,include
+Adjectives/1. loud/MVI_5336.MOV,1. loud,Adjectives,1. loud#2,test,include
+Adjectives/1. loud/MVI_5337.MOV,1. loud,Adjectives,1. loud#2,train,include
+Adjectives/1. loud/MVI_9289.MOV,1. loud,Adjectives,1. loud#3,train,include
+Adjectives/1. loud/MVI_9290.MOV,1. loud,Adjectives,1. loud#3,train,include
+Adjectives/1. loud/MVI_9291.MOV,1. loud,Adjectives,1. loud#3,val,include
+Adjectives/1. loud/MVI_9368.MOV,1. loud,Adjectives,1. loud#4,train,include
+Adjectives/1. loud/MVI_9369.MOV,1. loud,Adjectives,1. loud#4,test,include
+Adjectives/1. loud/MVI_9370.MOV,1. loud,Adjectives,1. loud#4,val,include
+Adjectives/1. loud/MVI_9448.MOV,1. loud,Adjectives,1. loud#5,train,include
+Adjectives/1. loud/MVI_9449.MOV,1. loud,Adjectives,1. loud#5,val,include
+Adjectives/1. loud/MVI_9450.MOV,1. loud,Adjectives,1. loud#5,train,include
+Adjectives/1. loud/MVI_9534.MOV,1. loud,Adjectives,1. loud#6,train,include
+Adjectives/1. loud/MVI_9535.MOV,1. loud,Adjectives,1. loud#6,train,include
+Adjectives/1. loud/MVI_9536.MOV,1. loud,Adjectives,1. loud#6,train,include
+Adjectives/2. quiet/MVI_5180.MOV,2. quiet,Adjectives,2. quiet#0,train,include
+Adjectives/2. quiet/MVI_5181.MOV,2. quiet,Adjectives,2. quiet#0,train,include
+Adjectives/2. quiet/MVI_5182.MOV,2. quiet,Adjectives,2. quiet#0,train,include
+Adjectives/2. quiet/MVI_5260.MOV,2. quiet,Adjectives,2. quiet#1,test,include
+Adjectives/2. quiet/MVI_5261.MOV,2. quiet,Adjectives,2. quiet#1,val,include
+Adjectives/2. quiet/MVI_5262.MOV,2. quiet,Adjectives,2. quiet#1,test,include
+Adjectives/2. quiet/MVI_5338.MOV,2. quiet,Adjectives,2. quiet#2,train,include
+Adjectives/2. quiet/MVI_5339.MOV,2. quiet,Adjectives,2. quiet#2,train,include
+Adjectives/2. quiet/MVI_5340.MOV,2. quiet,Adjectives,2. quiet#2,train,include
+Adjectives/2. quiet/MVI_9292.MOV,2. quiet,Adjectives,2. quiet#3,train,include
+Adjectives/2. quiet/MVI_9293.MOV,2. quiet,Adjectives,2. quiet#3,val,include
+Adjectives/2. quiet/MVI_9294.MOV,2. quiet,Adjectives,2. quiet#3,train,include
+Adjectives/2. quiet/MVI_9371.MOV,2. quiet,Adjectives,2. quiet#4,test,include
+Adjectives/2. quiet/MVI_9372.MOV,2. quiet,Adjectives,2. quiet#4,train,include
+Adjectives/2. quiet/MVI_9373.MOV,2. quiet,Adjectives,2. quiet#4,train,include
+Adjectives/2. quiet/MVI_9451.MOV,2. quiet,Adjectives,2. quiet#5,test,include
+Adjectives/2. quiet/MVI_9452.MOV,2. quiet,Adjectives,2. quiet#5,train,include
+Adjectives/2. quiet/MVI_9453.MOV,2. quiet,Adjectives,2. quiet#5,train,include
+Adjectives/2. quiet/MVI_9537.MOV,2. quiet,Adjectives,2. quiet#6,train,include
+Adjectives/2. quiet/MVI_9538.MOV,2. quiet,Adjectives,2. quiet#6,val,include
+Adjectives/2. quiet/MVI_9539.MOV,2. quiet,Adjectives,2. quiet#6,train,include
+Adjectives/3. happy/MVI_5183.MOV,3. happy,Adjectives,3. happy#0,train,include
+Adjectives/3. happy/MVI_5184.MOV,3. happy,Adjectives,3. happy#0,train,include
+Adjectives/3. happy/MVI_5185.MOV,3. happy,Adjectives,3. happy#0,train,include
+Adjectives/3. happy/MVI_5263.MOV,3. happy,Adjectives,3. happy#1,test,include
+Adjectives/3. happy/MVI_5264.MOV,3. happy,Adjectives,3. happy#1,val,include
+Adjectives/3. happy/MVI_5265.MOV,3. happy,Adjectives,3. happy#1,val,include
+Adjectives/3. happy/MVI_5341.MOV,3. happy,Adjectives,3. happy#2,train,include
+Adjectives/3. happy/MVI_5342.MOV,3. happy,Adjectives,3. happy#2,train,include
+Adjectives/3. happy/MVI_5343.MOV,3. happy,Adjectives,3. happy#2,test,include
+Adjectives/3. happy/MVI_9295.MOV,3. happy,Adjectives,3. happy#3,train,include
+Adjectives/3. happy/MVI_9296.MOV,3. happy,Adjectives,3. happy#3,train,include
+Adjectives/3. happy/MVI_9297.MOV,3. happy,Adjectives,3. happy#3,train,include
+Adjectives/3. happy/MVI_9374.MOV,3. happy,Adjectives,3. happy#4,train,include
+Adjectives/3. happy/MVI_9375.MOV,3. happy,Adjectives,3. happy#4,train,include
+Adjectives/3. happy/MVI_9376.MOV,3. happy,Adjectives,3. happy#4,train,include
+Adjectives/3. happy/MVI_9454.MOV,3. happy,Adjectives,3. happy#5,train,include
+Adjectives/3. happy/MVI_9455.MOV,3. happy,Adjectives,3. happy#5,test,include
+Adjectives/3. happy/MVI_9456.MOV,3. happy,Adjectives,3. happy#5,val,include
+Adjectives/3. happy/MVI_9540.MOV,3. happy,Adjectives,3. happy#6,train,include
+Adjectives/3. happy/MVI_9541.MOV,3. happy,Adjectives,3. happy#6,train,include
+Adjectives/3. happy/MVI_9542.MOV,3. happy,Adjectives,3. happy#6,test,include
+Adjectives/78. long/MVI_5106.MOV,78. long,Adjectives,78. long#0,train,include
+Adjectives/78. long/MVI_5107.MOV,78. long,Adjectives,78. long#0,train,include
+Adjectives/78. long/MVI_5108.MOV,78. long,Adjectives,78. long#0,train,include
+Adjectives/78. long/MVI_5186.MOV,78. long,Adjectives,78. long#1,train,include
+Adjectives/78. long/MVI_5187.MOV,78. long,Adjectives,78. long#1,train,include
+Adjectives/78. long/MVI_5188.MOV,78. long,Adjectives,78. long#1,val,include
+Adjectives/78. long/MVI_5266.MOV,78. long,Adjectives,78. long#2,test,include
+Adjectives/78. long/MVI_5267.MOV,78. long,Adjectives,78. long#2,train,include
+Adjectives/78. long/MVI_5268.MOV,78. long,Adjectives,78. long#2,train,include
+Adjectives/78. long/MVI_9217.MOV,78. long,Adjectives,78. long#3,test,include
+Adjectives/78. long/MVI_9218.MOV,78. long,Adjectives,78. long#3,train,include
+Adjectives/78. long/MVI_9219.MOV,78. long,Adjectives,78. long#3,train,include
+Adjectives/78. long/MVI_9298.MOV,78. long,Adjectives,78. long#4,train,include
+Adjectives/78. long/MVI_9299.MOV,78. long,Adjectives,78. long#4,val,include
+Adjectives/78. long/MVI_9300.MOV,78. long,Adjectives,78. long#4,test,include
+Adjectives/78. long/MVI_9377.MOV,78. long,Adjectives,78. long#5,train,include
+Adjectives/78. long/MVI_9378.MOV,78. long,Adjectives,78. long#5,train,include
+Adjectives/78. long/MVI_9379.MOV,78. long,Adjectives,78. long#5,test,include
+Adjectives/78. long/MVI_9458.MOV,78. long,Adjectives,78. long#6,val,include
+Adjectives/78. long/MVI_9459.MOV,78. long,Adjectives,78. long#6,train,include
+Adjectives/78. long/MVI_9460.MOV,78. long,Adjectives,78. long#6,train,include
+Adjectives/79. short/MVI_5110.MOV,79. short,Adjectives,79. short#0,train,include
+Adjectives/79. short/MVI_5111.MOV,79. short,Adjectives,79. short#0,train,include
+Adjectives/79. short/MVI_5112.MOV,79. short,Adjectives,79. short#0,test,include
+Adjectives/79. short/MVI_5189.MOV,79. short,Adjectives,79. short#1,test,include
+Adjectives/79. short/MVI_5190.MOV,79. short,Adjectives,79. short#1,test,include
+Adjectives/79. short/MVI_5191.MOV,79. short,Adjectives,79. short#1,train,include
+Adjectives/79. short/MVI_5269.MOV,79. short,Adjectives,79. short#2,train,include
+Adjectives/79. short/MVI_5270.MOV,79. short,Adjectives,79. short#2,train,include
+Adjectives/79. short/MVI_5271.MOV,79. short,Adjectives,79. short#2,val,include
+Adjectives/79. short/MVI_9220.MOV,79. short,Adjectives,79. short#3,train,include
+Adjectives/79. short/MVI_9221.MOV,79. short,Adjectives,79. short#3,train,include
+Adjectives/79. short/MVI_9222.MOV,79. short,Adjectives,79. short#3,train,include
+Adjectives/79. short/MVI_9301.MOV,79. short,Adjectives,79. short#4,val,include
+Adjectives/79. short/MVI_9302.MOV,79. short,Adjectives,79. short#4,test,include
+Adjectives/79. short/MVI_9303.MOV,79. short,Adjectives,79. short#4,train,include
+Adjectives/79. short/MVI_9380.MOV,79. short,Adjectives,79. short#5,train,include
+Adjectives/79. short/MVI_9381.MOV,79. short,Adjectives,79. short#5,val,include
+Adjectives/79. short/MVI_9382.MOV,79. short,Adjectives,79. short#5,train,include
+Adjectives/79. short/MVI_9461.MOV,79. short,Adjectives,79. short#6,train,include
+Adjectives/79. short/MVI_9462.MOV,79. short,Adjectives,79. short#6,train,include
+Adjectives/79. short/MVI_9463.MOV,79. short,Adjectives,79. short#6,train,include
+Adjectives/80. tall/MVI_5114.MOV,80. tall,Adjectives,80. tall#0,val,include
+Adjectives/80. tall/MVI_5115.MOV,80. tall,Adjectives,80. tall#0,train,include
+Adjectives/80. tall/MVI_5116.MOV,80. tall,Adjectives,80. tall#0,train,include
+Adjectives/80. tall/MVI_5194.MOV,80. tall,Adjectives,80. tall#1,test,include
+Adjectives/80. tall/MVI_5195.MOV,80. tall,Adjectives,80. tall#1,val,include
+Adjectives/80. tall/MVI_5196.MOV,80. tall,Adjectives,80. tall#1,train,include
+Adjectives/80. tall/MVI_5273.MOV,80. tall,Adjectives,80. tall#2,train,include
+Adjectives/80. tall/MVI_5274.MOV,80. tall,Adjectives,80. tall#2,train,include
+Adjectives/80. tall/MVI_5276.MOV,80. tall,Adjectives,80. tall#2,train,include
+Adjectives/80. tall/MVI_9223.MOV,80. tall,Adjectives,80. tall#3,val,include
+Adjectives/80. tall/MVI_9224.MOV,80. tall,Adjectives,80. tall#3,train,include
+Adjectives/80. tall/MVI_9225.MOV,80. tall,Adjectives,80. tall#3,train,include
+Adjectives/80. tall/MVI_9307.MOV,80. tall,Adjectives,80. tall#4,train,include
+Adjectives/80. tall/MVI_9308.MOV,80. tall,Adjectives,80. tall#4,test,include
+Adjectives/80. tall/MVI_9309.MOV,80. tall,Adjectives,80. tall#4,test,include
+Adjectives/80. tall/MVI_9384.MOV,80. tall,Adjectives,80. tall#5,train,include
+Adjectives/80. tall/MVI_9386.MOV,80. tall,Adjectives,80. tall#5,train,include
+Adjectives/80. tall/MVI_9387.MOV,80. tall,Adjectives,80. tall#5,test,include
+Adjectives/80. tall/MVI_9464.MOV,80. tall,Adjectives,80. tall#6,train,include
+Adjectives/80. tall/MVI_9465.MOV,80. tall,Adjectives,80. tall#6,train,include
+Adjectives/80. tall/MVI_9466.MOV,80. tall,Adjectives,80. tall#6,train,include
+Adjectives/81. wide/MVI_5117.MOV,81. wide,Adjectives,81. wide#0,train,include
+Adjectives/81. wide/MVI_5118.MOV,81. wide,Adjectives,81. wide#0,train,include
+Adjectives/81. wide/MVI_5119.MOV,81. wide,Adjectives,81. wide#0,train,include
+Adjectives/81. wide/MVI_5197.MOV,81. wide,Adjectives,81. wide#1,train,include
+Adjectives/81. wide/MVI_5198.MOV,81. wide,Adjectives,81. wide#1,train,include
+Adjectives/81. wide/MVI_5199.MOV,81. wide,Adjectives,81. wide#1,train,include
+Adjectives/81. wide/MVI_5277.MOV,81. wide,Adjectives,81. wide#2,val,include
+Adjectives/81. wide/MVI_5278.MOV,81. wide,Adjectives,81. wide#2,train,include
+Adjectives/81. wide/MVI_5279.MOV,81. wide,Adjectives,81. wide#2,test,include
+Adjectives/81. wide/MVI_9227.MOV,81. wide,Adjectives,81. wide#3,test,include
+Adjectives/81. wide/MVI_9228.MOV,81. wide,Adjectives,81. wide#3,val,include
+Adjectives/81. wide/MVI_9229.MOV,81. wide,Adjectives,81. wide#3,val,include
+Adjectives/81. wide/MVI_9310.MOV,81. wide,Adjectives,81. wide#4,train,include
+Adjectives/81. wide/MVI_9311.MOV,81. wide,Adjectives,81. wide#4,train,include
+Adjectives/81. wide/MVI_9312.MOV,81. wide,Adjectives,81. wide#4,test,include
+Adjectives/81. wide/MVI_9388.MOV,81. wide,Adjectives,81. wide#5,train,include
+Adjectives/81. wide/MVI_9389.MOV,81. wide,Adjectives,81. wide#5,test,include
+Adjectives/81. wide/MVI_9390.MOV,81. wide,Adjectives,81. wide#5,train,include
+Adjectives/81. wide/MVI_9467.MOV,81. wide,Adjectives,81. wide#6,train,include
+Adjectives/81. wide/MVI_9468.MOV,81. wide,Adjectives,81. wide#6,train,include
+Adjectives/81. wide/MVI_9469.MOV,81. wide,Adjectives,81. wide#6,train,include
+Adjectives/82. narrow/MVI_5120.MOV,82. narrow,Adjectives,82. narrow#0,train,include
+Adjectives/82. narrow/MVI_5121.MOV,82. narrow,Adjectives,82. narrow#0,val,include
+Adjectives/82. narrow/MVI_5122.MOV,82. narrow,Adjectives,82. narrow#0,test,include
+Adjectives/82. narrow/MVI_5200.MOV,82. narrow,Adjectives,82. narrow#1,train,include
+Adjectives/82. narrow/MVI_5201.MOV,82. narrow,Adjectives,82. narrow#1,train,include
+Adjectives/82. narrow/MVI_5202.MOV,82. narrow,Adjectives,82. narrow#1,train,include
+Adjectives/82. narrow/MVI_5280.MOV,82. narrow,Adjectives,82. narrow#2,train,include
+Adjectives/82. narrow/MVI_5281.MOV,82. narrow,Adjectives,82. narrow#2,train,include
+Adjectives/82. narrow/MVI_5282.MOV,82. narrow,Adjectives,82. narrow#2,train,include
+Adjectives/82. narrow/MVI_9230.MOV,82. narrow,Adjectives,82. narrow#3,train,include
+Adjectives/82. narrow/MVI_9231.MOV,82. narrow,Adjectives,82. narrow#3,test,include
+Adjectives/82. narrow/MVI_9232.MOV,82. narrow,Adjectives,82. narrow#3,train,include
+Adjectives/82. narrow/MVI_9313.MOV,82. narrow,Adjectives,82. narrow#4,train,include
+Adjectives/82. narrow/MVI_9314.MOV,82. narrow,Adjectives,82. narrow#4,train,include
+Adjectives/82. narrow/MVI_9315.MOV,82. narrow,Adjectives,82. narrow#4,test,include
+Adjectives/82. narrow/MVI_9391.MOV,82. narrow,Adjectives,82. narrow#5,val,include
+Adjectives/82. narrow/MVI_9392.MOV,82. narrow,Adjectives,82. narrow#5,train,include
+Adjectives/82. narrow/MVI_9393.MOV,82. narrow,Adjectives,82. narrow#5,test,include
+Adjectives/82. narrow/MVI_9471.MOV,82. narrow,Adjectives,82. narrow#6,train,include
+Adjectives/82. narrow/MVI_9472.MOV,82. narrow,Adjectives,82. narrow#6,val,include
+Adjectives/82. narrow/MVI_9474.MOV,82. narrow,Adjectives,82. narrow#6,train,include
+Adjectives/83. big large/MVI_5123.MOV,83. big large,Adjectives,83. big large#0,train,include
+Adjectives/83. big large/MVI_5124.MOV,83. big large,Adjectives,83. big large#0,train,include
+Adjectives/83. big large/MVI_5125.MOV,83. big large,Adjectives,83. big large#0,test,include
+Adjectives/83. big large/MVI_5203.MOV,83. big large,Adjectives,83. big large#1,val,include
+Adjectives/83. big large/MVI_5204.MOV,83. big large,Adjectives,83. big large#1,train,include
+Adjectives/83. big large/MVI_5205.MOV,83. big large,Adjectives,83. big large#1,train,include
+Adjectives/83. big large/MVI_5283.MOV,83. big large,Adjectives,83. big large#2,train,include
+Adjectives/83. big large/MVI_5284.MOV,83. big large,Adjectives,83. big large#2,train,include
+Adjectives/83. big large/MVI_5285.MOV,83. big large,Adjectives,83. big large#2,test,include
+Adjectives/83. big large/MVI_9233.MOV,83. big large,Adjectives,83. big large#3,train,include
+Adjectives/83. big large/MVI_9234.MOV,83. big large,Adjectives,83. big large#3,train,include
+Adjectives/83. big large/MVI_9235.MOV,83. big large,Adjectives,83. big large#3,train,include
+Adjectives/83. big large/MVI_9316.MOV,83. big large,Adjectives,83. big large#4,test,include
+Adjectives/83. big large/MVI_9317.MOV,83. big large,Adjectives,83. big large#4,train,include
+Adjectives/83. big large/MVI_9318.MOV,83. big large,Adjectives,83. big large#4,train,include
+Adjectives/83. big large/MVI_9394.MOV,83. big large,Adjectives,83. big large#5,train,include
+Adjectives/83. big large/MVI_9395.MOV,83. big large,Adjectives,83. big large#5,train,include
+Adjectives/83. big large/MVI_9396.MOV,83. big large,Adjectives,83. big large#5,test,include
+Adjectives/83. big large/MVI_9475.MOV,83. big large,Adjectives,83. big large#6,val,include
+Adjectives/83. big large/MVI_9476.MOV,83. big large,Adjectives,83. big large#6,train,include
+Adjectives/83. big large/MVI_9477.MOV,83. big large,Adjectives,83. big large#6,val,include
+Adjectives/84. small little/MVI_5126.MOV,84. small little,Adjectives,84. small little#0,train,include
+Adjectives/84. small little/MVI_5127.MOV,84. small little,Adjectives,84. small little#0,train,include
+Adjectives/84. small little/MVI_5128.MOV,84. small little,Adjectives,84. small little#0,train,include
+Adjectives/84. small little/MVI_5206.MOV,84. small little,Adjectives,84. small little#1,train,include
+Adjectives/84. small little/MVI_5207.MOV,84. small little,Adjectives,84. small little#1,train,include
+Adjectives/84. small little/MVI_5208.MOV,84. small little,Adjectives,84. small little#1,train,include
+Adjectives/84. small little/MVI_5286.MOV,84. small little,Adjectives,84. small little#2,train,include
+Adjectives/84. small little/MVI_5287.MOV,84. small little,Adjectives,84. small little#2,train,include
+Adjectives/84. small little/MVI_5288.MOV,84. small little,Adjectives,84. small little#2,test,include
+Adjectives/84. small little/MVI_9236.MOV,84. small little,Adjectives,84. small little#3,train,include
+Adjectives/84. small little/MVI_9237.MOV,84. small little,Adjectives,84. small little#3,test,include
+Adjectives/84. small little/MVI_9238.MOV,84. small little,Adjectives,84. small little#3,train,include
+Adjectives/84. small little/MVI_9319.MOV,84. small little,Adjectives,84. small little#4,train,include
+Adjectives/84. small little/MVI_9320.MOV,84. small little,Adjectives,84. small little#4,val,include
+Adjectives/84. small little/MVI_9321.MOV,84. small little,Adjectives,84. small little#4,train,include
+Adjectives/84. small little/MVI_9397.MOV,84. small little,Adjectives,84. small little#5,val,include
+Adjectives/84. small little/MVI_9398.MOV,84. small little,Adjectives,84. small little#5,train,include
+Adjectives/84. small little/MVI_9400.MOV,84. small little,Adjectives,84. small little#5,test,include
+Adjectives/84. small little/MVI_9478.MOV,84. small little,Adjectives,84. small little#6,train,include
+Adjectives/84. small little/MVI_9479.MOV,84. small little,Adjectives,84. small little#6,val,include
+Adjectives/84. small little/MVI_9480.MOV,84. small little,Adjectives,84. small little#6,test,include
+Adjectives/85. slow/MVI_5130.MOV,85. slow,Adjectives,85. slow#0,train,include
+Adjectives/85. slow/MVI_5131.MOV,85. slow,Adjectives,85. slow#0,train,include
+Adjectives/85. slow/MVI_5132.MOV,85. slow,Adjectives,85. slow#0,train,include
+Adjectives/85. slow/MVI_5210.MOV,85. slow,Adjectives,85. slow#1,train,include
+Adjectives/85. slow/MVI_5211.MOV,85. slow,Adjectives,85. slow#1,train,include
+Adjectives/85. slow/MVI_5212.MOV,85. slow,Adjectives,85. slow#1,train,include
+Adjectives/85. slow/MVI_5289.MOV,85. slow,Adjectives,85. slow#2,train,include
+Adjectives/85. slow/MVI_5290.MOV,85. slow,Adjectives,85. slow#2,train,include
+Adjectives/85. slow/MVI_5291.MOV,85. slow,Adjectives,85. slow#2,val,include
+Adjectives/85. slow/MVI_9240.MOV,85. slow,Adjectives,85. slow#3,val,include
+Adjectives/85. slow/MVI_9242.MOV,85. slow,Adjectives,85. slow#3,test,include
+Adjectives/85. slow/MVI_9243.MOV,85. slow,Adjectives,85. slow#3,train,include
+Adjectives/85. slow/MVI_9322.MOV,85. slow,Adjectives,85. slow#4,test,include
+Adjectives/85. slow/MVI_9323.MOV,85. slow,Adjectives,85. slow#4,test,include
+Adjectives/85. slow/MVI_9324.MOV,85. slow,Adjectives,85. slow#4,test,include
+Adjectives/85. slow/MVI_9402.MOV,85. slow,Adjectives,85. slow#5,train,include
+Adjectives/85. slow/MVI_9403.MOV,85. slow,Adjectives,85. slow#5,val,include
+Adjectives/85. slow/MVI_9404.MOV,85. slow,Adjectives,85. slow#5,train,include
+Adjectives/85. slow/MVI_9481.MOV,85. slow,Adjectives,85. slow#6,train,include
+Adjectives/85. slow/MVI_9482.MOV,85. slow,Adjectives,85. slow#6,train,include
+Adjectives/85. slow/MVI_9483.MOV,85. slow,Adjectives,85. slow#6,train,include
+Adjectives/86. fast/MVI_5133.MOV,86. fast,Adjectives,86. fast#0,train,include
+Adjectives/86. fast/MVI_5134.MOV,86. fast,Adjectives,86. fast#0,train,include
+Adjectives/86. fast/MVI_5135.MOV,86. fast,Adjectives,86. fast#0,train,include
+Adjectives/86. fast/MVI_5213.MOV,86. fast,Adjectives,86. fast#1,train,include
+Adjectives/86. fast/MVI_5214.MOV,86. fast,Adjectives,86. fast#1,test,include
+Adjectives/86. fast/MVI_5215.MOV,86. fast,Adjectives,86. fast#1,val,include
+Adjectives/86. fast/MVI_5292.MOV,86. fast,Adjectives,86. fast#2,train,include
+Adjectives/86. fast/MVI_5293.MOV,86. fast,Adjectives,86. fast#2,train,include
+Adjectives/86. fast/MVI_5294.MOV,86. fast,Adjectives,86. fast#2,test,include
+Adjectives/86. fast/MVI_9244.MOV,86. fast,Adjectives,86. fast#3,train,include
+Adjectives/86. fast/MVI_9245.MOV,86. fast,Adjectives,86. fast#3,train,include
+Adjectives/86. fast/MVI_9246.MOV,86. fast,Adjectives,86. fast#3,train,include
+Adjectives/86. fast/MVI_9325.MOV,86. fast,Adjectives,86. fast#4,val,include
+Adjectives/86. fast/MVI_9326.MOV,86. fast,Adjectives,86. fast#4,train,include
+Adjectives/86. fast/MVI_9327.MOV,86. fast,Adjectives,86. fast#4,test,include
+Adjectives/86. fast/MVI_9405.MOV,86. fast,Adjectives,86. fast#5,train,include
+Adjectives/86. fast/MVI_9406.MOV,86. fast,Adjectives,86. fast#5,test,include
+Adjectives/86. fast/MVI_9407.MOV,86. fast,Adjectives,86. fast#5,train,include
+Adjectives/86. fast/MVI_9484.MOV,86. fast,Adjectives,86. fast#6,train,include
+Adjectives/86. fast/MVI_9485.MOV,86. fast,Adjectives,86. fast#6,train,include
+Adjectives/86. fast/MVI_9486.MOV,86. fast,Adjectives,86. fast#6,val,include
+Adjectives/87. hot/MVI_5136.MOV,87. hot,Adjectives,87. hot#0,test,include
+Adjectives/87. hot/MVI_5137.MOV,87. hot,Adjectives,87. hot#0,train,include
+Adjectives/87. hot/MVI_5138.MOV,87. hot,Adjectives,87. hot#0,train,include
+Adjectives/87. hot/MVI_5216.MOV,87. hot,Adjectives,87. hot#1,train,include
+Adjectives/87. hot/MVI_5217.MOV,87. hot,Adjectives,87. hot#1,train,include
+Adjectives/87. hot/MVI_5218.MOV,87. hot,Adjectives,87. hot#1,train,include
+Adjectives/87. hot/MVI_5295.MOV,87. hot,Adjectives,87. hot#2,train,include
+Adjectives/87. hot/MVI_5296.MOV,87. hot,Adjectives,87. hot#2,train,include
+Adjectives/87. hot/MVI_5297.MOV,87. hot,Adjectives,87. hot#2,test,include
+Adjectives/87. hot/MVI_9247.MOV,87. hot,Adjectives,87. hot#3,train,include
+Adjectives/87. hot/MVI_9248.MOV,87. hot,Adjectives,87. hot#3,train,include
+Adjectives/87. hot/MVI_9249.MOV,87. hot,Adjectives,87. hot#3,val,include
+Adjectives/87. hot/MVI_9328.MOV,87. hot,Adjectives,87. hot#4,train,include
+Adjectives/87. hot/MVI_9329.MOV,87. hot,Adjectives,87. hot#4,test,include
+Adjectives/87. hot/MVI_9330.MOV,87. hot,Adjectives,87. hot#4,val,include
+Adjectives/87. hot/MVI_9408.MOV,87. hot,Adjectives,87. hot#5,test,include
+Adjectives/87. hot/MVI_9409.MOV,87. hot,Adjectives,87. hot#5,train,include
+Adjectives/87. hot/MVI_9410.MOV,87. hot,Adjectives,87. hot#5,train,include
+Adjectives/87. hot/MVI_9487.MOV,87. hot,Adjectives,87. hot#6,train,include
+Adjectives/87. hot/MVI_9488.MOV,87. hot,Adjectives,87. hot#6,train,include
+Adjectives/87. hot/MVI_9489.MOV,87. hot,Adjectives,87. hot#6,val,include
+Adjectives/88. cold/MVI_5139.MOV,88. cold,Adjectives,88. cold#0,train,include
+Adjectives/88. cold/MVI_5140.MOV,88. cold,Adjectives,88. cold#0,train,include
+Adjectives/88. cold/MVI_5219.MOV,88. cold,Adjectives,88. cold#1,train,include
+Adjectives/88. cold/MVI_5220.MOV,88. cold,Adjectives,88. cold#1,test,include
+Adjectives/88. cold/MVI_5221.MOV,88. cold,Adjectives,88. cold#1,test,include
+Adjectives/88. cold/MVI_5298.MOV,88. cold,Adjectives,88. cold#2,train,include
+Adjectives/88. cold/MVI_5299.MOV,88. cold,Adjectives,88. cold#2,train,include
+Adjectives/88. cold/MVI_5300.MOV,88. cold,Adjectives,88. cold#2,train,include
+Adjectives/88. cold/MVI_9250.MOV,88. cold,Adjectives,88. cold#3,train,include
+Adjectives/88. cold/MVI_9251.MOV,88. cold,Adjectives,88. cold#3,train,include
+Adjectives/88. cold/MVI_9252.MOV,88. cold,Adjectives,88. cold#3,train,include
+Adjectives/88. cold/MVI_9331.MOV,88. cold,Adjectives,88. cold#4,train,include
+Adjectives/88. cold/MVI_9332.MOV,88. cold,Adjectives,88. cold#4,train,include
+Adjectives/88. cold/MVI_9333.MOV,88. cold,Adjectives,88. cold#4,test,include
+Adjectives/88. cold/MVI_9411.MOV,88. cold,Adjectives,88. cold#5,train,include
+Adjectives/88. cold/MVI_9412.MOV,88. cold,Adjectives,88. cold#5,train,include
+Adjectives/88. cold/MVI_9413.MOV,88. cold,Adjectives,88. cold#5,test,include
+Adjectives/88. cold/MVI_9490.MOV,88. cold,Adjectives,88. cold#6,val,include
+Adjectives/88. cold/MVI_9491.MOV,88. cold,Adjectives,88. cold#6,val,include
+Adjectives/88. cold/MVI_9492.MOV,88. cold,Adjectives,88. cold#6,train,include
+Adjectives/89. warm/MVI_5141.MOV,89. warm,Adjectives,89. warm#0,train,include
+Adjectives/89. warm/MVI_5143.MOV,89. warm,Adjectives,89. warm#0,val,include
+Adjectives/89. warm/MVI_5144.MOV,89. warm,Adjectives,89. warm#0,train,include
+Adjectives/89. warm/MVI_5222.MOV,89. warm,Adjectives,89. warm#1,test,include
+Adjectives/89. warm/MVI_5223.MOV,89. warm,Adjectives,89. warm#1,train,include
+Adjectives/89. warm/MVI_5224.MOV,89. warm,Adjectives,89. warm#1,train,include
+Adjectives/89. warm/MVI_5301.MOV,89. warm,Adjectives,89. warm#2,test,include
+Adjectives/89. warm/MVI_5302.MOV,89. warm,Adjectives,89. warm#2,train,include
+Adjectives/89. warm/MVI_5303.MOV,89. warm,Adjectives,89. warm#2,train,include
+Adjectives/89. warm/MVI_9253.MOV,89. warm,Adjectives,89. warm#3,val,include
+Adjectives/89. warm/MVI_9254.MOV,89. warm,Adjectives,89. warm#3,train,include
+Adjectives/89. warm/MVI_9255.MOV,89. warm,Adjectives,89. warm#3,train,include
+Adjectives/89. warm/MVI_9334.MOV,89. warm,Adjectives,89. warm#4,test,include
+Adjectives/89. warm/MVI_9335.MOV,89. warm,Adjectives,89. warm#4,test,include
+Adjectives/89. warm/MVI_9336.MOV,89. warm,Adjectives,89. warm#4,train,include
+Adjectives/89. warm/MVI_9415.MOV,89. warm,Adjectives,89. warm#5,train,include
+Adjectives/89. warm/MVI_9416.MOV,89. warm,Adjectives,89. warm#5,train,include
+Adjectives/89. warm/MVI_9417.MOV,89. warm,Adjectives,89. warm#5,train,include
+Adjectives/89. warm/MVI_9493.MOV,89. warm,Adjectives,89. warm#6,train,include
+Adjectives/89. warm/MVI_9494.MOV,89. warm,Adjectives,89. warm#6,train,include
+Adjectives/89. warm/MVI_9495.MOV,89. warm,Adjectives,89. warm#6,val,include
+Adjectives/90. cool/MVI_5145.MOV,90. cool,Adjectives,90. cool#0,test,include
+Adjectives/90. cool/MVI_5146.MOV,90. cool,Adjectives,90. cool#0,test,include
+Adjectives/90. cool/MVI_5147.MOV,90. cool,Adjectives,90. cool#0,train,include
+Adjectives/90. cool/MVI_5225.MOV,90. cool,Adjectives,90. cool#1,train,include
+Adjectives/90. cool/MVI_5226.MOV,90. cool,Adjectives,90. cool#1,val,include
+Adjectives/90. cool/MVI_5227.MOV,90. cool,Adjectives,90. cool#1,train,include
+Adjectives/90. cool/MVI_5304.MOV,90. cool,Adjectives,90. cool#2,val,include
+Adjectives/90. cool/MVI_5305.MOV,90. cool,Adjectives,90. cool#2,train,include
+Adjectives/90. cool/MVI_5306.MOV,90. cool,Adjectives,90. cool#2,train,include
+Adjectives/90. cool/MVI_9256.MOV,90. cool,Adjectives,90. cool#3,train,include
+Adjectives/90. cool/MVI_9257.MOV,90. cool,Adjectives,90. cool#3,train,include
+Adjectives/90. cool/MVI_9258.MOV,90. cool,Adjectives,90. cool#3,train,include
+Adjectives/90. cool/MVI_9337.MOV,90. cool,Adjectives,90. cool#4,test,include
+Adjectives/90. cool/MVI_9338.MOV,90. cool,Adjectives,90. cool#4,train,include
+Adjectives/90. cool/MVI_9339.MOV,90. cool,Adjectives,90. cool#4,train,include
+Adjectives/90. cool/MVI_9418.MOV,90. cool,Adjectives,90. cool#5,train,include
+Adjectives/90. cool/MVI_9419.MOV,90. cool,Adjectives,90. cool#5,val,include
+Adjectives/90. cool/MVI_9420.MOV,90. cool,Adjectives,90. cool#5,train,include
+Adjectives/90. cool/MVI_9497.MOV,90. cool,Adjectives,90. cool#6,test,include
+Adjectives/90. cool/MVI_9498.MOV,90. cool,Adjectives,90. cool#6,train,include
+Adjectives/90. cool/MVI_9499.MOV,90. cool,Adjectives,90. cool#6,train,include
+Adjectives/91. new/MVI_5148.MOV,91. new,Adjectives,91. new#0,test,include
+Adjectives/91. new/MVI_5150.MOV,91. new,Adjectives,91. new#0,train,include
+Adjectives/91. new/MVI_5151.MOV,91. new,Adjectives,91. new#0,train,include
+Adjectives/91. new/MVI_5229.MOV,91. new,Adjectives,91. new#1,train,include
+Adjectives/91. new/MVI_5230.MOV,91. new,Adjectives,91. new#1,train,include
+Adjectives/91. new/MVI_5231.MOV,91. new,Adjectives,91. new#1,test,include
+Adjectives/91. new/MVI_5307.MOV,91. new,Adjectives,91. new#2,train,include
+Adjectives/91. new/MVI_5308.MOV,91. new,Adjectives,91. new#2,test,include
+Adjectives/91. new/MVI_5309.MOV,91. new,Adjectives,91. new#2,val,include
+Adjectives/91. new/MVI_9259.MOV,91. new,Adjectives,91. new#3,train,include
+Adjectives/91. new/MVI_9260.MOV,91. new,Adjectives,91. new#3,train,include
+Adjectives/91. new/MVI_9261.MOV,91. new,Adjectives,91. new#3,train,include
+Adjectives/91. new/MVI_9340.MOV,91. new,Adjectives,91. new#4,train,include
+Adjectives/91. new/MVI_9341.MOV,91. new,Adjectives,91. new#4,val,include
+Adjectives/91. new/MVI_9342.MOV,91. new,Adjectives,91. new#4,train,include
+Adjectives/91. new/MVI_9421.MOV,91. new,Adjectives,91. new#5,test,include
+Adjectives/91. new/MVI_9422.MOV,91. new,Adjectives,91. new#5,val,include
+Adjectives/91. new/MVI_9423.MOV,91. new,Adjectives,91. new#5,train,include
+Adjectives/91. new/MVI_9500.MOV,91. new,Adjectives,91. new#6,train,include
+Adjectives/91. new/MVI_9501.MOV,91. new,Adjectives,91. new#6,train,include
+Adjectives/91. new/MVI_9502.MOV,91. new,Adjectives,91. new#6,train,include
+Adjectives/92. old/MVI_5152.MOV,92. old,Adjectives,92. old#0,train,include
+Adjectives/92. old/MVI_5153.MOV,92. old,Adjectives,92. old#0,test,include
+Adjectives/92. old/MVI_5154.MOV,92. old,Adjectives,92. old#0,test,include
+Adjectives/92. old/MVI_5232.MOV,92. old,Adjectives,92. old#1,val,include
+Adjectives/92. old/MVI_5233.MOV,92. old,Adjectives,92. old#1,val,include
+Adjectives/92. old/MVI_5234.MOV,92. old,Adjectives,92. old#1,train,include
+Adjectives/92. old/MVI_5310.MOV,92. old,Adjectives,92. old#2,test,include
+Adjectives/92. old/MVI_5311.MOV,92. old,Adjectives,92. old#2,train,include
+Adjectives/92. old/MVI_5312.MOV,92. old,Adjectives,92. old#2,train,include
+Adjectives/92. old/MVI_9262.MOV,92. old,Adjectives,92. old#3,train,include
+Adjectives/92. old/MVI_9263.MOV,92. old,Adjectives,92. old#3,train,include
+Adjectives/92. old/MVI_9264.MOV,92. old,Adjectives,92. old#3,train,include
+Adjectives/92. old/MVI_9343.MOV,92. old,Adjectives,92. old#4,train,include
+Adjectives/92. old/MVI_9344.MOV,92. old,Adjectives,92. old#4,test,include
+Adjectives/92. old/MVI_9345.MOV,92. old,Adjectives,92. old#4,train,include
+Adjectives/92. old/MVI_9424.MOV,92. old,Adjectives,92. old#5,train,include
+Adjectives/92. old/MVI_9425.MOV,92. old,Adjectives,92. old#5,train,include
+Adjectives/92. old/MVI_9426.MOV,92. old,Adjectives,92. old#5,val,include
+Adjectives/92. old/MVI_9504.MOV,92. old,Adjectives,92. old#6,train,include
+Adjectives/92. old/MVI_9505.MOV,92. old,Adjectives,92. old#6,train,include
+Adjectives/92. old/MVI_9506.MOV,92. old,Adjectives,92. old#6,train,include
+Adjectives/93. young/MVI_5155.MOV,93. young,Adjectives,93. young#0,train,include
+Adjectives/93. young/MVI_5156.MOV,93. young,Adjectives,93. young#0,val,include
+Adjectives/93. young/MVI_5157.MOV,93. young,Adjectives,93. young#0,val,include
+Adjectives/93. young/MVI_5235.MOV,93. young,Adjectives,93. young#1,test,include
+Adjectives/93. young/MVI_5236.MOV,93. young,Adjectives,93. young#1,train,include
+Adjectives/93. young/MVI_5237.MOV,93. young,Adjectives,93. young#1,train,include
+Adjectives/93. young/MVI_5313.MOV,93. young,Adjectives,93. young#2,train,include
+Adjectives/93. young/MVI_5314.MOV,93. young,Adjectives,93. young#2,train,include
+Adjectives/93. young/MVI_5315.MOV,93. young,Adjectives,93. young#2,test,include
+Adjectives/93. young/MVI_9265.MOV,93. young,Adjectives,93. young#3,test,include
+Adjectives/93. young/MVI_9266.MOV,93. young,Adjectives,93. young#3,train,include
+Adjectives/93. young/MVI_9267.MOV,93. young,Adjectives,93. young#3,train,include
+Adjectives/93. young/MVI_9346.MOV,93. young,Adjectives,93. young#4,train,include
+Adjectives/93. young/MVI_9347.MOV,93. young,Adjectives,93. young#4,train,include
+Adjectives/93. young/MVI_9348.MOV,93. young,Adjectives,93. young#4,train,include
+Adjectives/93. young/MVI_9427.MOV,93. young,Adjectives,93. young#5,val,include
+Adjectives/93. young/MVI_9428.MOV,93. young,Adjectives,93. young#5,train,include
+Adjectives/93. young/MVI_9429.MOV,93. young,Adjectives,93. young#5,train,include
+Adjectives/93. young/MVI_9507.MOV,93. young,Adjectives,93. young#6,train,include
+Adjectives/93. young/MVI_9508.MOV,93. young,Adjectives,93. young#6,train,include
+Adjectives/93. young/MVI_9509.MOV,93. young,Adjectives,93. young#6,test,include
+Adjectives/94. good/MVI_5158.MOV,94. good,Adjectives,94. good#0,train,include
+Adjectives/94. good/MVI_5159.MOV,94. good,Adjectives,94. good#0,val,include
+Adjectives/94. good/MVI_5160.MOV,94. good,Adjectives,94. good#0,train,include
+Adjectives/94. good/MVI_5238.MOV,94. good,Adjectives,94. good#1,test,include
+Adjectives/94. good/MVI_5239.MOV,94. good,Adjectives,94. good#1,train,include
+Adjectives/94. good/MVI_5240.MOV,94. good,Adjectives,94. good#1,train,include
+Adjectives/94. good/MVI_5316.MOV,94. good,Adjectives,94. good#2,train,include
+Adjectives/94. good/MVI_5317.MOV,94. good,Adjectives,94. good#2,train,include
+Adjectives/94. good/MVI_5318.MOV,94. good,Adjectives,94. good#2,val,include
+Adjectives/94. good/MVI_9268.MOV,94. good,Adjectives,94. good#3,train,include
+Adjectives/94. good/MVI_9269.MOV,94. good,Adjectives,94. good#3,test,include
+Adjectives/94. good/MVI_9270.MOV,94. good,Adjectives,94. good#3,train,include
+Adjectives/94. good/MVI_9349.MOV,94. good,Adjectives,94. good#4,train,include
+Adjectives/94. good/MVI_9350.MOV,94. good,Adjectives,94. good#4,train,include
+Adjectives/94. good/MVI_9351.MOV,94. good,Adjectives,94. good#4,train,include
+Adjectives/94. good/MVI_9430.MOV,94. good,Adjectives,94. good#5,val,include
+Adjectives/94. good/MVI_9431.MOV,94. good,Adjectives,94. good#5,test,include
+Adjectives/94. good/MVI_9432.MOV,94. good,Adjectives,94. good#5,test,include
+Adjectives/94. good/MVI_9510.MOV,94. good,Adjectives,94. good#6,train,include
+Adjectives/94. good/MVI_9511.MOV,94. good,Adjectives,94. good#6,train,include
+Adjectives/94. good/MVI_9512.MOV,94. good,Adjectives,94. good#6,train,include
+Adjectives/95. bad/MVI_5161.MOV,95. bad,Adjectives,95. bad#0,train,include
+Adjectives/95. bad/MVI_5162.MOV,95. bad,Adjectives,95. bad#0,val,include
+Adjectives/95. bad/MVI_5163.MOV,95. bad,Adjectives,95. bad#0,train,include
+Adjectives/95. bad/MVI_5241.MOV,95. bad,Adjectives,95. bad#1,train,include
+Adjectives/95. bad/MVI_5242.MOV,95. bad,Adjectives,95. bad#1,test,include
+Adjectives/95. bad/MVI_5243.MOV,95. bad,Adjectives,95. bad#1,train,include
+Adjectives/95. bad/MVI_5319.MOV,95. bad,Adjectives,95. bad#2,train,include
+Adjectives/95. bad/MVI_5320.MOV,95. bad,Adjectives,95. bad#2,train,include
+Adjectives/95. bad/MVI_5321.MOV,95. bad,Adjectives,95. bad#2,val,include
+Adjectives/95. bad/MVI_9271.MOV,95. bad,Adjectives,95. bad#3,test,include
+Adjectives/95. bad/MVI_9272.MOV,95. bad,Adjectives,95. bad#3,val,include
+Adjectives/95. bad/MVI_9273.MOV,95. bad,Adjectives,95. bad#3,train,include
+Adjectives/95. bad/MVI_9352.MOV,95. bad,Adjectives,95. bad#4,train,include
+Adjectives/95. bad/MVI_9353.MOV,95. bad,Adjectives,95. bad#4,test,include
+Adjectives/95. bad/MVI_9354.MOV,95. bad,Adjectives,95. bad#4,train,include
+Adjectives/95. bad/MVI_9433.MOV,95. bad,Adjectives,95. bad#5,train,include
+Adjectives/95. bad/MVI_9434.MOV,95. bad,Adjectives,95. bad#5,train,include
+Adjectives/95. bad/MVI_9435.MOV,95. bad,Adjectives,95. bad#5,train,include
+Adjectives/95. bad/MVI_9513.MOV,95. bad,Adjectives,95. bad#6,test,include
+Adjectives/95. bad/MVI_9514.MOV,95. bad,Adjectives,95. bad#6,train,include
+Adjectives/95. bad/MVI_9516.MOV,95. bad,Adjectives,95. bad#6,train,include
+Adjectives/96. wet/MVI_5164.MOV,96. wet,Adjectives,96. wet#0,test,include
+Adjectives/96. wet/MVI_5165.MOV,96. wet,Adjectives,96. wet#0,val,include
+Adjectives/96. wet/MVI_5166.MOV,96. wet,Adjectives,96. wet#0,train,include
+Adjectives/96. wet/MVI_5244.MOV,96. wet,Adjectives,96. wet#1,train,include
+Adjectives/96. wet/MVI_5245.MOV,96. wet,Adjectives,96. wet#1,val,include
+Adjectives/96. wet/MVI_5246.MOV,96. wet,Adjectives,96. wet#1,train,include
+Adjectives/96. wet/MVI_5322.MOV,96. wet,Adjectives,96. wet#2,train,include
+Adjectives/96. wet/MVI_5323.MOV,96. wet,Adjectives,96. wet#2,train,include
+Adjectives/96. wet/MVI_5324.MOV,96. wet,Adjectives,96. wet#2,test,include
+Adjectives/96. wet/MVI_9274.MOV,96. wet,Adjectives,96. wet#3,train,include
+Adjectives/96. wet/MVI_9275.MOV,96. wet,Adjectives,96. wet#3,train,include
+Adjectives/96. wet/MVI_9276.MOV,96. wet,Adjectives,96. wet#3,train,include
+Adjectives/96. wet/MVI_9355.MOV,96. wet,Adjectives,96. wet#4,train,include
+Adjectives/96. wet/MVI_9356.MOV,96. wet,Adjectives,96. wet#4,test,include
+Adjectives/96. wet/MVI_9357.MOV,96. wet,Adjectives,96. wet#4,train,include
+Adjectives/96. wet/MVI_9436.MOV,96. wet,Adjectives,96. wet#5,test,include
+Adjectives/96. wet/MVI_9437.MOV,96. wet,Adjectives,96. wet#5,val,include
+Adjectives/96. wet/MVI_9438.MOV,96. wet,Adjectives,96. wet#5,train,include
+Adjectives/96. wet/MVI_9517.MOV,96. wet,Adjectives,96. wet#6,train,include
+Adjectives/96. wet/MVI_9518.MOV,96. wet,Adjectives,96. wet#6,train,include
+Adjectives/96. wet/MVI_9520.MOV,96. wet,Adjectives,96. wet#6,train,include
+Adjectives/97. dry/MVI_5167.MOV,97. dry,Adjectives,97. dry#0,train,include
+Adjectives/97. dry/MVI_5168.MOV,97. dry,Adjectives,97. dry#0,train,include
+Adjectives/97. dry/MVI_5169.MOV,97. dry,Adjectives,97. dry#0,test,include
+Adjectives/97. dry/MVI_5248.MOV,97. dry,Adjectives,97. dry#1,train,include
+Adjectives/97. dry/MVI_5249.MOV,97. dry,Adjectives,97. dry#1,train,include
+Adjectives/97. dry/MVI_5250.MOV,97. dry,Adjectives,97. dry#1,val,include
+Adjectives/97. dry/MVI_5326.MOV,97. dry,Adjectives,97. dry#2,train,include
+Adjectives/97. dry/MVI_5327.MOV,97. dry,Adjectives,97. dry#2,val,include
+Adjectives/97. dry/MVI_5328.MOV,97. dry,Adjectives,97. dry#2,val,include
+Adjectives/97. dry/MVI_9277.MOV,97. dry,Adjectives,97. dry#3,train,include
+Adjectives/97. dry/MVI_9278.MOV,97. dry,Adjectives,97. dry#3,train,include
+Adjectives/97. dry/MVI_9279.MOV,97. dry,Adjectives,97. dry#3,train,include
+Adjectives/97. dry/MVI_9359.MOV,97. dry,Adjectives,97. dry#4,train,include
+Adjectives/97. dry/MVI_9360.MOV,97. dry,Adjectives,97. dry#4,test,include
+Adjectives/97. dry/MVI_9361.MOV,97. dry,Adjectives,97. dry#4,train,include
+Adjectives/97. dry/MVI_9439.MOV,97. dry,Adjectives,97. dry#5,test,include
+Adjectives/97. dry/MVI_9440.MOV,97. dry,Adjectives,97. dry#5,train,include
+Adjectives/97. dry/MVI_9441.MOV,97. dry,Adjectives,97. dry#5,test,include
+Adjectives/97. dry/MVI_9521.MOV,97. dry,Adjectives,97. dry#6,train,include
+Adjectives/97. dry/MVI_9522.MOV,97. dry,Adjectives,97. dry#6,train,include
+Adjectives/97. dry/MVI_9523.MOV,97. dry,Adjectives,97. dry#6,train,include
+Adjectives/98. sick/MVI_5170.MOV,98. sick,Adjectives,98. sick#0,train,include
+Adjectives/98. sick/MVI_5171.MOV,98. sick,Adjectives,98. sick#0,val,include
+Adjectives/98. sick/MVI_5172.MOV,98. sick,Adjectives,98. sick#0,test,include
+Adjectives/98. sick/MVI_5251.MOV,98. sick,Adjectives,98. sick#1,test,include
+Adjectives/98. sick/MVI_5252.MOV,98. sick,Adjectives,98. sick#1,train,include
+Adjectives/98. sick/MVI_5253.MOV,98. sick,Adjectives,98. sick#1,train,include
+Adjectives/98. sick/MVI_5329.MOV,98. sick,Adjectives,98. sick#2,train,include
+Adjectives/98. sick/MVI_5330.MOV,98. sick,Adjectives,98. sick#2,train,include
+Adjectives/98. sick/MVI_5331.MOV,98. sick,Adjectives,98. sick#2,test,include
+Adjectives/98. sick/MVI_9280.MOV,98. sick,Adjectives,98. sick#3,train,include
+Adjectives/98. sick/MVI_9281.MOV,98. sick,Adjectives,98. sick#3,train,include
+Adjectives/98. sick/MVI_9282.MOV,98. sick,Adjectives,98. sick#3,train,include
+Adjectives/98. sick/MVI_9362.MOV,98. sick,Adjectives,98. sick#4,test,include
+Adjectives/98. sick/MVI_9363.MOV,98. sick,Adjectives,98. sick#4,train,include
+Adjectives/98. sick/MVI_9364.MOV,98. sick,Adjectives,98. sick#4,val,include
+Adjectives/98. sick/MVI_9442.MOV,98. sick,Adjectives,98. sick#5,train,include
+Adjectives/98. sick/MVI_9443.MOV,98. sick,Adjectives,98. sick#5,train,include
+Adjectives/98. sick/MVI_9444.MOV,98. sick,Adjectives,98. sick#5,train,include
+Adjectives/98. sick/MVI_9527.MOV,98. sick,Adjectives,98. sick#6,train,include
+Adjectives/98. sick/MVI_9528.MOV,98. sick,Adjectives,98. sick#6,train,include
+Adjectives/98. sick/MVI_9529.MOV,98. sick,Adjectives,98. sick#6,val,include
+Adjectives/99. healthy/MVI_5173.MOV,99. healthy,Adjectives,99. healthy#0,train,include
+Adjectives/99. healthy/MVI_5174.MOV,99. healthy,Adjectives,99. healthy#0,test,include
+Adjectives/99. healthy/MVI_5175.MOV,99. healthy,Adjectives,99. healthy#0,train,include
+Adjectives/99. healthy/MVI_5254.MOV,99. healthy,Adjectives,99. healthy#1,test,include
+Adjectives/99. healthy/MVI_5255.MOV,99. healthy,Adjectives,99. healthy#1,train,include
+Adjectives/99. healthy/MVI_5256.MOV,99. healthy,Adjectives,99. healthy#1,train,include
+Adjectives/99. healthy/MVI_5332.MOV,99. healthy,Adjectives,99. healthy#2,train,include
+Adjectives/99. healthy/MVI_5333.MOV,99. healthy,Adjectives,99. healthy#2,train,include
+Adjectives/99. healthy/MVI_5334.MOV,99. healthy,Adjectives,99. healthy#2,train,include
+Adjectives/99. healthy/MVI_9286.MOV,99. healthy,Adjectives,99. healthy#3,train,include
+Adjectives/99. healthy/MVI_9287.MOV,99. healthy,Adjectives,99. healthy#3,train,include
+Adjectives/99. healthy/MVI_9288.MOV,99. healthy,Adjectives,99. healthy#3,train,include
+Adjectives/99. healthy/MVI_9365.MOV,99. healthy,Adjectives,99. healthy#4,val,include
+Adjectives/99. healthy/MVI_9366.MOV,99. healthy,Adjectives,99. healthy#4,train,include
+Adjectives/99. healthy/MVI_9367.MOV,99. healthy,Adjectives,99. healthy#4,val,include
+Adjectives/99. healthy/MVI_9445.MOV,99. healthy,Adjectives,99. healthy#5,test,include
+Adjectives/99. healthy/MVI_9446.MOV,99. healthy,Adjectives,99. healthy#5,val,include
+Adjectives/99. healthy/MVI_9447.MOV,99. healthy,Adjectives,99. healthy#5,train,include
+Adjectives/99. healthy/MVI_9530.MOV,99. healthy,Adjectives,99. healthy#6,train,include
+Adjectives/99. healthy/MVI_9531.MOV,99. healthy,Adjectives,99. healthy#6,train,include
+Adjectives/99. healthy/MVI_9532.MOV,99. healthy,Adjectives,99. healthy#6,test,include
+Clothes/37. Hat/MVI_3688.MOV,37. Hat,Clothes,37. Hat#0,train,include
+Clothes/37. Hat/MVI_3690.MOV,37. Hat,Clothes,37. Hat#0,test,include
+Clothes/37. Hat/MVI_3691.MOV,37. Hat,Clothes,37. Hat#0,train,include
+Clothes/37. Hat/MVI_3835.MOV,37. Hat,Clothes,37. Hat#1,test,include
+Clothes/37. Hat/MVI_3836.MOV,37. Hat,Clothes,37. Hat#1,train,include
+Clothes/37. Hat/MVI_3837.MOV,37. Hat,Clothes,37. Hat#1,train,include
+Clothes/37. Hat/MVI_3984.MOV,37. Hat,Clothes,37. Hat#2,train,include
+Clothes/37. Hat/MVI_3985.MOV,37. Hat,Clothes,37. Hat#2,train,include
+Clothes/37. Hat/MVI_3986.MOV,37. Hat,Clothes,37. Hat#2,train,include
+Clothes/37. Hat/MVI_4197.MOV,37. Hat,Clothes,37. Hat#3,train,include
+Clothes/37. Hat/MVI_4865.MOV,37. Hat,Clothes,37. Hat#4,train,include
+Clothes/37. Hat/MVI_4866.MOV,37. Hat,Clothes,37. Hat#4,test,include
+Clothes/37. Hat/MVI_4867.MOV,37. Hat,Clothes,37. Hat#4,train,include
+Clothes/37. Hat/MVI_5006.MOV,37. Hat,Clothes,37. Hat#5,train,include
+Clothes/37. Hat/MVI_5007.MOV,37. Hat,Clothes,37. Hat#5,train,include
+Clothes/37. Hat/MVI_5008.MOV,37. Hat,Clothes,37. Hat#5,val,include
+Clothes/37. Hat/MVI_5154.MOV,37. Hat,Clothes,37. Hat#6,train,include
+Clothes/37. Hat/MVI_5155.MOV,37. Hat,Clothes,37. Hat#6,val,include
+Clothes/37. Hat/MVI_5156.MOV,37. Hat,Clothes,37. Hat#6,train,include
+Clothes/37. Hat/MVI_8600.MP4,37. Hat,Clothes,37. Hat#7,test,include
+Clothes/38. Dress/MVI_3693.MOV,38. Dress,Clothes,38. Dress#0,train,include
+Clothes/38. Dress/MVI_3694.MOV,38. Dress,Clothes,38. Dress#0,train,include
+Clothes/38. Dress/MVI_3696.MOV,38. Dress,Clothes,38. Dress#0,test,include
+Clothes/38. Dress/MVI_3838.MOV,38. Dress,Clothes,38. Dress#1,test,include
+Clothes/38. Dress/MVI_3839.MOV,38. Dress,Clothes,38. Dress#1,train,include
+Clothes/38. Dress/MVI_3840.MOV,38. Dress,Clothes,38. Dress#1,train,include
+Clothes/38. Dress/MVI_3987.MOV,38. Dress,Clothes,38. Dress#2,train,include
+Clothes/38. Dress/MVI_3988.MOV,38. Dress,Clothes,38. Dress#2,val,include
+Clothes/38. Dress/MVI_3989.MOV,38. Dress,Clothes,38. Dress#2,val,include
+Clothes/38. Dress/MVI_4198.MOV,38. Dress,Clothes,38. Dress#3,test,include
+Clothes/38. Dress/MVI_4868.MOV,38. Dress,Clothes,38. Dress#4,train,include
+Clothes/38. Dress/MVI_4869.MOV,38. Dress,Clothes,38. Dress#4,train,include
+Clothes/38. Dress/MVI_4870.MOV,38. Dress,Clothes,38. Dress#4,train,include
+Clothes/38. Dress/MVI_5009.MOV,38. Dress,Clothes,38. Dress#5,test,include
+Clothes/38. Dress/MVI_5010.MOV,38. Dress,Clothes,38. Dress#5,train,include
+Clothes/38. Dress/MVI_5011.MOV,38. Dress,Clothes,38. Dress#5,train,include
+Clothes/38. Dress/MVI_5157.MOV,38. Dress,Clothes,38. Dress#6,train,include
+Clothes/38. Dress/MVI_5158.MOV,38. Dress,Clothes,38. Dress#6,train,include
+Clothes/38. Dress/MVI_5159.MOV,38. Dress,Clothes,38. Dress#6,train,include
+Clothes/38. Dress/MVI_8601.MP4,38. Dress,Clothes,38. Dress#7,train,include
+Clothes/41. Shirt/MVI_3701.MOV,41. Shirt,Clothes,41. Shirt#0,train,include
+Clothes/41. Shirt/MVI_3702.MOV,41. Shirt,Clothes,41. Shirt#0,train,include
+Clothes/41. Shirt/MVI_3703.MOV,41. Shirt,Clothes,41. Shirt#0,test,include
+Clothes/41. Shirt/MVI_3847.MOV,41. Shirt,Clothes,41. Shirt#1,test,include
+Clothes/41. Shirt/MVI_3848.MOV,41. Shirt,Clothes,41. Shirt#1,train,include
+Clothes/41. Shirt/MVI_3849.MOV,41. Shirt,Clothes,41. Shirt#1,train,include
+Clothes/41. Shirt/MVI_3999.MOV,41. Shirt,Clothes,41. Shirt#2,val,include
+Clothes/41. Shirt/MVI_4000.MOV,41. Shirt,Clothes,41. Shirt#2,train,include
+Clothes/41. Shirt/MVI_4001.MOV,41. Shirt,Clothes,41. Shirt#2,train,include
+Clothes/41. Shirt/MVI_4201.MOV,41. Shirt,Clothes,41. Shirt#3,train,include
+Clothes/41. Shirt/MVI_4877.MOV,41. Shirt,Clothes,41. Shirt#4,train,include
+Clothes/41. Shirt/MVI_4879.MOV,41. Shirt,Clothes,41. Shirt#4,val,include
+Clothes/41. Shirt/MVI_4880.MOV,41. Shirt,Clothes,41. Shirt#4,train,include
+Clothes/41. Shirt/MVI_5018.MOV,41. Shirt,Clothes,41. Shirt#5,train,include
+Clothes/41. Shirt/MVI_5019.MOV,41. Shirt,Clothes,41. Shirt#5,test,include
+Clothes/41. Shirt/MVI_5020.MOV,41. Shirt,Clothes,41. Shirt#5,train,include
+Clothes/41. Shirt/MVI_5166.MOV,41. Shirt,Clothes,41. Shirt#6,test,include
+Clothes/41. Shirt/MVI_5167.MOV,41. Shirt,Clothes,41. Shirt#6,train,include
+Clothes/41. Shirt/MVI_5168.MOV,41. Shirt,Clothes,41. Shirt#6,train,include
+Clothes/41. Shirt/MVI_8605.MP4,41. Shirt,Clothes,41. Shirt#7,train,include
+Clothes/42. T-Shirt/MVI_3704.MOV,42. T-Shirt,Clothes,42. T-Shirt#0,train,include
+Clothes/42. T-Shirt/MVI_3705.MOV,42. T-Shirt,Clothes,42. T-Shirt#0,test,include
+Clothes/42. T-Shirt/MVI_3706.MOV,42. T-Shirt,Clothes,42. T-Shirt#0,train,include
+Clothes/42. T-Shirt/MVI_3850.MOV,42. T-Shirt,Clothes,42. T-Shirt#1,train,include
+Clothes/42. T-Shirt/MVI_3851.MOV,42. T-Shirt,Clothes,42. T-Shirt#1,train,include
+Clothes/42. T-Shirt/MVI_3852.MOV,42. T-Shirt,Clothes,42. T-Shirt#1,val,include
+Clothes/42. T-Shirt/MVI_4002.MOV,42. T-Shirt,Clothes,42. T-Shirt#2,train,include
+Clothes/42. T-Shirt/MVI_4003.MOV,42. T-Shirt,Clothes,42. T-Shirt#2,test,include
+Clothes/42. T-Shirt/MVI_4004.MOV,42. T-Shirt,Clothes,42. T-Shirt#2,train,include
+Clothes/42. T-Shirt/MVI_4202.MOV,42. T-Shirt,Clothes,42. T-Shirt#3,test,include
+Clothes/42. T-Shirt/MVI_4881.MOV,42. T-Shirt,Clothes,42. T-Shirt#4,train,include
+Clothes/42. T-Shirt/MVI_4882.MOV,42. T-Shirt,Clothes,42. T-Shirt#4,train,include
+Clothes/42. T-Shirt/MVI_4883.MOV,42. T-Shirt,Clothes,42. T-Shirt#4,train,include
+Clothes/42. T-Shirt/MVI_5021.MOV,42. T-Shirt,Clothes,42. T-Shirt#5,val,include
+Clothes/42. T-Shirt/MVI_5022.MOV,42. T-Shirt,Clothes,42. T-Shirt#5,train,include
+Clothes/42. T-Shirt/MVI_5023.MOV,42. T-Shirt,Clothes,42. T-Shirt#5,train,include
+Clothes/42. T-Shirt/MVI_5169.MOV,42. T-Shirt,Clothes,42. T-Shirt#6,train,include
+Clothes/42. T-Shirt/MVI_5170.MOV,42. T-Shirt,Clothes,42. T-Shirt#6,train,include
+Clothes/42. T-Shirt/MVI_5171.MOV,42. T-Shirt,Clothes,42. T-Shirt#6,train,include
+Clothes/42. T-Shirt/MVI_8606.MP4,42. T-Shirt,Clothes,42. T-Shirt#7,test,include
+Clothes/43. Pant/MVI_3707.MOV,43. Pant,Clothes,43. Pant#0,train,include
+Clothes/43. Pant/MVI_3708.MOV,43. Pant,Clothes,43. Pant#0,train,include
+Clothes/43. Pant/MVI_3709.MOV,43. Pant,Clothes,43. Pant#0,test,include
+Clothes/43. Pant/MVI_3853.MOV,43. Pant,Clothes,43. Pant#1,val,include
+Clothes/43. Pant/MVI_3854.MOV,43. Pant,Clothes,43. Pant#1,train,include
+Clothes/43. Pant/MVI_3855.MOV,43. Pant,Clothes,43. Pant#1,train,include
+Clothes/43. Pant/MVI_4005.MOV,43. Pant,Clothes,43. Pant#2,train,include
+Clothes/43. Pant/MVI_4006.MOV,43. Pant,Clothes,43. Pant#2,train,include
+Clothes/43. Pant/MVI_4007.MOV,43. Pant,Clothes,43. Pant#2,train,include
+Clothes/43. Pant/MVI_4203.MOV,43. Pant,Clothes,43. Pant#3,test,include
+Clothes/43. Pant/MVI_4884.MOV,43. Pant,Clothes,43. Pant#4,test,include
+Clothes/43. Pant/MVI_4885.MOV,43. Pant,Clothes,43. Pant#4,train,include
+Clothes/43. Pant/MVI_4886.MOV,43. Pant,Clothes,43. Pant#4,val,include
+Clothes/43. Pant/MVI_5024.MOV,43. Pant,Clothes,43. Pant#5,train,include
+Clothes/43. Pant/MVI_5025.MOV,43. Pant,Clothes,43. Pant#5,train,include
+Clothes/43. Pant/MVI_5026.MOV,43. Pant,Clothes,43. Pant#5,train,include
+Clothes/43. Pant/MVI_5172.MOV,43. Pant,Clothes,43. Pant#6,train,include
+Clothes/43. Pant/MVI_5173.MOV,43. Pant,Clothes,43. Pant#6,test,include
+Clothes/43. Pant/MVI_5174.MOV,43. Pant,Clothes,43. Pant#6,train,include
+Clothes/43. Pant/MVI_8607.MP4,43. Pant,Clothes,43. Pant#7,train,include
+Clothes/44. Shoes/MVI_3710.MOV,44. Shoes,Clothes,44. Shoes#0,train,include
+Clothes/44. Shoes/MVI_3711.MOV,44. Shoes,Clothes,44. Shoes#0,test,include
+Clothes/44. Shoes/MVI_3712.MOV,44. Shoes,Clothes,44. Shoes#0,train,include
+Clothes/44. Shoes/MVI_3856.MOV,44. Shoes,Clothes,44. Shoes#1,test,include
+Clothes/44. Shoes/MVI_3857.MOV,44. Shoes,Clothes,44. Shoes#1,train,include
+Clothes/44. Shoes/MVI_3858.MOV,44. Shoes,Clothes,44. Shoes#1,train,include
+Clothes/44. Shoes/MVI_4008.MOV,44. Shoes,Clothes,44. Shoes#2,val,include
+Clothes/44. Shoes/MVI_4009.MOV,44. Shoes,Clothes,44. Shoes#2,train,include
+Clothes/44. Shoes/MVI_4010.MOV,44. Shoes,Clothes,44. Shoes#2,train,include
+Clothes/44. Shoes/MVI_4204.MOV,44. Shoes,Clothes,44. Shoes#3,train,include
+Clothes/44. Shoes/MVI_4887.MOV,44. Shoes,Clothes,44. Shoes#4,val,include
+Clothes/44. Shoes/MVI_4888.MOV,44. Shoes,Clothes,44. Shoes#4,train,include
+Clothes/44. Shoes/MVI_4889.MOV,44. Shoes,Clothes,44. Shoes#4,train,include
+Clothes/44. Shoes/MVI_5028.MOV,44. Shoes,Clothes,44. Shoes#5,test,include
+Clothes/44. Shoes/MVI_5029.MOV,44. Shoes,Clothes,44. Shoes#5,train,include
+Clothes/44. Shoes/MVI_5030.MOV,44. Shoes,Clothes,44. Shoes#5,train,include
+Clothes/44. Shoes/MVI_5175.MOV,44. Shoes,Clothes,44. Shoes#6,test,include
+Clothes/44. Shoes/MVI_5176.MOV,44. Shoes,Clothes,44. Shoes#6,train,include
+Clothes/44. Shoes/MVI_5177.MOV,44. Shoes,Clothes,44. Shoes#6,train,include
+Clothes/44. Shoes/MVI_8608.MP4,44. Shoes,Clothes,44. Shoes#7,train,include
+Clothes/45. Pocket/MVI_3713.MOV,45. Pocket,Clothes,45. Pocket#0,val,include
+Clothes/45. Pocket/MVI_3714.MOV,45. Pocket,Clothes,45. Pocket#0,train,include
+Clothes/45. Pocket/MVI_3715.MOV,45. Pocket,Clothes,45. Pocket#0,train,include
+Clothes/45. Pocket/MVI_3859.MOV,45. Pocket,Clothes,45. Pocket#1,val,include
+Clothes/45. Pocket/MVI_3861.MOV,45. Pocket,Clothes,45. Pocket#1,train,include
+Clothes/45. Pocket/MVI_3862.MOV,45. Pocket,Clothes,45. Pocket#1,train,include
+Clothes/45. Pocket/MVI_4011.MOV,45. Pocket,Clothes,45. Pocket#2,test,include
+Clothes/45. Pocket/MVI_4012.MOV,45. Pocket,Clothes,45. Pocket#2,train,include
+Clothes/45. Pocket/MVI_4013.MOV,45. Pocket,Clothes,45. Pocket#2,test,include
+Clothes/45. Pocket/MVI_4205.MOV,45. Pocket,Clothes,45. Pocket#3,train,include
+Clothes/45. Pocket/MVI_4890.MOV,45. Pocket,Clothes,45. Pocket#4,train,include
+Clothes/45. Pocket/MVI_4891.MOV,45. Pocket,Clothes,45. Pocket#4,train,include
+Clothes/45. Pocket/MVI_4892.MOV,45. Pocket,Clothes,45. Pocket#4,train,include
+Clothes/45. Pocket/MVI_5031.MOV,45. Pocket,Clothes,45. Pocket#5,train,include
+Clothes/45. Pocket/MVI_5032.MOV,45. Pocket,Clothes,45. Pocket#5,train,include
+Clothes/45. Pocket/MVI_5033.MOV,45. Pocket,Clothes,45. Pocket#5,test,include
+Clothes/45. Pocket/MVI_5178.MOV,45. Pocket,Clothes,45. Pocket#6,train,include
+Clothes/45. Pocket/MVI_5179.MOV,45. Pocket,Clothes,45. Pocket#6,test,include
+Clothes/45. Pocket/MVI_5180.MOV,45. Pocket,Clothes,45. Pocket#6,train,include
+Clothes/45. Pocket/MVI_8610.MP4,45. Pocket,Clothes,45. Pocket#7,train,include
+Colours/51. Brown/MVI_3731.MOV,51. Brown,Colours,51. Brown#0,train,include
+Colours/51. Brown/MVI_3732.MOV,51. Brown,Colours,51. Brown#0,train,include
+Colours/51. Brown/MVI_3733.MOV,51. Brown,Colours,51. Brown#0,test,include
+Colours/51. Brown/MVI_3878.MOV,51. Brown,Colours,51. Brown#1,test,include
+Colours/51. Brown/MVI_3879.MOV,51. Brown,Colours,51. Brown#1,train,include
+Colours/51. Brown/MVI_3880.MOV,51. Brown,Colours,51. Brown#1,train,include
+Colours/51. Brown/MVI_4030.MOV,51. Brown,Colours,51. Brown#2,val,include
+Colours/51. Brown/MVI_4031.MOV,51. Brown,Colours,51. Brown#2,train,include
+Colours/51. Brown/MVI_4032.MOV,51. Brown,Colours,51. Brown#2,test,include
+Colours/51. Brown/MVI_4212.MOV,51. Brown,Colours,51. Brown#3,train,include
+Colours/51. Brown/MVI_4909.MOV,51. Brown,Colours,51. Brown#4,train,include
+Colours/51. Brown/MVI_4910.MOV,51. Brown,Colours,51. Brown#4,train,include
+Colours/51. Brown/MVI_4911.MOV,51. Brown,Colours,51. Brown#4,test,include
+Colours/51. Brown/MVI_5049.MOV,51. Brown,Colours,51. Brown#5,val,include
+Colours/51. Brown/MVI_5050.MOV,51. Brown,Colours,51. Brown#5,train,include
+Colours/51. Brown/MVI_5051.MOV,51. Brown,Colours,51. Brown#5,train,include
+Colours/51. Brown/MVI_5196.MOV,51. Brown,Colours,51. Brown#6,val,include
+Colours/51. Brown/MVI_5197.MOV,51. Brown,Colours,51. Brown#6,train,include
+Colours/51. Brown/MVI_5198.MOV,51. Brown,Colours,51. Brown#6,train,include
+Colours/51. Brown/MVI_5199.MOV,51. Brown,Colours,51. Brown#6,train,include
+Colours/51. Brown/MVI_8616.MP4,51. Brown,Colours,51. Brown#7,train,include
+Colours/56. Grey/MVI_3746.MOV,56. Grey,Colours,56. Grey#0,test,include
+Colours/56. Grey/MVI_3747.MOV,56. Grey,Colours,56. Grey#0,train,include
+Colours/56. Grey/MVI_3748.MOV,56. Grey,Colours,56. Grey#0,train,include
+Colours/56. Grey/MVI_3749.MOV,56. Grey,Colours,56. Grey#0,test,include
+Colours/56. Grey/MVI_3894.MOV,56. Grey,Colours,56. Grey#1,train,include
+Colours/56. Grey/MVI_3895.MOV,56. Grey,Colours,56. Grey#1,train,include
+Colours/56. Grey/MVI_3896.MOV,56. Grey,Colours,56. Grey#1,train,include
+Colours/56. Grey/MVI_4045.MOV,56. Grey,Colours,56. Grey#2,train,include
+Colours/56. Grey/MVI_4046.MOV,56. Grey,Colours,56. Grey#2,train,include
+Colours/56. Grey/MVI_4047.MOV,56. Grey,Colours,56. Grey#2,train,include
+Colours/56. Grey/MVI_4217.MOV,56. Grey,Colours,56. Grey#3,train,include
+Colours/56. Grey/MVI_4924.MOV,56. Grey,Colours,56. Grey#4,train,include
+Colours/56. Grey/MVI_4926.MOV,56. Grey,Colours,56. Grey#4,test,include
+Colours/56. Grey/MVI_4927.MOV,56. Grey,Colours,56. Grey#4,val,include
+Colours/56. Grey/MVI_5064.MOV,56. Grey,Colours,56. Grey#5,train,include
+Colours/56. Grey/MVI_5065.MOV,56. Grey,Colours,56. Grey#5,test,include
+Colours/56. Grey/MVI_5066.MOV,56. Grey,Colours,56. Grey#5,train,include
+Colours/56. Grey/MVI_5212.MOV,56. Grey,Colours,56. Grey#6,val,include
+Colours/56. Grey/MVI_5213.MOV,56. Grey,Colours,56. Grey#6,train,include
+Colours/56. Grey/MVI_5214.MOV,56. Grey,Colours,56. Grey#6,train,include
+Colours/56. Grey/MVI_8621.MP4,56. Grey,Colours,56. Grey#7,val,include
+Greetings/48. Hello/MVI_0029.MOV,48. Hello,Greetings,48. Hello#0,train,include
+Greetings/48. Hello/MVI_0030.MOV,48. Hello,Greetings,48. Hello#0,train,include
+Greetings/48. Hello/MVI_0031.MOV,48. Hello,Greetings,48. Hello#0,train,include
+Greetings/48. Hello/MVI_0032.MOV,48. Hello,Greetings,48. Hello#0,val,include
+Greetings/48. Hello/MVI_0037.MOV,48. Hello,Greetings,48. Hello#0,train,include
+Greetings/48. Hello/MVI_0038.MOV,48. Hello,Greetings,48. Hello#0,val,include
+Greetings/48. Hello/MVI_0039.MOV,48. Hello,Greetings,48. Hello#0,test,include
+Greetings/48. Hello/MVI_0089.MOV,48. Hello,Greetings,48. Hello#1,train,include
+Greetings/48. Hello/MVI_0090.MOV,48. Hello,Greetings,48. Hello#1,train,include
+Greetings/48. Hello/MVI_0091.MOV,48. Hello,Greetings,48. Hello#1,val,include
+Greetings/48. Hello/MVI_9914.MOV,48. Hello,Greetings,48. Hello#2,train,include
+Greetings/48. Hello/MVI_9915.MOV,48. Hello,Greetings,48. Hello#2,test,include
+Greetings/48. Hello/MVI_9916.MOV,48. Hello,Greetings,48. Hello#2,train,include
+Greetings/48. Hello/MVI_9917.MOV,48. Hello,Greetings,48. Hello#2,train,include
+Greetings/48. Hello/MVI_9954.MOV,48. Hello,Greetings,48. Hello#3,train,include
+Greetings/48. Hello/MVI_9955.MOV,48. Hello,Greetings,48. Hello#3,test,include
+Greetings/48. Hello/MVI_9956.MOV,48. Hello,Greetings,48. Hello#3,train,include
+Greetings/48. Hello/MVI_9957.MOV,48. Hello,Greetings,48. Hello#3,test,include
+Greetings/48. Hello/MVI_9982.MOV,48. Hello,Greetings,48. Hello#4,train,include
+Greetings/48. Hello/MVI_9983.MOV,48. Hello,Greetings,48. Hello#4,train,include
+Greetings/48. Hello/MVI_9984.MOV,48. Hello,Greetings,48. Hello#4,train,include
+Greetings/49. How are you/MVI_0033.MOV,49. How are you,Greetings,49. How are you#0,test,include
+Greetings/49. How are you/MVI_0034.MOV,49. How are you,Greetings,49. How are you#0,val,include
+Greetings/49. How are you/MVI_0035.MOV,49. How are you,Greetings,49. How are you#0,train,include
+Greetings/49. How are you/MVI_0036.MOV,49. How are you,Greetings,49. How are you#0,train,include
+Greetings/49. How are you/MVI_0040.MOV,49. How are you,Greetings,49. How are you#0,test,include
+Greetings/49. How are you/MVI_0041.MOV,49. How are you,Greetings,49. How are you#0,train,include
+Greetings/49. How are you/MVI_0042.MOV,49. How are you,Greetings,49. How are you#0,train,include
+Greetings/49. How are you/MVI_0092.MOV,49. How are you,Greetings,49. How are you#1,train,include
+Greetings/49. How are you/MVI_0093.MOV,49. How are you,Greetings,49. How are you#1,val,include
+Greetings/49. How are you/MVI_0094.MOV,49. How are you,Greetings,49. How are you#1,train,include
+Greetings/49. How are you/MVI_9918.MOV,49. How are you,Greetings,49. How are you#2,test,include
+Greetings/49. How are you/MVI_9919.MOV,49. How are you,Greetings,49. How are you#2,train,include
+Greetings/49. How are you/MVI_9920.MOV,49. How are you,Greetings,49. How are you#2,val,include
+Greetings/49. How are you/MVI_9921.MOV,49. How are you,Greetings,49. How are you#2,train,include
+Greetings/49. How are you/MVI_9959.MOV,49. How are you,Greetings,49. How are you#3,train,include
+Greetings/49. How are you/MVI_9960.MOV,49. How are you,Greetings,49. How are you#3,train,include
+Greetings/49. How are you/MVI_9961.MOV,49. How are you,Greetings,49. How are you#3,test,include
+Greetings/49. How are you/MVI_9962.MOV,49. How are you,Greetings,49. How are you#3,train,include
+Greetings/49. How are you/MVI_9985.MOV,49. How are you,Greetings,49. How are you#4,train,include
+Greetings/49. How are you/MVI_9986.MOV,49. How are you,Greetings,49. How are you#4,train,include
+Greetings/49. How are you/MVI_9987.MOV,49. How are you,Greetings,49. How are you#4,train,include
+Greetings/50. Alright/MVI_0037.MOV,50. Alright,Greetings,50. Alright#0,train,include
+Greetings/50. Alright/MVI_0038.MOV,50. Alright,Greetings,50. Alright#0,train,include
+Greetings/50. Alright/MVI_0039.MOV,50. Alright,Greetings,50. Alright#0,train,include
+Greetings/50. Alright/MVI_0040.MOV,50. Alright,Greetings,50. Alright#0,val,include
+Greetings/50. Alright/MVI_0043.MOV,50. Alright,Greetings,50. Alright#0,train,include
+Greetings/50. Alright/MVI_0044.MOV,50. Alright,Greetings,50. Alright#0,train,include
+Greetings/50. Alright/MVI_0045.MOV,50. Alright,Greetings,50. Alright#0,val,include
+Greetings/50. Alright/MVI_0095.MOV,50. Alright,Greetings,50. Alright#1,test,include
+Greetings/50. Alright/MVI_0096.MOV,50. Alright,Greetings,50. Alright#1,train,include
+Greetings/50. Alright/MVI_0097.MOV,50. Alright,Greetings,50. Alright#1,train,include
+Greetings/50. Alright/MVI_9923.MOV,50. Alright,Greetings,50. Alright#2,train,include
+Greetings/50. Alright/MVI_9924.MOV,50. Alright,Greetings,50. Alright#2,train,include
+Greetings/50. Alright/MVI_9925.MOV,50. Alright,Greetings,50. Alright#2,train,include
+Greetings/50. Alright/MVI_9926.MOV,50. Alright,Greetings,50. Alright#2,test,include
+Greetings/50. Alright/MVI_9963.MOV,50. Alright,Greetings,50. Alright#3,train,include
+Greetings/50. Alright/MVI_9964.MOV,50. Alright,Greetings,50. Alright#3,train,include
+Greetings/50. Alright/MVI_9965.MOV,50. Alright,Greetings,50. Alright#3,val,include
+Greetings/50. Alright/MVI_9966.MOV,50. Alright,Greetings,50. Alright#3,train,include
+Greetings/50. Alright/MVI_9988.MOV,50. Alright,Greetings,50. Alright#4,test,include
+Greetings/50. Alright/MVI_9989.MOV,50. Alright,Greetings,50. Alright#4,train,include
+Greetings/50. Alright/MVI_9990.MOV,50. Alright,Greetings,50. Alright#4,test,include
+Greetings/51. Good Morning/MVI_0042.MOV,51. Good Morning,Greetings,51. Good Morning#0,train,include
+Greetings/51. Good Morning/MVI_0043.MOV,51. Good Morning,Greetings,51. Good Morning#0,train,include
+Greetings/51. Good Morning/MVI_0044.MOV,51. Good Morning,Greetings,51. Good Morning#0,test,include
+Greetings/51. Good Morning/MVI_0045.MOV,51. Good Morning,Greetings,51. Good Morning#0,train,include
+Greetings/51. Good Morning/MVI_0046.MOV,51. Good Morning,Greetings,51. Good Morning#0,train,include
+Greetings/51. Good Morning/MVI_0047.MOV,51. Good Morning,Greetings,51. Good Morning#0,train,include
+Greetings/51. Good Morning/MVI_0048.MOV,51. Good Morning,Greetings,51. Good Morning#0,test,include
+Greetings/51. Good Morning/MVI_0098.MOV,51. Good Morning,Greetings,51. Good Morning#1,test,include
+Greetings/51. Good Morning/MVI_0099.MOV,51. Good Morning,Greetings,51. Good Morning#1,train,include
+Greetings/51. Good Morning/MVI_0100.MOV,51. Good Morning,Greetings,51. Good Morning#1,train,include
+Greetings/51. Good Morning/MVI_9932.MOV,51. Good Morning,Greetings,51. Good Morning#2,val,include
+Greetings/51. Good Morning/MVI_9933.MOV,51. Good Morning,Greetings,51. Good Morning#2,train,include
+Greetings/51. Good Morning/MVI_9934.MOV,51. Good Morning,Greetings,51. Good Morning#2,train,include
+Greetings/51. Good Morning/MVI_9935.MOV,51. Good Morning,Greetings,51. Good Morning#2,train,include
+Greetings/51. Good Morning/MVI_9968.MOV,51. Good Morning,Greetings,51. Good Morning#3,val,include
+Greetings/51. Good Morning/MVI_9969.MOV,51. Good Morning,Greetings,51. Good Morning#3,val,include
+Greetings/51. Good Morning/MVI_9970.MOV,51. Good Morning,Greetings,51. Good Morning#3,train,include
+Greetings/51. Good Morning/MVI_9971.MOV,51. Good Morning,Greetings,51. Good Morning#3,train,include
+Greetings/51. Good Morning/MVI_9991.MOV,51. Good Morning,Greetings,51. Good Morning#4,train,include
+Greetings/51. Good Morning/MVI_9992.MOV,51. Good Morning,Greetings,51. Good Morning#4,test,include
+Greetings/51. Good Morning/MVI_9993.MOV,51. Good Morning,Greetings,51. Good Morning#4,train,include
+Greetings/52. Good afternoon/MVI_0046.MOV,52. Good afternoon,Greetings,52. Good afternoon#0,val,include
+Greetings/52. Good afternoon/MVI_0047.MOV,52. Good afternoon,Greetings,52. Good afternoon#0,train,include
+Greetings/52. Good afternoon/MVI_0048.MOV,52. Good afternoon,Greetings,52. Good afternoon#0,train,include
+Greetings/52. Good afternoon/MVI_0049.MOV,52. Good afternoon,Greetings,52. Good afternoon#0,train,include
+Greetings/52. Good afternoon/MVI_0050.MOV,52. Good afternoon,Greetings,52. Good afternoon#0,train,include
+Greetings/52. Good afternoon/MVI_0050_ (1).MOV,52. Good afternoon,Greetings,52. Good afternoon#0,train,include
+Greetings/52. Good afternoon/MVI_0050_ (2).MOV,52. Good afternoon,Greetings,52. Good afternoon#0,train,include
+Greetings/52. Good afternoon/MVI_0051.MOV,52. Good afternoon,Greetings,52. Good afternoon#0,val,include
+Greetings/52. Good afternoon/MVI_0101.MOV,52. Good afternoon,Greetings,52. Good afternoon#1,train,include
+Greetings/52. Good afternoon/MVI_0102.MOV,52. Good afternoon,Greetings,52. Good afternoon#1,test,include
+Greetings/52. Good afternoon/MVI_0103.MOV,52. Good afternoon,Greetings,52. Good afternoon#1,train,include
+Greetings/52. Good afternoon/MVI_9936.MOV,52. Good afternoon,Greetings,52. Good afternoon#2,train,include
+Greetings/52. Good afternoon/MVI_9937.MOV,52. Good afternoon,Greetings,52. Good afternoon#2,test,include
+Greetings/52. Good afternoon/MVI_9938.MOV,52. Good afternoon,Greetings,52. Good afternoon#2,val,include
+Greetings/52. Good afternoon/MVI_9939.MOV,52. Good afternoon,Greetings,52. Good afternoon#2,test,include
+Greetings/52. Good afternoon/MVI_9972.MOV,52. Good afternoon,Greetings,52. Good afternoon#3,train,include
+Greetings/52. Good afternoon/MVI_9973.MOV,52. Good afternoon,Greetings,52. Good afternoon#3,train,include
+Greetings/52. Good afternoon/MVI_9974.MOV,52. Good afternoon,Greetings,52. Good afternoon#3,test,include
+Greetings/52. Good afternoon/MVI_9975.MOV,52. Good afternoon,Greetings,52. Good afternoon#3,train,include
+Greetings/52. Good afternoon/MVI_9994.MOV,52. Good afternoon,Greetings,52. Good afternoon#4,train,include
+Greetings/52. Good afternoon/MVI_9995.MOV,52. Good afternoon,Greetings,52. Good afternoon#4,train,include
+Greetings/52. Good afternoon/MVI_9996.MOV,52. Good afternoon,Greetings,52. Good afternoon#4,train,include
+Greetings/53. Good evening/MVI_0001.MOV,53. Good evening,Greetings,53. Good evening#0,train,include
+Greetings/53. Good evening/MVI_0052.MOV,53. Good evening,Greetings,53. Good evening#1,train,include
+Greetings/53. Good evening/MVI_0053.MOV,53. Good evening,Greetings,53. Good evening#1,train,include
+Greetings/53. Good evening/MVI_0054.MOV,53. Good evening,Greetings,53. Good evening#1,train,include
+Greetings/53. Good evening/MVI_0055.MOV,53. Good evening,Greetings,53. Good evening#1,train,include
+Greetings/53. Good evening/MVI_005_4 (1).MOV,53. Good evening,Greetings,53. Good evening#0,train,include
+Greetings/53. Good evening/MVI_005_4 (2).MOV,53. Good evening,Greetings,53. Good evening#0,test,include
+Greetings/53. Good evening/MVI_005_4 (3).MOV,53. Good evening,Greetings,53. Good evening#0,test,include
+Greetings/53. Good evening/MVI_0105.MOV,53. Good evening,Greetings,53. Good evening#2,val,include
+Greetings/53. Good evening/MVI_0106.MOV,53. Good evening,Greetings,53. Good evening#2,test,include
+Greetings/53. Good evening/MVI_0107.MOV,53. Good evening,Greetings,53. Good evening#2,train,include
+Greetings/53. Good evening/MVI_9940.MOV,53. Good evening,Greetings,53. Good evening#3,train,include
+Greetings/53. Good evening/MVI_9941.MOV,53. Good evening,Greetings,53. Good evening#3,train,include
+Greetings/53. Good evening/MVI_9942.MOV,53. Good evening,Greetings,53. Good evening#3,test,include
+Greetings/53. Good evening/MVI_9943.MOV,53. Good evening,Greetings,53. Good evening#3,val,include
+Greetings/53. Good evening/MVI_9976.MOV,53. Good evening,Greetings,53. Good evening#4,train,include
+Greetings/53. Good evening/MVI_9977.MOV,53. Good evening,Greetings,53. Good evening#4,train,include
+Greetings/53. Good evening/MVI_9978.MOV,53. Good evening,Greetings,53. Good evening#4,train,include
+Greetings/53. Good evening/MVI_9979.MOV,53. Good evening,Greetings,53. Good evening#4,train,include
+Greetings/53. Good evening/MVI_9998.MOV,53. Good evening,Greetings,53. Good evening#5,val,include
+Greetings/53. Good evening/MVI_9999.MOV,53. Good evening,Greetings,53. Good evening#5,train,include
+People/66. Brother/MVI_3778.MOV,66. Brother,People,66. Brother#0,val,include
+People/66. Brother/MVI_3779.MOV,66. Brother,People,66. Brother#0,test,include
+People/66. Brother/MVI_3780.MOV,66. Brother,People,66. Brother#0,val,include
+People/66. Brother/MVI_3781.MOV,66. Brother,People,66. Brother#0,train,include
+People/66. Brother/MVI_3927.MOV,66. Brother,People,66. Brother#1,train,include
+People/66. Brother/MVI_3928.MOV,66. Brother,People,66. Brother#1,val,include
+People/66. Brother/MVI_3929.MOV,66. Brother,People,66. Brother#1,train,include
+People/66. Brother/MVI_4075.MOV,66. Brother,People,66. Brother#2,train,include
+People/66. Brother/MVI_4076.MOV,66. Brother,People,66. Brother#2,train,include
+People/66. Brother/MVI_4077.MOV,66. Brother,People,66. Brother#2,train,include
+People/66. Brother/MVI_4230.MOV,66. Brother,People,66. Brother#3,test,include
+People/66. Brother/MVI_4955.MOV,66. Brother,People,66. Brother#4,test,include
+People/66. Brother/MVI_4956.MOV,66. Brother,People,66. Brother#4,train,include
+People/66. Brother/MVI_4957.MOV,66. Brother,People,66. Brother#4,train,include
+People/66. Brother/MVI_5095.MOV,66. Brother,People,66. Brother#5,train,include
+People/66. Brother/MVI_5096.MOV,66. Brother,People,66. Brother#5,train,include
+People/66. Brother/MVI_5097.MOV,66. Brother,People,66. Brother#5,train,include
+People/66. Brother/MVI_5243.MOV,66. Brother,People,66. Brother#6,train,include
+People/66. Brother/MVI_5244.MOV,66. Brother,People,66. Brother#6,train,include
+People/66. Brother/MVI_5245.MOV,66. Brother,People,66. Brother#6,test,include
+People/66. Brother/MVI_8631.MP4,66. Brother,People,66. Brother#7,train,include
+People/77. Boy/MVI_3814.MOV,77. Boy,People,77. Boy#0,train,include
+People/77. Boy/MVI_3815.MOV,77. Boy,People,77. Boy#0,val,include
+People/77. Boy/MVI_3816.MOV,77. Boy,People,77. Boy#0,train,include
+People/77. Boy/MVI_3962.MOV,77. Boy,People,77. Boy#1,train,include
+People/77. Boy/MVI_3963.MOV,77. Boy,People,77. Boy#1,train,include
+People/77. Boy/MVI_3964.MOV,77. Boy,People,77. Boy#1,test,include
+People/77. Boy/MVI_4109.MOV,77. Boy,People,77. Boy#2,train,include
+People/77. Boy/MVI_4110.MOV,77. Boy,People,77. Boy#2,train,include
+People/77. Boy/MVI_4111.MOV,77. Boy,People,77. Boy#2,test,include
+People/77. Boy/MVI_4112.MOV,77. Boy,People,77. Boy#2,train,include
+People/77. Boy/MVI_4242.MOV,77. Boy,People,77. Boy#3,val,include
+People/77. Boy/MVI_4981.MOV,77. Boy,People,77. Boy#4,train,include
+People/77. Boy/MVI_4982.MOV,77. Boy,People,77. Boy#4,train,include
+People/77. Boy/MVI_4983.MOV,77. Boy,People,77. Boy#4,train,include
+People/77. Boy/MVI_5132.MOV,77. Boy,People,77. Boy#5,train,include
+People/77. Boy/MVI_5133.MOV,77. Boy,People,77. Boy#5,train,include
+People/77. Boy/MVI_5134.MOV,77. Boy,People,77. Boy#5,test,include
+People/77. Boy/MVI_5285.MOV,77. Boy,People,77. Boy#6,test,include
+People/77. Boy/MVI_5286.MOV,77. Boy,People,77. Boy#6,train,include
+People/77. Boy/MVI_5287.MOV,77. Boy,People,77. Boy#6,val,include
+People/77. Boy/MVI_8644.MP4,77. Boy,People,77. Boy#7,train,include
+Pronouns/40. I/MVI_0001.MOV,40. I,Pronouns,40. I#0,val,include
+Pronouns/40. I/MVI_0002.MOV,40. I,Pronouns,40. I#0,train,include
+Pronouns/40. I/MVI_0003.MOV,40. I,Pronouns,40. I#0,train,include
+Pronouns/40. I/MVI_0012.MOV,40. I,Pronouns,40. I#1,train,include
+Pronouns/40. I/MVI_0013.MOV,40. I,Pronouns,40. I#1,train,include
+Pronouns/40. I/MVI_0014.MOV,40. I,Pronouns,40. I#1,val,include
+Pronouns/40. I/MVI_0064.MOV,40. I,Pronouns,40. I#2,train,include
+Pronouns/40. I/MVI_0065.MOV,40. I,Pronouns,40. I#2,train,include
+Pronouns/40. I/MVI_0066.MOV,40. I,Pronouns,40. I#2,train,include
+Pronouns/40. I/MVI_9878.MOV,40. I,Pronouns,40. I#3,train,include
+Pronouns/40. I/MVI_9879.MOV,40. I,Pronouns,40. I#3,val,include
+Pronouns/40. I/MVI_9880.MOV,40. I,Pronouns,40. I#3,test,include
+Pronouns/40. I/MVI_9881.MOV,40. I,Pronouns,40. I#3,train,include
+Pronouns/40. I/MVI_9918.MOV,40. I,Pronouns,40. I#4,train,include
+Pronouns/40. I/MVI_9919.MOV,40. I,Pronouns,40. I#4,test,include
+Pronouns/40. I/MVI_9920.MOV,40. I,Pronouns,40. I#4,train,include
+Pronouns/40. I/MVI_9922.MOV,40. I,Pronouns,40. I#4,test,include
+Pronouns/40. I/MVI_9957.MOV,40. I,Pronouns,40. I#5,train,include
+Pronouns/40. I/MVI_9958.MOV,40. I,Pronouns,40. I#5,test,include
+Pronouns/40. I/MVI_9959.MOV,40. I,Pronouns,40. I#5,train,include
+Pronouns/40. I/MVI_9995.MOV,40. I,Pronouns,40. I#6,train,include
+Pronouns/41. you/MVI_0015.MOV,41. you,Pronouns,41. you#0,train,include
+Pronouns/41. you/MVI_0016.MOV,41. you,Pronouns,41. you#0,train,include
+Pronouns/41. you/MVI_0017.MOV,41. you,Pronouns,41. you#0,val,include
+Pronouns/41. you/MVI_0067.MOV,41. you,Pronouns,41. you#1,val,include
+Pronouns/41. you/MVI_0068.MOV,41. you,Pronouns,41. you#1,train,include
+Pronouns/41. you/MVI_0069.MOV,41. you,Pronouns,41. you#1,train,include
+Pronouns/41. you/MVI_9885.MOV,41. you,Pronouns,41. you#2,test,include
+Pronouns/41. you/MVI_9886.MOV,41. you,Pronouns,41. you#2,train,include
+Pronouns/41. you/MVI_9887.MOV,41. you,Pronouns,41. you#2,train,include
+Pronouns/41. you/MVI_9888.MOV,41. you,Pronouns,41. you#2,train,include
+Pronouns/41. you/MVI_9923.MOV,41. you,Pronouns,41. you#3,test,include
+Pronouns/41. you/MVI_9924.MOV,41. you,Pronouns,41. you#3,train,include
+Pronouns/41. you/MVI_9925.MOV,41. you,Pronouns,41. you#3,train,include
+Pronouns/41. you/MVI_9926.MOV,41. you,Pronouns,41. you#3,train,include
+Pronouns/41. you/MVI_9960.MOV,41. you,Pronouns,41. you#4,train,include
+Pronouns/41. you/MVI_9961.MOV,41. you,Pronouns,41. you#4,test,include
+Pronouns/41. you/MVI_9962.MOV,41. you,Pronouns,41. you#4,test,include
+Pronouns/41. you/MVI_9996.MOV,41. you,Pronouns,41. you#5,train,include
+Pronouns/41. you/MVI_9997.MOV,41. you,Pronouns,41. you#5,train,include
+Pronouns/41. you/MVI_9998.MOV,41. you,Pronouns,41. you#5,train,include
+Pronouns/41. you/MVI_9999.MOV,41. you,Pronouns,41. you#5,val,include
+Pronouns/42. he/MVI_0005.MOV,42. he,Pronouns,42. he#0,train,include
+Pronouns/42. he/MVI_0006.MOV,42. he,Pronouns,42. he#0,train,include
+Pronouns/42. he/MVI_0007.MOV,42. he,Pronouns,42. he#0,test,include
+Pronouns/42. he/MVI_0008.MOV,42. he,Pronouns,42. he#0,train,include
+Pronouns/42. he/MVI_0018.MOV,42. he,Pronouns,42. he#1,train,include
+Pronouns/42. he/MVI_0019.MOV,42. he,Pronouns,42. he#1,train,include
+Pronouns/42. he/MVI_0020.MOV,42. he,Pronouns,42. he#1,train,include
+Pronouns/42. he/MVI_0070.MOV,42. he,Pronouns,42. he#2,train,include
+Pronouns/42. he/MVI_0071.MOV,42. he,Pronouns,42. he#2,train,include
+Pronouns/42. he/MVI_0072.MOV,42. he,Pronouns,42. he#2,test,include
+Pronouns/42. he/MVI_9889.MOV,42. he,Pronouns,42. he#3,test,include
+Pronouns/42. he/MVI_9890.MOV,42. he,Pronouns,42. he#3,train,include
+Pronouns/42. he/MVI_9891.MOV,42. he,Pronouns,42. he#3,test,include
+Pronouns/42. he/MVI_9892.MOV,42. he,Pronouns,42. he#3,train,include
+Pronouns/42. he/MVI_9927.MOV,42. he,Pronouns,42. he#4,train,include
+Pronouns/42. he/MVI_9928.MOV,42. he,Pronouns,42. he#4,train,include
+Pronouns/42. he/MVI_9930.MOV,42. he,Pronouns,42. he#4,train,include
+Pronouns/42. he/MVI_9931.MOV,42. he,Pronouns,42. he#4,val,include
+Pronouns/42. he/MVI_9963.MOV,42. he,Pronouns,42. he#5,val,include
+Pronouns/42. he/MVI_9964.MOV,42. he,Pronouns,42. he#5,val,include
+Pronouns/42. he/MVI_9965.MOV,42. he,Pronouns,42. he#5,train,include
+Pronouns/43. she/MVI_0009.MOV,43. she,Pronouns,43. she#0,train,include
+Pronouns/43. she/MVI_0010.MOV,43. she,Pronouns,43. she#0,train,include
+Pronouns/43. she/MVI_0011.MOV,43. she,Pronouns,43. she#0,train,include
+Pronouns/43. she/MVI_0012.MOV,43. she,Pronouns,43. she#0,train,include
+Pronouns/43. she/MVI_0021.MOV,43. she,Pronouns,43. she#1,val,include
+Pronouns/43. she/MVI_0022.MOV,43. she,Pronouns,43. she#1,test,include
+Pronouns/43. she/MVI_0023.MOV,43. she,Pronouns,43. she#1,val,include
+Pronouns/43. she/MVI_0073.MOV,43. she,Pronouns,43. she#2,train,include
+Pronouns/43. she/MVI_0074.MOV,43. she,Pronouns,43. she#2,train,include
+Pronouns/43. she/MVI_0075.MOV,43. she,Pronouns,43. she#2,test,include
+Pronouns/43. she/MVI_9893.MOV,43. she,Pronouns,43. she#3,train,include
+Pronouns/43. she/MVI_9894.MOV,43. she,Pronouns,43. she#3,train,include
+Pronouns/43. she/MVI_9895.MOV,43. she,Pronouns,43. she#3,train,include
+Pronouns/43. she/MVI_9896.MOV,43. she,Pronouns,43. she#3,test,include
+Pronouns/43. she/MVI_9932.MOV,43. she,Pronouns,43. she#4,train,include
+Pronouns/43. she/MVI_9933.MOV,43. she,Pronouns,43. she#4,train,include
+Pronouns/43. she/MVI_9934.MOV,43. she,Pronouns,43. she#4,train,include
+Pronouns/43. she/MVI_9935.MOV,43. she,Pronouns,43. she#4,val,include
+Pronouns/43. she/MVI_9966.MOV,43. she,Pronouns,43. she#5,train,include
+Pronouns/43. she/MVI_9967.MOV,43. she,Pronouns,43. she#5,train,include
+Pronouns/43. she/MVI_9968.MOV,43. she,Pronouns,43. she#5,test,include
+Pronouns/44. it/MVI_0013.MOV,44. it,Pronouns,44. it#0,test,include
+Pronouns/44. it/MVI_0014.MOV,44. it,Pronouns,44. it#0,val,include
+Pronouns/44. it/MVI_0015.MOV,44. it,Pronouns,44. it#0,train,include
+Pronouns/44. it/MVI_0016.MOV,44. it,Pronouns,44. it#0,test,include
+Pronouns/44. it/MVI_0024.MOV,44. it,Pronouns,44. it#1,train,include
+Pronouns/44. it/MVI_0025.MOV,44. it,Pronouns,44. it#1,train,include
+Pronouns/44. it/MVI_0026.MOV,44. it,Pronouns,44. it#1,train,include
+Pronouns/44. it/MVI_0076.MOV,44. it,Pronouns,44. it#2,train,include
+Pronouns/44. it/MVI_0077.MOV,44. it,Pronouns,44. it#2,train,include
+Pronouns/44. it/MVI_0078.MOV,44. it,Pronouns,44. it#2,train,include
+Pronouns/44. it/MVI_9897.MOV,44. it,Pronouns,44. it#3,train,include
+Pronouns/44. it/MVI_9898.MOV,44. it,Pronouns,44. it#3,val,include
+Pronouns/44. it/MVI_9899.MOV,44. it,Pronouns,44. it#3,val,include
+Pronouns/44. it/MVI_9900.MOV,44. it,Pronouns,44. it#3,train,include
+Pronouns/44. it/MVI_9936.MOV,44. it,Pronouns,44. it#4,train,include
+Pronouns/44. it/MVI_9937.MOV,44. it,Pronouns,44. it#4,train,include
+Pronouns/44. it/MVI_9938.MOV,44. it,Pronouns,44. it#4,test,include
+Pronouns/44. it/MVI_9939.MOV,44. it,Pronouns,44. it#4,test,include
+Pronouns/44. it/MVI_9969.MOV,44. it,Pronouns,44. it#5,train,include
+Pronouns/44. it/MVI_9970.MOV,44. it,Pronouns,44. it#5,train,include
+Pronouns/44. it/MVI_9971.MOV,44. it,Pronouns,44. it#5,train,include
+Pronouns/45. we/MVI_0017.MOV,45. we,Pronouns,45. we#0,val,include
+Pronouns/45. we/MVI_0018.MOV,45. we,Pronouns,45. we#0,train,include
+Pronouns/45. we/MVI_0019.MOV,45. we,Pronouns,45. we#0,train,include
+Pronouns/45. we/MVI_0020.MOV,45. we,Pronouns,45. we#0,train,include
+Pronouns/45. we/MVI_0027.MOV,45. we,Pronouns,45. we#1,train,include
+Pronouns/45. we/MVI_0028.MOV,45. we,Pronouns,45. we#1,train,include
+Pronouns/45. we/MVI_0029.MOV,45. we,Pronouns,45. we#1,train,include
+Pronouns/45. we/MVI_0079.MOV,45. we,Pronouns,45. we#2,train,include
+Pronouns/45. we/MVI_0080.MOV,45. we,Pronouns,45. we#2,val,include
+Pronouns/45. we/MVI_0081.MOV,45. we,Pronouns,45. we#2,train,include
+Pronouns/45. we/MVI_9901.MOV,45. we,Pronouns,45. we#3,val,include
+Pronouns/45. we/MVI_9902.MOV,45. we,Pronouns,45. we#3,test,include
+Pronouns/45. we/MVI_9903.MOV,45. we,Pronouns,45. we#3,train,include
+Pronouns/45. we/MVI_9904.MOV,45. we,Pronouns,45. we#3,train,include
+Pronouns/45. we/MVI_9940.MOV,45. we,Pronouns,45. we#4,train,include
+Pronouns/45. we/MVI_9941.MOV,45. we,Pronouns,45. we#4,test,include
+Pronouns/45. we/MVI_9942.MOV,45. we,Pronouns,45. we#4,train,include
+Pronouns/45. we/MVI_9943.MOV,45. we,Pronouns,45. we#4,test,include
+Pronouns/45. we/MVI_9972.MOV,45. we,Pronouns,45. we#5,train,include
+Pronouns/45. we/MVI_9973.MOV,45. we,Pronouns,45. we#5,test,include
+Pronouns/45. we/MVI_9974.MOV,45. we,Pronouns,45. we#5,train,include
+Pronouns/46. you (plural)/MVI_0021.MOV,46. you (plural),Pronouns,46. you (plural)#0,train,include
+Pronouns/46. you (plural)/MVI_0022.MOV,46. you (plural),Pronouns,46. you (plural)#0,train,include
+Pronouns/46. you (plural)/MVI_0023.MOV,46. you (plural),Pronouns,46. you (plural)#0,train,include
+Pronouns/46. you (plural)/MVI_0024.MOV,46. you (plural),Pronouns,46. you (plural)#0,train,include
+Pronouns/46. you (plural)/MVI_0030.MOV,46. you (plural),Pronouns,46. you (plural)#1,train,include
+Pronouns/46. you (plural)/MVI_0031.MOV,46. you (plural),Pronouns,46. you (plural)#1,train,include
+Pronouns/46. you (plural)/MVI_0032.MOV,46. you (plural),Pronouns,46. you (plural)#1,test,include
+Pronouns/46. you (plural)/MVI_0082.MOV,46. you (plural),Pronouns,46. you (plural)#2,test,include
+Pronouns/46. you (plural)/MVI_0083.MOV,46. you (plural),Pronouns,46. you (plural)#2,train,include
+Pronouns/46. you (plural)/MVI_0084.MOV,46. you (plural),Pronouns,46. you (plural)#2,train,include
+Pronouns/46. you (plural)/MVI_9905.MOV,46. you (plural),Pronouns,46. you (plural)#3,test,include
+Pronouns/46. you (plural)/MVI_9907.MOV,46. you (plural),Pronouns,46. you (plural)#3,train,include
+Pronouns/46. you (plural)/MVI_9908.MOV,46. you (plural),Pronouns,46. you (plural)#3,train,include
+Pronouns/46. you (plural)/MVI_9909.MOV,46. you (plural),Pronouns,46. you (plural)#3,train,include
+Pronouns/46. you (plural)/MVI_9945.MOV,46. you (plural),Pronouns,46. you (plural)#4,val,include
+Pronouns/46. you (plural)/MVI_9946.MOV,46. you (plural),Pronouns,46. you (plural)#4,train,include
+Pronouns/46. you (plural)/MVI_9947.MOV,46. you (plural),Pronouns,46. you (plural)#4,train,include
+Pronouns/46. you (plural)/MVI_9948.MOV,46. you (plural),Pronouns,46. you (plural)#4,train,include
+Pronouns/46. you (plural)/MVI_9975.MOV,46. you (plural),Pronouns,46. you (plural)#5,test,include
+Pronouns/46. you (plural)/MVI_9976.MOV,46. you (plural),Pronouns,46. you (plural)#5,val,include
+Pronouns/46. you (plural)/MVI_9977.MOV,46. you (plural),Pronouns,46. you (plural)#5,val,include
+Pronouns/47. they/MVI_0025.MOV,47. they,Pronouns,47. they#0,test,include
+Pronouns/47. they/MVI_0026.MOV,47. they,Pronouns,47. they#0,train,include
+Pronouns/47. they/MVI_0027.MOV,47. they,Pronouns,47. they#0,train,include
+Pronouns/47. they/MVI_0028.MOV,47. they,Pronouns,47. they#0,train,include
+Pronouns/47. they/MVI_0033.MOV,47. they,Pronouns,47. they#0,val,include
+Pronouns/47. they/MVI_0034.MOV,47. they,Pronouns,47. they#0,train,include
+Pronouns/47. they/MVI_0035.MOV,47. they,Pronouns,47. they#0,train,include
+Pronouns/47. they/MVI_0085.MOV,47. they,Pronouns,47. they#1,val,include
+Pronouns/47. they/MVI_0087.MOV,47. they,Pronouns,47. they#1,test,include
+Pronouns/47. they/MVI_0088.MOV,47. they,Pronouns,47. they#1,test,include
+Pronouns/47. they/MVI_9910.MOV,47. they,Pronouns,47. they#2,train,include
+Pronouns/47. they/MVI_9911.MOV,47. they,Pronouns,47. they#2,train,include
+Pronouns/47. they/MVI_9912.MOV,47. they,Pronouns,47. they#2,train,include
+Pronouns/47. they/MVI_9913.MOV,47. they,Pronouns,47. they#2,train,include
+Pronouns/47. they/MVI_9950.MOV,47. they,Pronouns,47. they#3,train,include
+Pronouns/47. they/MVI_9951.MOV,47. they,Pronouns,47. they#3,train,include
+Pronouns/47. they/MVI_9952.MOV,47. they,Pronouns,47. they#3,test,include
+Pronouns/47. they/MVI_9953.MOV,47. they,Pronouns,47. they#3,train,include
+Pronouns/47. they/MVI_9979.MOV,47. they,Pronouns,47. they#4,train,include
+Pronouns/47. they/MVI_9980.MOV,47. they,Pronouns,47. they#4,train,include
+Pronouns/47. they/MVI_9981.MOV,47. they,Pronouns,47. they#4,val,include
