@@ -9,7 +9,10 @@ iSign_meta/
 cache128/
 cache128_f32/
 cache_cislr/
+cache_cislr_f32/
+cache_custom/
 cache_isign/
+cache/
 
 # ── Virtualenv ────────────────────────────────────────────────────────────────
 nndlvit/
