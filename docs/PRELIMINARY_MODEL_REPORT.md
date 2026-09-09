@@ -125,12 +125,22 @@ and doing both cancels the gain. The spatial axis is data-limited exactly as
 claimed; the temporal axis was capacity-limited all along and the budget was too
 short to show it. A strong-augmentation bundle (cutmix, random erasing, tempo
 jitter, DeiT-strength mixup) was a **top-1 null at both frame counts** and left the
-model measurably worse calibrated, so it is not recommended despite posting the
-single highest number measured. The best configuration is now **68.9 % top-1 /
-89.4 % top-5**, which under confidence gating gives **80.7 % accuracy while
-answering 76 % of clips** -- the 75 % target met at high coverage rather than on
-half the data. The cumulative trajectory on one unchanged test set is 51.7 % ->
-59.7 % -> 68.9 %, about +17 points, **none of it architectural**.
+model measurably worse calibrated, so it is not recommended.
+
+**Re-extracting the corpus at 32 frames then lifted the ceiling twice over
+(§11.11).** Feeding 16 frames drawn from a 32-frame cache beats 16 drawn from a
+16-frame cache by **+3.2 points** on 12 % less data -- identical model, identical
+inference cost, the sampler simply has somewhere to jitter. The best result in this
+report is a five-member ensemble at **75.8 % top-1 / 92.8 % top-5**, reaching
+**90.7 % accuracy while answering 75 % of clips** under confidence gating. The
+cumulative trajectory on one unchanged 472-clip test set is 51.7 % -> 59.7 % ->
+70.1 % -> 75.8 %: about **+24 points, none of it architectural**. Three further
+levers were then tested and all failed -- native 16-frame SSL pretraining (-10.2),
+13 % more labelled cross-corpus data (-5.7), and doubling training length again
+(+0.6, null). The first two are the more instructive: pretraining without temporal
+jitter reached a *lower* reconstruction loss and transferred *worse*, and the extra
+labelled clips came from a corpus where the hand detector fires on only a quarter
+of frames.
 
 **The binding limitation, and the most important result in this report (§11.6).**
 Every figure above is measured *inside INCLUDE*. Tested on a genuinely different
@@ -1443,6 +1453,163 @@ re-extracting — and the frame axis is the one that pays. Whether the curve is
 still climbing at 32 is the single most valuable open question in this report, and
 it is unanswerable from the artefacts on disk. Re-extraction needs the 1080p
 sources (retained) and about 20 GB, and `crops.py --frames` now exists for it.
+
+---
+
+### 11.11 Past the cache ceiling: what temporal depth is actually worth
+
+§11.10 left the frame count pinned at 16 by a preprocessing decision rather than a
+measurement — `cache128` stored exactly 16 frames per clip. INCLUDE was therefore
+re-extracted at 32 frames (`cache128_f32`, 4,257 clips, 18.7 GB, 98 minutes, zero
+failures), and the detection quality of the new cache was checked against the old
+one before anything was trained on it:
+
+| Cache | left hand | right hand | face |
+|---|---|---|---|
+| `cache128` (16 frames) | 91.3 % | 85.4 % | 99.9 % |
+| `cache128_f32` (32 frames) | 91.1 % | 85.2 % | 99.9 % |
+
+Sampling twice as densely does not change what the detector finds, so the frame
+comparison below is not confounded by crop quality — which matters, because
+detection quality turns out to dominate everything else in this section.
+
+Two changes were made to the split at the same time, both to remove confounds
+rather than to improve anything. The tier was rebuilt **leak-free** (571 INCLUDE
+clips, no CISLR) because `cache_cislr` held only 16 frames and those 76 clips would
+otherwise have been temporally upsampled in the 24- and 32-frame cells but not in
+the control. And every cell reads the **same 32-frame cache**, varying only
+`n_frames`: using the old cache as the control would have confounded frame count
+with how much temporal jitter the sampler has to choose from. The test set is
+byte-identical to every other 50-word number in this report.
+
+#### The frame curve, and a hypothesis that was half right
+
+| Frames | Cached | Headroom | Top-1 | Top-1 + TTA | TTA gain |
+|---|---|---|---|---|---|
+| 8 | 32 | 4.00× | 60.0 % | 63.8 % | **+3.8** |
+| 16 | 32 | 2.00× | 69.9 / 70.3 % | 73.3 / 72.0 % | +3.4 / +1.7 |
+| 24 | 32 | 1.33× | 69.7 % | 70.3 % | +0.6 |
+| 32 | 32 | 1.00× | **72.5 %** | 72.7 % | +0.2 |
+| 16 | 16 (§11.10) | 1.00× | 66.7 % | 67.8 % | +1.1 |
+
+The first result is that **16 frames drawn from a 32-frame cache beats 16 frames
+drawn from a 16-frame cache by +3.2 points plain and +5.5 with TTA** — on 12 %
+*less* training data, with the model, its input, and its inference cost all
+identical. The only thing that changed is how much choice the sampler had.
+
+That suggested a clean mechanism, and it predicted something falsifiable: when
+`n_frames` equals the cache depth the sampler has no choice at all, so train-time
+jitter and test-time phase offsets both degenerate into no-ops. The prediction was
+that **32 frames would score *worse* than 16** despite seeing twice as much.
+
+It did not. `f32` posted the best plain top-1 in the sweep. The hypothesis
+survives in exactly one place and dies in the other:
+
+* **TTA gain tracks headroom perfectly** — +3.8, +3.4, +0.6, +0.2, monotone in the
+  ratio. That half is real and mechanical.
+* **Plain accuracy tracks frame count, not headroom.** The decisive cell was 8
+  frames from a 32-frame cache: the *most* headroom tested, on the *fewest* frames.
+  Headroom predicted it would be competitive; frame count predicted it would be
+  worst. It scored 60.0 %, worst by nine points.
+
+So the two effects are separate and partly substitutable. More frames improves the
+model directly; more headroom improves what test-time averaging can recover from
+it. `f16` reaches ~73 % via TTA and `f32` reaches ~73 % by simply seeing more, and
+they are statistically tied — which makes **16 frames the deployable choice at half
+the inference cost**, with the depth of the cache paid for in disk rather than in
+compute on the device.
+
+#### Ensembling, and the best result in this report
+
+Frame count turns out to be a useful diversity axis. Members disagreeing about
+*how much video to look at* make different errors in a way that seed variation
+alone does not:
+
+| Ensemble | Top-1 | Top-5 |
+|---|---|---|
+| best single model | 73.3 % | 90.5 % |
+| 2 seeds at 16 frames | 74.4 % | 91.1 % |
+| + 32-frame model | 75.0 % | 92.6 % |
+| + 4,000-epoch model | 75.4 % | 92.8 % |
+| **+ 24-frame model (5 members)** | **75.8 %** | **92.8 %** |
+
+Adding the 24-frame model helped despite it being the **weakest member** (70.3 %),
+which is the signature of genuine ensemble diversity rather than of averaging away
+noise. Under confidence gating the five-member ensemble reaches **90.7 % accuracy
+while answering 75 % of clips**, and 92.9 % answering 66 %.
+
+The cumulative trajectory on one unchanged 472-clip test set is 51.7 % → 59.7 % →
+70.1 % → 75.8 %. **Roughly +24 points, none of it architectural.** The model is the
+same 3.76 M-parameter ViT throughout; only the training length, the frame count,
+the cache depth, and the test-time averaging changed.
+
+#### Three levers that failed, and why they belong in the record
+
+With the frame axis exhausted, three further interventions were run against the
+same control (`f16_clean_s0/s1`, 69.9 % and 70.3 %, spread 0.4), one variable each:
+
+| Intervention | Top-1 | Δ vs control | Verdict |
+|---|---|---|---|
+| SSL pretrained natively at 16 frames | 60.0 % | **−10.2** | rejected |
+| +76 labelled CISLR clips (13 % more data) | 64.4 % | **−5.7** | rejected |
+| 4,000 epochs instead of 2,000 | 70.8 % | +0.6 | null (floor 2.7) |
+
+**Training duration has saturated.** At 8 frames, 250 → 2,000 epochs was worth +7.9
+and still climbing (§11.8). At 16 frames, doubling again buys nothing. The
+long-training result was a symptom of the frame bottleneck, not an independent
+lever — more frames per clip means more information per gradient step, so the model
+converges sooner. A finding that looked general was specific to a configuration.
+
+**More data was worse data.** The 76 CISLR clips cost 5.7 points. The reason is
+visible in the detection rates: MediaPipe finds a left hand in **25.4 %** of CISLR
+frames against **91.1 %** in INCLUDE, and a right hand in 49.6 % against 85.2 %.
+Three quarters of CISLR left-hand crops are interpolated boxes — stale detections
+showing where a hand recently was. This also revises §11.6: the cross-corpus
+failure was attributed to a 2.1× sharpness mismatch, which was measured and real,
+but sharpness was never the whole story. On CISLR the detector frequently is not
+finding the hand at all, so the model was partly being asked to transfer between
+*crops of hands* and *crops of where a hand had been* — a gap no amount of
+resolution jitter can close.
+
+**Pretraining needs jitter too, and reconstruction loss is the wrong signal.** The
+16-frame SSL run was expected to be the best bet of the three: every 16-frame model
+in this report had been initialised from time embeddings interpolated 8 → 16, and
+removing an approximation from the single most valuable component looked like free
+money. It lost 10 points. The cause is the same mechanism this section opened with —
+`cache_isign` holds 16 frames, so pretraining at 16 sampled 16 of 16 and had **no
+temporal jitter at all**, while the 8-frame pretrain had 2×:
+
+| Pretrain | Sampled | Cached | Headroom | Final loss | Downstream top-1 |
+|---|---|---|---|---|---|
+| `isign_mim` | 8 | 16 | 2.0× | 0.351 | **69.9 %** |
+| `isign_mim16` | 16 | 16 | 1.0× | **0.322** | 60.0 % |
+
+**The run that reconstructed better transferred worse.** Without jitter the frames
+never move, so masked reconstruction has an easy shortcut, and the loss curve
+reports progress on the shortcut. The interpolation that looked like a defect is
+cheaper than the problem removing it introduced. Fixing this properly requires iSign
+re-extracted at 32 frames — 40 GB → 80 GB, which the disk cannot currently hold.
+
+#### On the reliability of predictions in this project
+
+Two predictions were recorded in advance in this section and both were wrong: that
+32 frames would underperform 16 (it topped the plain-accuracy table), and that
+native 16-frame pretraining was the most likely of the three levers to pay (it lost
+10 points). A third — that the CISLR clips would hurt — was revised to the correct
+answer only after the detection rates were inspected, not from the original
+reasoning.
+
+The common failure is reasoning from a mechanism that is real but incomplete.
+Headroom genuinely governs TTA gain; it simply does not govern accuracy. Time-embed
+interpolation genuinely is lossy; it is just cheaper than the jitter loss that
+removing it caused. Both mechanisms were correct and both predictions were wrong,
+which is the specific way a plausible model of a system misleads: it explains what
+you have already seen and misplaces the weight when extrapolating.
+
+The practical consequence is the one already enforced elsewhere in this report —
+**every claim gets a second seed and a matched control before it is written down**,
+and the 2.7-point difference-of-runs noise floor is applied to intervention results
+rather than to the intuition that motivated them.
 
 ---
 
