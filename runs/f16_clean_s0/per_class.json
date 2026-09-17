@@ -1,0 +1,255 @@
+{
+  "run": "f16_clean_s0",
+  "classes": [
+    {
+      "word": "1. loud",
+      "support": 9,
+      "recall": 1.0
+    },
+    {
+      "word": "2. quiet",
+      "support": 9,
+      "recall": 1.0
+    },
+    {
+      "word": "3. happy",
+      "support": 9,
+      "recall": 0.8888888888888888
+    },
+    {
+      "word": "37. Hat",
+      "support": 10,
+      "recall": 1.0
+    },
+    {
+      "word": "38. Dress",
+      "support": 10,
+      "recall": 0.7
+    },
+    {
+      "word": "40. I",
+      "support": 9,
+      "recall": 0.6666666666666666
+    },
+    {
+      "word": "41. Shirt",
+      "support": 10,
+      "recall": 0.9
+    },
+    {
+      "word": "41. you",
+      "support": 6,
+      "recall": 1.0
+    },
+    {
+      "word": "42. T-Shirt",
+      "support": 10,
+      "recall": 0.9
+    },
+    {
+      "word": "42. he",
+      "support": 10,
+      "recall": 1.0
+    },
+    {
+      "word": "43. Pant",
+      "support": 10,
+      "recall": 1.0
+    },
+    {
+      "word": "43. she",
+      "support": 10,
+      "recall": 0.9
+    },
+    {
+      "word": "44. Shoes",
+      "support": 10,
+      "recall": 0.6
+    },
+    {
+      "word": "44. it",
+      "support": 10,
+      "recall": 0.5
+    },
+    {
+      "word": "45. Pocket",
+      "support": 10,
+      "recall": 0.9
+    },
+    {
+      "word": "45. we",
+      "support": 10,
+      "recall": 0.9
+    },
+    {
+      "word": "46. you (plural)",
+      "support": 10,
+      "recall": 0.6
+    },
+    {
+      "word": "47. they",
+      "support": 10,
+      "recall": 0.8
+    },
+    {
+      "word": "48. Hello",
+      "support": 10,
+      "recall": 0.6
+    },
+    {
+      "word": "49. How are you",
+      "support": 10,
+      "recall": 0.9
+    },
+    {
+      "word": "50. Alright",
+      "support": 10,
+      "recall": 0.2
+    },
+    {
+      "word": "51. Brown",
+      "support": 11,
+      "recall": 1.0
+    },
+    {
+      "word": "51. Good Morning",
+      "support": 10,
+      "recall": 0.9
+    },
+    {
+      "word": "52. Good afternoon",
+      "support": 11,
+      "recall": 0.6363636363636364
+    },
+    {
+      "word": "53. Good evening",
+      "support": 11,
+      "recall": 0.9090909090909091
+    },
+    {
+      "word": "56. Grey",
+      "support": 10,
+      "recall": 1.0
+    },
+    {
+      "word": "66. Brother",
+      "support": 10,
+      "recall": 1.0
+    },
+    {
+      "word": "77. Boy",
+      "support": 10,
+      "recall": 0.9
+    },
+    {
+      "word": "78. long",
+      "support": 9,
+      "recall": 0.7777777777777778
+    },
+    {
+      "word": "79. short",
+      "support": 9,
+      "recall": 1.0
+    },
+    {
+      "word": "80. tall",
+      "support": 9,
+      "recall": 1.0
+    },
+    {
+      "word": "81. wide",
+      "support": 9,
+      "recall": 0.1111111111111111
+    },
+    {
+      "word": "82. narrow",
+      "support": 9,
+      "recall": 0.5555555555555556
+    },
+    {
+      "word": "83. big large",
+      "support": 9,
+      "recall": 0.6666666666666666
+    },
+    {
+      "word": "84. small little",
+      "support": 9,
+      "recall": 0.4444444444444444
+    },
+    {
+      "word": "85. slow",
+      "support": 9,
+      "recall": 0.7777777777777778
+    },
+    {
+      "word": "86. fast",
+      "support": 9,
+      "recall": 0.0
+    },
+    {
+      "word": "87. hot",
+      "support": 9,
+      "recall": 0.0
+    },
+    {
+      "word": "88. cold",
+      "support": 8,
+      "recall": 0.5
+    },
+    {
+      "word": "89. warm",
+      "support": 9,
+      "recall": 1.0
+    },
+    {
+      "word": "90. cool",
+      "support": 9,
+      "recall": 0.7777777777777778
+    },
+    {
+      "word": "91. new",
+      "support": 9,
+      "recall": 0.6666666666666666
+    },
+    {
+      "word": "92. old",
+      "support": 9,
+      "recall": 0.3333333333333333
+    },
+    {
+      "word": "93. young",
+      "support": 9,
+      "recall": 1.0
+    },
+    {
+      "word": "94. good",
+      "support": 9,
+      "recall": 0.3333333333333333
+    },
+    {
+      "word": "95. bad",
+      "support": 9,
+      "recall": 0.4444444444444444
+    },
+    {
+      "word": "96. wet",
+      "support": 9,
+      "recall": 0.3333333333333333
+    },
+    {
+      "word": "97. dry",
+      "support": 9,
+      "recall": 0.6666666666666666
+    },
+    {
+      "word": "98. sick",
+      "support": 9,
+      "recall": 1.0
+    },
+    {
+      "word": "99. healthy",
+      "support": 9,
+      "recall": 0.6666666666666666
+    }
+  ]
+}

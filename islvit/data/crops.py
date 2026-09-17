@@ -109,7 +109,9 @@ ROI_SCALE = 2.8
 ROI_MIN_PIXELS = 60
 ROI_RESIZE = 256
 
-VIDEO_EXTENSIONS = (".MOV", ".mov", ".mp4", ".avi", ".mkv")
+# .webm is what a browser MediaRecorder produces, which is how the enrolment
+# screen in islvit.serve writes new takes into custom/<signer>/<word>/.
+VIDEO_EXTENSIONS = (".MOV", ".mov", ".mp4", ".avi", ".mkv", ".webm")
 
 # Every frame is resized to this height before detection. Two reasons: MediaPipe's
 # holistic graph carries state between calls and hard-fails when consecutive

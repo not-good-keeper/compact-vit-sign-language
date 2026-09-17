@@ -78,6 +78,9 @@ def main() -> None:
     parser.add_argument("--run", type=str, required=True)
     parser.add_argument("--split-file", type=str, default=None)
     parser.add_argument("--write-summary", action="store_true", help="record tta scores in summary.json")
+    parser.add_argument("--dump-per-class", action="store_true",
+                        help="write per_class.json: recall and support for each word, which the "
+                             "serving UI reads to show which classes are reliable")
     args = parser.parse_args()
 
     run_dir = Path(args.run)
@@ -115,6 +118,26 @@ def main() -> None:
         f"top5 {100 * (augmented['top5'] - plain['top5']):+.1f}  "
         f"balanced {100 * (augmented['balanced'] - plain['balanced']):+.1f}  (pts)"
     )
+
+    if args.dump_per_class:
+        # Per-word recall is what the vocabulary browser needs: a user deciding
+        # whether to rely on a sign wants that word's own number, not the mean.
+        ranked = np.argsort(-total, axis=1)
+        predicted = ranked[:, 0]
+        per_class = []
+        for index, name in enumerate(classes):
+            mask = labels == index
+            support = int(mask.sum())
+            per_class.append({
+                "word": name,
+                "support": support,
+                "recall": float((predicted[mask] == index).mean()) if support else None,
+            })
+        path = run_dir / "per_class.json"
+        path.write_text(json.dumps({"run": run_dir.name, "classes": per_class}, indent=2),
+                        encoding="utf-8")
+        weak = [c["word"] for c in per_class if c["recall"] is not None and c["recall"] < 0.5]
+        print(f"  wrote {path} ({len(weak)} words below 50 % recall)")
 
     if args.write_summary:
         path = run_dir / "summary.json"

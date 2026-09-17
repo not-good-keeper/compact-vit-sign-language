@@ -1,0 +1,59 @@
+{
+  "tag": "f16_262w_s0_qat4",
+  "source": "f16_262w_s0",
+  "split_file": "splits/full263__session-disjoint-foldval.csv",
+  "n_frames": 16,
+  "img_size": 64,
+  "seed": 0,
+  "recipe": {
+    "epochs": 300,
+    "group": 128,
+    "lr": 5e-05
+  },
+  "full_precision_top1": 0.5277,
+  "int4_before_qat_top1": 0.4782,
+  "int4_after_qat_top1": 0.5505,
+  "packed_int4_mb": 1.954,
+  "best_epoch": 150,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.5505,
+    "top5": 0.8119,
+    "balanced": 0.5549,
+    "n": 1010
+  },
+  "masked50": {
+    "split_file": "splits/vocab50clean__session-disjoint.csv",
+    "n": 472,
+    "n_deployed": 50,
+    "wide_plain": {
+      "top1": 0.5932203389830508,
+      "top5": 0.8707627118644068,
+      "balanced": 0.590459595959596,
+      "n": 472
+    },
+    "wide_tta": {
+      "top1": 0.6122881355932204,
+      "top5": 0.8834745762711864,
+      "balanced": 0.6097121212121211,
+      "n": 472
+    },
+    "masked_plain": {
+      "top1": 0.7436440677966102,
+      "top5": 0.9258474576271186,
+      "balanced": 0.7420202020202019,
+      "n": 472
+    },
+    "masked_tta": {
+      "top1": 0.7563559322033898,
+      "top5": 0.9322033898305084,
+      "balanced": 0.755232323232323,
+      "n": 472
+    }
+  }
+}
