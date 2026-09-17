@@ -23,6 +23,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import ticker
 import numpy as np
 
 from islvit.figures import AQUA, BLUE, GREEN, INK, INK2, MAGENTA, MUTED, ORANGE, RED, SURFACE, VIOLET, YELLOW, save, style
@@ -52,36 +53,44 @@ def top1(tag: str, tta: bool = False) -> float:
 
 # --------------------------------------------------------------------------- 1
 def fig_leakage_now():
-    """The control against the honest number, and how the gap has narrowed."""
+    """The control against the honest number, and how the gap has narrowed.
+
+    The control is the measured 98.5 % of ``baseline_random_s0``, not the ~97.9 %
+    probe quoted while that run was still training. The honest bar is the 1.95 MB
+    INT4 single model, not the 18.5 MB ensemble: quoting a headline the product
+    cannot ship is the same category of dishonesty this figure exists to expose.
+    """
     fig, (left, right) = plt.subplots(1, 2, figsize=(11, 4.2), gridspec_kw={"width_ratios": [1, 1.15]})
 
     names = ["random split\n(control)", "session-disjoint\n(honest)"]
-    values = [0.979, 0.758]
+    values = [0.985, 0.756]
     bars = left.bar(names, values, color=[ORANGE, AQUA], width=0.55)
     for bar, value in zip(bars, values):
         left.text(bar.get_x() + bar.get_width() / 2, value + 0.015, f"{value:.1%}",
                   ha="center", color=INK, fontsize=11, fontweight="600")
-    left.annotate("", xy=(1, 0.758), xytext=(1, 0.979),
+    left.annotate("", xy=(0.5, 0.756), xytext=(0.5, 0.985),
                   arrowprops=dict(arrowstyle="<->", color=RED, lw=1.6))
-    left.text(1.08, 0.868, "-22.1 pts\nleakage", color=RED, fontsize=10, fontweight="600", va="center")
+    left.text(0.56, 0.871, "-22.9 pts\nleakage", color=RED, fontsize=10, fontweight="600", va="center")
     left.set_ylim(0, 1.12)
     style(left, "Same 50 words, same model, same recipe", ylabel="top-1 accuracy")
     left.yaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
 
     # The control barely moves; the honest number is what the project improved.
     stages = ["Aug\nbaseline", "Sep\ncurrent"]
-    control, honest = [0.954, 0.979], [0.421, 0.758]
+    control, honest = [0.954, 0.985], [0.421, 0.756]
     x = np.arange(2)
     right.plot(x, control, "-o", color=ORANGE, lw=2.2, ms=8, label="random split (control)")
     right.plot(x, honest, "-o", color=AQUA, lw=2.2, ms=8, label="session-disjoint (honest)")
     right.fill_between(x, honest, control, color=RED, alpha=0.10)
     for i, (c, h) in enumerate(zip(control, honest)):
-        right.text(i, (c + h) / 2, f"{100*(c-h):.0f} pts", ha="center", color=RED,
+        right.text(i, (c + h) / 2, f"{100*(c-h):.0f} pts",
+                   ha="left" if i == 0 else "right", color=RED,
                    fontsize=10, fontweight="600")
+    right.set_xlim(-0.3, 1.3)
     right.set_xticks(x)
     right.set_xticklabels(stages)
     right.set_ylim(0.3, 1.05)
-    style(right, "The gap closed by 31 points", ylabel="top-1 accuracy")
+    style(right, "The gap closed by 30 points", ylabel="top-1 accuracy")
     right.yaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
     right.legend(frameon=False, fontsize=9, loc="lower right")
     save(fig, "fig10_leakage_now.png")
@@ -176,6 +185,7 @@ def fig_waterfall():
         ("+76 CISLR\nclips", 64.4, "fail"),
         ("4000\nepochs", 70.8, "null"),
         ("262-word head\nmasked to 50", 75.6, "win"),
+        ("INT4 QAT\n1.95 MB", 75.6, "win"),
     ]
     colors = {"base": MUTED, "win": GREEN, "fail": RED, "null": YELLOW}
     fig, ax = plt.subplots(figsize=(12.5, 5.2))
@@ -185,10 +195,11 @@ def fig_waterfall():
         ax.text(bar.get_x() + bar.get_width() / 2, value + 0.9, f"{value:.1f}",
                 ha="center", color=INK, fontsize=10, fontweight="600")
     ax.axhline(70.1, color=INK2, ls=":", lw=1.4)
-    # Left of the bars and below the line: the right-hand side is occupied by the
-    # 70.8 bar's own label, which this annotation used to run straight through.
-    ax.text(0.05, 68.4, "70.1 = the control the last four are measured against",
-            color=INK2, fontsize=9)
+    # High and centre-right: the band above the 60.0/64.4/70.8 bars is the only
+    # region no bar or data label occupies. Sitting it just under the line, as an
+    # earlier version did, ran it straight through three bars.
+    ax.text(5.4, 79.3, "70.1 = the control the last five are measured against",
+            color=INK2, fontsize=9, ha="center")
     ax.set_xticks(x)
     ax.set_xticklabels([s[0] for s in steps], fontsize=9)
     ax.set_ylim(45, 82)
@@ -378,6 +389,53 @@ def fig_per_class():
     print("  hardest words:", ", ".join(f"{w} {100*r:.0f}%" for w, r in worst))
 
 
+
+# --------------------------------------------------------------------------- 10
+def fig_size_ladder():
+    """What each compression step costs, against the 2 MB budget.
+
+    This is the figure the size constraint is actually judged on, so it plots
+    measured file sizes -- ``torch.save`` on the packed state dict -- rather than
+    parameter-count arithmetic, which understates a quantised model by ignoring
+    scales, the FP16 remainder and the container itself.
+
+    Accuracy is masked-to-50 with 6-view TTA on the same 472 held-out clips for
+    every row, so the bars are comparable. The ensemble is included because it was
+    the previous headline and it is the honest comparison: it buys 0.2 points --
+    one clip, well inside the 2.7-point noise floor for a difference -- for 9.5x
+    the file.
+    """
+    rungs = [
+        ("5-model\nensemble", 18.5, 75.8, MUTED),
+        ("single model\nFP32", 14.55, 75.6, BLUE),
+        ("packed\nINT8", 3.74, 75.6, VIOLET),
+        ("INT4 g128\npost-training", 1.95, 74.4, YELLOW),
+        ("INT4 g128\n+ QAT", 1.95, 75.6, GREEN),
+    ]
+    fig, ax = plt.subplots(figsize=(10.5, 5.0))
+    ax.scatter([r[1] for r in rungs], [r[2] for r in rungs],
+               s=190, c=[r[3] for r in rungs], zorder=3)
+    # Budget line first, so the markers and their labels sit on top of it.
+    ax.axvline(2.0, color=RED, ls="--", lw=1.6)
+    ax.text(2.12, 72.9, "2 MB budget", color=RED, fontsize=10, fontweight="600")
+    for name, size, score, _ in rungs:
+        # The two INT4 rungs share an x, so their labels must go opposite ways or
+        # they land on each other.
+        below = name.endswith("post-training") or name.endswith("ensemble")
+        ax.annotate(f"{name}\n{size:.2f} MB - {score:.1f} %", (size, score),
+                    textcoords="offset points", xytext=(0, -48 if below else 14),
+                    ha="center", color=INK, fontsize=9, fontweight="600")
+    ax.set_xscale("log")
+    ax.set_xticks([1.5, 2, 5, 10, 20])
+    ax.set_xticklabels(["1.5", "2", "5", "10", "20"])
+    ax.xaxis.set_minor_locator(ticker.NullLocator())
+    ax.set_xlim(1.15, 34)
+    ax.set_ylim(72.4, 77.6)
+    style(ax, "Accuracy against measured file size, 50-word deployed vocabulary",
+          xlabel="file size (MB, log scale)", ylabel="top-1, masked to 50 + TTA (%)")
+    save(fig, "fig20_size_ladder.png")
+
+
 def main():
     print("current-results figures ->", OUT)
     fig_leakage_now()
@@ -389,6 +447,7 @@ def main():
     fig_crop_montage()
     fig_training_curves()
     fig_per_class()
+    fig_size_ladder()
 
 
 if __name__ == "__main__":

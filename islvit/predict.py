@@ -38,9 +38,17 @@ OFFSETS = (0.25, 0.5, 0.75)
 FLIPS = (False, True)
 
 
-def extract(video: Path, crop_size: int):
-    """Run the cache-building detection path on an arbitrary file."""
-    crops_module.init_worker(crop_size, "include")
+def extract(video: Path, crop_size: int, frames: int = 32):
+    """Run the cache-building detection path on an arbitrary file.
+
+    ``frames`` must match the depth of the cache the model was trained from, not
+    the number of frames the model consumes. Training samples 16 of 32, which is
+    what gives test-time augmentation distinct temporal phases to average -- worth
+    a measured +3.2 points. Extracting only 16 here (the module default, which this
+    function used to inherit) made every TTA view land on the same frames, so the
+    live path quietly lost a gain the offline benchmark still reported.
+    """
+    crops_module.init_worker(crop_size, "include", frames)
     clip, sources, geometry, error = crops_module.extract_clip(video)
     if clip is None:
         raise SystemExit(f"could not process {video}: {error}")

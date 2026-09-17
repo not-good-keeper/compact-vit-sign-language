@@ -1,0 +1,39 @@
+{
+  "tag": "f16_262w_s1",
+  "split_file": "splits/full263__session-disjoint-foldval.csv",
+  "cache": "cache128_f32",
+  "img_size": 64,
+  "n_frames": 16,
+  "pretrained": "ssl:isign_mim",
+  "seed": 1,
+  "recipe": {
+    "epochs": 1000,
+    "weight_decay": 0.05,
+    "mixup": 0.2,
+    "mixup_prob": 0.5,
+    "cutmix": null,
+    "resolution_jitter": 0.5,
+    "speed_jitter": null,
+    "random_erasing": null,
+    "color_jitter": 0.4,
+    "grayscale_prob": 0.15,
+    "stream_dropout": 0.15,
+    "backbone_lr_scale": 0.1,
+    "lr": 0.0005,
+    "batch_size": 64
+  },
+  "best_epoch": 999,
+  "params_M": 3.803,
+  "val": {
+    "top1": 0.0,
+    "top5": 0.0,
+    "balanced": 0.0,
+    "n": 0
+  },
+  "test": {
+    "top1": 0.5584,
+    "top5": 0.8069,
+    "balanced": 0.573,
+    "n": 1010
+  }
+}

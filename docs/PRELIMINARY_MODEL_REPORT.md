@@ -131,10 +131,12 @@ model measurably worse calibrated, so it is not recommended.
 (§11.11).** Feeding 16 frames drawn from a 32-frame cache beats 16 drawn from a
 16-frame cache by **+3.2 points** on 12 % less data -- identical model, identical
 inference cost, the sampler simply has somewhere to jitter. The best result in this
-report is a five-member ensemble at **75.8 % top-1 / 92.8 % top-5**, reaching
-**90.7 % accuracy while answering 75 % of clips** under confidence gating. The
-cumulative trajectory on one unchanged 472-clip test set is 51.7 % -> 59.7 % ->
-70.1 % -> 75.8 %: about **+24 points, none of it architectural**. Three further
+report is a single model at **75.6 % top-1 / 93.2 % top-5 weighing 1.95 MB**
+(INT4, quantisation-aware, §11.12), reaching **90.7 % accuracy while answering 75 %
+of clips** under confidence gating. The cumulative trajectory on one unchanged
+472-clip test set is 51.7 % -> 59.7 % -> 70.1 % -> 75.6 %: about **+24 points, none
+of it architectural**. A five-member ensemble scores 75.8 % at 18.5 MB; that 0.2
+points is one clip in 472, so the ensemble is recorded but not claimed. Three further
 levers were then tested and all failed -- native 16-frame SSL pretraining (-10.2),
 13 % more labelled cross-corpus data (-5.7), and doubling training length again
 (+0.6, null). The first two are the more instructive: pretraining without temporal
@@ -1202,11 +1204,45 @@ The rising standard deviation says the same thing from another direction: sd goe
 landed 6.1 points apart. Below ~50 words the *measurement* degrades along with the
 model, and both are symptoms of running out of data.
 
-Two consequences for the product. First, 50 words is a genuine optimum rather than
-a compromise — there is nothing to be bought by scoping smaller. Second, every
-number in this table is measured at 250 epochs and is therefore an **underestimate**;
-§11.8 shows the same 50-word configuration reaching 64.6 % with a longer schedule.
-The *shape* of the curve should survive, but the levels do not.
+Every number in this table is measured at 250 epochs and is therefore an
+**underestimate**; §11.8 shows the same 50-word configuration reaching 64.6 % with a
+longer schedule. The *shape* of the curve should survive, but the levels do not.
+
+#### 11.7.1 Correction: this table cannot support the conclusion drawn from it
+
+An earlier version of this section concluded that "50 words is a genuine optimum
+rather than a compromise." That conclusion does not follow from the table above, and
+the reason is the same methodological rule this report applies everywhere else:
+**never compare across different test sets.**
+
+Look at the second column. Each row is scored on a different set of held-out clips —
+1,010, 976, 865, 472, 278 — because shrinking the vocabulary necessarily shrinks the
+test set with it. The rows therefore differ in two ways at once: the number of
+classes to separate, *and* which clips are being asked about. A tier could score
+higher purely by having dropped its hardest words. Nothing in the table separates
+those two effects, so the "inverted U" may be a property of the vocabulary, a
+property of the five different test sets, or any mixture of the two.
+
+The comparison that *is* valid holds the test set fixed. On the identical 472 clips
+of `vocab50clean__session-disjoint`:
+
+| Training vocabulary | Deployed vocabulary | Top-1 + TTA on the same 472 clips |
+|---|---|---|
+| 50 words (specialist) | 50 | 73.3 % |
+| **262 words** | **50, by masking the head** | **75.6 %** |
+
+**Training narrow is worse than training wide and predicting narrow**, by 2.3 points
+on identical clips. The extra 212 words are not noise competing for capacity; they
+are five times the training data, and they act as negatives that sharpen the 50
+words that matter. This is the opposite of what "50 words is a genuine optimum"
+implies — scoping the *product* to 50 words is right, but scoping the *training set*
+to 50 words costs accuracy.
+
+The inverted-U may well still be real as a statement about training vocabulary; the
+mechanism argued above (per-word support constant, total data shrinking) is sound and
+the rising standard deviation supports it. But it is not established by this table,
+and it is not what the deployed configuration does. `islvit/mask50.py` produces the
+fixed-test-set numbers, and §11.9 onward quotes those.
 
 ---
 
@@ -1539,7 +1575,8 @@ noise. Under confidence gating the five-member ensemble reaches **90.7 % accurac
 while answering 75 % of clips**, and 92.9 % answering 66 %.
 
 The cumulative trajectory on one unchanged 472-clip test set is 51.7 % → 59.7 % →
-70.1 % → 75.8 %. **Roughly +24 points, none of it architectural.** The model is the
+70.1 % → 75.8 %. **Roughly +24 points, none of it architectural.** (§11.12 replaces
+that last rung with a 1.95 MB single model at 75.6 %, which is what ships.) The model is the
 same 3.76 M-parameter ViT throughout; only the training length, the frame count,
 the cache depth, and the test-time averaging changed.
 
@@ -1610,6 +1647,100 @@ The practical consequence is the one already enforced elsewhere in this report �
 **every claim gets a second seed and a matched control before it is written down**,
 and the 2.7-point difference-of-runs noise floor is applied to intervention results
 rather than to the intuition that motivated them.
+
+---
+
+### 11.12 Meeting the 2 MB budget: quantisation-aware training
+
+The product constraint is a single model of about 2 MB at 75 % or better. Two things
+in the report to this point failed it. The 75.8 % headline was a **five-model
+ensemble at 18.5 MB** — nine times the budget, and not a model at all but five of
+them. The best single model, `f16_262w_s0`, reached the accuracy but weighed
+**14.55 MB** in FP32.
+
+Compression was therefore attempted before any further accuracy work, on the
+principle that a number the product cannot ship is not a result.
+
+**The ladder.** All accuracies are masked-to-50 with 6-view TTA on the same 472
+held-out clips (`islvit/mask50.py`); all sizes are `torch.save` on the packed state
+dict, measured rather than computed from parameter counts:
+
+| Representation | Size | Top-1 | Top-5 |
+|---|---|---|---|
+| 5-model ensemble (previous headline) | 18.50 MB | 75.8 % | 92.8 % |
+| Single model, FP32 | 14.55 MB | 75.6 % | 94.7 % |
+| Packed INT8 (Linear INT8 + per-channel conv + FP16 remainder) | 3.74 MB | 75.6 % | — |
+| INT4 group-128, post-training | 1.95 MB | 74.4 % | — |
+| **INT4 group-128 + QAT** (`f16_262w_s0_qat4`) | **1.95 MB** | **75.6 %** | 93.2 % |
+
+The ensemble's 0.2-point advantage over the single model is **one clip in 472**, far
+inside the 2.7-point noise floor for a difference of two runs. It bought nothing and
+cost 9.5x the file; it is withdrawn as the headline.
+
+**Why post-training INT4 loses 1.2 points and QAT does not.** Rounding a trained
+weight to the nearest of sixteen levels moves it away from a minimum that was found
+in continuous space. QAT puts the rounding inside the training loop — the forward
+pass uses quantised weights, the backward pass treats rounding as the identity (a
+straight-through estimator), and the full-precision masters absorb the update — so
+the optimiser finds weights that are already good *after* rounding.
+
+Three implementation details decide whether that works, and two of them were bugs
+first:
+
+* **QAT must round exactly as the exporter rounds.** Both now call
+  `export.int4_codes`. They did not originally: the exporter selected tensors by
+  `ndim >= 2`, which caught `cls_token`, `stream_embed` and `time_embed`, while QAT
+  walked modules for a parameter literally named `weight`, which did not. The two
+  paths would have optimised for and then applied different schemes — the one
+  failure mode that makes a QAT run silently worthless while still producing
+  plausible numbers. Both now share `export.int4_targets`; the sets were verified
+  identical, 0 mismatches.
+* **The straight-through estimator is done by swapping tensors, not by
+  `torch.nn.utils.parametrize`.** Registering a parametrisation builds a dynamic
+  `ParametrizedConv2d` class whose `weight` property does not survive the
+  `copy.deepcopy` inside `ModelEma`, and the forward pass dies with a bare
+  `AttributeError`. Stashing and restoring `parameter.data` around each step is the
+  same estimator with none of the machinery.
+* **Embeddings stay full precision** in both paths. Together they are under 4 k
+  parameters, so the saving is a few kilobytes, and they are the most
+  perturbation-sensitive tensors in the model.
+
+**Verification that the file scored is the file shipped.** Re-quantising the saved
+checkpoint moves no weight by more than **5.96e-08** — float32 epsilon. The weights
+genuinely sit on the 4-bit grid, so this is not a full-precision model that merely
+saw quantisation during training, and the 1.954 MB packed artefact is exactly what
+was measured at 75.6 %.
+
+**A control that turned out not to be needed.** On the 262-way single-view metric the
+QAT run finished at 55.0 % against the full-precision model's 52.8 % — apparently
++2.2 points *above* the model it started from, which quantisation-aware training has
+no business delivering. The obvious explanation was the 300 extra epochs rather than
+the quantisation-awareness, and an FP32 control for the same schedule was planned to
+separate them. It was not run, because on the deployed metric the effect disappears:
+masked-to-50 with TTA, QAT and FP32 both score **75.6 %, the same 357 of 472 clips**.
+
+The claim therefore narrows to one that needs no control: **QAT recovers the 1.2
+points that post-training quantisation loses, and nothing more.** The stronger claim
+would have required the control run; the weaker claim is the true one.
+
+**What quantisation does cost.** Top-5 falls from 94.7 % to 93.2 % while top-1 holds.
+Four bits blunt the tail of the distribution even where the argmax survives, which
+matters for the UI's ranked-alternatives screen and for confidence gating, both of
+which read more than the top entry.
+
+**On training length.** A reasonable expectation is that a transformer needs
+thousands of epochs; that is true when training from scratch and false here. QAT
+starts from converged weights at an LR an order of magnitude below the original, and
+the objective is already solved: for 262 classes at label smoothing 0.1 the loss
+floor is **0.879**, and the run sat at **0.897** — 0.018 above it, with most of the
+total movement (0.921 to 0.897) happening by epoch 10. The best checkpoint was
+**epoch 150 of 300**, and epochs 151-299 drifted slightly down. The budget was
+already double what the run could use.
+
+![Size ladder](figures/fig20_size_ladder.png)
+
+*Figure 20 — measured file size against masked-to-50 accuracy. The 2 MB budget is met
+by a single model with no accuracy cost relative to FP32.*
 
 ---
 

@@ -95,6 +95,90 @@ def pack_int8(model: nn.Module) -> dict:
     return packed
 
 
+def int4_targets(model: nn.Module) -> set[str]:
+    """state_dict keys the INT4 path quantises: module weight matrices only.
+
+    Selecting on ``ndim >= 2`` alone is wrong and was a real bug: cls_token,
+    stream_embed and time_embed are 3-D, so a dimension test quantised them while
+    quantisation-aware training -- which walks modules looking for a parameter named
+    "weight" -- left them alone. The two paths then rounded differently, which is the
+    one failure that makes a QAT run silently worthless.
+
+    Keeping them full precision is also what the size budget wants: together they are
+    under 4 k parameters, so the saving is a few kilobytes, and embeddings are the
+    most perturbation-sensitive tensors in the model.
+    """
+    targets = set()
+    for module_name, module in model.named_modules():
+        for name, parameter in module.named_parameters(recurse=False):
+            if name == "weight" and parameter.ndim >= 2:
+                targets.add(f"{module_name}.{name}" if module_name else name)
+    return targets
+
+
+def int4_codes(tensor: torch.Tensor, group: int) -> tuple[torch.Tensor, torch.Tensor, int]:
+    """Symmetric group-wise 4-bit codes and scales for one weight tensor.
+
+    Factored out so quantisation-aware training and the exporter round identically.
+    If QAT simulates a different scheme than the export applies -- a different group
+    size, asymmetric zero points, per-tensor instead of per-group -- it optimises the
+    model for rounding that never happens, and the gain evaporates at export time.
+    """
+    flat = tensor.reshape(-1)
+    pad = (-flat.numel()) % group
+    if pad:
+        flat = torch.cat([flat, flat.new_zeros(pad)])
+    blocks = flat.reshape(-1, group)
+    scale = blocks.abs().amax(dim=1, keepdim=True).clamp(min=1e-8) / 7.0
+    codes = (blocks / scale).round().clamp(-8, 7)
+    return codes, scale, pad
+
+
+def int4_dequantise(codes: torch.Tensor, scale: torch.Tensor, shape, numel: int) -> torch.Tensor:
+    """Inverse of int4_codes, back to the original tensor shape."""
+    return (codes * scale).reshape(-1)[:numel].reshape(shape)
+
+
+def pack_int4(model: nn.Module, group: int = 128) -> tuple[dict, dict]:
+    """Group-wise INT4 weight packing, plus the dequantised state for scoring.
+
+    INT8 over Linear leaves a 3.76 M model at 3.70 MB, which is nearly twice a 2 MB
+    budget. Halving the architecture to reach that budget costs accuracy nobody has
+    measured yet; halving the *bit width* costs accuracy that can be measured in
+    minutes, so it is worth trying first.
+
+    Quantisation is per group of ``group`` consecutive weights rather than per
+    tensor: a single scale across a whole 768x192 matrix is dominated by its largest
+    outlier and crushes the rest to a handful of levels. At group 128 the scale
+    overhead is 2 bytes per 128 weights -- about 1.6 % -- which is what keeps the
+    packed total under 2 MB.
+
+    Returns (packed, dequantised). The second is what the model is scored with, so
+    the accuracy reported is the accuracy the packed file would actually deliver.
+    """
+    packed, dequant = {}, {}
+    targets = int4_targets(model)
+    for name, tensor in model.state_dict().items():
+        # Only module weight matrices: norms, biases, tokens and position embeddings
+        # stay FP16. They are a few kilobytes and the most sensitive tensors here.
+        if not torch.is_floating_point(tensor) or name not in targets:
+            packed[name] = tensor.to(torch.float16) if torch.is_floating_point(tensor) else tensor
+            dequant[name] = tensor
+            continue
+        codes, scale, _ = int4_codes(tensor, group)
+        byte_codes = codes.to(torch.int8)
+        # Two 4-bit codes per byte.
+        low, high = byte_codes[:, 0::2] & 0x0F, byte_codes[:, 1::2] & 0x0F
+        packed[name] = {
+            "nibbles": (low | (high << 4)).to(torch.uint8),
+            "scale": scale.to(torch.float16),
+            "shape": tuple(tensor.shape),
+        }
+        dequant[name] = int4_dequantise(
+            codes, scale, tensor.shape, tensor.numel()).to(tensor.dtype)
+    return packed, dequant
+
+
 def build(dim: int, sp: int, tp: int, heads: int, n_classes: int, n_frames: int, img_size: int):
     return ISLViT(n_classes=n_classes, n_frames=n_frames, img_size=img_size, patch_size=16,
                   dim=dim, spatial_depth=sp, temporal_depth=tp, heads=heads, drop_path=0.0)
