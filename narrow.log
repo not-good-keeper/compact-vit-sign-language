@@ -1,0 +1,54 @@
+[f16_262w_s0_narrow] 571 training clips, 50 deployed columns, 150 epochs fixed in advance
+  wide_plain    top1  56.4%  top5  86.7%  balanced  56.0%
+  wide_tta      top1  58.7%  top5  87.7%  balanced  58.4%
+  masked_plain  top1  73.3%  top5  93.4%  balanced  73.2%
+  masked_tta    top1  75.6%  top5  94.7%  balanced  75.6%
+  ep    0  loss 1.217
+  ep   25  loss 0.730
+  ep   50  loss 0.928
+  ep   75  loss 0.765
+  ep  100  loss 1.002
+  ep  125  loss 1.054
+  ep  149  loss 0.927
+[f16_262w_s0_narrow] after
+  wide_plain    top1  49.6%  top5  83.5%  balanced  49.2%
+  wide_tta      top1  54.0%  top5  84.3%  balanced  53.7%
+  masked_plain  top1  75.4%  top5  93.0%  balanced  75.2%
+  masked_tta    top1  78.4%  top5  94.1%  balanced  78.4%
+[f16_262w_s0_narrow] masked-50 TTA 75.6% -> 78.4% (+2.8); clips gained 20, lost 7
+[f16_262w_s1_narrow] 571 training clips, 50 deployed columns, 150 epochs fixed in advance
+  wide_plain    top1  57.2%  top5  85.8%  balanced  56.5%
+  wide_tta      top1  59.1%  top5  86.4%  balanced  58.5%
+  masked_plain  top1  72.9%  top5  93.9%  balanced  72.4%
+  masked_tta    top1  73.5%  top5  94.3%  balanced  73.2%
+  ep    0  loss 1.160
+  ep   25  loss 0.812
+  ep   50  loss 0.939
+  ep   75  loss 0.883
+  ep  100  loss 0.802
+  ep  125  loss 0.876
+  ep  149  loss 1.080
+[f16_262w_s1_narrow] after
+  wide_plain    top1  52.8%  top5  81.4%  balanced  52.1%
+  wide_tta      top1  52.8%  top5  81.8%  balanced  52.0%
+  masked_plain  top1  73.7%  top5  91.5%  balanced  73.3%
+  masked_tta    top1  73.1%  top5  92.2%  balanced  72.7%
+[f16_262w_s1_narrow] masked-50 TTA 73.5% -> 73.1% (-0.4); clips gained 12, lost 14
+[f16_262w_s2_narrow] 571 training clips, 50 deployed columns, 150 epochs fixed in advance
+  wide_plain    top1  53.6%  top5  82.6%  balanced  53.5%
+  wide_tta      top1  56.1%  top5  84.3%  balanced  55.8%
+  masked_plain  top1  69.7%  top5  90.9%  balanced  69.5%
+  masked_tta    top1  72.0%  top5  91.5%  balanced  71.7%
+  ep    0  loss 1.305
+  ep   25  loss 0.757
+  ep   50  loss 0.968
+  ep   75  loss 1.149
+  ep  100  loss 1.053
+  ep  125  loss 0.974
+  ep  149  loss 1.101
+[f16_262w_s2_narrow] after
+  wide_plain    top1  46.0%  top5  75.6%  balanced  45.8%
+  wide_tta      top1  47.2%  top5  76.9%  balanced  46.7%
+  masked_plain  top1  66.7%  top5  88.3%  balanced  66.6%
+  masked_tta    top1  68.4%  top5  89.6%  balanced  68.2%
+[f16_262w_s2_narrow] masked-50 TTA 72.0% -> 68.4% (-3.6); clips gained 11, lost 28

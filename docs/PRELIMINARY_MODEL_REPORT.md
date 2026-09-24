@@ -1737,6 +1737,17 @@ total movement (0.921 to 0.897) happening by epoch 10. The best checkpoint was
 **epoch 150 of 300**, and epochs 151-299 drifted slightly down. The budget was
 already double what the run could use.
 
+**Caveat: the 75.6 % INT4 figure is optimistically biased.** "Best checkpoint" above
+means best by *test* accuracy: `qat.py` scored the EMA weights on the 262-way test set
+every 10 epochs and kept the highest, and those 1,010 clips contain the 472 the
+headline is measured on. With no validation set on this protocol, that is selection
+on test. The plateau it selected from spanned 53.4-55.0 % on the 262-way metric, so
+the bias is plausibly around a point; the base training runs are unaffected, because
+they keep the final epoch (`--select last`). The fix is a QAT run with the epoch count
+fixed in advance and the final weights taken, as `islvit/narrow.py` already does; it
+is queued behind the landmark experiments, and until it lands 75.6 % should be read
+as an upper estimate for the INT4 model, not a measurement of it.
+
 ![Size ladder](figures/fig20_size_ladder.png)
 
 *Figure 20 — measured file size against masked-to-50 accuracy. The 2 MB budget is met

@@ -39,6 +39,7 @@ def load_run(run_dir: Path, device: str) -> tuple[ISLViT, dict, list[str]]:
         temporal_depth=config.get("temporal_depth", 4),
         heads=config.get("heads", 3),
         drop_path=0.0,
+        landmarks=config.get("landmarks", False),
     )
     model.load_state_dict(checkpoint["model"])
     return model.to(device).eval(), config, classes
