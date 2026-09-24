@@ -359,6 +359,24 @@ _holistic = None
 _hand = None
 
 
+def reset_detectors() -> None:
+    """Discard both MediaPipe graphs so the next video starts from a fresh one.
+
+    IMAGE mode does not make these stateless. Measured: the same video run twice
+    in one process flips hand presence on 3-6 % of frames and moves pose by up to
+    0.2, while a freshly built detector reproduces exactly. Without a reset, a
+    clip's landmarks -- and so its prediction -- depend on whichever clips the
+    process happened to see before it. Crop boxes mostly hide this because they
+    are rounded to whole pixels; raw landmarks do not. Rebuilding costs ~0.6 s
+    per video, which buys a pipeline whose output is a function of the video.
+    """
+    global _holistic, _hand
+    for detector in (_holistic, _hand):
+        if detector is not None:
+            detector.close()
+    _holistic = _hand = None
+
+
 def get_holistic():
     """One MediaPipe graph per worker process, built lazily and reused."""
     global _holistic
@@ -432,6 +450,7 @@ def extract_clip(path: Path):
     if frames is None:
         return None, None, None, "cannot decode"
 
+    reset_detectors()
     holistic = get_holistic()
     height, width = frames[0].shape[:2]
 

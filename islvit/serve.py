@@ -41,7 +41,7 @@ import torch
 
 from islvit.eval import load_run
 from islvit.models.isl_vit import count_parameters
-from islvit.predict import extract, views
+from islvit.predict import extract, extract_landmarks, views
 
 STATE: dict = {}
 
@@ -52,6 +52,7 @@ def classify(video_path: Path, use_tta: bool = True) -> dict:
     device = STATE["device"]
 
     clip, detected, geometry, sources = extract(video_path, STATE["crop_size"])
+    landmarks = extract_landmarks(video_path) if config.get("landmarks") else None
 
     # Detection rate on the two hand streams is the single best predictor of
     # whether a prediction means anything -- with no hands found the model is
@@ -72,10 +73,12 @@ def classify(video_path: Path, use_tta: bool = True) -> dict:
 
     total, n = None, 0
     with torch.no_grad():
-        for crops, det, geo in views(clip, detected, geometry,
-                                     config["n_frames"], config["img_size"], use_tta):
+        for crops, det, geo, extras in views(clip, detected, geometry,
+                                             config["n_frames"], config["img_size"], use_tta,
+                                             landmarks):
+            extras = {key: value.to(device) for key, value in extras.items()}
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
-                logits = model(crops.to(device), det.to(device), geo.to(device))
+                logits = model(crops.to(device), det.to(device), geo.to(device), **extras)
             total = logits.float().softmax(1) if total is None else total + logits.float().softmax(1)
             n += 1
     probability = (total / n).squeeze(0).cpu()
