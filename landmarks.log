@@ -1,0 +1,51 @@
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+4257 cached clips, 0 already done, 4257 to extract
+  100/4257  0.60 clips/s  eta 115 min  failures 0
+  200/4257  0.63 clips/s  eta 108 min  failures 0
+  300/4257  0.64 clips/s  eta 103 min  failures 0
+  400/4257  0.65 clips/s  eta 99 min  failures 0
+  500/4257  0.65 clips/s  eta 96 min  failures 0
+  600/4257  0.66 clips/s  eta 92 min  failures 0
+  700/4257  0.67 clips/s  eta 89 min  failures 0
+  800/4257  0.67 clips/s  eta 86 min  failures 0
+  900/4257  0.66 clips/s  eta 84 min  failures 0
+  1000/4257  0.66 clips/s  eta 82 min  failures 0
+  1100/4257  0.66 clips/s  eta 79 min  failures 0
+  1200/4257  0.66 clips/s  eta 77 min  failures 0
+  1300/4257  0.66 clips/s  eta 74 min  failures 0
+  1400/4257  0.67 clips/s  eta 71 min  failures 0
+  1500/4257  0.68 clips/s  eta 68 min  failures 0
+  1600/4257  0.69 clips/s  eta 64 min  failures 0
+  1700/4257  0.70 clips/s  eta 61 min  failures 0
+  1800/4257  0.71 clips/s  eta 58 min  failures 0
+  1900/4257  0.71 clips/s  eta 56 min  failures 0
+  2000/4257  0.70 clips/s  eta 53 min  failures 0
+  2100/4257  0.70 clips/s  eta 51 min  failures 0
+  2200/4257  0.70 clips/s  eta 49 min  failures 0
+  2300/4257  0.69 clips/s  eta 47 min  failures 0
+  2400/4257  0.69 clips/s  eta 45 min  failures 0
+  2500/4257  0.69 clips/s  eta 42 min  failures 0
+  2600/4257  0.69 clips/s  eta 40 min  failures 0
+  2700/4257  0.68 clips/s  eta 38 min  failures 0
+  2800/4257  0.68 clips/s  eta 36 min  failures 0
+  2900/4257  0.68 clips/s  eta 33 min  failures 0
+  3000/4257  0.68 clips/s  eta 31 min  failures 0
+  3100/4257  0.68 clips/s  eta 28 min  failures 0
+  3200/4257  0.68 clips/s  eta 26 min  failures 0
+  3300/4257  0.68 clips/s  eta 24 min  failures 0
+  3400/4257  0.68 clips/s  eta 21 min  failures 0
+  3500/4257  0.68 clips/s  eta 18 min  failures 0
+  3600/4257  0.68 clips/s  eta 16 min  failures 0
+  3700/4257  0.67 clips/s  eta 14 min  failures 0
+  3800/4257  0.67 clips/s  eta 11 min  failures 0
+  3900/4257  0.66 clips/s  eta 9 min  failures 0
+  4000/4257  0.66 clips/s  eta 7 min  failures 0
+  4100/4257  0.65 clips/s  eta 4 min  failures 0
+  4200/4257  0.65 clips/s  eta 1 min  failures 0
+  4257/4257  0.64 clips/s  eta 0 min  failures 0
+done 4257/4257; hand coverage left 91.0% right 85.1%

@@ -32,7 +32,7 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 
-from islvit.data.dataset import build_datasets
+from islvit.data.dataset import build_datasets, model_inputs
 from islvit.eval import load_run
 
 # Three phases spanning the segment, plus the two flip states. Nine or more views
@@ -54,6 +54,7 @@ def view_probabilities(model, dataset, device: str, batch_size: int) -> tuple[np
                 batch["crops"].to(device),
                 batch["detected"].to(device),
                 batch["geometry"].to(device),
+                **model_inputs(batch, device),
             )
         probabilities.append(logits.float().softmax(1).cpu().numpy())
         labels.append(batch["label"].numpy())
@@ -88,7 +89,8 @@ def main() -> None:
     model, config, classes = load_run(run_dir, device)
     split_file = args.split_file or config["split_file"]
 
-    _, _, test_set = build_datasets(split_file, n_frames=config["n_frames"], img_size=config["img_size"])
+    _, _, test_set = build_datasets(split_file, n_frames=config["n_frames"], img_size=config["img_size"],
+                                    landmarks=config.get("landmarks", False))
     batch_size = config["batch_size"] * 2
 
     plain = None

@@ -40,7 +40,7 @@ import torch.nn as nn
 import yaml
 from torch.utils.data import DataLoader
 
-from islvit.data.dataset import build_datasets
+from islvit.data.dataset import build_datasets, model_inputs
 from islvit.eval import load_run
 from islvit.export import int4_codes, int4_dequantise, int4_targets, pack_int4
 from islvit.train import ModelEma, build_param_groups, cosine_schedule, evaluate, set_seed
@@ -127,6 +127,7 @@ def main() -> None:
         grayscale_prob=base_config.get("grayscale_prob", 0.0),
         crop_scale=base_config.get("crop_scale", 0.8),
         resolution_jitter=args.resolution_jitter,
+        landmarks=config.get("landmarks", False),
     )
     loader_kwargs = dict(num_workers=base_config.get("num_workers", 4),
                          pin_memory=device == "cuda",
@@ -172,7 +173,7 @@ def main() -> None:
             # Forward and backward at the quantised point; update the masters.
             faker.quantise_()
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
-                loss = criterion(model(crops, detected, geometry), labels)
+                loss = criterion(model(crops, detected, geometry, **model_inputs(batch, device)), labels)
             loss.backward()
             faker.restore_()
             nn.utils.clip_grad_norm_(model.parameters(), base_config.get("grad_clip", 1.0))

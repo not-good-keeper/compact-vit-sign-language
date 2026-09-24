@@ -56,6 +56,34 @@ def cache_dir_for(corpus: str) -> Path:
     return CORPUS_CACHES.get(corpus, CACHE_DIR)
 
 
+# Hand and pose landmarks, row-aligned to one specific crop cache (see
+# islvit.data.landmarks). INCLUDE only: no other corpus has them yet.
+LANDMARK_CACHE = Path(os.environ.get("ISLVIT_CACHE_LM", "cache_lm_f32"))
+# Pose order is nose, L/R shoulder, L/R elbow, L/R wrist; a mirror swaps each pair.
+POSE_FLIP = (0, 2, 1, 4, 3, 6, 5)
+HAND_FLIP = (1, 0)
+
+
+def check_landmark_alignment(crop_cache: Path, landmark_cache: Path = LANDMARK_CACHE) -> None:
+    """Refuse landmarks extracted against a different crop cache.
+
+    Row r of the landmark arrays is only meaningful next to row r of the crop
+    cache it was built from, sampled at the same frame count. A 16-frame crop
+    cache paired with 32-frame landmarks -- or a re-extracted cache whose row
+    order moved -- would train without error on landmarks from the wrong frames,
+    or the wrong video.
+    """
+    marker = landmark_cache / "SOURCE_CACHE"
+    if not marker.exists():
+        raise FileNotFoundError(f"{marker} missing -- run `python -m islvit.data.landmarks` first")
+    source, frames = marker.read_text(encoding="utf-8").split()[:2]
+    if Path(source).resolve() != crop_cache.resolve():
+        raise ValueError(f"landmarks in {landmark_cache} were built from {source}, not {crop_cache}")
+    crop_frames = np.load(crop_cache / "crops.npy", mmap_mode="r").shape[1]
+    if int(frames) != crop_frames:
+        raise ValueError(f"landmarks have {frames} frames per clip, crop cache has {crop_frames}")
+
+
 def load_cache_index(cache_dir: Path | None = None) -> dict[str, int]:
     """video_path -> row in the crop cache, for rows that actually got cached."""
     index_path = (cache_dir or CACHE_DIR) / "index.csv"
@@ -87,6 +115,7 @@ class IncludeCrops(Dataset):
         speed_jitter: float = 0.0,
         random_erasing: float = 0.0,
         label_to_index: dict[str, int] | None = None,
+        landmarks: bool = False,
     ) -> None:
         self.crop_scale = crop_scale
         self.n_frames = n_frames
@@ -138,6 +167,17 @@ class IncludeCrops(Dataset):
         self.take_groups = [row["take_group"] for row in rows]
 
         self._memmaps: dict[str, tuple[np.ndarray, np.ndarray, np.ndarray]] = {}
+
+        self.landmarks = landmarks
+        self._landmarks = None
+        if landmarks:
+            # An empty split (val, when it has been folded into train) has no corpus.
+            if corpora and corpora != ["include"]:
+                raise ValueError(f"landmarks exist for INCLUDE only; this split mixes {corpora}")
+            check_landmark_alignment(cache_dir_for("include"))
+            done = np.load(LANDMARK_CACHE / "done.npy")
+            if not done[self.rows].all():
+                raise ValueError(f"{int((~done[self.rows]).sum())} clips in this split have no landmarks yet")
 
     def __len__(self) -> int:
         return len(self.rows)
@@ -202,6 +242,19 @@ class IncludeCrops(Dataset):
         detected = detected[frame_indices]
         geometry = geometry[frame_indices]
 
+        extras = None
+        if self.landmarks:
+            if self._landmarks is None:
+                self._landmarks = tuple(np.load(LANDMARK_CACHE / name, mmap_mode="r")
+                                        for name in ("hands.npy", "hand_src.npy", "pose.npy"))
+            hands, hand_src, pose = self._landmarks
+            # Same frame indices as the crops: this is the alignment that matters.
+            extras = {
+                "hands": np.asarray(hands[row])[frame_indices].astype(np.float32),
+                "hand_present": np.asarray(hand_src[row])[frame_indices] > 0,
+                "pose": np.asarray(pose[row])[frame_indices].astype(np.float32),
+            }
+
         crops, detected, geometry = prepare_clip(
             clip,
             detected,
@@ -215,14 +268,18 @@ class IncludeCrops(Dataset):
             stream_dropout=self.stream_dropout,
             resolution_jitter=self.resolution_jitter,
             random_erasing=self.random_erasing,
+            extras=extras,
         )
 
-        return {
+        item = {
             "crops": torch.from_numpy(crops),
             "detected": torch.from_numpy(detected),
             "geometry": torch.from_numpy(geometry),
             "label": torch.tensor(self.labels[index], dtype=torch.long),
         }
+        if extras is not None:
+            item.update({key: torch.from_numpy(np.ascontiguousarray(value)) for key, value in extras.items()})
+        return item
 
 
 def prepare_clip(
@@ -239,6 +296,7 @@ def prepare_clip(
     stream_dropout: float = 0.0,
     resolution_jitter: float = 0.0,
     random_erasing: float = 0.0,
+    extras: dict | None = None,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Crop, augment and normalise one already frame-sampled clip.
 
@@ -248,6 +306,10 @@ def prepare_clip(
 
     ``clip`` is (T, S, cache_px, cache_px, 3) uint8; returns (T, S, 3, H, W) float32
     alongside the matching detected and geometry arrays.
+
+    ``extras`` holds landmark arrays, updated in place with the *same* flip and
+    stream-dropout draws as the pixels. Drawing them separately would mirror the
+    crops while leaving the hand joints unmirrored on half the batches.
     """
     n_frames, n_streams, source_size = clip.shape[0], clip.shape[1], clip.shape[2]
     output = np.empty((n_frames, n_streams, img_size, img_size, 3), dtype=np.uint8)
@@ -321,6 +383,12 @@ def prepare_clip(
         # told a left-side hand is on the right.
         geometry = geometry[:, list(FLIP_PERMUTATION)]
         geometry[:, :, 0] = 1.0 - geometry[:, :, 0]
+        if extras is not None:
+            extras["hands"] = extras["hands"][:, list(HAND_FLIP)]
+            extras["hands"][..., 0] = 1.0 - extras["hands"][..., 0]
+            extras["hand_present"] = extras["hand_present"][:, list(HAND_FLIP)]
+            extras["pose"] = extras["pose"][:, list(POSE_FLIP)]
+            extras["pose"][..., 0] = 1.0 - extras["pose"][..., 0]
 
     crops = (crops - IMAGENET_MEAN) / IMAGENET_STD
 
@@ -358,6 +426,12 @@ def prepare_clip(
             crops[:, drop] = 0.0
             detected[:, drop] = False
             geometry[:, drop] = 0.0
+            if extras is not None:
+                # A dropped hand stream loses its joints too, or the landmark
+                # branch would hand back exactly what the dropout took away. The
+                # body pose is not the face stream, so a dropped face keeps it.
+                extras["hand_present"] = extras["hand_present"].copy()
+                extras["hand_present"][:, drop[:2]] = False
 
     # Centre the geometry so an undetected stream's zeros are not confused with a
     # real box at the top-left corner.
@@ -365,15 +439,23 @@ def prepare_clip(
     return crops, detected, np.ascontiguousarray(geometry)
 
 
+def model_inputs(batch: dict, device: str) -> dict:
+    """Landmark keyword arguments for the model, or {} for a pixel-only batch."""
+    return {key: batch[key].to(device, non_blocking=True)
+            for key in ("hands", "hand_present", "pose") if key in batch}
+
+
 def build_datasets(
-    split_file: str | Path, n_frames: int = 8, img_size: int = 64, **train_kwargs
+    split_file: str | Path, n_frames: int = 8, img_size: int = 64, landmarks: bool = False,
+    **train_kwargs,
 ) -> tuple[IncludeCrops, IncludeCrops, IncludeCrops]:
     """Train/val/test over one split file, sharing a single label mapping."""
     with Path(split_file).open(encoding="utf-8") as handle:
         labels = sorted({row["label"] for row in csv.DictReader(handle)})
     label_to_index = {label: index for index, label in enumerate(labels)}
 
-    common = dict(n_frames=n_frames, img_size=img_size, label_to_index=label_to_index)
+    common = dict(n_frames=n_frames, img_size=img_size, label_to_index=label_to_index,
+                  landmarks=landmarks)
     train = IncludeCrops(split_file, "train", train=True, **common, **train_kwargs)
     val = IncludeCrops(split_file, "val", train=False, **common)
     test = IncludeCrops(split_file, "test", train=False, **common)

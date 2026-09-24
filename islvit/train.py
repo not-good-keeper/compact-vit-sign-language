@@ -35,7 +35,7 @@ import torch.nn.functional as F
 import yaml
 from torch.utils.data import DataLoader
 
-from islvit.data.dataset import build_datasets
+from islvit.data.dataset import build_datasets, model_inputs
 from islvit.models.isl_vit import ISLViT, count_parameters, load_deit_tiny_weights
 
 
@@ -122,12 +122,20 @@ def _soft_targets(targets, perm, n_classes, lam):
     return lam * onehot + (1 - lam) * onehot[perm]
 
 
-def mixup_batch(crops, geometry, targets, n_classes, alpha):
-    """Mixup over whole clips. Geometry is mixed with the pixels it describes."""
+def mixup_batch(crops, geometry, targets, n_classes, alpha, extras=None):
+    """Mixup over whole clips. Geometry is mixed with the pixels it describes.
+
+    ``extras`` (landmark tensors) is mixed in place with the same lambda and
+    permutation, for the same reason geometry is.
+    """
     lam = np.random.beta(alpha, alpha)
     perm = torch.randperm(crops.size(0), device=crops.device)
     crops = lam * crops + (1 - lam) * crops[perm]
     geometry = lam * geometry + (1 - lam) * geometry[perm]
+    if extras:
+        for key, value in extras.items():
+            value = value.float()
+            extras[key] = lam * value + (1 - lam) * value[perm]
     return crops, geometry, _soft_targets(targets, perm, n_classes, lam)
 
 
@@ -211,7 +219,7 @@ def evaluate(model: nn.Module, loader: DataLoader, device: str) -> dict[str, flo
         labels = batch["label"].to(device, non_blocking=True)
 
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
-            logits = model(crops, detected, geometry)
+            logits = model(crops, detected, geometry, **model_inputs(batch, device))
 
         ranked = logits.float().topk(min(5, logits.size(1)), dim=1).indices
         hits = ranked[:, 0] == labels
@@ -272,6 +280,8 @@ def main() -> None:
     parser.add_argument("--mixup-prob", type=float, default=None,
                         help="share of batches that get blended at all; DeiT uses 1.0, this project used 0.5")
     parser.add_argument("--n-frames", type=int, default=None, help="capacity ablation: frames sampled per clip")
+    parser.add_argument("--landmarks", action="store_true",
+                        help="add the hand/pose landmark stream (needs islvit.data.landmarks)")
     parser.add_argument("--img-size", type=int, default=None, help="capacity ablation: input resolution per crop")
     parser.add_argument(
         "--weight-decay",
@@ -327,6 +337,8 @@ def main() -> None:
         value = getattr(args, name)
         if value is not None:
             config[name] = value
+    if args.landmarks:
+        config["landmarks"] = True
     if args.backbone_lr_scale is not None:
         config["backbone_lr_scale"] = args.backbone_lr_scale
     if args.weight_decay is not None:
@@ -352,6 +364,7 @@ def main() -> None:
         resolution_jitter=config.get("resolution_jitter", 0.0),
         speed_jitter=config.get("speed_jitter", 0.0),
         random_erasing=config.get("random_erasing", 0.0),
+        landmarks=config.get("landmarks", False),
     )
     print(f"[{tag}] classes={train_set.n_classes} train={len(train_set)} val={len(val_set)} test={len(test_set)}")
 
@@ -374,6 +387,7 @@ def main() -> None:
         temporal_depth=config.get("temporal_depth", 4),
         heads=config.get("heads", 3),
         drop_path=config.get("drop_path", 0.1),
+        landmarks=config.get("landmarks", False),
     )
     if args.init_from:
         # Self-supervised weights supersede ImageNet: the checkpoint was itself
@@ -413,15 +427,16 @@ def main() -> None:
         detected = batch["detected"].to(device)
         geometry = batch["geometry"].to(device)
         labels = batch["label"].to(device)
+        extras = model_inputs(batch, device)
         print(f"\nOverfitting one batch of {labels.numel()} for 200 steps...")
         model.train()
         for step in range(200):
             optimizer.zero_grad(set_to_none=True)
-            loss = criterion(model(crops, detected, geometry), labels)
+            loss = criterion(model(crops, detected, geometry, **extras), labels)
             loss.backward()
             optimizer.step()
             if step % 40 == 0 or step == 199:
-                accuracy = (model(crops, detected, geometry).argmax(1) == labels).float().mean().item()
+                accuracy = (model(crops, detected, geometry, **extras).argmax(1) == labels).float().mean().item()
                 print(f"  step {step:3d} loss {loss.item():.4f} acc {accuracy:.1%}")
         return
 
@@ -494,6 +509,7 @@ def main() -> None:
             detected = batch["detected"].to(device, non_blocking=True)
             geometry = batch["geometry"].to(device, non_blocking=True)
             labels = batch["label"].to(device, non_blocking=True)
+            extras = model_inputs(batch, device)
 
             # One or the other per batch, never both: stacking them halves the
             # share of clips seen intact, and the DeiT recipe this follows picks
@@ -501,15 +517,18 @@ def main() -> None:
             use_mixup = mixup_alpha > 0 and np.random.rand() < config.get("mixup_prob", 0.5)
             use_cutmix = use_mixup and cutmix_alpha > 0 and np.random.rand() < config.get("cutmix_share", 0.5)
             if use_mixup:
-                blend = cutmix_batch if use_cutmix else mixup_batch
-                crops, geometry, soft_targets = blend(
-                    crops, geometry, labels, train_set.n_classes,
-                    cutmix_alpha if use_cutmix else mixup_alpha,
-                )
+                if use_cutmix and extras:
+                    raise SystemExit("cutmix pastes pixel patches; it has no landmark equivalent")
+                if use_cutmix:
+                    crops, geometry, soft_targets = cutmix_batch(
+                        crops, geometry, labels, train_set.n_classes, cutmix_alpha)
+                else:
+                    crops, geometry, soft_targets = mixup_batch(
+                        crops, geometry, labels, train_set.n_classes, mixup_alpha, extras=extras)
 
             optimizer.zero_grad(set_to_none=True)
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
-                logits = model(crops, detected, geometry)
+                logits = model(crops, detected, geometry, **extras)
                 loss = soft_criterion(logits, soft_targets) if use_mixup else criterion(logits, labels)
 
             loss.backward()
@@ -642,7 +661,7 @@ def main() -> None:
             key: config.get(key)
             for key in ("epochs", "weight_decay", "mixup", "mixup_prob", "cutmix", "resolution_jitter",
                         "speed_jitter", "random_erasing", "color_jitter", "grayscale_prob",
-                        "stream_dropout", "backbone_lr_scale", "lr", "batch_size")
+                        "stream_dropout", "backbone_lr_scale", "lr", "batch_size", "landmarks")
         },
         "best_epoch": best["epoch"],
         "params_M": round(stats["total_M"], 3),

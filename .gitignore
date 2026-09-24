@@ -25,7 +25,7 @@ __pycache__/
 *.ckpt
 
 # ── Third-party model binaries (MediaPipe .task, downloaded separately) ───────
-models/
+/models/
 
 # ── Local scratch / agent state ───────────────────────────────────────────────
 scratch/
@@ -45,3 +45,7 @@ logs_*.txt
 .claude/
 .cursor/
 *.code-workspace
+
+# Landmark cache (regenerable via islvit.data.landmarks)
+cache_lm_f32/
+_lm_smoke/
