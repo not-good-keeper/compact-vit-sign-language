@@ -43,6 +43,7 @@ from torch.utils.data import DataLoader
 from islvit.data.dataset import build_datasets, model_inputs
 from islvit.eval import load_run
 from islvit.export import int4_codes, int4_dequantise, int4_targets, pack_int4
+from islvit.mask50 import evaluate_masked
 from islvit.train import ModelEma, build_param_groups, cosine_schedule, evaluate, set_seed
 
 
@@ -154,11 +155,16 @@ def main() -> None:
 
     history = (output_dir / "history.csv").open("w", newline="", encoding="utf-8")
     writer = csv.writer(history)
-    writer.writerow(["epoch", "lr", "train_loss", "test_top1"])
+    writer.writerow(["epoch", "lr", "train_loss"])
     total_steps = args.epochs * len(train_loader)
     warmup = max(1, len(train_loader))
-    step, best = 0, dict(top1=fake["top1"], epoch=-1)
+    step = 0
 
+    # No test evaluation inside the loop. An earlier version scored the quantised
+    # EMA on the test set every 10 epochs and kept the best, which -- with no
+    # validation set on this protocol -- is selection on test, and made its
+    # headline an upper estimate. The epoch count is fixed before the run and the
+    # final weights are the result.
     for epoch in range(args.epochs):
         model.train()
         running = 0.0
@@ -181,26 +187,17 @@ def main() -> None:
             ema.update(model)
             running += loss.item()
             step += 1
-
-        if epoch % 10 == 0 or epoch == args.epochs - 1:
-            # Score what would actually ship: the EMA weights, quantised.
-            scored = evaluate(quantised_copy(ema.module, targets, args.group), test_loader, device)
-            writer.writerow([epoch, f"{optimizer.param_groups[0]['lr']:.2e}",
-                             f"{running/len(train_loader):.4f}", f"{scored['top1']:.4f}"])
-            history.flush()
-            if scored["top1"] > best["top1"]:
-                best = dict(top1=scored["top1"], epoch=epoch)
-                # The EMA copy is the one scored, so it is the one saved -- stripping
-                # folds the 4-bit values into plain weights the exporter can pack.
-                torch.save({"model": quantised_copy(ema.module, targets, args.group).state_dict(),
-                            "config": config, "classes": classes, "epoch": epoch},
-                           output_dir / "best.pt")
-            print(f"  ep {epoch:4d}  loss {running/len(train_loader):.3f}  "
-                  f"test {scored['top1']:.1%}", flush=True)
+        writer.writerow([epoch, f"{optimizer.param_groups[0]['lr']:.2e}", f"{running/len(train_loader):.4f}"])
+        history.flush()
+        if epoch % 25 == 0 or epoch == args.epochs - 1:
+            print(f"  ep {epoch:4d}  loss {running/len(train_loader):.3f}", flush=True)
     history.close()
 
-    # Pack what was actually saved and confirm the file lands under budget.
-    final = load_run(output_dir, device)[0]
+    # The EMA copy, with the 4-bit values folded in so the exporter can pack it.
+    final = quantised_copy(ema.module, targets, args.group)
+    torch.save({"model": final.state_dict(), "config": config, "classes": classes,
+                "epoch": args.epochs - 1}, output_dir / "best.pt")
+
     packed, _ = pack_int4(copy.deepcopy(final).cpu(), group=args.group)
     import tempfile
     with tempfile.NamedTemporaryFile(suffix=".pt", delete=False) as handle:
@@ -211,22 +208,25 @@ def main() -> None:
     finally:
         path.unlink(missing_ok=True)
 
+    after = evaluate(final, test_loader, device)
+    masked = evaluate_masked(final, config, classes, device, name=tag)
     summary = {
         "tag": tag, "source": source.name, "split_file": config["split_file"],
         "n_frames": config["n_frames"], "img_size": config["img_size"], "seed": args.seed,
-        "recipe": {"epochs": args.epochs, "group": args.group, "lr": args.lr},
+        "recipe": {"epochs": args.epochs, "group": args.group, "lr": args.lr,
+                   "selection": "final epoch, fixed in advance"},
         "full_precision_top1": round(before["top1"], 4),
         "int4_before_qat_top1": round(fake["top1"], 4),
-        "int4_after_qat_top1": round(best["top1"], 4),
+        "int4_after_qat_top1": round(after["top1"], 4),
         "packed_int4_mb": round(size_mb, 3),
-        "best_epoch": best["epoch"],
+        "masked50": {k: masked[k] for k in ("wide_tta", "masked_plain", "masked_tta",
+                                             "video_paths", "hits_masked_tta")},
         "val": {"top1": 0.0, "top5": 0.0, "balanced": 0.0, "n": 0},
-        "test": {k: round(v, 4) for k, v in evaluate(final, test_loader, device).items()},
+        "test": {k: round(v, 4) for k, v in after.items()},
     }
     (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    print(f"\n[{tag}] INT4 {fake['top1']:.1%} -> {best['top1']:.1%} "
-          f"({100*(best['top1']-fake['top1']):+.1f} pts recovered), {size_mb:.2f} MB")
-
+    print(f"\n[{tag}] 262-way INT4 {fake['top1']:.1%} -> {after['top1']:.1%}; "
+          f"masked-50 TTA {masked['masked_tta']['top1']:.1%}; {size_mb:.3f} MB")
 
 if __name__ == "__main__":
     main()
