@@ -107,7 +107,7 @@ def trace(video: Path, truth: str, model, config, classes, keep, device, crop_si
 
     total = None
     with torch.no_grad():
-        for crops, det, geo in views(clip, detected, geometry, n_frames, img_size, True):
+        for crops, det, geo, _ in views(clip, detected, geometry, n_frames, img_size, True):
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
                 logits = model(crops.to(device), det.to(device), geo.to(device))
             p = logits.float().softmax(1)

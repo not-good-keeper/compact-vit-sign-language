@@ -1,0 +1,11 @@
+
+
+
+restricted to 472 clips from splits/vocab50clean__session-disjoint.csv (test)
+472 cached clips, 0 already done, 472 to extract
+  100/472  0.50 clips/s  eta 13 min  failures 0
+  200/472  0.52 clips/s  eta 9 min  failures 0
+  300/472  0.52 clips/s  eta 6 min  failures 0
+  400/472  0.52 clips/s  eta 2 min  failures 0
+  472/472  0.53 clips/s  eta 0 min  failures 0
+done 472/472; hand coverage left 92.0% right 87.4%

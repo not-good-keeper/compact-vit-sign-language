@@ -56,14 +56,38 @@ def extract(video: Path, crop_size: int, frames: int = 32):
     return clip, detected, geometry.astype(np.float32), sources
 
 
-def views(clip, detected, geometry, n_frames, img_size, use_tta):
-    """Yield (crops, detected, geometry) tensors for each augmentation view."""
+def extract_landmarks(video: Path, frames: int = 32) -> dict:
+    """The landmark cache's own extraction path, on an arbitrary file.
+
+    This runs MediaPipe a second time over the same frames that ``extract``
+    already processed. Detection is deterministic in IMAGE mode, so the result is
+    identical to a single combined pass; it costs latency, not correctness, and
+    folding the two passes together is a later optimisation.
+    """
+    from islvit.data.landmarks import extract_landmarks as run
+
+    crops_module.init_worker(crops_module.CROP_SIZE, "include", frames)
+    hands, source, pose, error = run(video)
+    if hands is None:
+        raise SystemExit(f"could not extract landmarks from {video}: {error}")
+    return {"hands": hands.astype(np.float32), "hand_present": source > 0,
+            "pose": pose.astype(np.float32)}
+
+
+def views(clip, detected, geometry, n_frames, img_size, use_tta, landmarks=None):
+    """Yield (crops, detected, geometry, extras) for each augmentation view.
+
+    ``extras`` holds the landmark tensors for models trained with them, sampled at
+    the same frames and mirrored by the same flip as the pixels; it is {} for a
+    pixel-only model, so ``model(crops, det, geo, **extras)`` works for both.
+    """
     combos = [(o, f) for f in FLIPS for o in OFFSETS] if use_tta else [(0.5, False)]
     edges = np.linspace(0, clip.shape[0], n_frames + 1)
     for offset, flip in combos:
         picks = np.clip(
             (edges[:-1] + offset * (edges[1:] - edges[:-1])).astype(int), 0, clip.shape[0] - 1
         )
+        extras = {key: value[picks].copy() for key, value in landmarks.items()} if landmarks else None
         prepared = prepare_clip(
             clip[picks],
             detected[picks],
@@ -71,8 +95,12 @@ def views(clip, detected, geometry, n_frames, img_size, use_tta):
             img_size=img_size,
             train=False,
             flip_prob=1.0 if flip else 0.0,
+            extras=extras,
         )
-        yield tuple(torch.from_numpy(a).unsqueeze(0) for a in prepared)
+        tensors = tuple(torch.from_numpy(a).unsqueeze(0) for a in prepared)
+        batch = {key: torch.from_numpy(np.ascontiguousarray(value)).unsqueeze(0)
+                 for key, value in (extras or {}).items()}
+        yield (*tensors, batch)
 
 
 def main() -> None:
@@ -92,6 +120,7 @@ def main() -> None:
     model, config, classes = load_run(Path(args.run), device)
 
     clip, detected, geometry, sources = extract(video, args.crop_size)
+    landmarks = extract_landmarks(video) if config.get("landmarks") else None
     # Detection quality is the single best predictor of whether the prediction
     # means anything: with no hands found, the model is classifying background.
     hands = sources[:, :2]
@@ -99,11 +128,12 @@ def main() -> None:
 
     total = None
     with torch.no_grad():
-        for crops, det, geo in views(
-            clip, detected, geometry, config["n_frames"], config["img_size"], args.tta
+        for crops, det, geo, extras in views(
+            clip, detected, geometry, config["n_frames"], config["img_size"], args.tta, landmarks
         ):
+            extras = {key: value.to(device) for key, value in extras.items()}
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
-                logits = model(crops.to(device), det.to(device), geo.to(device))
+                logits = model(crops.to(device), det.to(device), geo.to(device), **extras)
             probability = logits.float().softmax(1)
             total = probability if total is None else total + probability
     probability = (total / (len(OFFSETS) * len(FLIPS) if args.tta else 1)).squeeze(0).cpu()

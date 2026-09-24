@@ -49,3 +49,6 @@ logs_*.txt
 # Landmark cache (regenerable via islvit.data.landmarks)
 cache_lm_f32/
 _lm_smoke/
+cache_lm_f32_fresh/
+cache128_f32_test/
+cache_lm_f32_test/

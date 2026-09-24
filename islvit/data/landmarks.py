@@ -84,9 +84,21 @@ def extract(job: tuple[int, str]):
     path = crops.resolve_video(video_path)
     if path is None:
         return row, None, None, None, "file not found"
+    return (row, *extract_landmarks(path))
+
+
+def extract_landmarks(path: Path):
+    """(hands, source, pose, error) for one video file.
+
+    Split out so inference (``islvit.predict``) runs exactly the code that built
+    the training cache, on an arbitrary path -- the same reason
+    ``crops.extract_clip`` exists.
+    """
     frames = crops.read_sampled_frames(path, crops.FRAMES_PER_CLIP)
     if frames is None:
-        return row, None, None, None, "cannot decode"
+        return None, None, None, "cannot decode"
+    # Fresh detectors per video: see crops.reset_detectors for why this matters.
+    crops.reset_detectors()
 
     import mediapipe as mp
 
@@ -116,8 +128,8 @@ def extract(job: tuple[int, str]):
                     hands[t, s] = points
                     source[t, s] = SRC_ROI
     except RuntimeError as error:
-        return row, None, None, None, f"mediapipe: {error}"
-    return row, hands, source, pose, ""
+        return None, None, None, f"mediapipe: {error}"
+    return hands, source, pose, ""
 
 
 def main() -> None:
@@ -127,6 +139,8 @@ def main() -> None:
     parser.add_argument("--frames", type=int, default=32, help="must equal the crop cache's frame count")
     parser.add_argument("--workers", type=int, default=6)
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--split-file", default=None, help="only extract clips in this split file...")
+    parser.add_argument("--split", default=None, help="...and in this split (e.g. test)")
     args = parser.parse_args()
 
     cache, out = Path(args.cache), Path(args.out)
@@ -135,6 +149,12 @@ def main() -> None:
     with (cache / "index.csv").open(encoding="utf-8") as handle:
         rows = [(int(r["row"]), r["video_path"]) for r in csv.DictReader(handle) if r["cached"] == "1"]
     n = max(r for r, _ in rows) + 1
+    if args.split_file:
+        with Path(args.split_file).open(encoding="utf-8") as handle:
+            wanted = {r["video_path"] for r in csv.DictReader(handle)
+                      if args.split is None or r["split"] == args.split}
+        rows = [job for job in rows if job[1] in wanted]
+        print(f"restricted to {len(rows)} clips from {args.split_file} ({args.split or 'all splits'})")
 
     out.mkdir(exist_ok=True)
     fmt = np.lib.format
