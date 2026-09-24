@@ -1,0 +1,240 @@
+[_lm_overfit] classes=262 train=2845 val=0 test=1010
+  resized time_embed: 8 -> 16 frames
+  init from runs/isign_mim/pretrained.pt (epoch 100): 112 tensors, 10 missing, 0 unexpected
+  params total=3.89M spatial=1.93M temporal=1.96M
+
+Overfitting one batch of 64 for 200 steps...
+  step   0 loss 5.5900 acc 3.1%
+  step  40 loss 2.0625 acc 100.0%
+  step  80 loss 0.9741 acc 100.0%
+  step 120 loss 0.9033 acc 100.0%
+  step 160 loss 0.8908 acc 100.0%
+  step 199 loss 0.8870 acc 100.0%
+[f16_262w_lm_s0] classes=262 train=2845 val=0 test=1010
+  resized time_embed: 8 -> 16 frames
+  init from runs/isign_mim/pretrained.pt (epoch 100): 112 tensors, 10 missing, 0 unexpected
+  params total=3.89M spatial=1.93M temporal=1.96M
+  ep   0  loss 5.576  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  65s
+  ep  10  loss 3.767  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep  20  loss 2.078  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep  30  loss 1.379  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep  40  loss 1.127  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep  50  loss 1.074  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep  60  loss 1.015  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep  70  loss 1.020  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep  80  loss 1.103  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep  90  loss 1.177  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 100  loss 0.904  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 110  loss 0.904  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 120  loss 0.865  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 130  loss 0.940  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 140  loss 0.877  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  30s
+  ep 150  loss 1.034  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 160  loss 0.948  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 170  loss 0.907  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 180  loss 0.747  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 190  loss 0.797  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 200  loss 1.078  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 210  loss 0.920  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 220  loss 0.914  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 230  loss 0.754  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 240  loss 0.815  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 250  loss 0.772  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 260  loss 0.871  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 270  loss 0.765  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 280  loss 0.905  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 290  loss 0.905  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 300  loss 0.871  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 310  loss 0.789  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 320  loss 0.816  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 330  loss 0.900  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 340  loss 0.890  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 350  loss 0.778  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 360  loss 0.824  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 370  loss 0.717  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 380  loss 0.687  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 390  loss 0.814  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 400  loss 0.894  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 410  loss 0.818  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 420  loss 1.014  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 430  loss 0.963  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 440  loss 0.922  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 450  loss 0.733  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 460  loss 0.907  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 470  loss 0.703  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 480  loss 0.676  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 490  loss 0.801  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 500  loss 0.801  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 510  loss 0.780  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 520  loss 0.850  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 530  loss 0.750  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 540  loss 0.865  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 550  loss 0.737  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 560  loss 0.795  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 570  loss 0.734  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 580  loss 0.765  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 590  loss 0.850  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 600  loss 0.742  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 610  loss 0.963  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 620  loss 0.808  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 630  loss 0.919  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 640  loss 0.818  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 650  loss 0.800  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 660  loss 0.750  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 670  loss 0.648  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 680  loss 0.703  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 690  loss 0.762  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  25s
+  ep 700  loss 0.775  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 710  loss 0.804  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 720  loss 0.624  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  31s
+  ep 730  loss 0.673  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 740  loss 0.876  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 750  loss 0.669  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 760  loss 0.746  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 770  loss 0.839  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 780  loss 0.760  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 790  loss 0.548  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 800  loss 0.653  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 810  loss 0.680  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 820  loss 0.770  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 830  loss 0.664  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 840  loss 0.800  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 850  loss 0.720  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 860  loss 0.747  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 870  loss 0.563  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 880  loss 0.654  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 890  loss 0.848  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 900  loss 0.792  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 910  loss 0.823  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 920  loss 0.605  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 930  loss 0.736  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 940  loss 0.739  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 950  loss 0.780  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 960  loss 0.662  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 970  loss 0.695  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 980  loss 0.859  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 990  loss 0.720  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 999  loss 0.633  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+
+[f16_262w_lm_s0] best epoch 999
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 61.7%  top5 85.4%  balanced 63.0%  (n=1010)
+[f16_262w_lm_s0] 472 clips, 50 deployed words of 262 head columns
+  wide_plain    top1  69.9%  top5  92.4%  balanced  69.6%
+  wide_tta      top1  71.4%  top5  93.0%  balanced  71.0%
+  masked_plain  top1  86.7%  top5  96.2%  balanced  86.6%
+  masked_tta    top1  87.7%  top5  96.8%  balanced  87.7%
+[f16_262w_lm_s1] classes=262 train=2845 val=0 test=1010
+  resized time_embed: 8 -> 16 frames
+  init from runs/isign_mim/pretrained.pt (epoch 100): 112 tensors, 10 missing, 0 unexpected
+  params total=3.89M spatial=1.93M temporal=1.96M
+  ep   0  loss 5.577  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  49s
+  ep  10  loss 3.676  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep  20  loss 2.001  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep  30  loss 1.389  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep  40  loss 1.194  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep  50  loss 1.103  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep  60  loss 1.343  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep  70  loss 1.038  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep  80  loss 1.036  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep  90  loss 1.073  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 100  loss 1.092  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 110  loss 1.012  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 120  loss 0.956  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  32s
+  ep 130  loss 1.057  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  24s
+  ep 140  loss 0.893  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  32s
+  ep 150  loss 0.996  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  24s
+  ep 160  loss 0.909  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  30s
+  ep 170  loss 0.980  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  25s
+  ep 180  loss 0.707  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 190  loss 0.931  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 200  loss 0.901  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 210  loss 1.105  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 220  loss 0.837  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 230  loss 0.765  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 240  loss 0.949  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 250  loss 0.659  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 260  loss 0.726  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 270  loss 0.771  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 280  loss 0.797  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 290  loss 0.740  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 300  loss 0.851  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 310  loss 0.895  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 320  loss 0.834  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 330  loss 1.056  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 340  loss 0.743  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 350  loss 0.933  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 360  loss 0.803  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 370  loss 0.954  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 380  loss 0.731  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 390  loss 0.892  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 400  loss 0.851  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 410  loss 0.689  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 420  loss 0.820  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 430  loss 0.913  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 440  loss 0.797  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 450  loss 0.708  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 460  loss 0.798  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 470  loss 0.794  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 480  loss 0.758  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 490  loss 0.909  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 500  loss 0.662  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 510  loss 0.644  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 520  loss 0.922  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 530  loss 0.854  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 540  loss 0.872  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 550  loss 0.711  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 560  loss 0.694  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 570  loss 0.886  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 580  loss 0.722  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 590  loss 0.743  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 600  loss 0.768  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 610  loss 0.783  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  24s
+  ep 620  loss 0.812  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 630  loss 0.756  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  24s
+  ep 640  loss 0.798  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 650  loss 0.729  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 660  loss 0.779  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 670  loss 0.901  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 680  loss 0.701  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 690  loss 0.687  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 700  loss 0.834  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 710  loss 0.863  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 720  loss 0.721  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 730  loss 0.814  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 740  loss 0.747  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 750  loss 0.753  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 760  loss 0.889  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 770  loss 0.765  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 780  loss 0.626  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  29s
+  ep 790  loss 0.726  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 800  loss 0.707  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 810  loss 0.752  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 820  loss 0.773  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 830  loss 0.779  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 840  loss 0.847  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 850  loss 0.693  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 860  loss 0.748  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 870  loss 0.752  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 880  loss 0.647  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 890  loss 0.695  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 900  loss 0.743  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 910  loss 0.858  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  21s
+  ep 920  loss 0.825  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 930  loss 0.747  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 940  loss 0.725  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  27s
+  ep 950  loss 0.840  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 960  loss 0.631  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 970  loss 0.670  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  22s
+  ep 980  loss 0.783  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+  ep 990  loss 0.716  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  23s
+  ep 999  loss 0.858  val 0.0% (top5 0.0%, bal 0.0%)  ema 0.0%  28s
+
+[f16_262w_lm_s1] best epoch 999
+  val  top1 0.0%  top5 0.0%  balanced 0.0%
+  TEST top1 66.7%  top5 85.5%  balanced 68.7%  (n=1010)
+[f16_262w_lm_s1] 472 clips, 50 deployed words of 262 head columns
+  wide_plain    top1  74.6%  top5  91.9%  balanced  74.2%
+  wide_tta      top1  75.8%  top5  92.4%  balanced  75.4%
+  masked_plain  top1  87.3%  top5  94.3%  balanced  87.2%
+  masked_tta    top1  87.3%  top5  95.1%  balanced  87.1%
