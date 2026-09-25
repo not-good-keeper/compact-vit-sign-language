@@ -130,13 +130,22 @@ model measurably worse calibrated, so it is not recommended.
 **Re-extracting the corpus at 32 frames then lifted the ceiling twice over
 (§11.11).** Feeding 16 frames drawn from a 32-frame cache beats 16 drawn from a
 16-frame cache by **+3.2 points** on 12 % less data -- identical model, identical
-inference cost, the sampler simply has somewhere to jitter. The best result in this
-report is a single model at **75.6 % top-1 / 93.2 % top-5 weighing 1.95 MB**
-(INT4, quantisation-aware, §11.12), reaching **90.7 % accuracy while answering 75 %
-of clips** under confidence gating. The cumulative trajectory on one unchanged
-472-clip test set is 51.7 % -> 59.7 % -> 70.1 % -> 75.6 %: about **+24 points, none
-of it architectural**. A five-member ensemble scores 75.8 % at 18.5 MB; that 0.2
-points is one clip in 472, so the ensemble is recorded but not claimed. Three further
+inference cost, the sampler simply has somewhere to jitter. The pixel-only model
+reached **75.6 %** masked to 50 words (§11.12); the trajectory on one unchanged
+472-clip test set was 51.7 % -> 59.7 % -> 70.1 % -> 75.6 %, about +24 points and
+none of it architectural. A five-member ensemble scores 75.8 % at 18.5 MB; that 0.2
+points is one clip in 472, so the ensemble is recorded but not claimed.
+
+**Feeding the model the hand landmarks it was already computing then added
+thirteen points (§11.13).** The crop pipeline ran MediaPipe on every frame, used the
+21 joints per hand to draw a box, and discarded them. Adding them back as a second
+input -- 91 k parameters, the architecture otherwise unchanged -- takes the same
+recipe from a pixel-only mean of **73.7 % to 87.1 %**, paired p ~ 1e-9 on both
+seeds. **The shippable model is 86.0 % top-1 at 2.0 MB** (INT4, quantisation-aware,
+two-seed mean 84.5 / 87.5 %), measured on a test set re-extracted exactly as the live
+app extracts it, with no epoch or seed chosen by test score. Along the way the
+detector itself turned out to be stateful: MediaPipe's output for a clip depended on
+which clips it had processed before, which is now fixed. Three further
 levers were then tested and all failed -- native 16-frame SSL pretraining (-10.2),
 13 % more labelled cross-corpus data (-5.7), and doubling training length again
 (+0.6, null). The first two are the more instructive: pretraining without temporal
@@ -1750,8 +1759,132 @@ as an upper estimate for the INT4 model, not a measurement of it.
 
 ![Size ladder](figures/fig20_size_ladder.png)
 
-*Figure 20 — measured file size against masked-to-50 accuracy. The 2 MB budget is met
-by a single model with no accuracy cost relative to FP32.*
+*Figure 20 — measured file size against masked-to-50 accuracy, redrawn in §11.13 on
+the clean test set with the landmark model; the pixel-only INT4 point shown in earlier
+versions was selected on test and is withdrawn.*
+
+---
+
+### 11.13 The landmark stream: thirteen points the pipeline was throwing away
+
+Every result before this section asks the spatial encoder to recover handshape from
+a 64-pixel crop. But the crop pipeline never had to guess where the hand was: it ran
+MediaPipe Holistic on every frame, got **21 three-dimensional joints per hand** plus a
+body pose, used them to draw a box, and discarded them. Handshape, measured directly,
+was being computed and thrown away on every clip.
+
+**What was added.** `islvit/data/landmarks.py` re-runs the identical detection path
+(Holistic, then the ROI hand model for a missed hand, as in `crops.py`) and stores
+the joints row-aligned to the crop cache. The model turns them into features itself,
+so no inference path can compute them differently:
+
+* **handshape** -- the 21 joints relative to the wrist, divided by the hand's own
+  extent, so the feature is independent of where the hand is and how far it is from
+  the camera (verified invariant to 5e-7);
+* **sign location** -- the wrist relative to the shoulder midpoint, in shoulder
+  widths, so it is independent of framing;
+* **body pose** -- nose, shoulders, elbows and wrists in the same body frame.
+
+Each hand's features go through a small MLP and are *added* to that hand's crop
+token; pose is added to the face token. The token count, the temporal stage and the
+pretrained initialisation are untouched. The projections are zero-initialised, so at
+step 0 the model reproduces the pixel-only model exactly (logit difference 0.0), and
+flip and stream dropout reach the joints through the same random draws as the pixels.
+Cost: **91 k parameters, about 0.045 MB at INT4**.
+
+**Alignment was checked, not assumed.** Landmark *t* of clip *r* is only meaningful
+next to crop *t* of clip *r*. Over all 472 held-out clips -- 23,957 directly detected
+hand-frames -- the landmark hull centre matches the crop-box centre with median error
+0.0004 of the frame. The loader refuses landmarks extracted against a different crop
+cache or frame count.
+
+**Result.** The f16_262w recipe exactly (262 words, 1,000 epochs, iSign SSL
+initialisation, final epoch), with `--landmarks` the only change, two seeds, masked to
+50 words with 6-view TTA on the same 472 session-disjoint clips:
+
+| | pixel-only | + landmarks | clips gained / lost | McNemar p |
+|---|---|---|---|---|
+| seed 0 | 75.6 % | **87.7 %** | 72 / 15 | 4e-10 |
+| seed 1 | 73.5 % | **87.3 %** | 86 / 21 | 2e-10 |
+
+On the full 262-word test set (1,010 clips) the landmark models score 61.7 / 66.7 %
+against ~52 % pixel-only.
+
+A gain this size warrants suspicion, so two further checks were run. Landmarks
+cannot carry the label -- they are computed per clip from that clip's own frames --
+and INCLUDE's shared-signer caveat applies to them exactly as it applies to faces in
+the pixel stream. And blanking inputs at test time shows the two streams are
+complementary rather than one dominating: landmarks alone reach ~70 %, landmarks plus
+pixels ~87 %.
+
+#### 11.13.1 The detector was stateful
+
+Verifying that live inference reproduces the offline numbers exposed a defect that
+predates this work. **MediaPipe's detectors keep state between videos, even in
+IMAGE mode.** Running the same clip twice in one process flipped hand presence on
+3-6 % of frames and moved pose by up to 0.2; a freshly built detector reproduced
+exactly. Every cached clip's detections therefore depended on whichever clips its
+worker process had handled before it. Crop boxes do not hide this: on one held-out
+clip only 52 % of cached crop pixels matched a fresh extraction, and a box centre
+moved by half the frame.
+
+`crops.reset_detectors()` now rebuilds both graphs at the start of every video
+(~0.6 s), in both the crop and landmark paths, after which two runs of the same clip
+agree to 0.0. The 472 held-out clips were re-extracted this way into a separate cache
+(`run_clean_test.sh`), leaving the training cache and all earlier results untouched,
+and every model was re-scored on it:
+
+| Model | history-dependent cache | **clean, as the live app sees it** |
+|---|---|---|
+| pixel-only, three seeds | 75.6 / 73.5 / 72.0 | 75.0 / 73.7 / 72.2 (mean 73.7) |
+| + landmarks, two seeds | 87.7 / 87.3 | 87.3 / 86.9 (mean 87.1) |
+
+Nothing moved by more than 0.6 points, so no earlier conclusion was an artefact of
+detector state -- but the clean set is what the numbers below are quoted on, because
+it is the only one that matches deployment.
+
+#### 11.13.2 Under the size budget, honestly
+
+The landmark model packs to **2.004 MB** at INT4 group 128. Quantisation-aware
+training was re-run in the corrected form (§11.12's caveat): 300 epochs fixed in
+advance, final EMA weights, no test evaluation during training. On the clean set:
+
+| Landmark model | Size | seed 0 | seed 1 | **mean** |
+|---|---|---|---|---|
+| FP32 | ~14.9 MB | 87.3 % | 86.9 % | 87.1 % |
+| INT4, post-training | 2.004 MB | 83.1 % | 85.2 % | 84.1 % |
+| **INT4, quantisation-aware** | **2.004 MB** | 84.5 % | 87.5 % | **86.0 %** |
+
+**The deployable result is 86.0 % at 2.0 MB**, quoted as the two-seed mean. Quoting
+the better seed would mean choosing it by its test score, which is the error §11.12
+had to retract. Against the product constraint -- 75 % or better, about 2 MB, a
+single model -- this clears the accuracy bar by 11 points at the size bar.
+
+#### 11.13.3 A rejected lever: fine-tuning on the deployed objective
+
+Before landmarks, one further idea was tested and failed. The 262-word model is
+trained 262-way and deployed 50-way; `islvit/narrow.py` fine-tuned each seed for a
+fixed 150 epochs with the softmax restricted to the 50 deployed columns:
+
+| Seed | before | after | clips gained / lost | p |
+|---|---|---|---|---|
+| 0 | 75.6 % | 78.4 % | 20 / 7 | 0.019 |
+| 1 | 73.5 % | 73.1 % | 12 / 14 | 0.85 |
+| 2 | 72.0 % | 68.4 % | 11 / 28 | 0.009 |
+| mean | 73.7 % | 73.3 % | 43 / 49 | 0.60 |
+
+Two seeds moved significantly in *opposite* directions. That is an unstable
+procedure, not a small effect lost in noise -- and seed 0 alone would have read as a
+significant +2.8. It is the clearest case in this report for the rule that no claim
+is written down on one seed.
+
+#### 11.13.4 What this changes
+
+The lesson generalises past this model. Every capacity, resolution and schedule lever
+in §11.10-11.11 was worth a few points; the largest single gain in the project came
+from an input the pipeline already computed and discarded. At this scale the
+bottleneck was not the network's ability to learn handshape from pixels but whether
+it was shown handshape at all.
 
 ---
 

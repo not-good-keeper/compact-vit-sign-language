@@ -185,10 +185,14 @@ def fig_waterfall():
         ("+76 CISLR\nclips", 64.4, "fail"),
         ("4000\nepochs", 70.8, "null"),
         ("262-word head\nmasked to 50", 75.6, "win"),
-        ("INT4 QAT\n1.95 MB", 75.6, "win"),
+        # The earlier "INT4 QAT 1.95 MB" bar was selected on test (see report
+        # 11.12) and is replaced by the honest landmark numbers below.
+        ("50-way\nfine-tune", 73.3, "null"),
+        ("+ hand\nlandmarks", 87.1, "win"),
+        ("INT4 QAT\n2.0 MB", 86.0, "win"),
     ]
     colors = {"base": MUTED, "win": GREEN, "fail": RED, "null": YELLOW}
-    fig, ax = plt.subplots(figsize=(12.5, 5.2))
+    fig, ax = plt.subplots(figsize=(14, 5.4))
     x = np.arange(len(steps))
     bars = ax.bar(x, [s[1] for s in steps], color=[colors[s[2]] for s in steps], width=0.62)
     for bar, (_, value, kind) in zip(bars, steps):
@@ -198,11 +202,12 @@ def fig_waterfall():
     # High and centre-right: the band above the 60.0/64.4/70.8 bars is the only
     # region no bar or data label occupies. Sitting it just under the line, as an
     # earlier version did, ran it straight through three bars.
-    ax.text(5.4, 79.3, "70.1 = the control the last five are measured against",
+    # Above the three levers it is the control for, where no bar reaches.
+    ax.text(5.0, 78.5, "dotted line (70.1) = control for these three",
             color=INK2, fontsize=9, ha="center")
     ax.set_xticks(x)
     ax.set_xticklabels([s[0] for s in steps], fontsize=9)
-    ax.set_ylim(45, 82)
+    ax.set_ylim(45, 95)
     style(ax, "Every intervention on the 50-word session-disjoint test set",
           ylabel="top-1 accuracy (%)")
     handles = [plt.Rectangle((0, 0), 1, 1, color=colors[k]) for k in ("win", "null", "fail")]
@@ -392,45 +397,38 @@ def fig_per_class():
 
 # --------------------------------------------------------------------------- 10
 def fig_size_ladder():
-    """What each compression step costs, against the 2 MB budget.
+    """What each step costs and buys, against the 2 MB budget.
 
-    This is the figure the size constraint is actually judged on, so it plots
-    measured file sizes -- ``torch.save`` on the packed state dict -- rather than
-    parameter-count arithmetic, which understates a quantised model by ignoring
-    scales, the FP16 remainder and the container itself.
-
-    Accuracy is masked-to-50 with 6-view TTA on the same 472 held-out clips for
-    every row, so the bars are comparable. The ensemble is included because it was
-    the previous headline and it is the honest comparison: it buys 0.2 points --
-    one clip, well inside the 2.7-point noise floor for a difference -- for 9.5x
-    the file.
+    Every point is measured on the clean test set -- the 472 held-out clips
+    re-extracted with a fresh detector per video, as the live app extracts them --
+    masked to 50 words with 6-view TTA, and is a mean over seeds with no epoch or
+    seed chosen by test score. Sizes are torch.save on the (packed) state dict,
+    not parameter-count arithmetic.
     """
     rungs = [
-        ("5-model\nensemble", 18.5, 75.8, MUTED),
-        ("single model\nFP32", 14.55, 75.6, BLUE),
-        ("packed\nINT8", 3.74, 75.6, VIOLET),
-        ("INT4 g128\npost-training", 1.95, 74.4, YELLOW),
-        ("INT4 g128\n+ QAT", 1.95, 75.6, GREEN),
+        # name, MB, accuracy, colour, label offset (points)
+        ("pixel-only\nFP32, 3 seeds", 14.55, 73.7, BLUE, (0, -46)),
+        ("+ landmarks\nFP32, 2 seeds", 14.90, 87.1, VIOLET, (0, 14)),
+        ("+ landmarks\nINT4 post-training", 2.004, 84.1, YELLOW, (16, -34)),
+        ("+ landmarks\nINT4 + QAT", 2.004, 86.0, GREEN, (16, 6)),
     ]
-    fig, ax = plt.subplots(figsize=(10.5, 5.0))
+    fig, ax = plt.subplots(figsize=(10.5, 5.2))
     ax.scatter([r[1] for r in rungs], [r[2] for r in rungs],
                s=190, c=[r[3] for r in rungs], zorder=3)
-    # Budget line first, so the markers and their labels sit on top of it.
     ax.axvline(2.0, color=RED, ls="--", lw=1.6)
-    ax.text(2.12, 72.9, "2 MB budget", color=RED, fontsize=10, fontweight="600")
-    for name, size, score, _ in rungs:
-        # The two INT4 rungs share an x, so their labels must go opposite ways or
-        # they land on each other.
-        below = name.endswith("post-training") or name.endswith("ensemble")
+    ax.text(2.1, 71.2, "2 MB budget", color=RED, fontsize=10, fontweight="600")
+    ax.axhline(75.0, color=MUTED, ls=":", lw=1.3)
+    ax.text(7.5, 75.5, "75 % target", color=INK2, fontsize=9)
+    for name, size, score, _, offset in rungs:
         ax.annotate(f"{name}\n{size:.2f} MB - {score:.1f} %", (size, score),
-                    textcoords="offset points", xytext=(0, -48 if below else 14),
-                    ha="center", color=INK, fontsize=9, fontweight="600")
+                    textcoords="offset points", xytext=offset,
+                    ha="left" if offset[0] else "center", color=INK, fontsize=9, fontweight="600")
     ax.set_xscale("log")
     ax.set_xticks([1.5, 2, 5, 10, 20])
     ax.set_xticklabels(["1.5", "2", "5", "10", "20"])
     ax.xaxis.set_minor_locator(ticker.NullLocator())
-    ax.set_xlim(1.15, 34)
-    ax.set_ylim(72.4, 77.6)
+    ax.set_xlim(1.3, 30)
+    ax.set_ylim(70, 91)
     style(ax, "Accuracy against measured file size, 50-word deployed vocabulary",
           xlabel="file size (MB, log scale)", ylabel="top-1, masked to 50 + TTA (%)")
     save(fig, "fig20_size_ladder.png")
