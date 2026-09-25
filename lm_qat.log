@@ -1,0 +1,36 @@
+[f16_262w_lm_s0_qat4] fake-quantising 40 weight tensors at group 128
+  full precision      top1 61.7%
+  INT4 before QAT     top1 59.5%  (-2.2 pts)
+  ep    0  loss 0.895
+  ep   25  loss 0.888
+  ep   50  loss 0.890
+  ep   75  loss 0.888
+  ep  100  loss 0.886
+  ep  125  loss 0.886
+  ep  150  loss 0.887
+  ep  175  loss 0.885
+  ep  200  loss 0.885
+  ep  225  loss 0.885
+  ep  250  loss 0.885
+  ep  275  loss 0.885
+  ep  299  loss 0.885
+
+[f16_262w_lm_s0_qat4] 262-way INT4 59.5% -> 61.3%; masked-50 TTA 85.2%; 2.004 MB
+[f16_262w_lm_s1_qat4] fake-quantising 40 weight tensors at group 128
+  full precision      top1 66.7%
+  INT4 before QAT     top1 68.6%  (+1.9 pts)
+  ep    0  loss 0.898
+  ep   25  loss 0.888
+  ep   50  loss 0.887
+  ep   75  loss 0.886
+  ep  100  loss 0.885
+  ep  125  loss 0.886
+  ep  150  loss 0.885
+  ep  175  loss 0.885
+  ep  200  loss 0.885
+  ep  225  loss 0.885
+  ep  250  loss 0.885
+  ep  275  loss 0.884
+  ep  299  loss 0.885
+
+[f16_262w_lm_s1_qat4] 262-way INT4 68.6% -> 67.7%; masked-50 TTA 87.3%; 2.004 MB
