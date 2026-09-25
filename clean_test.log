@@ -1,0 +1,20 @@
+restricted to 472 of 4257 clips
+472 videos -> cache128_f32_test\crops.npy (472, 32, 3, 128, 128, 3) (2.23 GB), 5 workers, mode=w+
+472 videos still to process (472 not yet cached)
+  [100/472] 0.5 clips/s  eta 12.7 min  coverage 100.0%  failures 0
+  [200/472] 0.5 clips/s  eta 9.0 min  coverage 100.0%  failures 0
+  [300/472] 0.5 clips/s  eta 5.6 min  coverage 100.0%  failures 0
+  [400/472] 0.5 clips/s  eta 2.3 min  coverage 100.0%  failures 0
+  [472/472] 0.5 clips/s  eta 0.0 min  coverage 100.0%  failures 0
+
+Cached 472/472 videos in 15.2 min
+  left_hand   direct=84.9% roi=7.0% interp=8.0% missing=0.0%
+  right_hand  direct=77.4% roi=10.0% interp=12.6% missing=0.0%
+  face        direct=100.0% roi=0.0% interp=0.0% missing=0.0%
+472 cached clips, 0 already done, 472 to extract
+  100/472  0.49 clips/s  eta 13 min  failures 0
+  200/472  0.52 clips/s  eta 9 min  failures 0
+  300/472  0.52 clips/s  eta 5 min  failures 0
+  400/472  0.53 clips/s  eta 2 min  failures 0
+  472/472  0.53 clips/s  eta 0 min  failures 0
+done 472/472; hand coverage left 92.0% right 87.4%
