@@ -54,14 +54,24 @@ def deployed_columns(classes: list[str], split_file: str = DEPLOYED_SPLIT) -> np
 
 
 def evaluate_masked(model, config: dict, classes: list[str], device: str,
-                    split_file: str = DEPLOYED_SPLIT, name: str = "") -> dict:
-    """Wide and masked scores, single view and 6-view TTA, plus per-clip hits."""
+                    split_file: str = DEPLOYED_SPLIT, name: str = "",
+                    eval_file: str | None = None, eval_split: str = "test") -> dict:
+    """Wide and masked scores, single view and 6-view TTA, plus per-clip hits.
+
+    By default this scores the deployed test set. ``eval_file``/``eval_split``
+    score another split instead -- the validation split, for choosing between
+    recipes without touching test. The deployed vocabulary always comes from
+    ``split_file``; wide scores use every clip, masked scores only the clips whose
+    word is deployed.
+    """
     model.eval()
     allowed = deployed_columns(classes, split_file)
     label_to_index = {label: i for i, label in enumerate(classes)}
-    test_set = IncludeCrops(split_file, "test", train=False, n_frames=config["n_frames"],
+    test_set = IncludeCrops(eval_file or split_file, eval_split, train=False,
+                            n_frames=config["n_frames"],
                             img_size=config["img_size"], label_to_index=label_to_index,
-                            landmarks=config.get("landmarks", False))
+                            landmarks=config.get("landmarks", False),
+                            lm_interp=config.get("lm_interp", False))
 
     total, labels, plain = np.zeros(0), np.zeros(0, dtype=np.int64), None
     for flip in FLIPS:
@@ -79,19 +89,21 @@ def evaluate_masked(model, config: dict, classes: list[str], device: str,
 
     keep = np.zeros(averaged.shape[1], dtype=bool)
     keep[allowed] = True
+    rows = np.isin(labels, allowed)
 
     def masked(probabilities):
-        return np.where(keep, probabilities, 0.0)
+        return np.where(keep, probabilities, 0.0)[rows]
 
     results = {
-        "run": name, "split_file": split_file, "n": int(len(labels)),
+        "run": name, "split_file": split_file, "eval_file": eval_file or split_file,
+        "eval_split": eval_split, "n": int(rows.sum()), "n_wide": int(len(labels)),
         "n_deployed": int(len(allowed)), "n_head": len(classes),
         "wide_plain": score(plain, labels), "wide_tta": score(averaged, labels),
-        "masked_plain": score(masked(plain), labels),
-        "masked_tta": score(masked(averaged), labels),
-        # In test-set order, so any two runs line up clip for clip.
-        "video_paths": list(test_set.video_paths),
-        "hits_masked_tta": (masked(averaged).argmax(1) == labels).astype(int).tolist(),
+        "masked_plain": score(masked(plain), labels[rows]),
+        "masked_tta": score(masked(averaged), labels[rows]),
+        # In evaluation-set order, so any two runs line up clip for clip.
+        "video_paths": [p for p, r in zip(test_set.video_paths, rows) if r],
+        "hits_masked_tta": (masked(averaged).argmax(1) == labels[rows]).astype(int).tolist(),
     }
     return results
 
@@ -107,11 +119,14 @@ def main() -> None:
     parser.add_argument("--run", required=True)
     parser.add_argument("--split-file", default=DEPLOYED_SPLIT)
     parser.add_argument("--out", default=None)
+    parser.add_argument("--eval-file", default=None, help="score this split file instead (e.g. for val)")
+    parser.add_argument("--eval-split", default="test")
     args = parser.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, config, classes = load_run(Path(args.run), device)
-    results = evaluate_masked(model, config, classes, device, args.split_file, Path(args.run).name)
+    results = evaluate_masked(model, config, classes, device, args.split_file, Path(args.run).name,
+                              eval_file=args.eval_file, eval_split=args.eval_split)
     print(f"[{results['run']}] {results['n']} clips, {results['n_deployed']} deployed words "
           f"of {results['n_head']} head columns")
     report(results)

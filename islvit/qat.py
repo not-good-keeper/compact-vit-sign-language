@@ -129,6 +129,8 @@ def main() -> None:
         crop_scale=base_config.get("crop_scale", 0.8),
         resolution_jitter=args.resolution_jitter,
         landmarks=config.get("landmarks", False),
+        lm_interp=config.get("lm_interp", False),
+        lm_aug=config.get("lm_aug", 0.0),
     )
     loader_kwargs = dict(num_workers=base_config.get("num_workers", 4),
                          pin_memory=device == "cuda",
