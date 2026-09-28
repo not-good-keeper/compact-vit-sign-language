@@ -52,7 +52,8 @@ def classify(video_path: Path, use_tta: bool = True) -> dict:
     device = STATE["device"]
 
     clip, detected, geometry, sources = extract(video_path, STATE["crop_size"])
-    landmarks = extract_landmarks(video_path) if config.get("landmarks") else None
+    landmarks = extract_landmarks(video_path, interp=config.get("lm_interp", False)) \
+        if config.get("landmarks") else None
 
     # Detection rate on the two hand streams is the single best predictor of
     # whether a prediction means anything -- with no hands found the model is

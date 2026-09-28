@@ -150,11 +150,13 @@ class ISLViT(nn.Module):
         drop_path: float = 0.1,
         drop: float = 0.0,
         landmarks: bool = False,
+        lm_velocity: bool = False,
     ) -> None:
         super().__init__()
         self.n_frames = n_frames
         self.n_streams = n_streams
         self.landmarks = landmarks
+        self.lm_velocity = lm_velocity
 
         self.spatial = SpatialEncoder(img_size, patch_size, dim, spatial_depth, heads, drop_path, drop)
 
@@ -177,7 +179,8 @@ class ISLViT(nn.Module):
             # token, which is the stream that already carries body context. Both
             # are added to the crop tokens like geometry, so the token count and
             # the temporal stage are unchanged.
-            self.hand_proj = nn.Sequential(nn.Linear(HAND_FEATURES, dim), nn.GELU(), nn.Linear(dim, dim))
+            hand_in = HAND_FEATURES * (2 if lm_velocity else 1)
+            self.hand_proj = nn.Sequential(nn.Linear(hand_in, dim), nn.GELU(), nn.Linear(dim, dim))
             self.pose_proj = nn.Sequential(nn.Linear(POSE_FEATURES, dim), nn.GELU(), nn.Linear(dim, dim))
 
         rates = torch.linspace(0, drop_path, temporal_depth).tolist()
@@ -242,6 +245,14 @@ class ISLViT(nn.Module):
             if hands is None:
                 raise ValueError("this model was built with landmarks; pass hands, hand_present, pose")
             hand_features, pose_features, pose_ok = landmark_features(hands, pose)
+            if self.lm_velocity:
+                # Explicit motion: each hand's feature change since the previous
+                # sampled frame, zeroed unless the hand was seen in both frames.
+                seen = hand_present.bool()
+                step = hand_features[:, 1:] - hand_features[:, :-1]
+                valid = (seen[:, 1:] & seen[:, :-1]).unsqueeze(-1).to(step.dtype)
+                velocity = torch.cat([torch.zeros_like(hand_features[:, :1]), step * valid], dim=1)
+                hand_features = torch.cat([hand_features, velocity], dim=-1)
             hand_term = self.hand_proj(hand_features) * hand_present.unsqueeze(-1).to(hand_features.dtype)
             pose_term = self.pose_proj(pose_features) * pose_ok.unsqueeze(-1).to(pose_features.dtype)
             tokens = tokens + torch.cat([hand_term, pose_term.unsqueeze(2)], dim=2).to(tokens.dtype)

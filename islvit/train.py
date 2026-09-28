@@ -282,6 +282,11 @@ def main() -> None:
     parser.add_argument("--n-frames", type=int, default=None, help="capacity ablation: frames sampled per clip")
     parser.add_argument("--landmarks", action="store_true",
                         help="add the hand/pose landmark stream (needs islvit.data.landmarks)")
+    parser.add_argument("--lm-interp", action="store_true", help="fill short gaps in hand landmarks")
+    parser.add_argument("--lm-velocity", action="store_true", help="add per-hand frame-to-frame motion")
+    parser.add_argument("--lm-aug", type=float, default=None, help="landmark augmentation strength")
+    parser.add_argument("--val-every", type=int, default=1,
+                        help="validate every N epochs (and the last); selection only sees those")
     parser.add_argument("--img-size", type=int, default=None, help="capacity ablation: input resolution per crop")
     parser.add_argument(
         "--weight-decay",
@@ -339,6 +344,12 @@ def main() -> None:
             config[name] = value
     if args.landmarks:
         config["landmarks"] = True
+    if args.lm_interp:
+        config["lm_interp"] = True
+    if args.lm_velocity:
+        config["lm_velocity"] = True
+    if args.lm_aug is not None:
+        config["lm_aug"] = args.lm_aug
     if args.backbone_lr_scale is not None:
         config["backbone_lr_scale"] = args.backbone_lr_scale
     if args.weight_decay is not None:
@@ -365,6 +376,8 @@ def main() -> None:
         speed_jitter=config.get("speed_jitter", 0.0),
         random_erasing=config.get("random_erasing", 0.0),
         landmarks=config.get("landmarks", False),
+        lm_interp=config.get("lm_interp", False),
+        lm_aug=config.get("lm_aug", 0.0),
     )
     print(f"[{tag}] classes={train_set.n_classes} train={len(train_set)} val={len(val_set)} test={len(test_set)}")
 
@@ -388,6 +401,7 @@ def main() -> None:
         heads=config.get("heads", 3),
         drop_path=config.get("drop_path", 0.1),
         landmarks=config.get("landmarks", False),
+        lm_velocity=config.get("lm_velocity", False),
     )
     if args.init_from:
         # Self-supervised weights supersede ImageNet: the checkpoint was itself
@@ -543,8 +557,15 @@ def main() -> None:
             step += 1
 
         train_loss = running_loss / max(1, seen)
-        val = evaluate(model, val_loader, device)
-        ema_val = evaluate(ema.module, val_loader, device) if ema is not None else {"top1": 0.0}
+        # Validation is the most expensive part of an epoch on a real val split;
+        # --val-every thins it, and selection below only ever sees scored epochs.
+        validated = epoch % args.val_every == 0 or epoch == config["epochs"] - 1
+        if validated:
+            val = evaluate(model, val_loader, device)
+            ema_val = evaluate(ema.module, val_loader, device) if ema is not None else {"top1": 0.0}
+        else:
+            val = {"top1": float("nan"), "top5": float("nan"), "balanced": float("nan")}
+            ema_val = {"top1": float("nan")}
 
         # DIAGNOSTIC ONLY. Logging test accuracy during training is legitimate for
         # observing the shape of the generalisation curve (e.g. checking for a
@@ -579,7 +600,7 @@ def main() -> None:
         # epoch is far cheaper than that.
         take_last = args.select == "last"
         score = max(val["top1"], ema_val["top1"])
-        take = True if take_last else score > best["val_top1"]
+        take = True if take_last else (validated and score > best["val_top1"])
 
         marker = ""
         if take:
@@ -661,7 +682,8 @@ def main() -> None:
             key: config.get(key)
             for key in ("epochs", "weight_decay", "mixup", "mixup_prob", "cutmix", "resolution_jitter",
                         "speed_jitter", "random_erasing", "color_jitter", "grayscale_prob",
-                        "stream_dropout", "backbone_lr_scale", "lr", "batch_size", "landmarks")
+                        "stream_dropout", "backbone_lr_scale", "lr", "batch_size", "landmarks",
+                        "lm_interp", "lm_velocity", "lm_aug")
         },
         "best_epoch": best["epoch"],
         "params_M": round(stats["total_M"], 3),

@@ -56,7 +56,7 @@ def extract(video: Path, crop_size: int, frames: int = 32):
     return clip, detected, geometry.astype(np.float32), sources
 
 
-def extract_landmarks(video: Path, frames: int = 32) -> dict:
+def extract_landmarks(video: Path, frames: int = 32, interp: bool = False) -> dict:
     """The landmark cache's own extraction path, on an arbitrary file.
 
     This runs MediaPipe a second time over the same frames that ``extract``
@@ -70,8 +70,11 @@ def extract_landmarks(video: Path, frames: int = 32) -> dict:
     hands, source, pose, error = run(video)
     if hands is None:
         raise SystemExit(f"could not extract landmarks from {video}: {error}")
-    return {"hands": hands.astype(np.float32), "hand_present": source > 0,
-            "pose": pose.astype(np.float32)}
+    hands, present = hands.astype(np.float32), source > 0
+    if interp:
+        from islvit.data.dataset import interpolate_hands
+        hands, present = interpolate_hands(hands, present)
+    return {"hands": hands, "hand_present": present, "pose": pose.astype(np.float32)}
 
 
 def views(clip, detected, geometry, n_frames, img_size, use_tta, landmarks=None):
@@ -120,7 +123,8 @@ def main() -> None:
     model, config, classes = load_run(Path(args.run), device)
 
     clip, detected, geometry, sources = extract(video, args.crop_size)
-    landmarks = extract_landmarks(video) if config.get("landmarks") else None
+    landmarks = extract_landmarks(video, interp=config.get("lm_interp", False)) \
+        if config.get("landmarks") else None
     # Detection quality is the single best predictor of whether the prediction
     # means anything: with no hands found, the model is classifying background.
     hands = sources[:, :2]

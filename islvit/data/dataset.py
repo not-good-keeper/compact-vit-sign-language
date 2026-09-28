@@ -64,6 +64,68 @@ POSE_FLIP = (0, 2, 1, 4, 3, 6, 5)
 HAND_FLIP = (1, 0)
 
 
+def interpolate_hands(hands: np.ndarray, present: np.ndarray, max_gap: int = 4):
+    """Fill short interior gaps in each hand's joints by linear interpolation.
+
+    hands (T,2,21,3), present (T,2) bool, over the *cached* frame axis -- this runs
+    before frame sampling, so a gap is measured in cache frames. The detector
+    misses a hand on 9-15 % of frames, usually for one or two frames mid-motion;
+    leaving those as zeros tells the model the hand vanished. Only gaps bounded by
+    detections on both sides and at most ``max_gap`` long are filled -- a hand that
+    is genuinely off-screen at the start or end stays missing. This mirrors what
+    crops.fill_gaps does for crop boxes.
+
+    Shared by training and inference (islvit.predict), so both fill identically.
+    """
+    hands, present = hands.copy(), present.copy()
+    for side in range(hands.shape[1]):
+        seen = np.flatnonzero(present[:, side])
+        for a, b in zip(seen[:-1], seen[1:]):
+            gap = b - a - 1
+            if 0 < gap <= max_gap:
+                for k in range(1, gap + 1):
+                    w = k / (gap + 1)
+                    hands[a + k, side] = (1 - w) * hands[a, side] + w * hands[b, side]
+                present[a + 1:b, side] = True
+    return hands, present
+
+
+def augment_landmarks(extras: dict, strength: float, rng=np.random) -> None:
+    """One random similarity-plus-shear per clip, applied in place, train only.
+
+    The pixel stream gets crop jitter, colour, blur and erasing; the landmark
+    stream got nothing, so every training epoch showed it the same joints. This
+    rotates (+-10 deg), scales (+-10 %) and shears (+-0.1) all joints and the pose
+    together about the shoulder midpoint -- a stand-in for camera angle, distance
+    and signer build -- and adds small per-joint noise for detector jitter.
+    Magnitudes scale with ``strength``. Work is done in isotropic units because
+    frames are 16:9; rotating normalised coordinates directly would also shear.
+    """
+    aspect = 1280 / 720
+    hands, pose, present = extras["hands"], extras["pose"], extras["hand_present"]
+    seen = pose[..., 1:3, 2].min(axis=-1) > 0.3
+    if seen.any():
+        t = int(np.flatnonzero(seen)[0])
+        centre = pose[t, 1:3, :2].mean(axis=0)
+    else:
+        centre = np.array([0.5, 0.5], dtype=np.float32)
+    theta = np.deg2rad(rng.uniform(-10, 10) * strength)
+    scale = np.exp(rng.uniform(-0.1, 0.1) * strength)
+    shear = rng.uniform(-0.1, 0.1) * strength
+    rotate = np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
+    matrix = (scale * rotate @ np.array([[1.0, shear], [0.0, 1.0]])).astype(np.float32)
+
+    def transform(xy):
+        iso = (xy - centre) * np.array([aspect, 1.0], dtype=np.float32)
+        return (iso @ matrix.T) / np.array([aspect, 1.0], dtype=np.float32) + centre
+
+    moved = transform(hands[..., :2])
+    moved = moved + rng.normal(0.0, 0.002 * strength, size=moved.shape).astype(np.float32)
+    # Missing hands are zeros and must stay zeros, not become a transformed origin.
+    hands[..., :2] = np.where(present[..., None, None], moved, hands[..., :2])
+    pose[..., :2] = np.where(pose[..., 2:3] > 0, transform(pose[..., :2]), pose[..., :2])
+
+
 def check_landmark_alignment(crop_cache: Path, landmark_cache: Path = LANDMARK_CACHE) -> None:
     """Refuse landmarks extracted against a different crop cache.
 
@@ -116,6 +178,8 @@ class IncludeCrops(Dataset):
         random_erasing: float = 0.0,
         label_to_index: dict[str, int] | None = None,
         landmarks: bool = False,
+        lm_interp: bool = False,
+        lm_aug: float = 0.0,
     ) -> None:
         self.crop_scale = crop_scale
         self.n_frames = n_frames
@@ -169,6 +233,8 @@ class IncludeCrops(Dataset):
         self._memmaps: dict[str, tuple[np.ndarray, np.ndarray, np.ndarray]] = {}
 
         self.landmarks = landmarks
+        self.lm_interp = lm_interp
+        self.lm_aug = lm_aug if train else 0.0
         self._landmarks = None
         if landmarks:
             # An empty split (val, when it has been folded into train) has no corpus.
@@ -248,12 +314,19 @@ class IncludeCrops(Dataset):
                 self._landmarks = tuple(np.load(LANDMARK_CACHE / name, mmap_mode="r")
                                         for name in ("hands.npy", "hand_src.npy", "pose.npy"))
             hands, hand_src, pose = self._landmarks
+            clip_hands = np.asarray(hands[row]).astype(np.float32)
+            clip_present = np.asarray(hand_src[row]) > 0
+            if self.lm_interp:
+                # On the full cached sequence, before sampling, as at inference.
+                clip_hands, clip_present = interpolate_hands(clip_hands, clip_present)
             # Same frame indices as the crops: this is the alignment that matters.
             extras = {
-                "hands": np.asarray(hands[row])[frame_indices].astype(np.float32),
-                "hand_present": np.asarray(hand_src[row])[frame_indices] > 0,
+                "hands": clip_hands[frame_indices],
+                "hand_present": clip_present[frame_indices],
                 "pose": np.asarray(pose[row])[frame_indices].astype(np.float32),
             }
+            if self.lm_aug > 0:
+                augment_landmarks(extras, self.lm_aug)
 
         crops, detected, geometry = prepare_clip(
             clip,
@@ -447,7 +520,7 @@ def model_inputs(batch: dict, device: str) -> dict:
 
 def build_datasets(
     split_file: str | Path, n_frames: int = 8, img_size: int = 64, landmarks: bool = False,
-    **train_kwargs,
+    lm_interp: bool = False, **train_kwargs,
 ) -> tuple[IncludeCrops, IncludeCrops, IncludeCrops]:
     """Train/val/test over one split file, sharing a single label mapping."""
     with Path(split_file).open(encoding="utf-8") as handle:
@@ -455,7 +528,7 @@ def build_datasets(
     label_to_index = {label: index for index, label in enumerate(labels)}
 
     common = dict(n_frames=n_frames, img_size=img_size, label_to_index=label_to_index,
-                  landmarks=landmarks)
+                  landmarks=landmarks, lm_interp=lm_interp)
     train = IncludeCrops(split_file, "train", train=True, **common, **train_kwargs)
     val = IncludeCrops(split_file, "val", train=False, **common)
     test = IncludeCrops(split_file, "test", train=False, **common)
