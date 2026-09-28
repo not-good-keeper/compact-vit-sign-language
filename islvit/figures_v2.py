@@ -188,8 +188,8 @@ def fig_waterfall():
         # The earlier "INT4 QAT 1.95 MB" bar was selected on test (see report
         # 11.12) and is replaced by the honest landmark numbers below.
         ("50-way\nfine-tune", 73.3, "null"),
-        ("+ hand\nlandmarks", 87.1, "win"),
-        ("INT4 QAT\n2.0 MB", 86.0, "win"),
+        ("+ hand\nlandmarks", 86.5, "win"),
+        ("INT4 QAT\n2.0 MB", 85.9, "win"),
     ]
     colors = {"base": MUTED, "win": GREEN, "fail": RED, "null": YELLOW}
     fig, ax = plt.subplots(figsize=(14, 5.4))
@@ -408,9 +408,9 @@ def fig_size_ladder():
     rungs = [
         # name, MB, accuracy, colour, label offset (points)
         ("pixel-only\nFP32, 3 seeds", 14.55, 73.7, BLUE, (0, -46)),
-        ("+ landmarks\nFP32, 2 seeds", 14.90, 87.1, VIOLET, (0, 14)),
-        ("+ landmarks\nINT4 post-training", 2.004, 84.1, YELLOW, (16, -34)),
-        ("+ landmarks\nINT4 + QAT", 2.004, 86.0, GREEN, (16, 6)),
+        ("+ landmarks\nFP32, 3 seeds", 14.90, 86.5, VIOLET, (0, 14)),
+        ("+ landmarks\nINT4 post-training", 2.004, 83.4, YELLOW, (16, -34)),
+        ("+ landmarks\nINT4 + QAT", 2.004, 85.9, GREEN, (16, 6)),
     ]
     fig, ax = plt.subplots(figsize=(10.5, 5.2))
     ax.scatter([r[1] for r in rungs], [r[2] for r in rungs],
