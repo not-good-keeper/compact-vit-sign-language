@@ -140,9 +140,9 @@ points is one clip in 472, so the ensemble is recorded but not claimed.
 thirteen points (§11.13).** The crop pipeline ran MediaPipe on every frame, used the
 21 joints per hand to draw a box, and discarded them. Adding them back as a second
 input -- 91 k parameters, the architecture otherwise unchanged -- takes the same
-recipe from a pixel-only mean of **73.7 % to 87.1 %**, paired p ~ 1e-9 on both
-seeds. **The shippable model is 86.0 % top-1 at 2.0 MB** (INT4, quantisation-aware,
-two-seed mean 84.5 / 87.5 %), measured on a test set re-extracted exactly as the live
+recipe from a pixel-only mean of **73.7 % to 86.5 %**, paired p < 1e-8 on all three
+seeds. **The shippable model is 85.9 % top-1 at 2.0 MB** (INT4, quantisation-aware,
+three-seed mean of 84.5 / 87.5 / 85.8 %), measured on a test set re-extracted exactly as the live
 app extracts it, with no epoch or seed chosen by test score. Along the way the
 detector itself turned out to be stateful: MediaPipe's output for a clip depended on
 which clips it had processed before, which is now fixed. Three further
@@ -1837,7 +1837,7 @@ and every model was re-scored on it:
 | Model | history-dependent cache | **clean, as the live app sees it** |
 |---|---|---|
 | pixel-only, three seeds | 75.6 / 73.5 / 72.0 | 75.0 / 73.7 / 72.2 (mean 73.7) |
-| + landmarks, two seeds | 87.7 / 87.3 | 87.3 / 86.9 (mean 87.1) |
+| + landmarks, three seeds | 87.7 / 87.3 / -- | 87.3 / 86.9 / 85.4 (mean 86.5) |
 
 Nothing moved by more than 0.6 points, so no earlier conclusion was an artefact of
 detector state -- but the clean set is what the numbers below are quoted on, because
@@ -1849,16 +1849,19 @@ The landmark model packs to **2.004 MB** at INT4 group 128. Quantisation-aware
 training was re-run in the corrected form (§11.12's caveat): 300 epochs fixed in
 advance, final EMA weights, no test evaluation during training. On the clean set:
 
-| Landmark model | Size | seed 0 | seed 1 | **mean** |
-|---|---|---|---|---|
-| FP32 | ~14.9 MB | 87.3 % | 86.9 % | 87.1 % |
-| INT4, post-training | 2.004 MB | 83.1 % | 85.2 % | 84.1 % |
-| **INT4, quantisation-aware** | **2.004 MB** | 84.5 % | 87.5 % | **86.0 %** |
+| Landmark model | Size | seed 0 | seed 1 | seed 2 | **mean** |
+|---|---|---|---|---|---|
+| FP32 | ~14.9 MB | 87.3 % | 86.9 % | 85.4 % | 86.5 % |
+| INT4, post-training | 2.004 MB | 83.1 % | 85.2 % | 82.0 % | 83.4 % |
+| **INT4, quantisation-aware** | **2.004 MB** | 84.5 % | 87.5 % | 85.8 % | **85.9 %** |
 
-**The deployable result is 86.0 % at 2.0 MB**, quoted as the two-seed mean. Quoting
+**The deployable result is 85.9 % at 2.0 MB**, quoted as the three-seed mean. (Seed 2
+was added after the first two; it crashed at epoch 235, was resumed from its checkpoint,
+and replicates the landmark gain on its own: paired against pixel-only seed 2, 88 clips
+gained and 26 lost, p = 5e-9.) Quoting
 the better seed would mean choosing it by its test score, which is the error §11.12
 had to retract. Against the product constraint -- 75 % or better, about 2 MB, a
-single model -- this clears the accuracy bar by 11 points at the size bar.
+single model -- this clears the accuracy bar by about 11 points at the size bar.
 
 #### 11.13.3 A rejected lever: fine-tuning on the deployed objective
 
