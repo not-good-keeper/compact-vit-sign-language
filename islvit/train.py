@@ -284,6 +284,8 @@ def main() -> None:
                         help="add the hand/pose landmark stream (needs islvit.data.landmarks)")
     parser.add_argument("--lm-interp", action="store_true", help="fill short gaps in hand landmarks")
     parser.add_argument("--lm-velocity", action="store_true", help="add per-hand frame-to-frame motion")
+    parser.add_argument("--lm-pair", action="store_true", help="add the wrist-to-wrist vector and distance")
+    parser.add_argument("--lm-wrist-vel", action="store_true", help="add wrist motion in the body frame")
     parser.add_argument("--lm-aug", type=float, default=None, help="landmark augmentation strength")
     parser.add_argument("--val-every", type=int, default=1,
                         help="validate every N epochs (and the last); selection only sees those")
@@ -348,6 +350,10 @@ def main() -> None:
         config["lm_interp"] = True
     if args.lm_velocity:
         config["lm_velocity"] = True
+    if args.lm_pair:
+        config["lm_pair"] = True
+    if args.lm_wrist_vel:
+        config["lm_wrist_vel"] = True
     if args.lm_aug is not None:
         config["lm_aug"] = args.lm_aug
     if args.backbone_lr_scale is not None:
@@ -402,6 +408,8 @@ def main() -> None:
         drop_path=config.get("drop_path", 0.1),
         landmarks=config.get("landmarks", False),
         lm_velocity=config.get("lm_velocity", False),
+        lm_pair=config.get("lm_pair", False),
+        lm_wrist_vel=config.get("lm_wrist_vel", False),
     )
     if args.init_from:
         # Self-supervised weights supersede ImageNet: the checkpoint was itself
@@ -683,7 +691,7 @@ def main() -> None:
             for key in ("epochs", "weight_decay", "mixup", "mixup_prob", "cutmix", "resolution_jitter",
                         "speed_jitter", "random_erasing", "color_jitter", "grayscale_prob",
                         "stream_dropout", "backbone_lr_scale", "lr", "batch_size", "landmarks",
-                        "lm_interp", "lm_velocity", "lm_aug")
+                        "lm_interp", "lm_velocity", "lm_aug", "lm_pair", "lm_wrist_vel")
         },
         "best_epoch": best["epoch"],
         "params_M": round(stats["total_M"], 3),

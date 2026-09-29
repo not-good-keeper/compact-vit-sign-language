@@ -41,6 +41,8 @@ def load_run(run_dir: Path, device: str) -> tuple[ISLViT, dict, list[str]]:
         drop_path=0.0,
         landmarks=config.get("landmarks", False),
         lm_velocity=config.get("lm_velocity", False),
+        lm_pair=config.get("lm_pair", False),
+        lm_wrist_vel=config.get("lm_wrist_vel", False),
     )
     model.load_state_dict(checkpoint["model"])
     return model.to(device).eval(), config, classes

@@ -151,12 +151,16 @@ class ISLViT(nn.Module):
         drop: float = 0.0,
         landmarks: bool = False,
         lm_velocity: bool = False,
+        lm_pair: bool = False,
+        lm_wrist_vel: bool = False,
     ) -> None:
         super().__init__()
         self.n_frames = n_frames
         self.n_streams = n_streams
         self.landmarks = landmarks
         self.lm_velocity = lm_velocity
+        self.lm_pair = lm_pair
+        self.lm_wrist_vel = lm_wrist_vel
 
         self.spatial = SpatialEncoder(img_size, patch_size, dim, spatial_depth, heads, drop_path, drop)
 
@@ -179,9 +183,10 @@ class ISLViT(nn.Module):
             # token, which is the stream that already carries body context. Both
             # are added to the crop tokens like geometry, so the token count and
             # the temporal stage are unchanged.
-            hand_in = HAND_FEATURES * (2 if lm_velocity else 1)
+            hand_in = HAND_FEATURES * (2 if lm_velocity else 1) + (2 if lm_wrist_vel else 0)
+            pose_in = POSE_FEATURES + (3 if lm_pair else 0)
             self.hand_proj = nn.Sequential(nn.Linear(hand_in, dim), nn.GELU(), nn.Linear(dim, dim))
-            self.pose_proj = nn.Sequential(nn.Linear(POSE_FEATURES, dim), nn.GELU(), nn.Linear(dim, dim))
+            self.pose_proj = nn.Sequential(nn.Linear(pose_in, dim), nn.GELU(), nn.Linear(dim, dim))
 
         rates = torch.linspace(0, drop_path, temporal_depth).tolist()
         self.blocks = nn.ModuleList([Block(dim, heads, drop_path=rates[i], drop=drop) for i in range(temporal_depth)])
@@ -244,7 +249,23 @@ class ISLViT(nn.Module):
         if self.landmarks:
             if hands is None:
                 raise ValueError("this model was built with landmarks; pass hands, hand_present, pose")
-            hand_features, pose_features, pose_ok = landmark_features(hands, pose)
+            hand_features, pose_features, pose_ok, wrist = landmark_features(hands, pose)
+            seen = hand_present.bool() & pose_ok.unsqueeze(-1)
+            if self.lm_wrist_vel:
+                # Where the wrist travels in the body frame since the previous
+                # sampled frame. Only the wrist: differencing all 65 handshape
+                # numbers mostly amplifies joint jitter, which is what made the
+                # full-velocity variant worse.
+                move = (wrist[:, 1:] - wrist[:, :-1]) * (seen[:, 1:] & seen[:, :-1]).unsqueeze(-1)
+                move = torch.cat([torch.zeros_like(wrist[:, :1]), move], dim=1)
+            if self.lm_pair:
+                # The two hands' relation: right-minus-left wrist vector and its
+                # length, in shoulder widths. Signs such as big / wide / narrow
+                # differ almost only in this, and per-hand features never state it.
+                both = (seen[..., 0] & seen[..., 1]).unsqueeze(-1).to(wrist.dtype)
+                apart = wrist[:, :, 1] - wrist[:, :, 0]
+                pair = torch.cat([apart, apart.norm(dim=-1, keepdim=True)], dim=-1) * both
+                pose_features = torch.cat([pose_features, pair], dim=-1)
             if self.lm_velocity:
                 # Explicit motion: each hand's feature change since the previous
                 # sampled frame, zeroed unless the hand was seen in both frames.
@@ -253,6 +274,8 @@ class ISLViT(nn.Module):
                 valid = (seen[:, 1:] & seen[:, :-1]).unsqueeze(-1).to(step.dtype)
                 velocity = torch.cat([torch.zeros_like(hand_features[:, :1]), step * valid], dim=1)
                 hand_features = torch.cat([hand_features, velocity], dim=-1)
+            if self.lm_wrist_vel:
+                hand_features = torch.cat([hand_features, move], dim=-1)
             hand_term = self.hand_proj(hand_features) * hand_present.unsqueeze(-1).to(hand_features.dtype)
             pose_term = self.pose_proj(pose_features) * pose_ok.unsqueeze(-1).to(pose_features.dtype)
             tokens = tokens + torch.cat([hand_term, pose_term.unsqueeze(2)], dim=2).to(tokens.dtype)
@@ -318,7 +341,7 @@ def landmark_features(hands: torch.Tensor, pose: torch.Tensor):
     wrist = ((hands[..., 0, :2] * scale_xy - centre) / width) * gate.unsqueeze(-2)
     body = ((pose[..., :2] * scale_xy - centre) / width) * gate.unsqueeze(-2)
     pose_features = torch.cat([body, pose[..., 2:3]], dim=-1).flatten(-2)
-    return torch.cat([shape, wrist], dim=-1), pose_features, pose_ok
+    return torch.cat([shape, wrist], dim=-1), pose_features, pose_ok, wrist
 
 
 def load_deit_tiny_weights(model: ISLViT, verbose: bool = True) -> ISLViT:
