@@ -1,0 +1,128 @@
+[dev_lm_aug_pair_s0] classes=262 train=1957 val=888 test=1010
+  resized time_embed: 8 -> 16 frames
+  init from runs/isign_mim/pretrained.pt (epoch 100): 112 tensors, 10 missing, 0 unexpected
+  params total=3.89M spatial=1.93M temporal=1.96M
+  ep   0  loss 5.578  val 0.3% (top5 1.5%, bal 0.4%)  ema 0.3%  41s
+  ep  10  loss 4.093  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  20  loss 2.362  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  30  loss 1.542  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  40  loss 1.483  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  50  loss 1.515  val 37.8% (top5 68.5%, bal 39.7%)  ema 40.2%  24s
+  ep  60  loss 0.921  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  70  loss 0.962  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  80  loss 1.164  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  90  loss 1.019  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 100  loss 1.038  val 46.4% (top5 76.4%, bal 48.8%)  ema 48.1%  24s
+  ep 110  loss 0.947  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 120  loss 0.725  val nan% (top5 nan%, bal nan%)  ema nan%  22s
+  ep 130  loss 1.131  val nan% (top5 nan%, bal nan%)  ema nan%  20s
+  ep 140  loss 0.895  val nan% (top5 nan%, bal nan%)  ema nan%  22s
+  ep 150  loss 1.127  val 44.4% (top5 75.2%, bal 46.1%)  ema 50.0%  32s
+  ep 160  loss 0.785  val nan% (top5 nan%, bal nan%)  ema nan%  16s
+  ep 170  loss 1.118  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 180  loss 1.003  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 190  loss 0.654  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 200  loss 0.897  val 50.0% (top5 79.7%, bal 51.4%)  ema 50.1%  24s
+  ep 210  loss 1.140  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 220  loss 0.876  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 230  loss 0.975  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 240  loss 0.847  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 250  loss 0.923  val 50.2% (top5 79.4%, bal 51.9%)  ema 51.5%  25s
+  ep 260  loss 0.964  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 270  loss 0.565  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 280  loss 0.751  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 290  loss 0.696  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 300  loss 0.953  val 51.5% (top5 80.6%, bal 53.5%)  ema 51.2%  25s
+  ep 310  loss 0.822  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 320  loss 0.744  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 330  loss 0.876  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 340  loss 0.922  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 350  loss 0.967  val 49.5% (top5 77.7%, bal 51.4%)  ema 50.9%  24s
+  ep 360  loss 0.888  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 370  loss 0.870  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 380  loss 0.871  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 390  loss 0.881  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 400  loss 0.738  val 52.4% (top5 80.2%, bal 54.1%)  ema 51.7%  24s
+  ep 410  loss 0.844  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 420  loss 0.826  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 430  loss 0.734  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 440  loss 0.730  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 450  loss 0.844  val 52.5% (top5 80.1%, bal 54.2%)  ema 51.8%  24s
+  ep 460  loss 0.699  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 470  loss 0.682  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 480  loss 0.675  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 490  loss 0.890  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 499  loss 0.788  val 51.7% (top5 79.8%, bal 53.1%)  ema 51.9%  24s
+
+[dev_lm_aug_pair_s0] best epoch 499
+  val  top1 51.9%  top5 79.8%  balanced 53.3%
+  TEST top1 59.4%  top5 81.0%  balanced 62.8%  (n=1010)
+[dev_lm_aug_pair_s0] 154 clips, 50 deployed words of 262 head columns
+  wide_plain    top1  51.9%  top5  80.0%  balanced  53.3%
+  wide_tta      top1  52.1%  top5  79.7%  balanced  53.6%
+  masked_plain  top1  77.3%  top5  98.1%  balanced  78.8%
+  masked_tta    top1  77.9%  top5  99.4%  balanced  79.7%
+[dev_lm_aug_wrist_s0] classes=262 train=1957 val=888 test=1010
+  resized time_embed: 8 -> 16 frames
+  init from runs/isign_mim/pretrained.pt (epoch 100): 112 tensors, 10 missing, 0 unexpected
+  params total=3.89M spatial=1.93M temporal=1.96M
+  ep   0  loss 5.572  val 0.7% (top5 1.9%, bal 0.7%)  ema 0.7%  43s
+  ep  10  loss 4.085  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  20  loss 2.395  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  30  loss 1.578  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  40  loss 1.517  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  50  loss 1.538  val 41.4% (top5 70.3%, bal 43.1%)  ema 40.7%  25s
+  ep  60  loss 0.922  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  70  loss 0.947  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  80  loss 1.144  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep  90  loss 0.996  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 100  loss 1.029  val 46.2% (top5 75.3%, bal 48.5%)  ema 47.1%  24s
+  ep 110  loss 0.932  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 120  loss 0.733  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 130  loss 1.122  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 140  loss 0.892  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 150  loss 1.117  val 47.7% (top5 77.6%, bal 49.9%)  ema 50.3%  25s
+  ep 160  loss 0.785  val nan% (top5 nan%, bal nan%)  ema nan%  16s
+  ep 170  loss 1.085  val nan% (top5 nan%, bal nan%)  ema nan%  16s
+  ep 180  loss 0.991  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 190  loss 0.652  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 200  loss 0.898  val 49.1% (top5 79.8%, bal 51.4%)  ema 51.1%  25s
+  ep 210  loss 1.103  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 220  loss 0.859  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 230  loss 0.989  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 240  loss 0.839  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 250  loss 0.926  val 49.1% (top5 80.0%, bal 50.6%)  ema 50.0%  24s
+  ep 260  loss 0.951  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 270  loss 0.569  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 280  loss 0.750  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 290  loss 0.695  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 300  loss 0.939  val 50.9% (top5 80.7%, bal 53.0%)  ema 51.7%  25s
+  ep 310  loss 0.815  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 320  loss 0.727  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 330  loss 0.868  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 340  loss 0.919  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 350  loss 0.969  val 52.1% (top5 83.6%, bal 54.0%)  ema 51.1%  25s
+  ep 360  loss 0.887  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 370  loss 0.862  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 380  loss 0.872  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 390  loss 0.868  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 400  loss 0.733  val 51.7% (top5 83.1%, bal 53.6%)  ema 51.9%  25s
+  ep 410  loss 0.842  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 420  loss 0.812  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 430  loss 0.724  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 440  loss 0.721  val nan% (top5 nan%, bal nan%)  ema nan%  14s
+  ep 450  loss 0.844  val 52.1% (top5 83.3%, bal 53.7%)  ema 52.1%  24s
+  ep 460  loss 0.695  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 470  loss 0.687  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 480  loss 0.677  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 490  loss 0.881  val nan% (top5 nan%, bal nan%)  ema nan%  15s
+  ep 499  loss 0.773  val 51.5% (top5 82.8%, bal 53.3%)  ema 51.7%  24s
+
+[dev_lm_aug_wrist_s0] best epoch 499
+  val  top1 51.7%  top5 82.9%  balanced 53.5%
+  TEST top1 57.1%  top5 79.4%  balanced 60.5%  (n=1010)
+[dev_lm_aug_wrist_s0] 154 clips, 50 deployed words of 262 head columns
+  wide_plain    top1  51.8%  top5  82.9%  balanced  53.6%
+  wide_tta      top1  51.8%  top5  83.7%  balanced  53.3%
+  masked_plain  top1  85.1%  top5  98.1%  balanced  85.7%
+  masked_tta    top1  84.4%  top5  98.1%  balanced  85.2%
