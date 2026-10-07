@@ -25,6 +25,11 @@ from islvit.train import evaluate
 
 
 def load_run(run_dir: Path, device: str) -> tuple[ISLViT, dict, list[str]]:
+    # A packed release file (release/*.pt) loads directly; a run directory loads
+    # its best.pt. Every entry point (predict, serve, mask50) goes through here.
+    if Path(run_dir).is_file():
+        from islvit.export import load_release
+        return load_release(Path(run_dir), device)
     checkpoint = torch.load(run_dir / "best.pt", map_location=device, weights_only=False)
     config = checkpoint["config"]
     classes = checkpoint["classes"]

@@ -95,6 +95,110 @@ def pack_int8(model: nn.Module) -> dict:
     return packed
 
 
+def save_int4(packed: dict, path: Path, meta: dict | None = None) -> float:
+    """Write a packed INT4 state compactly, and return the file size in MiB.
+
+    ``torch.save`` on the packed dict costs roughly 240 bytes per tensor in pickle
+    keys and headers. At ~200 tensors that is ~48 KB -- which is what put a model
+    whose contents measure 2004 KB into a 2052 KB file, over a 2 MB budget by
+    packaging alone.
+
+    Everything is concatenated into three flat buffers (nibbles, scales, FP16
+    leftovers) plus one small manifest describing where each tensor lives. The
+    stored bits are identical, so this is lossless: it changes the container, not
+    the model.
+    """
+    nibbles, scales, plain, manifest = [], [], [], []
+    for name, value in packed.items():
+        if isinstance(value, dict):
+            manifest.append(("q", name, tuple(value["shape"]),
+                             len(nibbles), value["nibbles"].shape,
+                             len(scales), value["scale"].shape))
+            nibbles.append(value["nibbles"].reshape(-1))
+            scales.append(value["scale"].reshape(-1))
+        else:
+            manifest.append(("f", name, tuple(value.shape), len(plain), None, None, None))
+            plain.append(value.reshape(-1))
+    blob = {
+        # Config and word list, so the file is a complete deliverable: without
+        # them a reader cannot rebuild the architecture or name its outputs.
+        "meta": meta or {},
+        "manifest": manifest,
+        "nibbles": torch.cat(nibbles) if nibbles else torch.empty(0, dtype=torch.uint8),
+        "scales": torch.cat(scales) if scales else torch.empty(0, dtype=torch.float16),
+        "plain": torch.cat([v.to(torch.float16).reshape(-1) for v in plain])
+                 if plain else torch.empty(0, dtype=torch.float16),
+        "splits": {
+            "nibbles": [int(t.numel()) for t in nibbles],
+            "scales": [int(t.numel()) for t in scales],
+            "plain": [int(t.numel()) for t in plain],
+        },
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    torch.save(blob, path, _use_new_zipfile_serialization=True)
+    return path.stat().st_size / 2**20
+
+
+def load_int4(path: Path, group: int = 128) -> dict:
+    """Read a file written by ``save_int4`` back into a usable state_dict.
+
+    A write-only container is not a deliverable, so this is the other half of the
+    format: it rebuilds full-precision tensors from the 4-bit codes and scales and
+    returns something ``load_state_dict`` accepts directly.
+    """
+    blob = torch.load(path, map_location="cpu", weights_only=False)
+    offsets = {kind: 0 for kind in ("nibbles", "scales", "plain")}
+    cursors = {kind: [] for kind in ("nibbles", "scales", "plain")}
+    for kind in cursors:
+        start = 0
+        for count in blob["splits"][kind]:
+            cursors[kind].append((start, start + count))
+            start += count
+
+    state = {}
+    for kind, name, shape, index, nib_shape, scale_index, scale_shape in blob["manifest"]:
+        if kind == "f":
+            lo, hi = cursors["plain"][index]
+            state[name] = blob["plain"][lo:hi].reshape(shape).float()
+            continue
+        lo, hi = cursors["nibbles"][index]
+        nibbles = blob["nibbles"][lo:hi].reshape(tuple(nib_shape))
+        lo, hi = cursors["scales"][scale_index]
+        scale = blob["scales"][lo:hi].reshape(tuple(scale_shape)).float()
+        # Unpack two signed 4-bit codes per byte; values 8..15 are negative.
+        low = (nibbles & 0x0F).to(torch.int16)
+        high = ((nibbles >> 4) & 0x0F).to(torch.int16)
+        low = torch.where(low > 7, low - 16, low)
+        high = torch.where(high > 7, high - 16, high)
+        codes = torch.empty(nibbles.shape[0], nibbles.shape[1] * 2, dtype=torch.float32)
+        codes[:, 0::2], codes[:, 1::2] = low.float(), high.float()
+        numel = int(torch.tensor(shape).prod())
+        state[name] = int4_dequantise(codes, scale, tuple(shape), numel)
+    return state
+
+
+
+def load_release(path: Path, device: str = "cpu"):
+    """(model, config, classes) from a file written by ``save_int4`` with meta.
+
+    The weights are rebuilt from the stored 4-bit codes and FP16 scales, so the
+    model evaluated is exactly the model in the file.
+    """
+    from islvit.models.isl_vit import ISLViT
+
+    meta = torch.load(path, map_location="cpu", weights_only=False)["meta"]
+    config, classes = meta["config"], meta["classes"]
+    model = ISLViT(
+        n_classes=len(classes), n_frames=config["n_frames"], img_size=config["img_size"],
+        patch_size=config.get("patch_size", 16), dim=config.get("dim", 192),
+        spatial_depth=config.get("spatial_depth", 4), temporal_depth=config.get("temporal_depth", 4),
+        heads=config.get("heads", 3), drop_path=0.0, landmarks=config.get("landmarks", False),
+        lm_velocity=config.get("lm_velocity", False), lm_pair=config.get("lm_pair", False),
+        lm_wrist_vel=config.get("lm_wrist_vel", False),
+    )
+    model.load_state_dict(load_int4(path, group=meta.get("group", 128)))
+    return model.to(device).eval(), config, classes
+
 def int4_targets(model: nn.Module) -> set[str]:
     """state_dict keys the INT4 path quantises: module weight matrices only.
 
@@ -162,10 +266,21 @@ def pack_int4(model: nn.Module, group: int = 128) -> tuple[dict, dict]:
         # Only module weight matrices: norms, biases, tokens and position embeddings
         # stay FP16. They are a few kilobytes and the most sensitive tensors here.
         if not torch.is_floating_point(tensor) or name not in targets:
-            packed[name] = tensor.to(torch.float16) if torch.is_floating_point(tensor) else tensor
-            dequant[name] = tensor
+            if torch.is_floating_point(tensor):
+                packed[name] = tensor.to(torch.float16)
+                # Same rule as the scales: reconstruct from what is stored, so the
+                # measured model and the saved model are the same model.
+                dequant[name] = packed[name].to(tensor.dtype)
+            else:
+                packed[name] = tensor
+                dequant[name] = tensor
             continue
         codes, scale, _ = int4_codes(tensor, group)
+        # Round the scale to FP16 *before* reconstructing, because FP16 is what the
+        # file stores. Dequantising from the FP32 scale reports an accuracy the
+        # saved model cannot deliver -- the same class of mismatch as QAT and the
+        # exporter rounding differently.
+        scale = scale.to(torch.float16).float()
         byte_codes = codes.to(torch.int8)
         # Two 4-bit codes per byte.
         low, high = byte_codes[:, 0::2] & 0x0F, byte_codes[:, 1::2] & 0x0F

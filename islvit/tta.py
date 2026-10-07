@@ -25,6 +25,7 @@ Usage::
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 from pathlib import Path
 
@@ -49,7 +50,7 @@ def view_probabilities(model, dataset, device: str, batch_size: int) -> tuple[np
     loader = DataLoader(dataset, batch_size=batch_size, num_workers=0, shuffle=False)
     probabilities, labels = [], []
     for batch in loader:
-        with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
+        with (torch.autocast("cuda", dtype=torch.bfloat16) if device == "cuda" else contextlib.nullcontext()):
             logits = model(
                 batch["crops"].to(device),
                 batch["detected"].to(device),

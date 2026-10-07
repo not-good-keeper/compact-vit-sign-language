@@ -53,3 +53,6 @@ cache_lm_f32_fresh/
 cache128_f32_test/
 cache_lm_f32_test/
 runs/_val_probs/
+
+# The shipped INT4 models are the one deliberate exception to *.pt
+!release/*.pt

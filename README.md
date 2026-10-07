@@ -4,28 +4,52 @@
 
 | | |
 |---|---|
-| Parameters | **3.80 M** |
-| Compute | **0.824 GMACs / clip** |
-| Model size (INT8) | **≈ 3.8 MB** |
-| Latency (desktop CPU, 1 clip) | **12 ms** |
-| Input | 8 frames × 3 streams (L hand, R hand, face) × 64×64 RGB |
-| Vocabulary | 50 (development) / 262 (full) signs |
+| Parameters | **3.89 M** |
+| Shipped model | **1.97 MiB** (INT4, quantisation-aware), in [`release/`](release/) |
+| Top-1, 50 deployed words, session-disjoint | **85.9 %** (mean of 3 seeds: 84.5 / 87.5 / 85.8) |
+| Top-5 | **96.4 %** |
+| Input | 16 frames × 3 crops (L hand, R hand, face) × 64×64 RGB, plus 21 hand joints per hand and upper-body pose |
+| Vocabulary | 262-word head, deployed masked to 50 words |
 
-**[Full technical report →](docs/PRELIMINARY_MODEL_REPORT.md)** — 19 sections, architecture diagrams, ablations, error analysis, reproducibility appendix.
+**[Full technical report →](docs/PRELIMINARY_MODEL_REPORT.md)** — architecture, ablations, error analysis, every correction, reproducibility appendix. §11.13 covers the current model.
 
 ---
 
 ## Headline results
 
-Best configuration, INCLUDE-50, `session-disjoint` protocol:
+INCLUDE, 50 deployed words, `session-disjoint` protocol, 472 held-out clips re-extracted
+exactly as the live app extracts video. Every number is a seed mean, with no epoch or seed
+chosen by test score.
 
-| Metric | Value |
-|---|---|
-| Top-1 | **68.9 %** |
-| Top-5 | **89.4 %** |
-| Accuracy under confidence gating | **80.7 %** on the 76 % of clips the model commits to |
+| Model | Size | Top-1 |
+|---|---|---|
+| Pixel crops only, FP32 | 14.55 MB | 73.7 % |
+| + hand / pose landmarks, FP32 | 14.90 MB | 86.5 % |
+| **+ landmarks, INT4 + quantisation-aware training** | **1.97 MiB** | **85.9 %** |
 
-The cumulative trajectory on one unchanged test set is **51.7 % → 59.7 % → 68.9 %** — about +17 points, **none of it architectural**.
+The largest single gain came from an input the pipeline already computed and discarded:
+MediaPipe's 21 joints per hand, fed back alongside the crops (91 k parameters). Paired on
+identical clips, it wins on all three seeds at p < 1e-8. The trajectory on one unchanged test
+set is 51.7 % → 59.7 % → 70.1 % → 75.6 % (pixels only) → 85.9 % (landmarks, INT4).
+
+## Using the released model
+
+```bash
+# Predict the sign in a video (runs on CPU or GPU; 6-view test-time augmentation)
+python -m islvit.predict --run release/isl_vit_tiny_lm_int4_s0.pt --video path/to/clip.mp4
+
+# Local web UI (record, predict, correct, enrol new takes)
+python -m islvit.serve --run release/isl_vit_tiny_lm_int4_s0.pt
+
+# Reproduce the headline on the held-out clips (needs the INCLUDE crop + landmark caches)
+python -m islvit.mask50 --run release/isl_vit_tiny_lm_int4_s0.pt
+```
+
+`release/` holds three INT4 models, one per training seed. Seed 0 is the default by
+convention, not because it scored best: picking the best-scoring seed would be selection on
+the test set. Expect the three-seed mean, 85.9 %, from any of them. Each file contains the
+4-bit weights, FP16 scales, the config and the word list; `islvit/release.py` writes them and
+`islvit.export.load_release` reads them.
 
 ## The measurement problem this project is really about
 
@@ -77,7 +101,7 @@ This is not a label-mismatch artefact: retrieval confirms the two corpora sign t
 A naive video ViT attends jointly over all patches of all frames: `O((T·S·P)²)`. Factorising into a spatial encoder (within a crop) followed by a temporal encoder (across crops) gives `O(P²) + O((T·S)²)` — **≈ 0.02× the attention cost**, which is what makes the model fit an edge budget at all.
 
 ```
-Input (B, T=8, S=3, 3, 64, 64)
+Input (B, T=16, S=3, 3, 64, 64)
   |
   |-- STAGE A -- Spatial encoder (weights shared across all 24 crops)
   |     Conv2d patch embed 3->192 (k=16, s=16) -> 16 patches
@@ -88,9 +112,11 @@ Input (B, T=8, S=3, 3, 64, 64)
   |     + stream embedding + time embedding
   |     + geometry projection (box centre x/y, size -> 192, zero-init)
   |     + missing embedding where the box is unreliable
+  |     + landmark projections (zero-init): handshape and wrist location on each
+  |       hand token, upper-body pose on the face token
   |
   |-- STAGE B -- Temporal encoder
-  |     prepend CLS -> 25 tokens x 192
+  |     prepend CLS -> 49 tokens x 192
   |     4 x Transformer block
   |
   `-- Linear 192 -> n_classes
@@ -118,23 +144,28 @@ islvit/
   train.py  eval.py     training loop, protocol evaluation
   pretrain.py           CISLR / iSign pretraining
   tta.py  gate.py       test-time augmentation, confidence gating
+  data/landmarks.py     hand / pose landmark extraction, row-aligned to the crop cache
+  qat.py  export.py     quantisation-aware training, INT4 packing and the release format
+  mask50.py             the deployed metric: 262-word head masked to 50 words
+  predict.py  serve.py  live inference from a video file, and the local web UI
   figures.py report.py  every figure and table in the report
 configs/                YAML configs, one per experiment
 splits/                 19 split definitions -- the four protocols, plus cross-corpus
 runs/                   75 runs: summary.json + history.csv (checkpoints not tracked)
 docs/                   technical report, figures, capture protocol
+release/                the shipped INT4 models (one per seed)
 run_*.sh                the experiment scripts, one per investigation
 ```
 
 ## What is deliberately not in this repository
 
-No source video, no preprocessed caches, no model checkpoints. All three are large and all three are reproducible:
+No source video, no preprocessed caches, and no training checkpoints -- only the three shipped INT4 models in `release/` (~2 MB each). The rest is large and reproducible:
 
 | Excluded | Size | How to get it back |
 |---|---|---|
 | Source corpora (INCLUDE, CISLR, iSign, ISL-CSLTR) | ~57 GB | Download from the original sources below |
 | Crop caches (`cache*/`) | ~70 GB | Regenerate with `islvit.data.crops` |
-| Checkpoints (`*.pt`) | ~1 GB | Retrain via the `run_*.sh` script for that experiment |
+| Training checkpoints (`runs/*/best.pt`) | ~1 GB | Retrain via the `run_*.sh` script for that experiment |
 
 What *is* tracked is everything needed to verify the claims: all code, all configs, all 19 split definitions, and per-run `summary.json` / `history.csv` for all 75 runs — every accuracy value in the report is read directly from those files. See §19.2 of the report for the full reproduction sequence.
 
