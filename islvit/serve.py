@@ -29,6 +29,7 @@ Usage::
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import tempfile
 import time
@@ -78,7 +79,7 @@ def classify(video_path: Path, use_tta: bool = True) -> dict:
                                              config["n_frames"], config["img_size"], use_tta,
                                              landmarks):
             extras = {key: value.to(device) for key, value in extras.items()}
-            with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
+            with (torch.autocast("cuda", dtype=torch.bfloat16) if device == "cuda" else contextlib.nullcontext()):
                 logits = model(crops.to(device), det.to(device), geo.to(device), **extras)
             total = logits.float().softmax(1) if total is None else total + logits.float().softmax(1)
             n += 1

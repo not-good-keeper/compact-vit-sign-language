@@ -22,6 +22,7 @@ different corpus), so treat predictions on unfamiliar footage as unvalidated.
 from __future__ import annotations
 
 import argparse
+import contextlib
 from pathlib import Path
 
 import numpy as np
@@ -136,7 +137,7 @@ def main() -> None:
             clip, detected, geometry, config["n_frames"], config["img_size"], args.tta, landmarks
         ):
             extras = {key: value.to(device) for key, value in extras.items()}
-            with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
+            with (torch.autocast("cuda", dtype=torch.bfloat16) if device == "cuda" else contextlib.nullcontext()):
                 logits = model(crops.to(device), det.to(device), geo.to(device), **extras)
             probability = logits.float().softmax(1)
             total = probability if total is None else total + probability
