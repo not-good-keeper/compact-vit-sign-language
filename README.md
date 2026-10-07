@@ -176,7 +176,7 @@ What *is* tracked is everything needed to verify the claims: all code, all confi
 - **iSign** — 18,000 clips from ~11,000 distinct source videos, used for scaled pretraining.
 - **ISL-CSLTR** — continuous-signing corpus, used for auxiliary experiments.
 
-Each is obtained from its original source under its own licence; none is redistributed here.
+Each is obtained from its original source under its own licence; no source video or preprocessed cache is redistributed here. **Exception:** a small number of illustrative figures (`docs/figures/fig16_crop_montage.png`, `fig19_walkthrough.png`, the case-study images in `report/case_study/assets/`, and documents embedding them) show frames and crops of an INCLUDE signer. These are reproduced from INCLUDE (Sridhar et al., ACM MM 2020, Zenodo 4010759) under CC-BY-4.0, with attribution.
 
 ## Environment
 
