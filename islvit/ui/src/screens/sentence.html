@@ -1,0 +1,31 @@
+<div class="sn">
+  <div class="sn-main">
+    <section class="sn-strip glass coated" aria-labelledby="sn-strip-title">
+      <div class="sn-strip-head">
+        <h2 class="eyebrow" id="sn-strip-title">Sentence</h2>
+        <span class="muted sn-count num" data-ref="count"></span>
+      </div>
+      <ol class="sn-words" data-ref="words" aria-describedby="sn-reorder-hint"></ol>
+      <p class="sr-only" id="sn-reorder-hint">Drag a word to move it, or focus it and press Alt with the left or right arrow.</p>
+      <div class="sn-tools">
+        <label class="sn-switch">
+          <input type="checkbox" data-ref="merge">
+          <span class="sn-switch-track" aria-hidden="true"><span></span></span>
+          Merge repeated words
+        </label>
+        <div class="row sn-actions">
+          <button class="btn primary" type="button" data-act="speak" data-ref="speakBtn">Speak</button>
+          <button class="btn" type="button" data-act="copy">Copy</button>
+          <button class="btn" type="button" data-act="export">Export</button>
+          <button class="btn ghost" type="button" data-act="clear" data-ref="clearBtn">Clear</button>
+        </div>
+      </div>
+    </section>
+    <p class="note sn-note">Words appear in the order they were signed. Grammar translation isn't built yet, and ISL word order isn't English word order.</p>
+  </div>
+
+  <aside class="sn-side glass pad" aria-labelledby="sn-time-title">
+    <h2 class="eyebrow" id="sn-time-title">Every clip this session</h2>
+    <ol class="sn-timeline" data-ref="timeline"></ol>
+  </aside>
+</div>

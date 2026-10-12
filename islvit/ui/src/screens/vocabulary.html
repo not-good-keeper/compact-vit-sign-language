@@ -1,0 +1,40 @@
+<div class="vb">
+  <div class="vb-stats" data-ref="stats"></div>
+  <p class="vb-source muted" data-ref="source"></p>
+
+  <section class="vb-spectrum glass coated" aria-labelledby="vb-spec-title" data-ref="spectrumCard">
+    <div class="vb-spec-head">
+      <h2 class="eyebrow" id="vb-spec-title">Recall on unseen sessions, one dot per word</h2>
+      <span class="muted vb-spec-hint">Select a dot to see the word</span>
+    </div>
+    <div class="vb-track" data-ref="track">
+      <div class="vb-band weak"><span>Weak</span></div>
+      <div class="vb-band patchy"><span>Patchy</span></div>
+      <div class="vb-band reliable"><span>Reliable</span></div>
+      <div class="vb-dots" data-ref="dots"></div>
+    </div>
+    <div class="vb-axis" aria-hidden="true"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>90%</span><span>100%</span></div>
+  </section>
+
+  <div class="vb-controls">
+    <input class="field vb-search" type="search" placeholder="Find a word" aria-label="Find a word" data-ref="search">
+    <div class="seg" role="group" aria-label="Show" data-ref="filter">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="reliable" aria-pressed="false">Reliable</button>
+      <button type="button" data-filter="patchy" aria-pressed="false">Patchy</button>
+      <button type="button" data-filter="weak" aria-pressed="false">Weak</button>
+      <button type="button" data-filter="lookalike" aria-pressed="false">Look-alikes</button>
+    </div>
+    <div class="seg" role="group" aria-label="Sort" data-ref="sort">
+      <button type="button" data-sort="weak" aria-pressed="true">Weakest first</button>
+      <button type="button" data-sort="az" aria-pressed="false">A–Z</button>
+    </div>
+  </div>
+
+  <div class="vb-grid" data-ref="grid"></div>
+
+  <aside class="vb-drawer glass" data-ref="drawer" aria-hidden="true" aria-labelledby="vb-drawer-word" tabindex="-1">
+    <button class="btn sm ghost vb-close" type="button" data-act="close" aria-label="Close">Close <kbd>Esc</kbd></button>
+    <div data-ref="drawerBody"></div>
+  </aside>
+</div>

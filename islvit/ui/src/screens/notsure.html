@@ -1,0 +1,56 @@
+<div class="ns">
+  <div class="ns-main" data-ref="main">
+    <section class="ns-fog glass" data-ref="fog" aria-live="polite">
+      <div class="ns-ghosts" data-ref="ghosts" aria-hidden="true"></div>
+      <div class="ns-pane">
+        <div class="ns-glyph" aria-hidden="true">?</div>
+        <div class="ns-copy">
+          <p class="eyebrow ns-kicker">Not sure</p>
+          <p class="ns-reason" data-ref="reason"></p>
+          <p class="ns-meta muted" data-ref="meta"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ns-short" aria-labelledby="ns-short-title">
+      <div class="ns-short-head">
+        <h2 class="eyebrow" id="ns-short-title">Pick the word you signed</h2>
+        <span class="muted ns-short-hint">Press <kbd>1</kbd>–<kbd>5</kbd>, or <kbd>R</kbd> to sign it again</span>
+      </div>
+      <div class="ns-tiles" data-ref="tiles"></div>
+      <div class="row ns-after">
+        <button class="btn" type="button" data-act="again">Sign it again <kbd>R</kbd></button>
+        <span class="muted ns-after-note">The right word was in the model's top five for 96.4% of held-out clips.</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="ns-empty glass" data-ref="empty" hidden>
+    <div class="empty">
+      <p class="empty-title">Nothing to check</p>
+      <p class="empty-body">When the model's confidence in a clip falls below your threshold, the clip waits here with its five most likely words.</p>
+      <button class="btn primary" type="button" data-act="capture">Go to capture</button>
+    </div>
+  </div>
+
+  <aside class="ns-side">
+    <article class="glass pad ns-queue" data-ref="queueCard" hidden>
+      <h2 class="eyebrow">Waiting to be checked</h2>
+      <ul class="ns-queue-list" data-ref="queue"></ul>
+    </article>
+
+    <article class="glass pad ns-why">
+      <h2 class="eyebrow">Why the app says “not sure”</h2>
+      <p>Below your threshold the app shows a shortlist instead of guessing. On an earlier model, a threshold of 0.40 meant answering 75% of clips, with 88.7% of those answers right. That measurement hasn't been repeated for the current model yet.</p>
+    </article>
+
+    <article class="glass pad ns-corr">
+      <h2 class="eyebrow">Corrections</h2>
+      <div class="ns-corr-row">
+        <span class="ns-corr-num num" data-ref="corrections">0</span>
+        <span class="muted">this session</span>
+      </div>
+      <p class="muted ns-corr-note" data-ref="corrNote">Each pick is saved to <code>runs/corrections.jsonl</code> with the clip's shortlist, so it can become a labelled training example.</p>
+    </article>
+  </aside>
+</div>

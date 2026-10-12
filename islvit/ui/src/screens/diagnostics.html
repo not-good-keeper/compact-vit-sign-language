@@ -1,0 +1,65 @@
+<div class="dg">
+  <div class="dg-bar">
+    <div class="seg" role="group" aria-label="Time window" data-ref="windowSeg">
+      <button type="button" data-window="minute" aria-pressed="true">Last minute</button>
+      <button type="button" data-window="session" aria-pressed="false">This session</button>
+    </div>
+    <span class="muted dg-count num" data-ref="count"></span>
+  </div>
+
+  <div data-ref="body">
+    <div class="dg-verdict" data-ref="verdict" role="status"></div>
+
+    <div class="dg-grid">
+      <article class="glass coated dg-streams" aria-labelledby="dg-streams-title">
+        <h2 class="eyebrow" id="dg-streams-title">Where the crops came from</h2>
+        <div class="dg-rows" data-ref="streams"></div>
+        <dl class="dg-legend">
+          <div><dt><i class="d"></i>Direct</dt><dd>The full-frame detector found it.</dd></div>
+          <div><dt><i class="r"></i>ROI-rescued</dt><dd>A second pass on an enlarged region around the arm found it.</dd></div>
+          <div><dt><i class="p"></i>Interpolated</dt><dd>Not found; the box was carried from a neighbouring frame, so it usually shows where the hand <em>was</em>.</dd></div>
+          <div><dt><i class="m"></i>Missing</dt><dd>Nothing to carry: no crop at all.</dd></div>
+        </dl>
+      </article>
+
+      <article class="glass pad dg-time" aria-labelledby="dg-time-title">
+        <div class="dg-time-head">
+          <h2 class="eyebrow" id="dg-time-title">Hands found, clip by clip</h2>
+          <ul class="dg-keys"><li><i class="l"></i>Left hand</li><li><i class="rr"></i>Right hand</li><li><i class="f"></i>Face</li></ul>
+        </div>
+        <div class="dg-chart-wrap">
+          <svg class="dg-chart" data-ref="chart" viewBox="0 0 520 220" role="img" aria-label="Share of frames with a genuine hand detection for each clip"></svg>
+          <div class="dg-tip" data-ref="tip" hidden></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="dg-grid dg-grid-b">
+      <article class="glass pad dg-table-card" aria-labelledby="dg-table-title">
+        <h2 class="eyebrow" id="dg-table-title">Every clip in the window</h2>
+        <div class="dg-table-scroll">
+          <table class="dg-table">
+            <thead><tr><th scope="col">Time</th><th scope="col">Left</th><th scope="col">Right</th><th scope="col">Face</th><th scope="col">Result</th></tr></thead>
+            <tbody data-ref="rows"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="glass pad dg-ref" aria-labelledby="dg-ref-title">
+        <h2 class="eyebrow" id="dg-ref-title">What healthy looks like</h2>
+        <div class="dg-ref-bars" data-ref="reference"></div>
+        <p class="dg-ref-note">Adding 76 CISLR clips, where the detector rarely finds the hand, to training cost 5.7 points. Detection quality matters more than the amount of data.</p>
+      </article>
+    </div>
+
+    <p class="note dg-note">This server reports detection shares per clip. Frame-by-frame detail isn't available yet.</p>
+  </div>
+
+  <div class="glass dg-empty" data-ref="empty" hidden>
+    <div class="empty">
+      <p class="empty-title" data-ref="emptyTitle">No clips yet</p>
+      <p class="empty-body" data-ref="emptyBody">Read a clip on the capture screen. Each one reports how often the detector found each hand and the face.</p>
+      <button class="btn primary" type="button" data-act="capture">Go to capture</button>
+    </div>
+  </div>
+</div>

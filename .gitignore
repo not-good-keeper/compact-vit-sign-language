@@ -56,3 +56,9 @@ runs/_val_probs/
 
 # The shipped INT4 models are the one deliberate exception to *.pt
 !release/*.pt
+
+# Run logs (results are kept as JSON under runs/)
+/*.log
+
+# Demo clips are INCLUDE test videos: rebuild them with `python -m islvit.demo_samples`
+demo_samples/
