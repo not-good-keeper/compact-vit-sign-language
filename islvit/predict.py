@@ -39,7 +39,7 @@ OFFSETS = (0.25, 0.5, 0.75)
 FLIPS = (False, True)
 
 
-def extract(video: Path, crop_size: int, frames: int = 32):
+def extract(video: Path, crop_size: int, frames: int = 32, upscaler: str | None = None):
     """Run the cache-building detection path on an arbitrary file.
 
     ``frames`` must match the depth of the cache the model was trained from, not
@@ -49,7 +49,7 @@ def extract(video: Path, crop_size: int, frames: int = 32):
     function used to inherit) made every TTA view land on the same frames, so the
     live path quietly lost a gain the offline benchmark still reported.
     """
-    crops_module.init_worker(crop_size, "include", frames)
+    crops_module.init_worker(crop_size, "include", frames, upscaler)
     clip, sources, geometry, error = crops_module.extract_clip(video)
     if clip is None:
         raise SystemExit(f"could not process {video}: {error}")
@@ -57,7 +57,7 @@ def extract(video: Path, crop_size: int, frames: int = 32):
     return clip, detected, geometry.astype(np.float32), sources
 
 
-def extract_landmarks(video: Path, frames: int = 32, interp: bool = False) -> dict:
+def extract_landmarks(video: Path, frames: int = 32, interp: bool = False, upscaler: str | None = None) -> dict:
     """The landmark cache's own extraction path, on an arbitrary file.
 
     This runs MediaPipe a second time over the same frames that ``extract``
@@ -67,7 +67,7 @@ def extract_landmarks(video: Path, frames: int = 32, interp: bool = False) -> di
     """
     from islvit.data.landmarks import extract_landmarks as run
 
-    crops_module.init_worker(crops_module.CROP_SIZE, "include", frames)
+    crops_module.init_worker(crops_module.CROP_SIZE, "include", frames, upscaler)
     hands, source, pose, error = run(video)
     if hands is None:
         raise SystemExit(f"could not extract landmarks from {video}: {error}")
@@ -114,17 +114,21 @@ def main() -> None:
     parser.add_argument("--topk", type=int, default=5)
     parser.add_argument("--no-tta", dest="tta", action="store_false", help="single centre view only")
     parser.add_argument("--crop-size", type=int, default=128, help="must match the training cache")
+    parser.add_argument("--sr", type=str, default=None,
+                        help="islvit.sr generator: upscale sub-720p video with the GAN instead of bicubic")
     args = parser.parse_args()
 
     video = Path(args.video)
     if not video.exists():
         raise SystemExit(f"{video} not found")
+    if args.sr and not Path(args.sr).exists():
+        raise SystemExit(f"--sr {args.sr} not found")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, config, classes = load_run(Path(args.run), device)
 
-    clip, detected, geometry, sources = extract(video, args.crop_size)
-    landmarks = extract_landmarks(video, interp=config.get("lm_interp", False)) \
+    clip, detected, geometry, sources = extract(video, args.crop_size, upscaler=args.sr)
+    landmarks = extract_landmarks(video, interp=config.get("lm_interp", False), upscaler=args.sr) \
         if config.get("landmarks") else None
     # Detection quality is the single best predictor of whether the prediction
     # means anything: with no hands found, the model is classifying background.

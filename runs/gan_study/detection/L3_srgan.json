@@ -1,0 +1,48 @@
+{
+  "cache": "C:/isl_gan_work/test_L3_srgan",
+  "clips": 472,
+  "frontend": {
+    "degrade": [
+      180,
+      40
+    ],
+    "sr": "runs/sr_gan/generator.pt",
+    "sr_sha256": "6f3d17891cb723d948485d21f0c43b660b006b452edbbd04bddc00fba5937f71"
+  },
+  "streams": {
+    "left_hand": {
+      "direct": 0.5009931144067796,
+      "roi": 0.18544756355932204,
+      "interp": 0.3135593220338983,
+      "missing": 0.0,
+      "genuine": 0.6864406779661016
+    },
+    "right_hand": {
+      "direct": 0.4937102754237288,
+      "roi": 0.2252383474576271,
+      "interp": 0.2810513771186441,
+      "missing": 0.0,
+      "genuine": 0.718948622881356
+    },
+    "face": {
+      "direct": 0.9986096398305084,
+      "roi": 0.0,
+      "interp": 0.0013903601694915254,
+      "missing": 0.0,
+      "genuine": 0.9986096398305084
+    }
+  },
+  "hand_landmarks_present": {
+    "left": 0.6864406779661016,
+    "right": 0.718948622881356
+  },
+  "against_clean": {
+    "reference": "cache_lm_f32_test",
+    "presence_agreement": 0.7525820974576272,
+    "extra_hands": 0.026483050847457626,
+    "missed_hands": 0.22093485169491525,
+    "wrist_error_median": 0.00766722671687603,
+    "wrist_error_p90": 0.025911826640367508,
+    "misplaced_hands": 0.046775688559322036
+  }
+}

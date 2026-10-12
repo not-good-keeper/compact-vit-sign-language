@@ -141,11 +141,24 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--split-file", default=None, help="only extract clips in this split file...")
     parser.add_argument("--split", default=None, help="...and in this split (e.g. test)")
+    parser.add_argument("--corpus", default="include", choices=("include", "cislr", "custom", "isign"),
+                        help="corpus the crop cache was extracted from (decides where videos are found)")
+    parser.add_argument("--sr", default=None, help="islvit.sr generator; must match the crop cache's front end")
+    parser.add_argument("--degrade", default=None, help="'HEIGHT:JPEG'; must match the crop cache's front end")
     args = parser.parse_args()
+
+    from islvit.sr.degrade import parse_spec
+    degrade = parse_spec(args.degrade)
+    crops.init_worker(crops.CROP_SIZE, args.corpus, args.frames, args.sr, degrade)
 
     cache, out = Path(args.cache), Path(args.out)
     crop_frames = np.load(cache / "crops.npy", mmap_mode="r").shape[1]
     assert crop_frames == args.frames, f"crop cache has {crop_frames} frames, asked for {args.frames}"
+    # Landmarks must come from the same frames as the crops beside them: the same
+    # degradation and the same upscaler, or the two streams describe different images.
+    if crops.read_frontend(cache) != crops.frontend_spec():
+        raise SystemExit(f"{cache} was built with front end {crops.read_frontend(cache)}; "
+                         f"this run uses {crops.frontend_spec()}. Pass the same --sr/--degrade.")
     with (cache / "index.csv").open(encoding="utf-8") as handle:
         rows = [(int(r["row"]), r["video_path"]) for r in csv.DictReader(handle) if r["cached"] == "1"]
     n = max(r for r, _ in rows) + 1
@@ -172,13 +185,15 @@ def main() -> None:
     pose = array("pose.npy", (n, args.frames, len(POSE_POINTS), 3), np.float16)
     done = array("done.npy", (n,), np.bool_)
     (out / "SOURCE_CACHE").write_text(f"{cache.resolve()}\n{args.frames}\n", encoding="utf-8")
+    import json
+    (out / "FRONTEND.json").write_text(json.dumps(crops.frontend_spec(), indent=2), encoding="utf-8")
 
     remaining = [job for job in rows if not done[job[0]]]
     pending = remaining[: args.limit]
     print(f"{len(rows)} cached clips, {len(rows) - len(remaining)} already done, {len(pending)} to extract")
     start, failures = time.time(), []
     with mp_proc.Pool(processes=args.workers, initializer=crops.init_worker,
-                      initargs=(crops.CROP_SIZE, "include", args.frames)) as pool:
+                      initargs=(crops.CROP_SIZE, args.corpus, args.frames, args.sr, degrade)) as pool:
         for i, (row, h, s, p, error) in enumerate(pool.imap_unordered(extract, pending, chunksize=2), 1):
             if error:
                 failures.append((row, error))

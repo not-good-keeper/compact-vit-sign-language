@@ -1,0 +1,106 @@
+{
+ "c1_models.png": [
+  1452,
+  770
+ ],
+ "c2_gan_accuracy.png": [
+  2156,
+  880
+ ],
+ "c3_decomposition.png": [
+  1452,
+  748
+ ],
+ "c4_v3_validation.png": [
+  2156,
+  792
+ ],
+ "c5_leakage.png": [
+  968,
+  726
+ ],
+ "d1.png": [
+  2572,
+  1160
+ ],
+ "d2.png": [
+  2432,
+  1120
+ ],
+ "fig0_how_it_works.png": [
+  2320,
+  1860
+ ],
+ "fig2_model_architecture.png": [
+  2100,
+  2000
+ ],
+ "fig3_evaluation_split.png": [
+  1620,
+  1260
+ ],
+ "fig4_training_pipeline.png": [
+  2440,
+  700
+ ],
+ "fig5_quantisation.png": [
+  2640,
+  320
+ ],
+ "fig6_landmark_features.png": [
+  1840,
+  600
+ ],
+ "fig7_research_gap.png": [
+  1200,
+  1100
+ ],
+ "ui_capture.png": [
+  2400,
+  1350
+ ],
+ "ui_capture_crop.png": [
+  2400,
+  1040
+ ],
+ "ui_capture_samples.png": [
+  2400,
+  1500
+ ],
+ "ui_capture_samples_crop.png": [
+  2400,
+  1500
+ ],
+ "ui_diagnostics.png": [
+  2400,
+  1500
+ ],
+ "ui_enrolment.png": [
+  2400,
+  1500
+ ],
+ "ui_notsure.png": [
+  2400,
+  1500
+ ],
+ "ui_notsure_crop.png": [
+  2400,
+  1110
+ ],
+ "ui_sentence.png": [
+  2400,
+  1500
+ ],
+ "ui_sentence_crop.png": [
+  2400,
+  900
+ ],
+ "ui_settings.png": [
+  2400,
+  1500
+ ],
+ "ui_vocabulary.png": [
+  2400,
+  1500
+ ]
+}

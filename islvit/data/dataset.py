@@ -144,6 +144,12 @@ def check_landmark_alignment(crop_cache: Path, landmark_cache: Path = LANDMARK_C
     crop_frames = np.load(crop_cache / "crops.npy", mmap_mode="r").shape[1]
     if int(frames) != crop_frames:
         raise ValueError(f"landmarks have {frames} frames per clip, crop cache has {crop_frames}")
+    # Same frames is not enough: both must have gone through the same degradation and
+    # upscaler (islvit.sr), or the landmarks describe different images than the crops.
+    from islvit.data.crops import read_frontend
+    if read_frontend(crop_cache) != read_frontend(landmark_cache):
+        raise ValueError(f"{crop_cache} and {landmark_cache} were built through different front ends: "
+                         f"{read_frontend(crop_cache)} vs {read_frontend(landmark_cache)}")
 
 
 def load_cache_index(cache_dir: Path | None = None) -> dict[str, int]:

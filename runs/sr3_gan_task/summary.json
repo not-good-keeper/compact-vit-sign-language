@@ -1,0 +1,38 @@
+{
+  "stage": "gan",
+  "iters": 60000,
+  "batch": 16,
+  "lr": 0.0001,
+  "seed": 0,
+  "bank": "C:/isl_gan_work/hr_train_v3.npy",
+  "init": "runs/sr3_l1/generator.pt",
+  "generator_params": 2039568,
+  "generator_config": {
+    "channels": 3,
+    "features": 96,
+    "convs": 24,
+    "scale": 4
+  },
+  "discriminator_params": 4376897,
+  "perceptual": "vgg19",
+  "gan_loss": "ragan",
+  "weights": {
+    "pixel": 1.0,
+    "percep": 1.0,
+    "adv": 0.1,
+    "hand": 2.0,
+    "hand_feat": 0.2
+  },
+  "hands": "C:/isl_gan_work/hands_train_v3.npy",
+  "hand_frac": 0.5,
+  "hand_proxy": "runs/hand_proxy/proxy.pt",
+  "codec_prob": 0.5,
+  "final_val": {
+    "val_hand_err": 0.034553496632725,
+    "val_hand_err_bicubic": 0.08621634263545275
+  },
+  "ema": 0.999,
+  "selection": "final EMA weights, iteration count fixed in advance",
+  "amp": true,
+  "minutes": 280.2
+}

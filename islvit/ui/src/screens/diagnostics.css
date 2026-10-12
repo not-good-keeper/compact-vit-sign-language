@@ -1,0 +1,88 @@
+/* Detection: provenance first, because detection quality is the best predictor of whether an answer means anything. */
+#screen-diagnostics .dg-bar { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+#screen-diagnostics .dg-count { font-size: 12.5px; }
+
+#screen-diagnostics .dg-verdict {
+  display: flex; align-items: center; gap: 14px; padding: 16px 20px; margin-bottom: 22px; border-radius: var(--r-lg);
+  border: 1px solid var(--rim); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  font-size: 14.5px; color: var(--ink-2);
+}
+#screen-diagnostics .dg-verdict b { font: 400 22px/1.1 var(--f-display); font-stretch: 85%; color: var(--ink); display: block; margin-bottom: 2px; }
+#screen-diagnostics .dg-verdict .dot { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+#screen-diagnostics .dg-verdict.mint { background: linear-gradient(120deg, rgba(110, 231, 168, .14), rgba(110, 231, 168, .03)); border-color: rgba(110, 231, 168, .3); box-shadow: var(--glow-mint); }
+#screen-diagnostics .dg-verdict.mint .dot { background: var(--mint); box-shadow: 0 0 14px var(--mint); }
+#screen-diagnostics .dg-verdict.amber { background: linear-gradient(120deg, rgba(245, 183, 78, .14), rgba(245, 183, 78, .03)); border-color: rgba(245, 183, 78, .3); box-shadow: var(--glow-amber); }
+#screen-diagnostics .dg-verdict.amber .dot { background: var(--amber); box-shadow: 0 0 14px var(--amber); }
+#screen-diagnostics .dg-verdict.coral { background: linear-gradient(120deg, rgba(255, 107, 107, .15), rgba(255, 107, 107, .03)); border-color: rgba(255, 107, 107, .32); box-shadow: var(--glow-coral); }
+#screen-diagnostics .dg-verdict.coral .dot { background: var(--coral); box-shadow: 0 0 14px var(--coral); }
+
+#screen-diagnostics .dg-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+#screen-diagnostics .dg-grid-b { margin-top: 22px; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+
+#screen-diagnostics .dg-streams { padding: 22px 24px; border-radius: var(--r-xl); box-shadow: var(--e3); }
+#screen-diagnostics .dg-rows { display: grid; gap: 20px; margin-top: 18px; }
+#screen-diagnostics .dg-row {
+  display: grid; grid-template-columns: 130px minmax(0, 1fr); grid-template-areas: "name bar" "val parts";
+  gap: 4px 20px; align-items: center;
+}
+#screen-diagnostics .dg-row-name { grid-area: name; display: flex; align-items: center; gap: 8px; color: var(--ink-2); font-size: 14px; }
+#screen-diagnostics .dg-row-name .icon { width: 18px; height: 18px; color: var(--ink-3); }
+#screen-diagnostics .dg-row-val { grid-area: val; font: 300 46px/1 var(--f-display); font-stretch: 76%; color: var(--ink); }
+#screen-diagnostics .dg-row-val small { font-size: 20px; color: var(--ink-3); }
+#screen-diagnostics .dg-row .provbar { grid-area: bar; height: 12px; }
+#screen-diagnostics .dg-row-parts { grid-area: parts; align-self: start; font: 500 11.5px var(--f-mono); color: var(--ink-3); display: flex; gap: 6px 14px; flex-wrap: wrap; }
+#screen-diagnostics .dg-legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; margin: 22px 0 0; padding-top: 16px; border-top: 1px solid var(--rim); }
+#screen-diagnostics .dg-legend dt { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--ink); }
+#screen-diagnostics .dg-legend dd { margin: 2px 0 0 16px; font-size: 12px; color: var(--ink-3); }
+#screen-diagnostics .dg-legend i { width: 9px; height: 9px; border-radius: 3px; display: inline-block; }
+#screen-diagnostics .dg-legend .d { background: var(--mint); } #screen-diagnostics .dg-legend .r { background: var(--sky); }
+#screen-diagnostics .dg-legend .p { background: var(--amber); } #screen-diagnostics .dg-legend .m { background: var(--coral); }
+
+#screen-diagnostics .dg-time-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+#screen-diagnostics .dg-keys { display: flex; gap: 14px; font-size: 12px; color: var(--ink-3); }
+#screen-diagnostics .dg-keys i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: 3px; }
+#screen-diagnostics .dg-keys .l { background: var(--lilac); } #screen-diagnostics .dg-keys .rr { background: var(--peri); }
+#screen-diagnostics .dg-keys .f { background: rgba(236, 239, 246, .35); }
+#screen-diagnostics .dg-chart-wrap { position: relative; margin-top: 12px; }
+#screen-diagnostics .dg-chart { width: 100%; height: auto; display: block; }
+#screen-diagnostics .dg-chart .grid { stroke: rgba(255, 255, 255, .06); }
+#screen-diagnostics .dg-chart .lab { fill: var(--ink-4); font: 500 10px var(--f-mono); }
+#screen-diagnostics .dg-chart .floor { stroke: var(--coral); stroke-dasharray: 5 5; opacity: .75; }
+#screen-diagnostics .dg-chart .floor-lab { fill: var(--coral); font: 600 10px var(--f-mono); }
+#screen-diagnostics .dg-chart .line { fill: none; stroke-width: 2.2; }
+#screen-diagnostics .dg-chart .dot { stroke: var(--smoke-0); stroke-width: 1.5; cursor: pointer; }
+#screen-diagnostics .dg-chart .dot:hover, #screen-diagnostics .dg-chart .dot:focus { r: 6; outline: none; }
+#screen-diagnostics .dg-tip {
+  position: absolute; pointer-events: none; transform: translate(-50%, -115%); padding: 7px 10px; border-radius: 10px; white-space: nowrap;
+  background: rgba(20, 25, 37, .92); border: 1px solid var(--rim); font-size: 12px; color: var(--ink); box-shadow: var(--e2);
+}
+#screen-diagnostics .dg-tip .num { color: var(--ink-3); }
+
+#screen-diagnostics .dg-table-scroll { max-height: 300px; overflow: auto; margin-top: 12px; }
+#screen-diagnostics .dg-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+#screen-diagnostics .dg-table th { position: sticky; top: 0; background: rgba(18, 22, 32, .95); text-align: left; padding: 7px 10px; font: 600 11px var(--f-mono); color: var(--ink-3); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--rim); }
+#screen-diagnostics .dg-table td { padding: 8px 10px; border-bottom: 1px solid rgba(255, 255, 255, .04); font-family: var(--f-mono); color: var(--ink-2); }
+#screen-diagnostics .dg-table td.low { color: var(--coral); }
+#screen-diagnostics .dg-table td.word { font-family: var(--f-display); font-size: 16px; font-stretch: 85%; color: var(--ink); }
+#screen-diagnostics .dg-table td.unsure { font-family: var(--f-body); font-size: 13px; color: var(--amber); }
+
+#screen-diagnostics .dg-ref-bars { display: grid; gap: 14px; margin-top: 14px; }
+#screen-diagnostics .dg-ref-group h3 { font: 600 12.5px var(--f-body); color: var(--ink-2); margin-bottom: 6px; }
+#screen-diagnostics .dg-ref-bar { display: grid; grid-template-columns: 74px 1fr 46px; gap: 10px; align-items: center; font-size: 12px; color: var(--ink-3); margin-bottom: 5px; }
+#screen-diagnostics .dg-ref-bar .track { height: 7px; border-radius: 999px; background: rgba(255, 255, 255, .06); overflow: hidden; }
+#screen-diagnostics .dg-ref-bar .track i { display: block; height: 100%; border-radius: inherit; }
+#screen-diagnostics .dg-ref-bar .num { text-align: right; color: var(--ink-2); }
+#screen-diagnostics .dg-ref-note { margin-top: 14px; font-size: 13px; color: var(--ink-2); }
+#screen-diagnostics .dg-note { margin-top: 22px; font-size: 13px; }
+
+@media (max-width: 1080px) {
+  #screen-diagnostics .dg-grid, #screen-diagnostics .dg-grid-b { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  #screen-diagnostics .dg-row { grid-template-columns: 1fr; grid-template-areas: "name" "val" "bar" "parts"; }
+  #screen-diagnostics .dg-row-val { font-size: 38px; }
+  #screen-diagnostics .dg-legend { grid-template-columns: minmax(0, 1fr); }
+  #screen-diagnostics .dg-streams { padding: 18px; }
+}
+/* The lower pair (clip table, reference bars) ends on one line. */
+#screen-diagnostics .dg-grid-b { align-items: stretch; }
