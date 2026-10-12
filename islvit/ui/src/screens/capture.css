@@ -1,0 +1,259 @@
+/* Capture: a viewfinder stage, and the lens that floats over its edge.
+   The lens's fog is a registered property so its blur can animate: clear glass
+   when the model is sure, frosted amber glass when it is not. */
+@property --capture-fog { syntax: '<length>'; inherits: true; initial-value: 14px; }
+
+#screen-capture .cap { display: flex; flex-direction: column; gap: 22px; }
+#screen-capture .cap-top {
+  display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 28px; align-items: center;
+}
+
+/* ------------------------------------------------------------ stage */
+#screen-capture .cap-stage {
+  aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--r-xl);
+  background: radial-gradient(120% 90% at 30% 20%, rgba(40, 48, 68, .55), rgba(9, 12, 18, .9));
+  transition: box-shadow .35s var(--ease), border-color .35s;
+}
+#screen-capture .cap-stage.drag { border-color: rgba(110, 231, 168, .6); box-shadow: var(--e2), var(--glow-mint); }
+#screen-capture .cap-stage video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .5s var(--ease);
+}
+#screen-capture .cap-stage.has-video video { opacity: 1; }
+#screen-capture .cap-stage.has-video .cap-empty { opacity: 0; pointer-events: none; }
+
+#screen-capture .cap-brackets i {
+  position: absolute; width: 34px; height: 34px; border: 0 solid rgba(236, 239, 246, .55); pointer-events: none;
+}
+#screen-capture .cap-brackets i:nth-child(1) { top: 18px; left: 18px; border-top-width: 1.5px; border-left-width: 1.5px; border-top-left-radius: 10px; }
+#screen-capture .cap-brackets i:nth-child(2) { top: 18px; right: 18px; border-top-width: 1.5px; border-right-width: 1.5px; border-top-right-radius: 10px; }
+#screen-capture .cap-brackets i:nth-child(3) { bottom: 18px; left: 18px; border-bottom-width: 1.5px; border-left-width: 1.5px; border-bottom-left-radius: 10px; }
+#screen-capture .cap-brackets i:nth-child(4) { bottom: 18px; right: 18px; border-bottom-width: 1.5px; border-right-width: 1.5px; border-bottom-right-radius: 10px; }
+#screen-capture .cap-stage.recording .cap-brackets i { border-color: var(--coral); }
+
+#screen-capture .cap-empty {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
+  padding: 0 14% 0 9%; gap: 10px; transition: opacity .4s var(--ease);
+}
+#screen-capture .cap-empty-title { font-size: clamp(30px, 3.4vw, 46px); max-width: 15ch; color: var(--ink); }
+#screen-capture .cap-empty-body { color: var(--ink-2); max-width: 42ch; }
+#screen-capture .cap-empty-actions { margin-top: 8px; }
+#screen-capture .cap-drop-hint { color: var(--ink-4); font-size: 13px; }
+
+#screen-capture .cap-count {
+  position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
+  background: radial-gradient(circle at center, rgba(9, 12, 18, .15), rgba(9, 12, 18, .55));
+}
+#screen-capture .cap-count span {
+  font: 300 clamp(110px, 16vw, 190px)/1 var(--f-display); font-stretch: 75%; color: var(--ink);
+  text-shadow: 0 0 40px rgba(255, 107, 107, .45); animation: capture-count 1s var(--ease);
+}
+@keyframes capture-count { from { opacity: 0; transform: scale(1.35); filter: blur(10px); } to { opacity: 1; transform: none; filter: none; } }
+
+#screen-capture .cap-rec {
+  position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px; padding: 6px 14px 6px 8px; border-radius: 999px;
+  background: rgba(9, 12, 18, .6); border: 1px solid rgba(255, 107, 107, .4); color: #FFE3E3; font-size: 13px;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: var(--glow-coral);
+}
+#screen-capture .cap-rec svg { width: 26px; height: 26px; transform: rotate(-90deg); }
+#screen-capture .cap-rec circle { fill: none; stroke-width: 3; }
+#screen-capture .cap-rec-track { stroke: rgba(255, 255, 255, .15); }
+#screen-capture .cap-rec-fill { stroke: var(--coral); stroke-linecap: round; stroke-dasharray: 94.25; stroke-dashoffset: 94.25; }
+
+/* While the server reads a clip: a slow sweep, nothing that pretends to know progress. */
+#screen-capture .cap-scan { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+#screen-capture .cap-scan::before {
+  content: ""; position: absolute; left: -40%; top: 0; bottom: 0; width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(110, 231, 168, .1) 45%, rgba(224, 106, 209, .12) 55%, transparent);
+  animation: capture-sweep 2.4s ease-in-out infinite;
+}
+@keyframes capture-sweep { to { left: 100%; } }
+
+#screen-capture .cap-status {
+  position: absolute; left: 64px; bottom: 20px; margin: 0; font-size: 12.5px; color: var(--ink-2);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .8);
+}
+
+#screen-capture .cap-controls { margin-top: 14px; }
+
+/* ------------------------------------------------------------ lens */
+#screen-capture .cap-lens-col {
+  position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+#screen-capture .cap-lens {
+  --capture-fog: 14px;
+  position: relative; width: 340px; max-width: 100%; aspect-ratio: 1; border-radius: 50%;
+  background: conic-gradient(from 210deg, rgba(224, 106, 209, .2), rgba(143, 162, 255, .1), rgba(110, 231, 168, .18), rgba(245, 183, 78, .07), rgba(224, 106, 209, .2));
+  -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow: var(--e3);
+  transition: --capture-fog .9s var(--ease), box-shadow .7s var(--ease), transform .6s var(--ease);
+}
+#screen-capture .cap-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+#screen-capture .cap-ring .track { fill: none; stroke: rgba(255, 255, 255, .07); stroke-width: 12; stroke-linecap: round; }
+#screen-capture .cap-ring .t {
+  stroke: rgba(236, 239, 246, .18); stroke-width: 3; stroke-linecap: round;
+  transition: stroke .35s var(--ease) calc(var(--i) * 24ms), opacity .35s calc(var(--i) * 24ms), filter .35s;
+}
+#screen-capture .cap-ring .t.major { stroke-width: 3.6; }
+#screen-capture .cap-lens[data-state="sure"] .cap-ring .t.on { stroke: var(--mint); filter: drop-shadow(0 0 4px rgba(110, 231, 168, .8)); }
+#screen-capture .cap-lens[data-state="unsure"] .cap-ring .t.on { stroke: var(--amber); filter: drop-shadow(0 0 4px rgba(245, 183, 78, .8)); }
+#screen-capture .cap-ring .notch { fill: var(--ink); opacity: .85; transition: transform .5s var(--ease); }
+#screen-capture .cap-ring .notch-label { fill: var(--ink-3); font: 600 9px var(--f-mono); }
+
+#screen-capture .cap-lens-glass {
+  position: absolute; inset: 30px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; padding: 0 26px;
+  background:
+    radial-gradient(70% 55% at 30% 22%, rgba(255, 255, 255, .16), transparent 60%),
+    radial-gradient(circle at 50% 120%, rgba(110, 231, 168, .08), transparent 60%),
+    rgba(12, 16, 25, .38);
+  -webkit-backdrop-filter: blur(var(--capture-fog)) saturate(160%);
+  backdrop-filter: blur(var(--capture-fog)) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, .16);
+  box-shadow: inset 0 2px 1px rgba(255, 255, 255, .18), inset 0 -22px 44px rgba(0, 0, 0, .5), inset 0 0 0 6px rgba(255, 255, 255, .02);
+  overflow: hidden;
+  transition: background .7s var(--ease);
+}
+/* A curved specular highlight, the way light catches the upper edge of a lens. */
+#screen-capture .cap-lens-glass::before {
+  content: ""; position: absolute; left: 14%; right: 30%; top: 7%; height: 28%; border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .22), transparent); filter: blur(2px); opacity: .7; pointer-events: none;
+}
+#screen-capture .cap-kicker { position: relative; }
+#screen-capture .cap-word {
+  position: relative; font-size: clamp(38px, 4.2vw, 58px); color: var(--ink); max-width: 100%;
+  overflow-wrap: anywhere; transition: color .5s, opacity .5s, filter .6s var(--ease), font-size .4s;
+}
+#screen-capture .cap-word.long { font-size: clamp(28px, 3vw, 40px); }
+#screen-capture .cap-guess { position: relative; font-size: 13px; color: var(--ink-2); min-height: 1em; }
+#screen-capture .cap-conf { position: relative; font-size: 13px; color: var(--ink-3); }
+#screen-capture .cap-conf b { font: 600 18px var(--f-mono); color: var(--ink); }
+
+#screen-capture .cap-lens[data-state="idle"] .cap-word { color: var(--ink-4); }
+#screen-capture .cap-lens[data-state="reading"] { --capture-fog: 10px; }
+#screen-capture .cap-lens[data-state="reading"] .cap-ring .t { animation: capture-breathe 1.6s ease-in-out infinite; animation-delay: calc(var(--i) * 70ms); }
+@keyframes capture-breathe { 50% { stroke: rgba(236, 239, 246, .55); } }
+#screen-capture .cap-lens[data-state="sure"] { --capture-fog: 2px; box-shadow: var(--e3), var(--glow-mint); }
+#screen-capture .cap-lens[data-state="sure"] .cap-kicker { color: var(--mint); }
+#screen-capture .cap-lens[data-state="unsure"] { --capture-fog: 18px; box-shadow: var(--e3), var(--glow-amber); }
+#screen-capture .cap-lens[data-state="unsure"] .cap-lens-glass {
+  background:
+    radial-gradient(70% 55% at 30% 22%, rgba(255, 255, 255, .12), transparent 60%),
+    radial-gradient(circle at 50% 60%, rgba(245, 183, 78, .2), rgba(245, 183, 78, .06) 70%),
+    rgba(30, 24, 14, .42);
+}
+#screen-capture .cap-lens[data-state="unsure"] .cap-kicker { color: var(--amber); }
+#screen-capture .cap-lens[data-state="unsure"] .cap-word { color: rgba(236, 239, 246, .55); filter: blur(.6px); }
+#screen-capture .cap-lens.focusing .cap-lens-glass { animation: capture-focus 1.1s var(--ease); }
+@keyframes capture-focus { from { filter: blur(6px) brightness(1.25); transform: scale(.97); } to { filter: none; transform: none; } }
+
+#screen-capture .cap-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; min-height: 40px; }
+#screen-capture .cap-actions .done { color: var(--ink-3); font-size: 13.5px; display: inline-flex; align-items: center; gap: 8px; }
+#screen-capture .cap-warn { width: 100%; max-width: 360px; }
+#screen-capture .cap-warn:empty { display: none; }
+
+/* ------------------------------------------------------------ cards */
+#screen-capture .cap-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 22px; }
+#screen-capture .cap-alt-list { margin-top: 14px; display: grid; gap: 12px; }
+#screen-capture .cap-alt { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; }
+#screen-capture .cap-alt-word { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--ink); min-width: 0; }
+#screen-capture .cap-alt-p { font: 500 13px var(--f-mono); color: var(--ink-2); }
+#screen-capture .cap-alt-bar { grid-column: 1 / -1; height: 5px; border-radius: 999px; background: rgba(255, 255, 255, .06); overflow: hidden; }
+#screen-capture .cap-alt-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--peri), var(--lilac)); transition: width .7s var(--ease); }
+#screen-capture .cap-placeholder { color: var(--ink-4); font-size: 13.5px; margin-top: 14px; }
+
+#screen-capture .cap-health-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+#screen-capture .cap-health-sub { font-size: 12.5px; }
+#screen-capture .cap-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+#screen-capture .cap-tile {
+  padding: 14px; border-radius: var(--r-md); background: rgba(0, 0, 0, .2); border: 1px solid var(--rim);
+  display: grid; gap: 10px;
+}
+#screen-capture .cap-tile-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--ink-2); font-size: 13px; }
+#screen-capture .cap-tile-head .icon { width: 18px; height: 18px; color: var(--ink-3); }
+#screen-capture .cap-tile-val { font: 400 34px/1 var(--f-display); font-stretch: 80%; color: var(--ink); }
+#screen-capture .cap-tile-val small { font-size: 16px; color: var(--ink-3); margin-left: 2px; }
+#screen-capture .cap-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 14px; font-size: 12px; color: var(--ink-3); }
+#screen-capture .cap-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+#screen-capture .cap-legend .d { background: var(--mint); } #screen-capture .cap-legend .r { background: var(--sky); }
+#screen-capture .cap-legend .p { background: var(--amber); } #screen-capture .cap-legend .m { background: var(--coral); }
+
+#screen-capture .cap-strip-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+#screen-capture .cap-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; min-height: 38px; align-items: center; }
+#screen-capture .cap-chip {
+  display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 6px 0 14px; border-radius: 999px;
+  font: 400 19px/1 var(--f-display); font-stretch: 85%; color: var(--ink);
+  background: linear-gradient(160deg, rgba(110, 231, 168, .14), rgba(110, 231, 168, .04));
+  border: 1px solid rgba(110, 231, 168, .3); box-shadow: 0 10px 22px -16px rgba(110, 231, 168, .7);
+  animation: capture-chip .45s var(--ease);
+}
+@keyframes capture-chip { from { opacity: 0; transform: translateY(6px) scale(.96); } }
+#screen-capture .cap-chip button {
+  width: 24px; height: 24px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-3);
+  display: grid; place-items: center;
+}
+#screen-capture .cap-chip button:hover { background: rgba(255, 255, 255, .1); color: var(--ink); }
+#screen-capture .cap-chip .icon { width: 14px; height: 14px; }
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 1280px) {
+  #screen-capture .cap-top { grid-template-columns: minmax(0, 1fr) 280px; gap: 22px; }
+  #screen-capture .cap-lens { width: 280px; }
+}
+@media (max-width: 900px) {
+  #screen-capture .cap-top { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  #screen-capture .cap-lens { width: 270px; }
+  #screen-capture .cap-grid { grid-template-columns: minmax(0, 1fr); }
+  #screen-capture .cap-empty { padding: 0 8%; }
+  #screen-capture .cap-empty-body, #screen-capture .cap-drop-hint { display: none; }
+}
+@media (max-width: 560px) {
+  #screen-capture .cap-tiles { grid-template-columns: minmax(0, 1fr); }
+  #screen-capture .cap-empty-title { font-size: 26px; }
+  #screen-capture .cap-stage { aspect-ratio: 4 / 3; }
+}
+
+/* ------------------------------------------------------------ demo clips */
+#screen-capture .cap-samples-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+#screen-capture .cap-samples-note { margin-top: 6px; font-size: 13px; color: var(--ink-3); max-width: 70ch; }
+#screen-capture .cap-samples-score { font-size: 12.5px; color: var(--ink-2); white-space: nowrap; padding-top: 2px; }
+#screen-capture .cap-samples-strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+#screen-capture .cap-sample {
+  display: flex; flex-direction: column; gap: 9px; padding: 8px 8px 11px; text-align: left; color: var(--ink);
+  border-radius: var(--r-md); background: rgba(0, 0, 0, .22); border: 1px solid var(--rim);
+  transition: transform var(--t-med) var(--ease-out), border-color var(--t-med) var(--ease-out),
+              box-shadow var(--t-slow) var(--ease-out), background var(--t-med);
+}
+#screen-capture .cap-sample:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .04);
+  box-shadow: 0 18px 36px -22px rgba(0, 0, 0, .95), -10px 14px 30px -24px rgba(224, 106, 209, .55), 10px 14px 30px -24px rgba(110, 231, 168, .5); }
+#screen-capture .cap-sample:active { transform: translateY(-1px) scale(.99); }
+#screen-capture .cap-sample-thumb { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 11px; overflow: hidden; background: var(--smoke-2); }
+#screen-capture .cap-sample-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--t-slow) var(--ease-out), filter var(--t-med); filter: saturate(.85) brightness(.9); }
+#screen-capture .cap-sample:hover .cap-sample-thumb img { transform: scale(1.05); filter: none; }
+#screen-capture .cap-sample-play {
+  position: absolute; inset: 0; margin: auto; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(9, 12, 18, .55); border: 1px solid rgba(255, 255, 255, .25); color: var(--ink);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  opacity: .0; transform: scale(.85); transition: opacity var(--t-med) var(--ease-out), transform var(--t-med) var(--ease-out);
+}
+#screen-capture .cap-sample-play svg { width: 16px; height: 16px; fill: currentColor; stroke: none; margin-left: 2px; }
+#screen-capture .cap-sample:hover .cap-sample-play, #screen-capture .cap-sample:focus-visible .cap-sample-play { opacity: 1; transform: none; }
+/* While the model reads the clip, a light sweeps along the bottom of its thumbnail. */
+#screen-capture .cap-sample-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; opacity: 0; overflow: hidden; }
+#screen-capture .cap-sample-bar::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%;
+  background: linear-gradient(90deg, transparent, var(--mint), transparent); animation: sample-sweep 1.2s var(--ease) infinite; }
+@keyframes sample-sweep { from { left: -40%; } to { left: 100%; } }
+#screen-capture .cap-sample[data-state="reading"] .cap-sample-bar { opacity: 1; }
+#screen-capture .cap-sample[data-state="reading"] { border-color: rgba(110, 231, 168, .4); }
+#screen-capture .cap-sample-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 4px; min-width: 0; }
+#screen-capture .cap-sample-word { font: 400 19px/1.1 var(--f-display); font-stretch: 85%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#screen-capture .cap-sample-verdict { padding: 0 4px; font: 500 12px/1.3 var(--f-body); color: var(--ink-3); min-height: 16px; }
+#screen-capture .cap-sample[data-state="right"] { border-color: rgba(110, 231, 168, .45); }
+#screen-capture .cap-sample[data-state="right"] .cap-sample-verdict { color: var(--mint); }
+#screen-capture .cap-sample[data-state="unsure"] { border-color: rgba(245, 183, 78, .45); }
+#screen-capture .cap-sample[data-state="unsure"] .cap-sample-verdict { color: var(--amber); }
+#screen-capture .cap-sample[data-state="wrong"] { border-color: rgba(255, 107, 107, .45); }
+#screen-capture .cap-sample[data-state="wrong"] .cap-sample-verdict { color: var(--coral); }
+@media (max-width: 1280px) { #screen-capture .cap-samples-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } }

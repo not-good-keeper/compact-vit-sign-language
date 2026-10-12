@@ -1,0 +1,97 @@
+<div class="cap">
+  <div class="cap-top">
+    <div class="cap-stage-col">
+      <div class="cap-stage glass" data-ref="stage" data-glare>
+        <video data-ref="video" playsinline muted aria-label="Camera preview"></video>
+        <div class="cap-brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+        <div class="cap-empty" data-ref="empty">
+          <p class="cap-empty-title display">Sign one word, then hold still.</p>
+          <p class="cap-empty-body">Start and end with your hands at rest, and keep your head and both hands in the frame.</p>
+          <div class="row cap-empty-actions">
+            <button class="btn primary" type="button" data-act="camera">Turn on camera</button>
+            <button class="btn" type="button" data-act="choose">Choose a video</button>
+          </div>
+          <p class="cap-drop-hint">or drop a clip here</p>
+        </div>
+
+        <div class="cap-count" data-ref="count" hidden aria-live="assertive"><span data-ref="countNum">3</span></div>
+        <div class="cap-rec" data-ref="rec" hidden>
+          <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="cap-rec-track" cx="18" cy="18" r="15"/><circle class="cap-rec-fill" data-ref="recFill" cx="18" cy="18" r="15"/></svg>
+          <span class="num" data-ref="recText">REC 0.0 s</span>
+        </div>
+        <div class="cap-scan" data-ref="scan" hidden aria-hidden="true"></div>
+        <p class="cap-status num" data-ref="status" aria-live="polite"></p>
+      </div>
+
+      <div class="cap-controls row">
+        <button class="btn" type="button" data-act="camera" data-ref="camBtn">Turn on camera</button>
+        <button class="btn record" type="button" data-act="record" data-ref="recBtn" disabled>Record 3 s <kbd>Space</kbd></button>
+        <button class="btn ghost" type="button" data-act="choose">Choose a video</button>
+        <input type="file" accept="video/*" hidden data-ref="file">
+      </div>
+    </div>
+
+    <div class="cap-lens-col">
+      <div class="cap-lens coated" data-ref="lens" data-state="idle" data-tilt>
+        <svg class="cap-ring" viewBox="0 0 220 220" data-ref="ring" aria-hidden="true">
+          <title>21 ticks, one per tracked hand joint</title>
+        </svg>
+        <div class="cap-lens-glass">
+          <span class="eyebrow cap-kicker" data-ref="kicker">Waiting for a sign</span>
+          <span class="cap-word display" data-ref="word">—</span>
+          <span class="cap-guess" data-ref="guess"></span>
+          <span class="cap-conf num" data-ref="conf"></span>
+        </div>
+      </div>
+      <div class="cap-actions" data-ref="actions"></div>
+      <div class="cap-warn" data-ref="warn"></div>
+    </div>
+  </div>
+
+  <!-- Demo clips: held-out test videos kept on the server (python -m islvit.demo_samples),
+       so a demo needs no files on the presenting computer. Shown only with a live server. -->
+  <section class="glass pad cap-samples" data-ref="samplesCard" hidden aria-labelledby="cap-samples-title">
+    <div class="cap-samples-head">
+      <div>
+        <h2 class="eyebrow" id="cap-samples-title">Demo clips</h2>
+        <p class="cap-samples-note" data-ref="samplesNote"></p>
+      </div>
+      <span class="cap-samples-score num" data-ref="samplesScore" aria-live="polite"></span>
+    </div>
+    <div class="cap-samples-strip" data-ref="samples" role="list"></div>
+  </section>
+
+  <div class="cap-grid">
+    <article class="glass pad cap-alts" aria-labelledby="cap-alts-title">
+      <h2 class="eyebrow" id="cap-alts-title">Other candidates</h2>
+      <ol class="cap-alt-list" data-ref="alts"></ol>
+    </article>
+
+    <article class="glass pad cap-health" aria-labelledby="cap-health-title">
+      <div class="cap-health-head">
+        <h2 class="eyebrow" id="cap-health-title">Crop health</h2>
+        <span class="muted cap-health-sub">Share of frames where each crop is a real detection</span>
+      </div>
+      <div class="cap-tiles" data-ref="tiles"></div>
+      <ul class="cap-legend">
+        <li><i class="d"></i>Direct</li>
+        <li><i class="r"></i>ROI-rescued</li>
+        <li><i class="p"></i>Interpolated</li>
+        <li><i class="m"></i>Missing</li>
+      </ul>
+    </article>
+  </div>
+
+  <article class="glass pad cap-strip" aria-labelledby="cap-strip-title">
+    <div class="cap-strip-head">
+      <h2 class="eyebrow" id="cap-strip-title">Sentence</h2>
+      <div class="row">
+        <button class="btn sm ghost" type="button" data-act="undo">Undo</button>
+        <button class="btn sm ghost" type="button" data-act="clear">Clear</button>
+        <button class="btn sm" type="button" data-act="sentence">Open sentence</button>
+      </div>
+    </div>
+    <div class="cap-chips" data-ref="chips"></div>
+  </article>
+</div>

@@ -1,0 +1,162 @@
+<div class="st">
+
+  <article class="glass coated st-hero" data-glare aria-labelledby="st-tau-title">
+    <header class="st-hero-head">
+      <p class="eyebrow">Confidence threshold</p>
+      <h2 class="st-h2" id="st-tau-title">Choose when the app says "Not sure"</h2>
+      <p class="st-lede">If the top word's confidence is below τ, the app says "Not sure" and shows a shortlist instead of one word. Raise τ to answer fewer clips and get more of those right.</p>
+    </header>
+
+    <div class="st-ros">
+      <div class="st-ro st-ro-tau">
+        <span class="eyebrow st-ro-key">Threshold τ</span>
+        <span class="st-ro-val"><b data-ref="roTau">0.40</b></span>
+      </div>
+      <div class="st-ro">
+        <span class="eyebrow st-ro-key"><i class="st-sw cov" aria-hidden="true"></i>Coverage</span>
+        <span class="st-ro-val"><b data-ref="roCov">75%</b> of clips answered</span>
+      </div>
+      <div class="st-ro">
+        <span class="eyebrow st-ro-key"><i class="st-sw acc" aria-hidden="true"></i>Accuracy</span>
+        <span class="st-ro-val"><b data-ref="roAcc">89%</b> of those are right</span>
+      </div>
+      <div class="st-ro">
+        <span class="eyebrow st-ro-key"><i class="st-sw yld" aria-hidden="true"></i>Yield</span>
+        <span class="st-ro-val"><b data-ref="roYld">67%</b> answered and right</span>
+      </div>
+    </div>
+
+    <div class="st-chart" data-ref="chartWrap">
+      <svg class="st-svg" data-ref="svg" role="group" aria-label="Coverage and accuracy for each threshold. Drag the line or use the arrow keys to change τ." focusable="false"></svg>
+      <div class="empty st-chart-empty" data-ref="chartEmpty" hidden>
+        <p class="empty-title">The threshold measurements didn't load</p>
+        <p class="empty-body">The chart needs the gating curve to show the trade-off. You can still set τ with the slider below.</p>
+      </div>
+    </div>
+
+    <div class="st-range">
+      <label class="st-range-label" for="st-tau-range">Threshold τ</label>
+      <input id="st-tau-range" class="range" type="range" min="0" max="0.9" step="0.05" value="0.4" data-ref="tauRange">
+      <output class="st-range-out num" for="st-tau-range" data-ref="tauOut">0.40</output>
+    </div>
+
+    <p class="st-caption">
+      <span class="st-src" data-ref="src">runs/gate_mixed.json</span>
+      Measured on an earlier pixel-only ensemble of three models, not the shipped landmark model, so read it as a guide to the trade-off rather than a promise. At τ = 0.40 that ensemble answered 75% of clips and 88.7% of those were right.
+    </p>
+
+    <details class="st-points">
+      <summary>Show the measured points</summary>
+      <div class="st-points-scroll">
+        <table class="st-tbl">
+          <caption class="sr-only">Gating curve measured on the earlier pixel-only ensemble</caption>
+          <thead>
+            <tr>
+              <th scope="col">τ</th>
+              <th scope="col">Answered</th>
+              <th scope="col">Right when answered</th>
+              <th scope="col">Answered and right</th>
+            </tr>
+          </thead>
+          <tbody data-ref="points"></tbody>
+        </table>
+      </div>
+    </details>
+  </article>
+
+  <article class="glass pad st-card st-half" aria-labelledby="st-views-title">
+    <header class="st-card-head">
+      <p class="eyebrow">Views per clip</p>
+      <h2 class="st-h3" id="st-views-title">How many times to read each clip</h2>
+    </header>
+    <div class="seg" role="group" aria-label="Views per clip" data-ref="viewsSeg">
+      <button type="button" data-views="6" aria-pressed="true">6 views</button>
+      <button type="button" data-views="1" aria-pressed="false">1 view</button>
+    </div>
+    <div class="st-vmap" aria-hidden="true" data-ref="vmap">
+      <span></span><span>Phase 1</span><span>Phase 2</span><span>Phase 3</span>
+      <span>As recorded</span><i></i><i></i><i></i>
+      <span>Mirrored</span><i></i><i></i><i></i>
+    </div>
+    <p class="st-explain" data-ref="viewsExplain" aria-live="polite"></p>
+  </article>
+
+  <article class="glass pad st-card st-half" aria-labelledby="st-floor-title">
+    <header class="st-card-head">
+      <p class="eyebrow">Hand-detection warning floor</p>
+      <h2 class="st-h3" id="st-floor-title">Warn when hands are hard to find</h2>
+    </header>
+    <div class="st-floor-row">
+      <label class="sr-only" for="st-floor-range">Warning floor, percent of frames</label>
+      <input id="st-floor-range" class="range" type="range" min="0" max="90" step="5" value="25" data-ref="floorRange" aria-describedby="st-floor-explain">
+      <output class="st-floor-val" for="st-floor-range" data-ref="floorOut">25%</output>
+    </div>
+    <p class="st-explain" id="st-floor-explain" data-ref="floorExplain"></p>
+    <p class="st-fine">For scale: the detector found the left hand in 91.1% of INCLUDE frames but only 25.4% of CISLR frames.</p>
+  </article>
+
+  <article class="glass pad st-card st-vocab" aria-labelledby="st-vocab-title">
+    <header class="st-card-head">
+      <p class="eyebrow">Vocabulary</p>
+      <h2 class="st-count" id="st-vocab-title"><b data-ref="nWords">0</b> <span data-ref="nWordsLabel">words in the loaded model</span></h2>
+    </header>
+
+    <p class="st-explain">The deployed list has 50 words. On it, the shipped model scores:</p>
+    <dl class="st-facts">
+      <div><dt>Top-1</dt><dd><b>85.9%</b><span>mean of three seeds</span></dd></div>
+      <div><dt>Top-5</dt><dd><b>96.4%</b><span>right word in the shortlist</span></dd></div>
+      <div><dt>Test set</dt><dd><b>472</b><span>clips from unseen recording sessions</span></dd></div>
+    </dl>
+
+    <div class="note" data-ref="vocabNote"></div>
+
+    <details class="st-deployed" data-ref="deployedWrap">
+      <summary data-ref="deployedSummary">Show the 50 deployed words</summary>
+      <ul class="st-chips" data-ref="deployed"></ul>
+    </details>
+
+    <div class="st-runs-wrap">
+      <h3 class="st-h4">Other runs on disk</h3>
+      <p class="st-fine">Switching vocabulary needs a server restart. Copy a command, stop the server, and run it.</p>
+      <ul class="st-runs" data-ref="runs"></ul>
+    </div>
+  </article>
+
+  <article class="glass pad st-card st-model" aria-labelledby="st-model-title">
+    <header class="st-card-head">
+      <p class="eyebrow">Loaded model</p>
+      <h2 class="st-h3" id="st-model-title">What the server is running</h2>
+    </header>
+    <dl class="st-spec" data-ref="spec"></dl>
+    <p class="st-fine">The shipped model has 3.89 M parameters in a 1.97 MiB file: 4-bit weights from quantisation-aware training.</p>
+  </article>
+
+  <article class="glass pad st-card st-na" aria-labelledby="st-na-title">
+    <header class="st-card-head">
+      <p class="eyebrow">Not available yet</p>
+      <h2 class="st-h3" id="st-na-title">Controls this server can't change</h2>
+    </header>
+    <div class="st-na-grid">
+      <div class="st-na-item">
+        <div class="st-na-head">
+          <h3 class="st-h4" id="st-ens-title">Ensemble</h3>
+          <span class="tag">Unavailable</span>
+        </div>
+        <div class="seg" role="group" aria-labelledby="st-ens-title" aria-describedby="st-ens-why">
+          <button type="button" aria-pressed="true" disabled>1 model</button>
+          <button type="button" aria-pressed="false" disabled>3 models</button>
+        </div>
+        <p class="st-explain" id="st-ens-why">The server loads one model, so there is nothing to average. Ensembles need a backend that runs several models per clip.</p>
+      </div>
+      <div class="st-na-item">
+        <div class="st-na-head">
+          <h3 class="st-h4" id="st-rate-title">Detector rate</h3>
+          <span class="tag">Set on the device</span>
+        </div>
+        <input class="range" type="range" min="0" max="30" value="15" disabled aria-labelledby="st-rate-title" aria-describedby="st-rate-why">
+        <p class="st-explain" id="st-rate-why">How often MediaPipe looks for hands and face is set on the device. This app reads the frames the device sends and can't change that rate.</p>
+      </div>
+    </div>
+  </article>
+
+</div>
