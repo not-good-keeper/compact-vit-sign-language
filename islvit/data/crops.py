@@ -84,6 +84,13 @@ HAND_MODEL = Path("models/hand_landmarker.task")
 FRAMES_PER_CLIP = 16
 # Optional CSV of video_path values to extract; None means the whole corpus.
 RESTRICT_TO = None
+# Path to an islvit.sr generator. When set, video below the working height is
+# brought up to it by the super-resolution GAN instead of bicubic interpolation.
+# None (the default) leaves the pipeline exactly as it was.
+UPSCALER = None
+# (height, jpeg quality) applied to every decoded frame before anything else --
+# the controlled low-resolution conditions of the GAN study. Never set otherwise.
+DEGRADE = None
 CROP_SIZE = 80
 STREAMS = ("left_hand", "right_hand", "face")
 N_STREAMS = len(STREAMS)
@@ -177,14 +184,53 @@ def read_sampled_frames(path: Path, count: int) -> list[np.ndarray] | None:
     indices = np.linspace(0, len(frames) - 1, count).round().astype(int)
     sampled = [frames[index] for index in indices]
 
+    if DEGRADE:
+        from islvit.sr.degrade import degrade_frame
+        sampled = [degrade_frame(frame, *DEGRADE) for frame in sampled]
+
     height, width = sampled[0].shape[:2]
     if height != WORK_HEIGHT:
         scale = WORK_HEIGHT / height
         size = (int(round(width * scale)), WORK_HEIGHT)
-        interpolation = cv2.INTER_AREA if scale < 1 else cv2.INTER_CUBIC
-        sampled = [cv2.resize(frame, size, interpolation=interpolation) for frame in sampled]
+        if scale > 1 and UPSCALER:
+            # Low-resolution video: the super-resolution GAN replaces bicubic here,
+            # before the hand detector ever sees the frame.
+            from islvit.sr.upscaler import upscale_frames
+            sampled = upscale_frames(sampled, size, UPSCALER)
+        else:
+            interpolation = cv2.INTER_AREA if scale < 1 else cv2.INTER_CUBIC
+            sampled = [cv2.resize(frame, size, interpolation=interpolation) for frame in sampled]
 
     return [pad_to_work_width(frame) for frame in sampled]
+
+
+def frontend_spec() -> dict:
+    """What happened to frames before detection; stored with every cache.
+
+    A crop cache and a landmark cache built through different front ends must
+    never be paired -- the landmarks would describe different frames than the
+    crops -- so both record this and the loaders compare it.
+    """
+    if not (UPSCALER or DEGRADE):
+        return {"degrade": None, "sr": None, "sr_sha256": None}
+    from islvit.sr.upscaler import half_precision, sha256
+    spec = {
+        "degrade": list(DEGRADE) if DEGRADE else None,
+        "sr": Path(UPSCALER).as_posix() if UPSCALER else None,
+        "sr_sha256": sha256(UPSCALER) if UPSCALER else None,
+    }
+    if UPSCALER and half_precision():
+        spec["sr_precision"] = "fp16"      # only present when on, so existing caches still match
+    return spec
+
+
+def read_frontend(cache_dir: Path) -> dict:
+    """The front end a cache was built with; caches older than this file used none."""
+    import json
+    path = Path(cache_dir) / "FRONTEND.json"
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    return {"degrade": None, "sr": None, "sr_sha256": None}
 
 
 def pad_to_work_width(frame: np.ndarray) -> np.ndarray:
@@ -337,7 +383,8 @@ def crop_to_square(frame: np.ndarray, box: tuple[int, int, int, int]) -> np.ndar
     return cv2.cvtColor(resized, cv2.COLOR_BGR2RGB)
 
 
-def init_worker(crop_size: int, corpus: str = "include", frames: int | None = None) -> None:
+def init_worker(crop_size: int, corpus: str = "include", frames: int | None = None,
+                upscaler: str | None = None, degrade: tuple | None = None) -> None:
     """Push config into a spawned worker.
 
     Windows spawns rather than forks, so each worker re-imports this module and
@@ -346,13 +393,17 @@ def init_worker(crop_size: int, corpus: str = "include", frames: int | None = No
     Every CLI override has to be listed here. ``--frames`` was added without it and
     the workers kept returning 16-frame clips into a cache allocated for 32, which
     at least failed loudly on the shape mismatch -- a knob that merely changed
-    behaviour rather than shape would have passed silently.
+    behaviour rather than shape would have passed silently. ``--sr`` and
+    ``--degrade`` are exactly that kind of knob, so they are set unconditionally:
+    a caller that does not pass them gets the plain pipeline, never a leftover.
     """
-    global CROP_SIZE, CORPUS, FRAMES_PER_CLIP
+    global CROP_SIZE, CORPUS, FRAMES_PER_CLIP, UPSCALER, DEGRADE
     CROP_SIZE = crop_size
     CORPUS = corpus
     if frames is not None:
         FRAMES_PER_CLIP = frames
+    UPSCALER = upscaler
+    DEGRADE = tuple(degrade) if degrade else None
 
 
 _holistic = None
@@ -579,7 +630,7 @@ def _corpus_video_list() -> list[tuple[str, str]]:
 
 
 def main() -> None:
-    global CACHE_DIR, CROP_SIZE, CORPUS, FRAMES_PER_CLIP, RESTRICT_TO
+    global CACHE_DIR, CROP_SIZE, CORPUS, FRAMES_PER_CLIP, RESTRICT_TO, UPSCALER, DEGRADE
 
     parser = argparse.ArgumentParser(description="Extract INCLUDE hand/face crops")
     parser.add_argument("--limit", type=int, default=0, help="only process the first N videos")
@@ -616,6 +667,10 @@ def main() -> None:
         "custom reads newly recorded clips from custom/<signer>/<label>/, "
         "isign reads the extracted subset from iSign_videos/",
     )
+    parser.add_argument("--sr", type=str, default=None,
+                        help="islvit.sr generator: upscale sub-720p video with the GAN instead of bicubic")
+    parser.add_argument("--degrade", type=str, default=None,
+                        help="GAN study only: 'HEIGHT:JPEG', e.g. 360:60, applied to every frame first")
     args = parser.parse_args()
 
     if args.cache_dir:
@@ -626,6 +681,11 @@ def main() -> None:
         FRAMES_PER_CLIP = args.frames
     RESTRICT_TO = args.restrict_to
     CORPUS = args.corpus
+    if args.sr and not Path(args.sr).exists():
+        raise SystemExit(f"--sr {args.sr} not found")
+    UPSCALER = args.sr
+    from islvit.sr.degrade import parse_spec
+    DEGRADE = parse_spec(args.degrade)
 
     missing_models = [path for path in (HOLISTIC_MODEL, HAND_MODEL) if not path.exists()]
     if missing_models:
@@ -668,6 +728,14 @@ def main() -> None:
                 f"Delete {CACHE_DIR} to rebuild, or point --cache-dir somewhere else."
             )
         del existing
+        # Resuming through a different front end would mix two kinds of frame in one cache.
+        if read_frontend(CACHE_DIR) != frontend_spec():
+            raise SystemExit(
+                f"{CACHE_DIR} was built with front end {read_frontend(CACHE_DIR)}, "
+                f"this run uses {frontend_spec()}. Use a different --cache-dir."
+            )
+    import json
+    (CACHE_DIR / "FRONTEND.json").write_text(json.dumps(frontend_spec(), indent=2), encoding="utf-8")
 
     crops_cache = np.lib.format.open_memmap(crops_path, mode=mode, dtype=np.uint8, shape=shape)
     sources_cache = np.lib.format.open_memmap(
@@ -696,7 +764,8 @@ def main() -> None:
     started = time.time()
     completed = 0
 
-    with mp_proc.Pool(processes=workers, initializer=init_worker, initargs=(CROP_SIZE, CORPUS, FRAMES_PER_CLIP)) as pool:
+    with mp_proc.Pool(processes=workers, initializer=init_worker,
+                      initargs=(CROP_SIZE, CORPUS, FRAMES_PER_CLIP, UPSCALER, DEGRADE)) as pool:
         for row, crops, source_array, geometry, error in pool.imap_unordered(process_video, pending, chunksize=2):
             completed += 1
             if crops is None:

@@ -1,0 +1,36 @@
+{
+  "cache": "C:/isl_gan_work/cislr_bicubic",
+  "clips": 609,
+  "frontend": {
+    "degrade": null,
+    "sr": null,
+    "sr_sha256": null
+  },
+  "streams": {
+    "left_hand": {
+      "direct": 0.22198275862068967,
+      "roi": 0.027811986863711002,
+      "interp": 0.4119458128078818,
+      "missing": 0.33825944170771755,
+      "genuine": 0.24979474548440064
+    },
+    "right_hand": {
+      "direct": 0.43154761904761907,
+      "roi": 0.05613711001642036,
+      "interp": 0.5106732348111659,
+      "missing": 0.0016420361247947454,
+      "genuine": 0.4876847290640394
+    },
+    "face": {
+      "direct": 0.9845545977011494,
+      "roi": 0.0,
+      "interp": 0.015445402298850575,
+      "missing": 0.0,
+      "genuine": 0.9845545977011494
+    }
+  },
+  "hand_landmarks_present": {
+    "left": 0.24979474548440064,
+    "right": 0.4876847290640394
+  }
+}
