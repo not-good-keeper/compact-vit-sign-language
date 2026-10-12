@@ -1,0 +1,217 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Review 3 diagrams</title>
+<style>
+  body { margin: 0; background: #fff; font-family: Arial, Helvetica, sans-serif; }
+  .fig { display: inline-block; padding: 18px; background: #fff; }
+  svg text { font-family: Arial, Helvetica, sans-serif; fill: #1F2430; }
+  .h { font-size: 15px; font-weight: 700; }
+  .t { font-size: 12.5px; }
+  .s { font-size: 11px; fill: #4B5563; }
+  .w { fill: #fff; }
+  .box { fill: #F7F8FA; stroke: #CBD2DC; stroke-width: 1.2; }
+  .ui { fill: #EEF1FB; stroke: #5B7BD6; stroke-width: 1.4; }
+  .srv { fill: #F3EEF7; stroke: #C065B0; stroke-width: 1.4; }
+  .step { fill: #fff; stroke: #9AA3B2; stroke-width: 1.1; }
+  .gan { fill: #EAF6F0; stroke: #2E9E6E; stroke-width: 1.6; }
+  .model { fill: #E7F4EE; stroke: #1E7A5A; stroke-width: 1.6; }
+  .loss { fill: #FFF6E9; stroke: #D98C2B; stroke-width: 1.3; }
+  .new { fill: #F1E9F8; stroke: #8E5BB5; stroke-width: 1.3; stroke-dasharray: 5 3; }
+  .a { stroke: #4B5563; stroke-width: 1.5; fill: none; marker-end: url(#arr); }
+  .ad { stroke: #8E5BB5; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#arrp); }
+  .ab { stroke: #D98C2B; stroke-width: 1.4; fill: none; marker-end: url(#arro); }
+</style></head>
+<body>
+
+<!-- ======================= D1: integrated application ======================= -->
+<div class="fig" id="d1">
+<svg width="1250" height="540" viewBox="0 0 1250 540">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4B5563"/></marker>
+  </defs>
+  <!-- browser -->
+  <rect class="ui" x="10" y="40" width="250" height="470" rx="14"/>
+  <text class="h" x="28" y="70">Browser (presenter's laptop)</text>
+  <text class="s" x="28" y="90">one self-contained page, HTML/CSS/JS</text>
+  <g>
+    <rect class="step" x="28" y="108" width="214" height="30" rx="8"/><text class="t" x="40" y="128">1  Capture: camera, file or demo clip</text>
+    <rect class="step" x="28" y="146" width="214" height="30" rx="8"/><text class="t" x="40" y="166">2  Not sure: top-5 shortlist</text>
+    <rect class="step" x="28" y="184" width="214" height="30" rx="8"/><text class="t" x="40" y="204">3  Sentence: accepted words</text>
+    <rect class="step" x="28" y="222" width="214" height="30" rx="8"/><text class="t" x="40" y="242">4  Settings: threshold, views</text>
+    <rect class="step" x="28" y="260" width="214" height="30" rx="8"/><text class="t" x="40" y="280">5  Detection: crop provenance</text>
+    <rect class="step" x="28" y="298" width="214" height="30" rx="8"/><text class="t" x="40" y="318">6  Vocabulary: per-word recall</text>
+    <rect class="step" x="28" y="336" width="214" height="30" rx="8"/><text class="t" x="40" y="356">7  Enrolment: record new signers</text>
+  </g>
+  <text class="s" x="28" y="396">Confidence gate in the browser:</text>
+  <text class="s" x="28" y="412">top word below threshold (default 0.40)</text>
+  <text class="s" x="28" y="428">opens the shortlist instead of answering.</text>
+  <text class="s" x="28" y="458">Reached over an SSH tunnel:</text>
+  <text class="s" x="28" y="474">localhost counts as a secure origin,</text>
+  <text class="s" x="28" y="490">so the camera API is available.</text>
+
+  <!-- arrows browser <-> server -->
+  <path class="a" d="M262,200 L416,200"/>
+  <text class="s" x="272" y="176">POST /predict (video)</text>
+  <text class="s" x="272" y="192">/correct, /enrol</text>
+  <path class="a" d="M416,280 L262,280"/>
+  <text class="s" x="272" y="300">JSON: top-5, confidence,</text>
+  <text class="s" x="272" y="316">crop provenance</text>
+  <text class="s" x="272" y="356">GET /info, /samples</text>
+  <g transform="translate(70,0)">
+  <!-- server -->
+  <rect class="srv" x="348" y="40" width="822" height="470" rx="14"/>
+  <text class="h" x="368" y="70">Server: islvit.demo (serve.py request handler), CPU</text>
+  <text class="s" x="368" y="90">one request = one clip; the same code path builds the training caches, so live and offline inputs match</text>
+
+  <!-- pipeline -->
+  <rect class="step" x="368" y="112" width="150" height="74" rx="10"/>
+  <text class="t" x="380" y="134" style="font-weight:700">Decode</text>
+  <text class="s" x="380" y="152">32 frames, uniform;</text>
+  <text class="s" x="380" y="168">letterbox to 1280x720</text>
+  <path class="a" d="M518,149 L548,149"/>
+
+  <rect class="gan" x="550" y="112" width="176" height="74" rx="10"/>
+  <text class="t" x="562" y="134" style="font-weight:700">Upscale if below 720p</text>
+  <text class="s" x="562" y="152">bicubic (default), or</text>
+  <text class="s" x="562" y="168">SR-GAN generator (--sr)</text>
+  <path class="a" d="M726,149 L756,149"/>
+
+  <rect class="step" x="758" y="112" width="190" height="74" rx="10"/>
+  <text class="t" x="770" y="134" style="font-weight:700">MediaPipe Holistic</text>
+  <text class="s" x="770" y="152">hands, face, pose per frame;</text>
+  <text class="s" x="770" y="168">missed hand: ROI re-detection</text>
+  <path class="a" d="M948,149 L978,149"/>
+
+  <rect class="step" x="980" y="112" width="172" height="74" rx="10"/>
+  <text class="t" x="992" y="134" style="font-weight:700">Model inputs</text>
+  <text class="s" x="992" y="152">3 crops x 16 frames, 64 px</text>
+  <text class="s" x="992" y="168">+ 21-joint hand landmarks</text>
+  <path class="a" d="M1066,186 L1066,226"/>
+
+  <rect class="model" x="760" y="228" width="392" height="96" rx="12"/>
+  <text class="h" x="776" y="254">ISL-ViT-Tiny (any trained checkpoint, --run)</text>
+  <text class="s" x="776" y="274">shipped: 4-bit QAT, 3.89 M parameters, 1.97 MiB file</text>
+  <text class="s" x="776" y="292">spatial ViT per crop, then temporal ViT over 48 crop tokens</text>
+  <text class="s" x="776" y="310">6 views per clip (3 frame phases x mirror), probabilities averaged</text>
+  <path class="a" d="M760,276 L700,276"/>
+
+  <rect class="step" x="500" y="236" width="198" height="80" rx="10"/>
+  <text class="t" x="512" y="258" style="font-weight:700">Response</text>
+  <text class="s" x="512" y="276">top-5 words and probabilities,</text>
+  <text class="s" x="512" y="292">hand/face detection shares</text>
+  <text class="s" x="512" y="308">(direct, ROI, interpolated)</text>
+
+  <!-- storage -->
+  <rect class="box" x="368" y="362" width="380" height="128" rx="10"/>
+  <text class="t" x="382" y="386" style="font-weight:700">Written by the server</text>
+  <text class="s" x="382" y="406">/correct  -&gt; runs/corrections.jsonl (user's pick + shortlist)</text>
+  <text class="s" x="382" y="424">/enrol    -&gt; custom/&lt;signer&gt;/&lt;word&gt;/takeN.webm</text>
+  <text class="s" x="382" y="446">Read by the server</text>
+  <text class="s" x="382" y="464">/samples  -&gt; demo_samples/ (10 held-out INCLUDE clips)</text>
+  <text class="s" x="382" y="480">/info     -&gt; model name, vocabulary, frame and crop sizes</text>
+
+  <rect class="box" x="770" y="362" width="382" height="128" rx="10"/>
+  <text class="t" x="784" y="386" style="font-weight:700">Models the interface runs</text>
+  <text class="s" x="784" y="406">classifier: any checkpoint, selected at launch with --run</text>
+  <text class="s" x="784" y="422">  (4-bit release seeds 0-2, FP32 pixel or landmark runs)</text>
+  <text class="s" x="784" y="440">front end: bicubic, or an SR generator with --sr</text>
+  <text class="s" x="784" y="456">  (SR-L1, SR-GAN v1/v2, v3 arms)</text>
+  <text class="s" x="784" y="476">answers from the 50 deployed words, as evaluated (--all-words: 262)</text>
+  </g>
+</svg>
+</div>
+
+<!-- ======================= D2: SR-GAN ======================= -->
+<div class="fig" id="d2">
+<svg width="1180" height="520" viewBox="0 0 1180 520">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4B5563"/></marker>
+    <marker id="arro" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D98C2B"/></marker>
+    <marker id="arrp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8E5BB5"/></marker>
+  </defs>
+  <!-- data -->
+  <rect class="box" x="10" y="30" width="200" height="120" rx="10"/>
+  <text class="h" x="24" y="56">HR patch, 128 px</text>
+  <text class="s" x="24" y="76">INCLUDE training sessions only</text>
+  <text class="s" x="24" y="94">hand/face crops + frame patches</text>
+  <text class="s" x="24" y="112">(v3: 32k patches + 43.7k</text>
+  <text class="s" x="24" y="128">MediaPipe-labelled hand crops)</text>
+  <path class="a" d="M110,150 L110,190"/>
+  <rect class="box" x="10" y="192" width="200" height="150" rx="10"/>
+  <text class="h" x="24" y="218">Degrade x4 (random)</text>
+  <text class="s" x="24" y="238">blur (Gaussian or motion)</text>
+  <text class="s" x="24" y="254">resize, noise, JPEG q40-95</text>
+  <text class="s" x="24" y="270">applied twice (2nd-order)</text>
+  <text class="s" x="24" y="286">final x4 downscale + JPEG</text>
+  <text class="s" x="24" y="306">v3: H.264 intra coding,</text>
+  <text class="s" x="24" y="322">CRF 23-43, on half the samples</text>
+  <path class="a" d="M210,266 L262,266"/>
+  <text class="s" x="214" y="256">LR, 32 px</text>
+
+  <!-- generator -->
+  <rect class="gan" x="264" y="196" width="300" height="140" rx="12"/>
+  <text class="h" x="280" y="222">Generator (SRVGG-compact)</text>
+  <text class="s" x="280" y="242">conv 3x3 + PReLU, repeated at LR resolution</text>
+  <text class="s" x="280" y="258">  v1/v2: 64 channels x 16 layers, 0.62 M params</text>
+  <text class="s" x="280" y="274">  v3:    96 channels x 24 layers, 2.04 M params</text>
+  <text class="s" x="280" y="292">pixel shuffle x4, plus nearest-neighbour</text>
+  <text class="s" x="280" y="308">upsample of the input as a residual</text>
+  <text class="s" x="280" y="326">EMA weights (0.999) are what ships</text>
+  <path class="a" d="M564,266 L620,266"/>
+  <text class="s" x="568" y="256">SR, 128 px</text>
+
+  <!-- discriminator -->
+  <rect class="box" x="622" y="196" width="230" height="140" rx="12"/>
+  <text class="h" x="638" y="222">Discriminator</text>
+  <text class="s" x="638" y="242">U-Net, spectral normalisation</text>
+  <text class="s" x="638" y="258">4.38 M parameters</text>
+  <text class="s" x="638" y="276">one real/fake score per pixel,</text>
+  <text class="s" x="638" y="292">so it can judge fingers and</text>
+  <text class="s" x="638" y="308">palm separately</text>
+  <text class="s" x="638" y="326">bf16 autocast in training</text>
+  <path class="a" d="M110,30 L110,14 L737,14 L737,194"/>
+  <text class="s" x="420" y="10">HR target (real)</text>
+
+  <!-- losses -->
+  <rect class="loss" x="900" y="40" width="270" height="72" rx="10"/>
+  <text class="t" x="914" y="62" style="font-weight:700">Pixel L1 (weight 1)</text>
+  <text class="s" x="914" y="80">stage 1 alone = SR-L1 (no-GAN control),</text>
+  <text class="s" x="914" y="96">100k iterations, Adam 2e-4</text>
+  <rect class="loss" x="900" y="124" width="270" height="56" rx="10"/>
+  <text class="t" x="914" y="146" style="font-weight:700">VGG19 perceptual (weight 1)</text>
+  <text class="s" x="914" y="164">feature distance, bf16</text>
+  <rect class="loss" x="900" y="192" width="270" height="70" rx="10"/>
+  <text class="t" x="914" y="214" style="font-weight:700">Adversarial (weight 0.1)</text>
+  <text class="s" x="914" y="232">v1/v2: binary cross-entropy</text>
+  <text class="s" x="914" y="248">v3: relativistic average (RaGAN)</text>
+  <path class="ab" d="M852,232 L898,228"/>
+  <path class="ab" d="M590,266 L590,76 L898,76"/>
+  <path class="ab" d="M598,266 L598,152 L898,152"/>
+
+  <rect class="new" x="900" y="282" width="270" height="118" rx="10"/>
+  <text class="t" x="914" y="304" style="font-weight:700">v3 only: hand-structure loss</text>
+  <text class="s" x="914" y="322">frozen ResNet-18 heatmap network,</text>
+  <text class="s" x="914" y="338">distilled from MediaPipe (21 joints)</text>
+  <text class="s" x="914" y="356">landmark distance (weight 2) +</text>
+  <text class="s" x="914" y="372">feature distance (weight 0.2) between</text>
+  <text class="s" x="914" y="388">SR hand crop and HR hand crop</text>
+  <path class="ad" d="M480,336 L480,356 L898,356"/>
+
+  <!-- schedule -->
+  <rect class="box" x="264" y="372" width="588" height="124" rx="10"/>
+  <text class="t" x="280" y="396" style="font-weight:700">Training schedule (iterations fixed in advance; final EMA weights kept, no selection on results)</text>
+  <text class="s" x="280" y="418">Stage 1, SR-L1: 100k iterations, batch 32 (v1: 55.6 min)</text>
+  <text class="s" x="280" y="436">Stage 2, SR-GAN v1: from SR-L1, 60k iterations, batch 16, Adam 1e-4, cosine decay (236.8 min)</text>
+  <text class="s" x="280" y="454">SR-GAN v2: v1 generator + fresh discriminator, 80k more iterations, peak LR 5e-5</text>
+  <text class="s" x="280" y="472">v3: 2.04 M generator, 100k L1 iterations, then three 60k-iteration arms</text>
+  <text class="s" x="280" y="488">    (GAN + hand loss, GAN only, hand loss only)</text>
+
+  <rect class="box" x="10" y="372" width="230" height="124" rx="10"/>
+  <text class="t" x="24" y="396" style="font-weight:700">Inference</text>
+  <text class="s" x="24" y="416">runs on whole frames,</text>
+  <text class="s" x="24" y="432">only when the video is below</text>
+  <text class="s" x="24" y="448">720p; x4 output is area-</text>
+  <text class="s" x="24" y="464">resized to 720p. 1080p video</text>
+  <text class="s" x="24" y="480">never passes through it.</text>
+</svg>
+</div>
+</body></html>
