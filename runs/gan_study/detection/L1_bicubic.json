@@ -1,0 +1,48 @@
+{
+  "cache": "C:/isl_gan_work/test_L1_bicubic",
+  "clips": 472,
+  "frontend": {
+    "degrade": [
+      360,
+      60
+    ],
+    "sr": null,
+    "sr_sha256": null
+  },
+  "streams": {
+    "left_hand": {
+      "direct": 0.7779396186440678,
+      "roi": 0.0887844279661017,
+      "interp": 0.1332759533898305,
+      "missing": 0.0,
+      "genuine": 0.8667240466101694
+    },
+    "right_hand": {
+      "direct": 0.6526085805084746,
+      "roi": 0.17253707627118645,
+      "interp": 0.174854343220339,
+      "missing": 0.0,
+      "genuine": 0.825145656779661
+    },
+    "face": {
+      "direct": 0.9993379237288136,
+      "roi": 0.0,
+      "interp": 0.0006620762711864406,
+      "missing": 0.0,
+      "genuine": 0.9993379237288136
+    }
+  },
+  "hand_landmarks_present": {
+    "left": 0.8667240466101694,
+    "right": 0.825145656779661
+  },
+  "against_clean": {
+    "reference": "cache_lm_f32_test",
+    "presence_agreement": 0.9037010063559322,
+    "extra_hands": 0.022543697033898306,
+    "missed_hands": 0.0737552966101695,
+    "wrist_error_median": 0.004274677950888872,
+    "wrist_error_p90": 0.010822582058608532,
+    "misplaced_hands": 0.019398834745762712
+  }
+}

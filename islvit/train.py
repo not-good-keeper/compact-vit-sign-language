@@ -327,7 +327,17 @@ def main() -> None:
         default=None,
         help="path to a pretrained.pt from islvit.pretrain; overrides ImageNet init",
     )
+    parser.add_argument(
+        "--finetune-from",
+        type=str,
+        default=None,
+        help="a trained best.pt to continue from, head included (same vocabulary and inputs). "
+        "Used by the GAN study to adapt the shipped model to low-resolution video",
+    )
+    parser.add_argument("--lr", type=float, default=None, help="override the config learning rate")
     args = parser.parse_args()
+    if args.init_from and args.finetune_from:
+        raise SystemExit("--init-from and --finetune-from are alternatives; pass one")
 
     config = yaml.safe_load(Path(args.config).read_text(encoding="utf-8"))
     if args.split_file:
@@ -360,6 +370,8 @@ def main() -> None:
         config["backbone_lr_scale"] = args.backbone_lr_scale
     if args.weight_decay is not None:
         config["weight_decay"] = args.weight_decay
+    if args.lr is not None:
+        config["lr"] = args.lr
 
     split_name = Path(config["split_file"]).stem
     tag = args.tag or f"{split_name}{'_scratch' if not config.get('pretrained', True) else ''}"
@@ -411,7 +423,17 @@ def main() -> None:
         lm_pair=config.get("lm_pair", False),
         lm_wrist_vel=config.get("lm_wrist_vel", False),
     )
-    if args.init_from:
+    if args.finetune_from:
+        # The whole trained model, head included, strictly: a fine-tune that quietly
+        # dropped or reshaped a tensor would be a different starting point than the
+        # one it claims to continue from.
+        checkpoint = torch.load(args.finetune_from, map_location="cpu", weights_only=False)
+        if checkpoint.get("classes") and checkpoint["classes"] != train_set.classes:
+            raise SystemExit(f"{args.finetune_from} was trained on a different vocabulary than {config['split_file']}")
+        model.load_state_dict(checkpoint["model"])
+        print(f"  fine-tuning from {args.finetune_from} (epoch {checkpoint.get('epoch', '?')})")
+        config["pretrained"] = f"finetune:{Path(args.finetune_from).parent.name}"
+    elif args.init_from:
         # Self-supervised weights supersede ImageNet: the checkpoint was itself
         # initialised from DeiT-Tiny and then trained on signing crops, so loading
         # ImageNet over it would throw that away. The classifier head is not in the

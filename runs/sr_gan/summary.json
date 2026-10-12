@@ -1,0 +1,21 @@
+{
+  "stage": "gan",
+  "iters": 80000,
+  "batch": 16,
+  "lr": 5e-05,
+  "seed": 0,
+  "bank": "C:/isl_gan_work/hr_train.npy",
+  "init": "runs/sr_gan_v1/generator.pt",
+  "generator_params": 621424,
+  "discriminator_params": 4376897,
+  "perceptual": "vgg19",
+  "weights": {
+    "pixel": 1.0,
+    "percep": 1.0,
+    "adv": 0.1
+  },
+  "ema": 0.999,
+  "selection": "final EMA weights, iteration count fixed in advance",
+  "amp": true,
+  "minutes": 261.4
+}

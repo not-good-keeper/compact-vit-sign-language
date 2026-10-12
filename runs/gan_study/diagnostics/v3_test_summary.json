@@ -1,0 +1,656 @@
+{
+ "frozen_int4/L1/bicubic": [
+  0.809322033898305,
+  0.8283898305084746,
+  0.798728813559322
+ ],
+ "frozen_int4/L1/srl1": [
+  0.8199152542372882,
+  0.847457627118644,
+  0.8389830508474576
+ ],
+ "frozen_int4/L1/srgan": [
+  0.8199152542372882,
+  0.8453389830508474,
+  0.8283898305084746
+ ],
+ "frozen_int4/L1/sr3_gan_task": [
+  0.8241525423728814,
+  0.8453389830508474,
+  0.8516949152542372
+ ],
+ "frozen_int4/L1/sr3_l1_task": [
+  0.8305084745762712,
+  0.8538135593220338,
+  0.8305084745762712
+ ],
+ "frozen_int4/L1/sr3_gan_task_vs_bicubic": {
+  "delta": 0.02824858757062147,
+  "per_seed": [
+   0.014830508474576343,
+   0.016949152542372836,
+   0.052966101694915224
+  ],
+  "gained": 71,
+  "lost": 31,
+  "p": 9.307650827247335e-05,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_int4/L1/sr3_l1_task_vs_bicubic": {
+  "delta": 0.026129943502824864,
+  "per_seed": [
+   0.021186440677966156,
+   0.025423728813559254,
+   0.03177966101694918
+  ],
+  "gained": 64,
+  "lost": 27,
+  "p": 0.00013216326274489122,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_int4/L1/sr3_gan_task_vs_srgan": {
+  "delta": 0.009180790960451954,
+  "per_seed": [
+   0.004237288135593209,
+   0.0,
+   0.02330508474576265
+  ],
+  "gained": 40,
+  "lost": 27,
+  "p": 0.14207137942637568,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_int4/L1/sr3_l1_task_vs_srgan": {
+  "delta": 0.007062146892655348,
+  "per_seed": [
+   0.010593220338983023,
+   0.008474576271186418,
+   0.0021186440677966045
+  ],
+  "gained": 43,
+  "lost": 33,
+  "p": 0.3018724904870077,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_int4/L1/sr3_gan_task_vs_srl1": {
+  "delta": 0.004943502824858744,
+  "per_seed": [
+   0.004237288135593209,
+   -0.0021186440677966045,
+   0.012711864406779627
+  ],
+  "gained": 30,
+  "lost": 23,
+  "p": 0.4101027163746913,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_int4/L1/sr3_gan_task_vs_sr3_l1_task": {
+  "delta": 0.0021186440677966045,
+  "per_seed": [
+   -0.006355932203389814,
+   -0.008474576271186418,
+   0.021186440677966045
+  ],
+  "gained": 33,
+  "lost": 30,
+  "p": 0.8013064925040662,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_int4/L2/bicubic": [
+  0.75,
+  0.7711864406779662,
+  0.7584745762711864
+ ],
+ "frozen_int4/L2/srl1": [
+  0.798728813559322,
+  0.8220338983050848,
+  0.8050847457627118
+ ],
+ "frozen_int4/L2/srgan": [
+  0.8135593220338984,
+  0.847457627118644,
+  0.809322033898305
+ ],
+ "frozen_int4/L2/sr3_gan_task": [
+  0.8008474576271186,
+  0.8283898305084746,
+  0.8199152542372882
+ ],
+ "frozen_int4/L2/sr3_l1_task": [
+  0.777542372881356,
+  0.815677966101695,
+  0.7838983050847458
+ ],
+ "frozen_int4/L2/sr3_gan_task_vs_bicubic": {
+  "delta": 0.05649717514124294,
+  "per_seed": [
+   0.05084745762711862,
+   0.05720338983050843,
+   0.06144067796610175
+  ],
+  "gained": 140,
+  "lost": 60,
+  "p": 1.507061557352612e-08,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_int4/L2/sr3_l1_task_vs_bicubic": {
+  "delta": 0.032485875706214716,
+  "per_seed": [
+   0.02754237288135597,
+   0.044491525423728806,
+   0.025423728813559365
+  ],
+  "gained": 102,
+  "lost": 56,
+  "p": 0.00031456796621816757,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_int4/L2/sr3_gan_task_vs_srgan": {
+  "delta": -0.007062146892655348,
+  "per_seed": [
+   -0.012711864406779738,
+   -0.01906779661016944,
+   0.010593220338983134
+  ],
+  "gained": 38,
+  "lost": 48,
+  "p": 0.3318343545999156,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_int4/L2/sr3_l1_task_vs_srgan": {
+  "delta": -0.03107344632768357,
+  "per_seed": [
+   -0.03601694915254239,
+   -0.03177966101694907,
+   -0.025423728813559254
+  ],
+  "gained": 24,
+  "lost": 68,
+  "p": 4.9353514190469894e-06,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "hurts"
+ },
+ "frozen_int4/L2/sr3_gan_task_vs_srl1": {
+  "delta": 0.00776836158192092,
+  "per_seed": [
+   0.0021186440677966045,
+   0.006355932203389814,
+   0.014830508474576343
+  ],
+  "gained": 52,
+  "lost": 41,
+  "p": 0.2997316968970305,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_int4/L2/sr3_gan_task_vs_sr3_l1_task": {
+  "delta": 0.02401129943502822,
+  "per_seed": [
+   0.02330508474576265,
+   0.012711864406779627,
+   0.03601694915254239
+  ],
+  "gained": 68,
+  "lost": 34,
+  "p": 0.000986536808184603,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_int4/L3/bicubic": [
+  0.5953389830508474,
+  0.6228813559322034,
+  0.6122881355932204
+ ],
+ "frozen_int4/L3/srl1": [
+  0.7563559322033898,
+  0.7711864406779662,
+  0.7521186440677966
+ ],
+ "frozen_int4/L3/srgan": [
+  0.7288135593220338,
+  0.7966101694915254,
+  0.739406779661017
+ ],
+ "frozen_int4/L3/sr3_gan_task": [
+  0.7478813559322034,
+  0.7669491525423728,
+  0.7478813559322034
+ ],
+ "frozen_int4/L3/sr3_l1_task": [
+  0.7457627118644068,
+  0.7669491525423728,
+  0.7563559322033898
+ ],
+ "frozen_int4/L3/sr3_gan_task_vs_bicubic": {
+  "delta": 0.14406779661016947,
+  "per_seed": [
+   0.15254237288135597,
+   0.14406779661016944,
+   0.13559322033898302
+  ],
+  "gained": 265,
+  "lost": 61,
+  "p": 1.8788594227496535e-31,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_int4/L3/sr3_l1_task_vs_bicubic": {
+  "delta": 0.14618644067796607,
+  "per_seed": [
+   0.15042372881355937,
+   0.14406779661016944,
+   0.14406779661016944
+  ],
+  "gained": 252,
+  "lost": 45,
+  "p": 4.4666154428495794e-36,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_int4/L3/sr3_gan_task_vs_srgan": {
+  "delta": -0.0007062146892655349,
+  "per_seed": [
+   0.019067796610169552,
+   -0.029661016949152574,
+   0.008474576271186418
+  ],
+  "gained": 62,
+  "lost": 63,
+  "p": 1.0,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_int4/L3/sr3_l1_task_vs_srgan": {
+  "delta": 0.0014124293785310698,
+  "per_seed": [
+   0.016949152542372947,
+   -0.029661016949152574,
+   0.016949152542372836
+  ],
+  "gained": 64,
+  "lost": 62,
+  "p": 0.9290596866317957,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_int4/L3/sr3_gan_task_vs_srl1": {
+  "delta": -0.0056497175141243154,
+  "per_seed": [
+   -0.008474576271186418,
+   -0.00423728813559332,
+   -0.004237288135593209
+  ],
+  "gained": 53,
+  "lost": 61,
+  "p": 0.5122548722298448,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_int4/L3/sr3_gan_task_vs_sr3_l1_task": {
+  "delta": -0.0021186440677966045,
+  "per_seed": [
+   0.0021186440677966045,
+   0.0,
+   -0.008474576271186418
+  ],
+  "gained": 59,
+  "lost": 62,
+  "p": 0.8558215992110799,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L1/bicubic": [
+  0.8411016949152542,
+  0.8538135593220338,
+  0.826271186440678
+ ],
+ "frozen_fp32/L1/srl1": [
+  0.8283898305084746,
+  0.8538135593220338,
+  0.8389830508474576
+ ],
+ "frozen_fp32/L1/srgan": [
+  0.8347457627118644,
+  0.8495762711864406,
+  0.8283898305084746
+ ],
+ "frozen_fp32/L1/sr3_gan_task": [
+  0.8389830508474576,
+  0.8453389830508474,
+  0.836864406779661
+ ],
+ "frozen_fp32/L1/sr3_l1_task": [
+  0.8432203389830508,
+  0.8538135593220338,
+  0.8305084745762712
+ ],
+ "frozen_fp32/L1/sr3_gan_task_vs_bicubic": {
+  "delta": 0.0,
+  "per_seed": [
+   -0.0021186440677966045,
+   -0.008474576271186418,
+   0.010593220338983023
+  ],
+  "gained": 51,
+  "lost": 51,
+  "p": 1.0,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L1/sr3_l1_task_vs_bicubic": {
+  "delta": 0.0021186440677966045,
+  "per_seed": [
+   0.0021186440677966045,
+   0.0,
+   0.004237288135593209
+  ],
+  "gained": 38,
+  "lost": 35,
+  "p": 0.8151212352249975,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L1/sr3_gan_task_vs_srgan": {
+  "delta": 0.0028248587570621395,
+  "per_seed": [
+   0.004237288135593209,
+   -0.004237288135593209,
+   0.008474576271186418
+  ],
+  "gained": 44,
+  "lost": 40,
+  "p": 0.7436441861052041,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L1/sr3_l1_task_vs_srgan": {
+  "delta": 0.004943502824858744,
+  "per_seed": [
+   0.008474576271186418,
+   0.004237288135593209,
+   0.0021186440677966045
+  ],
+  "gained": 43,
+  "lost": 36,
+  "p": 0.49989687686032663,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L1/sr3_gan_task_vs_srl1": {
+  "delta": 0.0,
+  "per_seed": [
+   0.010593220338983023,
+   -0.008474576271186418,
+   -0.0021186440677966045
+  ],
+  "gained": 33,
+  "lost": 33,
+  "p": 1.0,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L1/sr3_gan_task_vs_sr3_l1_task": {
+  "delta": -0.0021186440677966045,
+  "per_seed": [
+   -0.004237288135593209,
+   -0.008474576271186418,
+   0.006355932203389814
+  ],
+  "gained": 33,
+  "lost": 36,
+  "p": 0.8099490529189247,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L2/bicubic": [
+  0.7245762711864406,
+  0.7563559322033898,
+  0.7627118644067796
+ ],
+ "frozen_fp32/L2/srl1": [
+  0.809322033898305,
+  0.815677966101695,
+  0.8029661016949152
+ ],
+ "frozen_fp32/L2/srgan": [
+  0.8199152542372882,
+  0.8283898305084746,
+  0.8050847457627118
+ ],
+ "frozen_fp32/L2/sr3_gan_task": [
+  0.788135593220339,
+  0.8177966101694916,
+  0.7966101694915254
+ ],
+ "frozen_fp32/L2/sr3_l1_task": [
+  0.7838983050847458,
+  0.836864406779661,
+  0.8072033898305084
+ ],
+ "frozen_fp32/L2/sr3_gan_task_vs_bicubic": {
+  "delta": 0.0529661016949153,
+  "per_seed": [
+   0.06355932203389836,
+   0.06144067796610175,
+   0.03389830508474578
+  ],
+  "gained": 144,
+  "lost": 69,
+  "p": 3.0280723626020696e-07,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_fp32/L2/sr3_l1_task_vs_bicubic": {
+  "delta": 0.06144067796610172,
+  "per_seed": [
+   0.05932203389830515,
+   0.0805084745762712,
+   0.044491525423728806
+  ],
+  "gained": 144,
+  "lost": 57,
+  "p": 7.157293314035383e-10,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_fp32/L2/sr3_gan_task_vs_srgan": {
+  "delta": -0.016949152542372874,
+  "per_seed": [
+   -0.03177966101694918,
+   -0.010593220338983023,
+   -0.008474576271186418
+  ],
+  "gained": 38,
+  "lost": 62,
+  "p": 0.020978735677851718,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "hurts"
+ },
+ "frozen_fp32/L2/sr3_l1_task_vs_srgan": {
+  "delta": -0.008474576271186455,
+  "per_seed": [
+   -0.03601694915254239,
+   0.008474576271186418,
+   0.0021186440677966045
+  ],
+  "gained": 44,
+  "lost": 56,
+  "p": 0.2712530240738347,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L2/sr3_gan_task_vs_srl1": {
+  "delta": -0.008474576271186418,
+  "per_seed": [
+   -0.021186440677966045,
+   0.0021186440677966045,
+   -0.006355932203389814
+  ],
+  "gained": 39,
+  "lost": 51,
+  "p": 0.24610644971627793,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L2/sr3_gan_task_vs_sr3_l1_task": {
+  "delta": -0.008474576271186418,
+  "per_seed": [
+   0.004237288135593209,
+   -0.01906779661016944,
+   -0.010593220338983023
+  ],
+  "gained": 48,
+  "lost": 60,
+  "p": 0.28979821540506145,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L3/bicubic": [
+  0.5423728813559322,
+  0.5932203389830508,
+  0.5995762711864406
+ ],
+ "frozen_fp32/L3/srl1": [
+  0.7415254237288136,
+  0.7754237288135594,
+  0.739406779661017
+ ],
+ "frozen_fp32/L3/srgan": [
+  0.7330508474576272,
+  0.7796610169491526,
+  0.7457627118644068
+ ],
+ "frozen_fp32/L3/sr3_gan_task": [
+  0.75,
+  0.7436440677966102,
+  0.7309322033898306
+ ],
+ "frozen_fp32/L3/sr3_l1_task": [
+  0.7563559322033898,
+  0.7754237288135594,
+  0.7436440677966102
+ ],
+ "frozen_fp32/L3/sr3_gan_task_vs_bicubic": {
+  "delta": 0.16313559322033902,
+  "per_seed": [
+   0.2076271186440678,
+   0.15042372881355937,
+   0.13135593220338992
+  ],
+  "gained": 306,
+  "lost": 75,
+  "p": 3.2512755831663364e-34,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_fp32/L3/sr3_l1_task_vs_bicubic": {
+  "delta": 0.1800847457627119,
+  "per_seed": [
+   0.2139830508474576,
+   0.18220338983050854,
+   0.14406779661016955
+  ],
+  "gained": 300,
+  "lost": 45,
+  "p": 2.1684600487344459e-47,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "helps"
+ },
+ "frozen_fp32/L3/sr3_gan_task_vs_srgan": {
+  "delta": -0.011299435028248594,
+  "per_seed": [
+   0.016949152542372836,
+   -0.03601694915254239,
+   -0.014830508474576232
+  ],
+  "gained": 64,
+  "lost": 80,
+  "p": 0.21115264054329339,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L3/sr3_l1_task_vs_srgan": {
+  "delta": 0.005649717514124279,
+  "per_seed": [
+   0.02330508474576265,
+   -0.004237288135593209,
+   -0.0021186440677966045
+  ],
+  "gained": 74,
+  "lost": 66,
+  "p": 0.5542689157763164,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L3/sr3_gan_task_vs_srl1": {
+  "delta": -0.010593220338983059,
+  "per_seed": [
+   0.008474576271186418,
+   -0.03177966101694918,
+   -0.008474576271186418
+  ],
+  "gained": 72,
+  "lost": 87,
+  "p": 0.26682526360032177,
+  "consistent": false,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ },
+ "frozen_fp32/L3/sr3_gan_task_vs_sr3_l1_task": {
+  "delta": -0.016949152542372874,
+  "per_seed": [
+   -0.006355932203389814,
+   -0.03177966101694918,
+   -0.012711864406779627
+  ],
+  "gained": 67,
+  "lost": 91,
+  "p": 0.06694263927535096,
+  "consistent": true,
+  "seeds": 3,
+  "verdict": "no reliable difference"
+ }
+}
