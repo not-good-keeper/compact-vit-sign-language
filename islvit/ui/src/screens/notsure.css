@@ -1,0 +1,92 @@
+/* Not sure: the model's guesses sit behind fogged amber glass. Only the
+   question mark is sharp; the shortlist below is where the answer comes from. */
+#screen-notsure .ns { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; align-items: start; }
+#screen-notsure .ns-main, #screen-notsure .ns-empty { grid-column: 1; }
+#screen-notsure .ns-side { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; gap: 18px; }
+#screen-notsure .ns-main { display: flex; flex-direction: column; gap: 22px; }
+
+#screen-notsure .ns-fog {
+  overflow: hidden; border-radius: var(--r-xl); min-height: 240px;
+  background: linear-gradient(140deg, rgba(245, 183, 78, .16), rgba(245, 183, 78, .04) 55%, rgba(224, 106, 209, .06));
+  border-color: rgba(245, 183, 78, .25); border-top-color: rgba(255, 220, 160, .35);
+  box-shadow: var(--e3), var(--glow-amber);
+}
+#screen-notsure .ns-ghosts { position: absolute; inset: 0; pointer-events: none; }
+#screen-notsure .ns-ghost {
+  position: absolute; white-space: nowrap; color: rgba(255, 236, 205, .75);
+  font: 400 64px/1 var(--f-display); font-stretch: 78%;
+  /* Blurred in place: the guesses should be felt, not read, behind the fog. */
+  filter: blur(7px);
+  animation: notsure-drift 9s ease-in-out infinite alternate;
+}
+@keyframes notsure-drift { to { transform: translate(var(--dx, 12px), var(--dy, -6px)); } }
+#screen-notsure .ns-pane {
+  position: relative; display: flex; align-items: center; gap: 28px; min-height: 240px; padding: 30px 34px;
+  background: linear-gradient(120deg, rgba(36, 28, 16, .45), rgba(20, 18, 16, .25));
+  -webkit-backdrop-filter: blur(20px) saturate(140%); backdrop-filter: blur(20px) saturate(140%);
+}
+#screen-notsure .ns-glyph {
+  flex: none; width: 150px; height: 150px; border-radius: 50%; display: grid; place-items: center;
+  font: 300 112px/1 var(--f-display); font-stretch: 75%; color: var(--amber);
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .12), rgba(245, 183, 78, .08) 55%, transparent 70%);
+  border: 1px solid rgba(245, 183, 78, .35);
+  text-shadow: 0 0 30px rgba(245, 183, 78, .55);
+  box-shadow: inset 0 2px 1px rgba(255, 255, 255, .15), 0 20px 50px -24px rgba(245, 183, 78, .7);
+  animation: notsure-pulse 3.2s ease-in-out infinite;
+}
+@keyframes notsure-pulse { 50% { text-shadow: 0 0 46px rgba(245, 183, 78, .8); transform: scale(1.03); } }
+#screen-notsure .ns-kicker { color: var(--amber); }
+#screen-notsure .ns-reason { font: 400 clamp(22px, 2.3vw, 30px)/1.22 var(--f-display); font-stretch: 85%; color: var(--ink); margin-top: 8px; max-width: 30ch; }
+#screen-notsure .ns-reason q { quotes: "“" "”"; color: var(--amber); }
+#screen-notsure .ns-meta { margin-top: 10px; font-size: 13px; }
+
+#screen-notsure .ns-short-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+#screen-notsure .ns-short-hint { font-size: 12.5px; display: inline-flex; gap: 5px; align-items: center; }
+#screen-notsure .ns-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+#screen-notsure .ns-tile {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; text-align: left;
+  min-height: 150px; padding: 16px; border-radius: var(--r-lg); color: var(--ink);
+  background: var(--glass-tint); border: 1px solid var(--rim); border-top-color: var(--rim-top);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: var(--e2);
+  transition: transform .25s var(--ease), border-color .25s, box-shadow .3s;
+}
+#screen-notsure .ns-tile:hover { transform: translateY(-4px); border-color: rgba(110, 231, 168, .45); box-shadow: var(--e2), var(--glow-mint); }
+#screen-notsure .ns-tile:active { transform: translateY(-1px) scale(.99); }
+#screen-notsure .ns-tile.first { border-color: rgba(245, 183, 78, .4); }
+#screen-notsure .ns-tile-word { font: 400 26px/1.05 var(--f-display); font-stretch: 80%; overflow-wrap: anywhere; }
+#screen-notsure .ns-tile-p { font: 500 13px var(--f-mono); color: var(--ink-2); margin-top: auto; }
+#screen-notsure .ns-tile-bar { width: 100%; height: 4px; border-radius: 999px; background: rgba(255, 255, 255, .07); overflow: hidden; }
+#screen-notsure .ns-tile-bar i { display: block; height: 100%; background: var(--amber); border-radius: inherit; }
+#screen-notsure .ns-tile-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+#screen-notsure .ns-tile kbd { position: absolute; top: 12px; right: 12px; }
+#screen-notsure .ns-tile.saving { opacity: .55; pointer-events: none; }
+#screen-notsure .ns-after { margin-top: 16px; }
+#screen-notsure .ns-after-note { font-size: 12.5px; }
+
+#screen-notsure .ns-queue-list { display: grid; gap: 6px; margin-top: 12px; }
+#screen-notsure .ns-queue-list button {
+  width: 100%; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; text-align: left;
+  padding: 9px 10px; border: 1px solid transparent; border-radius: 12px; background: rgba(0, 0, 0, .18); color: var(--ink-2); font-size: 13.5px;
+}
+#screen-notsure .ns-queue-list button:hover { color: var(--ink); border-color: var(--rim); }
+#screen-notsure .ns-queue-list button[aria-current="true"] { color: var(--ink); border-color: rgba(245, 183, 78, .4); background: rgba(245, 183, 78, .08); }
+#screen-notsure .ns-queue-list .num { font-size: 12px; color: var(--ink-3); }
+#screen-notsure .ns-why p { margin-top: 10px; color: var(--ink-2); font-size: 13.5px; }
+#screen-notsure .ns-corr-row { display: flex; align-items: baseline; gap: 10px; margin-top: 10px; }
+#screen-notsure .ns-corr-num { font: 300 44px/1 var(--f-display); font-stretch: 78%; color: var(--ink); }
+#screen-notsure .ns-corr-note { margin-top: 8px; font-size: 13px; }
+
+@media (max-width: 1180px) {
+  #screen-notsure .ns-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 980px) {
+  #screen-notsure .ns { grid-template-columns: minmax(0, 1fr); }
+  #screen-notsure .ns-side { grid-column: 1; grid-row: auto; }
+}
+@media (max-width: 600px) {
+  #screen-notsure .ns-pane { flex-direction: column; align-items: flex-start; padding: 24px; gap: 16px; }
+  #screen-notsure .ns-glyph { width: 96px; height: 96px; font-size: 72px; }
+  #screen-notsure .ns-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #screen-notsure .ns-tile { min-height: 120px; }
+  #screen-notsure .ns-ghost { font-size: 44px; }
+}

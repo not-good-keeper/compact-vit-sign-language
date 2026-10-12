@@ -1,0 +1,79 @@
+{
+  "L3_bicubic": {
+    "present": 0.433203125,
+    "clean_present": 0.882734375,
+    "missed": 0.475625,
+    "extra": 0.02609375,
+    "wrist_err_med": 0.01567916013300419,
+    "misplaced": 0.11984375,
+    "points_err_med": 0.023225653916597366,
+    "points_err_mean": 0.03853213042020798,
+    "jitter_corr": 0.5091969382771282
+  },
+  "L3_srl1": {
+    "present": 0.645859375,
+    "clean_present": 0.882734375,
+    "missed": 0.26953125,
+    "extra": 0.03265625,
+    "wrist_err_med": 0.007824546657502651,
+    "misplaced": 0.077890625,
+    "points_err_med": 0.012976153753697872,
+    "points_err_mean": 0.02298668399453163,
+    "jitter_corr": 0.479737674273879
+  },
+  "L3_srgan_v2": {
+    "present": 0.632890625,
+    "clean_present": 0.882734375,
+    "missed": 0.281875,
+    "extra": 0.03203125,
+    "wrist_err_med": 0.007795149926096201,
+    "misplaced": 0.062734375,
+    "points_err_med": 0.012984608300030231,
+    "points_err_mean": 0.020952610298991203,
+    "jitter_corr": 0.4391621984514673
+  },
+  "L3_sr3_l1": {
+    "present": 0.691875,
+    "clean_present": 0.882734375,
+    "missed": 0.22625,
+    "extra": 0.035390625,
+    "wrist_err_med": 0.0073530967347323895,
+    "misplaced": 0.091953125,
+    "points_err_med": 0.011863727122545242,
+    "points_err_mean": 0.022342944517731667,
+    "jitter_corr": 0.5633342078428463
+  },
+  "L3_sr3_gan_task": {
+    "present": 0.7334375,
+    "clean_present": 0.882734375,
+    "missed": 0.189453125,
+    "extra": 0.04015625,
+    "wrist_err_med": 0.007540475577116013,
+    "misplaced": 0.07234375,
+    "points_err_med": 0.012348027899861336,
+    "points_err_mean": 0.020877758041024208,
+    "jitter_corr": 0.4038087743044345
+  },
+  "L3_sr3_gan": {
+    "present": 0.71671875,
+    "clean_present": 0.882734375,
+    "missed": 0.204921875,
+    "extra": 0.03890625,
+    "wrist_err_med": 0.00766722671687603,
+    "misplaced": 0.07390625,
+    "points_err_med": 0.012796402908861637,
+    "points_err_mean": 0.02118990570306778,
+    "jitter_corr": 0.4156539352656661
+  },
+  "L3_sr3_l1_task": {
+    "present": 0.607421875,
+    "clean_present": 0.882734375,
+    "missed": 0.289921875,
+    "extra": 0.014609375,
+    "wrist_err_med": 0.0064120166935026646,
+    "misplaced": 0.059765625,
+    "points_err_med": 0.009862974286079407,
+    "points_err_mean": 0.01801794394850731,
+    "jitter_corr": 0.5029992093375002
+  }
+}

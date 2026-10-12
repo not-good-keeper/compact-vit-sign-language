@@ -1,0 +1,36 @@
+{
+  "cache": "C:/isl_gan_work/cislr_srgan",
+  "clips": 609,
+  "frontend": {
+    "degrade": null,
+    "sr": "runs/sr_gan/generator.pt",
+    "sr_sha256": "6f3d17891cb723d948485d21f0c43b660b006b452edbbd04bddc00fba5937f71"
+  },
+  "streams": {
+    "left_hand": {
+      "direct": 0.21685139573070608,
+      "roi": 0.02622126436781609,
+      "interp": 0.38911124794745483,
+      "missing": 0.367816091954023,
+      "genuine": 0.24307266009852216
+    },
+    "right_hand": {
+      "direct": 0.4247742200328407,
+      "roi": 0.05177545155993432,
+      "interp": 0.5218082922824302,
+      "missing": 0.0016420361247947454,
+      "genuine": 0.47654967159277506
+    },
+    "face": {
+      "direct": 0.9885057471264368,
+      "roi": 0.0,
+      "interp": 0.011494252873563218,
+      "missing": 0.0,
+      "genuine": 0.9885057471264368
+    }
+  },
+  "hand_landmarks_present": {
+    "left": 0.24307266009852216,
+    "right": 0.47654967159277506
+  }
+}

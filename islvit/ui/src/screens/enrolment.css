@@ -1,0 +1,93 @@
+/* Enrolment: a guided recording flow around one framed camera stage. */
+#screen-enrolment .en-steps { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+#screen-enrolment .en-steps li {
+  display: flex; align-items: center; gap: 10px; padding: 7px 16px 7px 8px; border-radius: 999px;
+  background: rgba(0, 0, 0, .22); border: 1px solid var(--rim); color: var(--ink-3); font-size: 13.5px; transition: all .3s var(--ease);
+}
+#screen-enrolment .en-step-n { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 600 12px var(--f-mono); background: rgba(255, 255, 255, .06); }
+#screen-enrolment .en-steps li.now { color: var(--ink); border-color: rgba(110, 231, 168, .4); box-shadow: 0 10px 24px -16px rgba(110, 231, 168, .8); }
+#screen-enrolment .en-steps li.now .en-step-n { background: var(--mint); color: #08130D; }
+#screen-enrolment .en-steps li.done { color: var(--ink-2); }
+#screen-enrolment .en-steps li.done .en-step-n { background: rgba(110, 231, 168, .2); color: var(--mint); }
+
+#screen-enrolment .en-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px; align-items: start; }
+
+#screen-enrolment .en-stage { aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--r-xl); box-shadow: var(--e3); background: radial-gradient(120% 90% at 30% 20%, rgba(40, 48, 68, .55), rgba(9, 12, 18, .92)); }
+#screen-enrolment .en-stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+#screen-enrolment .en-guide { position: absolute; inset: 6% 0 0; width: 100%; height: 94%; pointer-events: none; }
+#screen-enrolment .en-guide ellipse, #screen-enrolment .en-guide path { fill: none; stroke: rgba(236, 239, 246, .55); stroke-width: .6; stroke-dasharray: 2 1.6; }
+#screen-enrolment .en-guide .zone { fill: rgba(110, 231, 168, .05); stroke: rgba(110, 231, 168, .6); stroke-width: .5; stroke-dasharray: 1.6 1.4; }
+#screen-enrolment .en-stage.recording .en-guide .zone { stroke: var(--coral); fill: rgba(255, 107, 107, .05); }
+#screen-enrolment .en-banner {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%); display: flex; align-items: baseline; gap: 12px;
+  padding: 8px 18px; border-radius: 999px; background: rgba(9, 12, 18, .55); border: 1px solid var(--rim);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); white-space: nowrap; max-width: calc(100% - 32px);
+}
+#screen-enrolment .en-word { font-size: 30px; color: var(--ink); overflow: hidden; text-overflow: ellipsis; }
+#screen-enrolment .en-take { font-size: 12.5px; color: var(--ink-2); }
+#screen-enrolment .en-hint { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; font-size: 12.5px; color: var(--ink-2); text-shadow: 0 1px 6px rgba(0, 0, 0, .8); }
+#screen-enrolment .en-count { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(9, 12, 18, .35); }
+#screen-enrolment .en-count span { font: 300 160px/1 var(--f-display); font-stretch: 75%; color: var(--ink); text-shadow: 0 0 40px rgba(255, 107, 107, .45); animation: enrolment-count 1s var(--ease); }
+@keyframes enrolment-count { from { opacity: 0; transform: scale(1.35); filter: blur(10px); } }
+#screen-enrolment .en-rec {
+  position: absolute; top: 74px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px;
+  padding: 6px 14px 6px 8px; border-radius: 999px; background: rgba(9, 12, 18, .6); border: 1px solid rgba(255, 107, 107, .4);
+  color: #FFE3E3; font-size: 13px; box-shadow: var(--glow-coral);
+}
+#screen-enrolment .en-rec svg { width: 26px; height: 26px; transform: rotate(-90deg); }
+#screen-enrolment .en-rec circle { fill: none; stroke-width: 3; }
+#screen-enrolment .en-rec .t { stroke: rgba(255, 255, 255, .15); }
+#screen-enrolment .en-rec .f { stroke: var(--coral); stroke-linecap: round; stroke-dasharray: 94.25; stroke-dashoffset: 94.25; }
+#screen-enrolment .en-off { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; padding: 20px; background: rgba(9, 12, 18, .45); }
+#screen-enrolment .en-off-title { font-size: clamp(24px, 2.8vw, 36px); max-width: 18ch; }
+#screen-enrolment .en-stage.live .en-off { display: none; }
+/* With the camera off the guide is only a hint; it must not cut through the message. */
+#screen-enrolment .en-stage:not(.live) .en-guide { opacity: .28; filter: blur(1px); }
+#screen-enrolment .en-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; }
+#screen-enrolment .en-status { font-size: 13px; color: var(--ink-2); margin-left: auto; }
+#screen-enrolment .en-status.ok { color: var(--mint); }
+#screen-enrolment .en-status.err { color: var(--coral); }
+
+#screen-enrolment .en-lower { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; margin-top: 22px; }
+#screen-enrolment .en-ring-row { display: flex; align-items: center; gap: 18px; margin-top: 12px; }
+#screen-enrolment .en-ring { width: 104px; height: 104px; transform: rotate(-90deg); flex: none; }
+#screen-enrolment .en-ring circle { fill: none; stroke-width: 9; }
+#screen-enrolment .en-ring .bg { stroke: rgba(255, 255, 255, .07); }
+#screen-enrolment .en-ring .fg { stroke: var(--mint); stroke-linecap: round; stroke-dasharray: 314.16; stroke-dashoffset: 314.16; transition: stroke-dashoffset .8s var(--ease); filter: drop-shadow(0 0 6px rgba(110, 231, 168, .6)); }
+#screen-enrolment .en-ring-row b { display: block; font: 300 44px/1 var(--f-display); font-stretch: 76%; }
+#screen-enrolment .en-team { font-size: 12.5px; color: var(--ink-3); margin-top: 8px; }
+#screen-enrolment .en-tips ul { margin-top: 10px; display: grid; gap: 8px; }
+#screen-enrolment .en-tips li { position: relative; padding-left: 16px; font-size: 13px; color: var(--ink-2); }
+#screen-enrolment .en-tips li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); opacity: .7; }
+
+#screen-enrolment .en-side { display: flex; flex-direction: column; gap: 18px; }
+#screen-enrolment .en-signer .field { margin-top: 10px; }
+#screen-enrolment .en-signer .field.bad { border-color: rgba(255, 107, 107, .6); box-shadow: 0 0 0 3px rgba(255, 107, 107, .14); }
+#screen-enrolment .en-field-help { font-size: 12.5px; color: var(--ink-3); margin-top: 8px; }
+#screen-enrolment .en-field-help.err { color: var(--coral); }
+#screen-enrolment .en-queue-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+#screen-enrolment .en-queue { margin-top: 12px; display: grid; gap: 5px; max-height: 460px; overflow: auto; padding-right: 4px; }
+#screen-enrolment .en-queue button {
+  width: 100%; display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; text-align: left;
+  padding: 9px 11px; border-radius: 12px; border: 1px solid transparent; background: rgba(0, 0, 0, .18); color: var(--ink-2);
+  transition: border-color .2s, background .2s;
+}
+#screen-enrolment .en-queue button:hover { border-color: var(--rim); color: var(--ink); }
+#screen-enrolment .en-queue button[aria-current="true"] { border-color: rgba(110, 231, 168, .45); background: rgba(110, 231, 168, .08); color: var(--ink); }
+#screen-enrolment .en-q-word { display: flex; align-items: center; gap: 7px; font: 400 17px var(--f-display); font-stretch: 85%; min-width: 0; }
+#screen-enrolment .en-q-r { font: 500 11.5px var(--f-mono); color: var(--ink-3); }
+#screen-enrolment .en-q-r.weak { color: var(--coral); } #screen-enrolment .en-q-r.patchy { color: var(--amber); }
+#screen-enrolment .en-pips { display: flex; gap: 3px; }
+#screen-enrolment .en-pips i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, .12); }
+#screen-enrolment .en-pips i.on { background: var(--mint); box-shadow: 0 0 6px rgba(110, 231, 168, .8); }
+
+@media (max-width: 1080px) {
+  #screen-enrolment .en-layout { grid-template-columns: minmax(0, 1fr); }
+  #screen-enrolment .en-queue { max-height: 320px; }
+}
+@media (max-width: 620px) {
+  #screen-enrolment .en-lower { grid-template-columns: minmax(0, 1fr); }
+  #screen-enrolment .en-stage { aspect-ratio: 4 / 3; }
+  #screen-enrolment .en-word { font-size: 22px; }
+  #screen-enrolment .en-status { margin-left: 0; width: 100%; }
+}

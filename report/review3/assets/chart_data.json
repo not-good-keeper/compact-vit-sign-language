@@ -1,0 +1,176 @@
+{
+ "models": [
+  {
+   "label": "Pixel-only FP32",
+   "top1": 73.658,
+   "size": "14.55 MB"
+  },
+  {
+   "label": "+ landmarks FP32",
+   "top1": 86.511,
+   "size": "14.9 MB"
+  },
+  {
+   "label": "+ landmarks, 4-bit post-training",
+   "top1": 83.404,
+   "size": "~2 MB"
+  },
+  {
+   "label": "+ landmarks, 4-bit QAT (shipped)",
+   "top1": 85.946,
+   "size": "1.97 MiB"
+  }
+ ],
+ "frozen_int4": {
+  "levels": [
+   "360p",
+   "240p",
+   "180p"
+  ],
+  "clean": 85.946,
+  "arms": [
+   {
+    "label": "Bicubic (no GAN)",
+    "values": [
+     81.215,
+     75.989,
+     61.017
+    ]
+   },
+   {
+    "label": "SR-L1 (no adversarial loss)",
+    "values": [
+     83.545,
+     80.862,
+     75.989
+    ]
+   },
+   {
+    "label": "SR-GAN v2",
+    "values": [
+     83.121,
+     82.345,
+     75.494
+    ]
+   },
+   {
+    "label": "v3: GAN + hand loss",
+    "values": [
+     84.04,
+     81.638,
+     75.424
+    ]
+   },
+   {
+    "label": "v3: hand loss, no GAN",
+    "values": [
+     83.828,
+     79.237,
+     75.636
+    ]
+   }
+  ]
+ },
+ "retrained": {
+  "levels": [
+   "360p",
+   "240p",
+   "180p"
+  ],
+  "arms": [
+   {
+    "label": "Bicubic",
+    "values": [
+     83.545,
+     77.895,
+     64.407
+    ]
+   },
+   {
+    "label": "SR-GAN v2",
+    "values": [
+     84.887,
+     83.121,
+     76.907
+    ]
+   }
+  ]
+ },
+ "decomposition": {
+  "categories": [
+   "Both degraded",
+   "Landmarks degraded (pixels clean)",
+   "Pixels degraded (landmarks clean)"
+  ],
+  "clean": 85.946,
+  "arms": [
+   {
+    "label": "Bicubic",
+    "values": [
+     61.017,
+     73.729,
+     78.955
+    ]
+   },
+   {
+    "label": "SR-GAN v2",
+    "values": [
+     75.494,
+     78.249,
+     83.051
+    ]
+   }
+  ]
+ },
+ "v3_validation": {
+  "labels": [
+   "Bicubic",
+   "SR-L1 (v1)",
+   "SR-GAN v2",
+   "v3 pixel L1",
+   "v3 GAN",
+   "v3 GAN + hand loss",
+   "v3 hand loss, no GAN"
+  ],
+  "present_L3": [
+   43.32,
+   64.586,
+   63.289,
+   69.188,
+   71.672,
+   73.344,
+   60.742
+  ],
+  "present_L2": [
+   64.336,
+   78.773,
+   78.281,
+   80.805,
+   83.188,
+   84.047,
+   79.758
+  ],
+  "shape_err_L3": [
+   2.323,
+   1.298,
+   1.298,
+   1.186,
+   1.28,
+   1.235,
+   0.986
+  ],
+  "shape_err_L2": [
+   1.26,
+   0.827,
+   0.839,
+   0.742,
+   0.803,
+   0.765,
+   0.662
+  ]
+ },
+ "leakage": {
+  "random": 98.5,
+  "sessions": 75.6
+ }
+}

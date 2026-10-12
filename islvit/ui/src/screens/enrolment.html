@@ -1,0 +1,82 @@
+<div class="en">
+  <ol class="en-steps" data-ref="steps" aria-label="Progress">
+    <li data-step="1"><span class="en-step-n">1</span><span class="en-step-t">Signer</span></li>
+    <li data-step="2"><span class="en-step-n">2</span><span class="en-step-t">Word</span></li>
+    <li data-step="3"><span class="en-step-n">3</span><span class="en-step-t">Three takes</span></li>
+  </ol>
+
+  <div class="en-layout">
+    <div class="en-main">
+      <div class="en-stage glass coated" data-ref="stage">
+        <video data-ref="video" playsinline muted aria-label="Camera preview"></video>
+        <svg class="en-guide" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <ellipse cx="80" cy="25" rx="9.5" ry="12"/>
+          <path d="M52 66 C58 49 70 45 80 45 C90 45 102 49 108 66"/>
+          <rect class="zone" x="30" y="40" width="30" height="34" rx="5"/>
+          <rect class="zone" x="100" y="40" width="30" height="34" rx="5"/>
+        </svg>
+        <div class="en-banner" data-ref="banner">
+          <span class="eyebrow">Sign</span>
+          <span class="en-word display" data-ref="word">—</span>
+          <span class="en-take num" data-ref="take"></span>
+        </div>
+        <p class="en-hint" data-ref="hint">Keep your head and both hands inside the guide.</p>
+        <div class="en-count" data-ref="count" hidden><span data-ref="countNum">3</span></div>
+        <div class="en-rec" data-ref="rec" hidden>
+          <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15"/><circle class="f" data-ref="recFill" cx="18" cy="18" r="15"/></svg>
+          <span class="num" data-ref="recText">REC 0.0 s</span>
+        </div>
+        <div class="en-off" data-ref="off">
+          <p class="en-off-title display">Turn the camera on to record takes.</p>
+          <button class="btn primary" type="button" data-act="camera">Turn on camera</button>
+        </div>
+      </div>
+      <div class="en-controls">
+        <button class="btn" type="button" data-act="camera" data-ref="camBtn">Turn on camera</button>
+        <button class="btn record" type="button" data-act="record" data-ref="recBtn" disabled>Record take <kbd>Space</kbd></button>
+        <button class="btn ghost" type="button" data-act="skip" data-ref="skipBtn">Skip word</button>
+        <span class="en-status" data-ref="status" aria-live="polite"></span>
+      </div>
+
+      <div class="en-lower">
+        <article class="glass pad en-progress">
+          <h2 class="eyebrow">This session</h2>
+          <div class="en-ring-row">
+            <svg class="en-ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="bg" cx="60" cy="60" r="50"/><circle class="fg" data-ref="ring" cx="60" cy="60" r="50"/></svg>
+            <div><b class="num" data-ref="done">0</b><span class="muted" data-ref="doneOf">of 150 takes for this signer</span>
+              <p class="en-team">Target for the team: 3 signers × 50 words × 3 takes ≈ 450 clips.</p></div>
+          </div>
+        </article>
+        <article class="glass pad en-tips">
+          <h2 class="eyebrow">For a usable take</h2>
+          <ul>
+            <li>Start and end with your hands at rest, still for about half a second.</li>
+            <li>One sign per take, two to four seconds.</li>
+            <li>Keep your head and both hands in the frame the whole time.</li>
+            <li>Hold the camera landscape. A phone or webcam is fine.</li>
+            <li>Change the room, light or clothes between signers. The model has only seen one studio, so variety is the point.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <aside class="en-side">
+      <article class="glass pad en-signer">
+        <label class="eyebrow" for="en-signer-input">Signer name</label>
+        <input class="field" id="en-signer-input" type="text" maxlength="40" autocomplete="off" placeholder="for example, priya" data-ref="signer" aria-describedby="en-signer-help">
+        <p class="en-field-help" id="en-signer-help" data-ref="signerHelp">Takes are saved per signer, so a test set can hold out people the model never saw.</p>
+      </article>
+      <article class="glass pad en-queue-card">
+        <div class="en-queue-head">
+          <h2 class="eyebrow">Words</h2>
+          <div class="seg" role="group" aria-label="Order" data-ref="order">
+            <button type="button" data-order="need" aria-pressed="true">Needs data first</button>
+            <button type="button" data-order="az" aria-pressed="false">A–Z</button>
+          </div>
+        </div>
+        <ul class="en-queue" data-ref="queue"></ul>
+        <p class="en-field-help" data-ref="saveNote"></p>
+      </article>
+    </aside>
+  </div>
+</div>
