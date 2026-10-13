@@ -60,7 +60,7 @@ for rect, m in zip(rects, models):
     ax.text(x, m[1] + 1.2, f"{m[1]:.1f}", ha="center", fontsize=9, color=INK)
     ax.text(x, 6, m[2], ha="center", color="white", fontsize=8.5, fontweight="bold")
 ax.axhline(75, color="#D14343", ls=":", lw=1.2)
-ax.text(-0.42, 76.2, "target 75 %", color="#D14343", fontsize=8, ha="left")
+ax.text(3.42, 76.2, "target 75 %", color="#D14343", fontsize=8, ha="right")
 ax.set_ylim(0, 100)
 ax.set_ylabel("Top-1 accuracy (%)")
 ax.set_title("Model variants on 472 held-out clips (mean of 3 seeds)", fontsize=10.5, color=INK)
@@ -71,15 +71,17 @@ save(fig, "c1_models.png")
 LEVELS = [("L1", "360p"), ("L2", "240p"), ("L3", "180p")]
 clean = top1(RUNS / "f16_262w_lm_s?_qat4/masked50_clean.json")
 arms = [("bicubic", "Bicubic (no GAN)", "gan_study", "bicubic"),
-        ("srl1", "SR-L1 (no adversarial loss)", "gan_study", "srl1"),
+        ("srl1", "SR-L1 (no GAN)", "gan_study", "srl1"),
+        ("sr3_l1_task", "v3 without the GAN", "gan_study", "sr3_l1_task"),
+        ("srgan_v1", "SR-GAN v1", "gan_study_v1", "srgan"),
         ("srgan", "SR-GAN v2", "gan_study", "srgan"),
-        ("sr3_gan_task", "v3: GAN + hand loss", "gan_study", "sr3_gan_task"),
-        ("sr3_l1_task", "v3: hand loss, no GAN", "gan_study", "sr3_l1_task")]
+        ("sr3_gan_task", "SR-GAN v3", "gan_study", "sr3_gan_task")]
+FT_ARMS = [("bicubic", "Bicubic", "gan_study"), ("srgan_v1", "SR-GAN v1", "gan_study_v1"), ("srgan", "SR-GAN v2", "gan_study")]
 fig, axes = plt.subplots(1, 2, figsize=(9.8, 4.0), gridspec_kw={"width_ratios": [1.35, 1]})
-ax, w = axes[0], 0.16
+ax, w = axes[0], 0.135
 for j, (key, label, study, name) in enumerate(arms):
     vals = [top1(RUNS / study / f"frozen_int4/{lv}_{name}_s?.json") for lv, _ in LEVELS]
-    xs = [i + (j - 2) * w for i in range(3)]
+    xs = [i + (j - 2.5) * w for i in range(3)]
     ax.bar(xs, vals, w * 0.95, color=COL[key], label=label)
     for x, v in zip(xs, vals):
         ax.text(x, v + 0.8, f"{v:.0f}", ha="center", fontsize=7.5, color=INK)
@@ -88,16 +90,17 @@ ax.text(2.55, clean + 1.0, f"clean 1080p {clean:.1f}", fontsize=8, ha="right", c
 ax.set_xticks(range(3)); ax.set_xticklabels([f"{n} + JPEG" for _, n in LEVELS]); ax.set_ylim(50, 92)
 ax.set_ylabel("Top-1 accuracy (%)"); ax.set_title("Shipped INT4 model, frozen", fontsize=10.5, color=INK)
 grid(ax); ax.legend(fontsize=7.5, frameon=False, ncol=3, loc="upper center", bbox_to_anchor=(0.5, -0.12))
-ax, w = axes[1], 0.32
-for j, (key, label) in enumerate([("bicubic", "Bicubic"), ("srgan", "SR-GAN v2")]):
-    vals = [top1(RUNS / "gan_study" / f"retrained/{lv}_{key}_s?.json") for lv, _ in LEVELS]
-    xs = [i + (j - 0.5) * w for i in range(3)]
+ax, w = axes[1], 0.26
+for j, (key, label, study) in enumerate(FT_ARMS):
+    name = "srgan" if key == "srgan_v1" else key
+    vals = [top1(RUNS / study / f"retrained/{lv}_{name}_s?.json") for lv, _ in LEVELS]
+    xs = [i + (j - 1) * w for i in range(3)]
     ax.bar(xs, vals, w * 0.95, color=COL[key], label=label)
     for x, v in zip(xs, vals):
         ax.text(x, v + 0.8, f"{v:.0f}", ha="center", fontsize=7.5, color=INK)
 ax.set_xticks(range(3)); ax.set_xticklabels([n for _, n in LEVELS]); ax.set_ylim(50, 92)
 ax.set_title("Fine-tuned on 360p video", fontsize=10.5, color=INK); grid(ax)
-ax.legend(fontsize=7.5, frameon=False, ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.12))
+ax.legend(fontsize=7.5, frameon=False, ncol=3, loc="upper center", bbox_to_anchor=(0.5, -0.12))
 save(fig, "c2_gan_accuracy.png")
 
 # 3. Where the remaining loss sits at 180p: pixels versus landmarks
@@ -115,17 +118,17 @@ for j, (arm, label) in enumerate((("bicubic", "Bicubic"), ("srgan", "SR-GAN v2")
         ax.text(x, v + 0.8, f"{v:.1f}", ha="center", fontsize=8, color=INK)
 ax.axhline(clean, color=INK, ls="--", lw=1)
 ax.text(2.45, clean + 0.9, f"clean {clean:.1f}", fontsize=8, ha="right")
-ax.set_xticks(range(3)); ax.set_xticklabels(cats); ax.set_ylim(50, 92); ax.set_ylabel("Top-1 accuracy (%)")
+ax.set_xticks(range(3)); ax.set_xticklabels(cats); ax.set_ylim(50, 97); ax.set_ylabel("Top-1 accuracy (%)")
 ax.set_title("180p + JPEG 40: which input carries the loss", fontsize=10.5, color=INK)
-grid(ax); ax.legend(fontsize=8, frameon=False, loc="upper left")
+grid(ax); ax.legend(fontsize=8, frameon=False, loc="upper left", ncol=2)
 save(fig, "c3_decomposition.png")
 
 # 4. v3 generators on the validation sessions (real MediaPipe on 200 clips, against clean landmarks)
 dev = {lv: json.loads((D / f"dev_v3_{lv}.json").read_text()) for lv in ("L3", "L2")}
-order = [("bicubic", "Bicubic", COL["bicubic"]), ("srl1", "SR-L1 (v1)", COL["srl1"]),
-         ("srgan_v2", "SR-GAN v2", COL["srgan"]), ("sr3_l1", "v3 pixel L1", COL["sr3_l1"]),
-         ("sr3_gan", "v3 GAN", COL["sr3_gan"]), ("sr3_gan_task", "v3 GAN + hand loss", COL["sr3_gan_task"]),
-         ("sr3_l1_task", "v3 hand loss, no GAN", COL["sr3_l1_task"])]
+order = [("bicubic", "Bicubic", COL["bicubic"]), ("srl1", "SR-L1", COL["srl1"]),
+         ("srgan_v2", "SR-GAN v2", COL["srgan"]), ("sr3_l1", "v3 base (L1)", COL["sr3_l1"]),
+         ("sr3_gan", "v3 GAN, no hand loss", COL["sr3_gan"]), ("sr3_gan_task", "SR-GAN v3", COL["sr3_gan_task"]),
+         ("sr3_l1_task", "v3 without the GAN", COL["sr3_l1_task"])]
 fig, axes = plt.subplots(1, 2, figsize=(9.8, 3.6))
 for ax, metric, title in ((axes[0], "present", "Hand frames found (%) - clean video 88.3"),
                           (axes[1], "points_err_med", "Handshape error, median (x100; lower is better)")):
@@ -159,8 +162,9 @@ data = {
         {"label": label, "values": [round(top1(RUNS / study / f"frozen_int4/{lv}_{name}_s?.json"), 3) for lv, _ in LEVELS]}
         for _, label, study, name in arms]},
     "retrained": {"levels": [n for _, n in LEVELS], "arms": [
-        {"label": label, "values": [round(top1(RUNS / "gan_study" / f"retrained/{lv}_{key}_s?.json"), 3) for lv, _ in LEVELS]}
-        for key, label in (("bicubic", "Bicubic"), ("srgan", "SR-GAN v2"))]},
+        {"label": label, "values": [round(top1(RUNS / study / f"retrained/{lv}_{'srgan' if key == 'srgan_v1' else key}_s?.json"), 3)
+                                    for lv, _ in LEVELS]}
+        for key, label, study in FT_ARMS]},
     "decomposition": {"categories": [c.replace("\n", " ") for c in cats], "clean": round(clean, 3), "arms": [
         {"label": label, "values": [round(top1(RUNS / f"gan_study/frozen_int4/L3_{arm}_s?.json"), 3),
                                     round(top1(D / f"res_clean_pix_L3_{arm}_s?.json"), 3),
