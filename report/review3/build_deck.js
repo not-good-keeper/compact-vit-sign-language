@@ -22,12 +22,14 @@ const THEME = {
   },
 };
 const HEX = THEME.colors;
+const TEAM = [["Yalamanchi Kushal", "CB.SC.U4CSE23766"], ["Nethi Kushala Kumar", "CB.SC.U4CSE23735"],
+  ["Dhruseek Rishi Menon", "CB.SC.U4CSE23716"]];
 
 const pres = new pptxgen();
 pres.layout = "LAYOUT_WIDE"; // 13.333 x 7.5 in
 pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
 pres.title = "ISL Reader - Review 3";
-pres.author = "Group 03";
+pres.author = "Team 3: " + TEAM.map(([name, roll]) => `${name} (${roll})`).join(", ");
 const C = pres.SchemeColor;
 const W = 13.333, H = 7.5;
 
@@ -46,7 +48,7 @@ pres.defineSlideMaster({
   margin: [0.5, 0.6, 0.6, 0.6],
   objects: [
     { placeholder: { options: { name: "title", type: "title", x: 0.6, y: 0.35, w: 12.1, h: 0.85, fontFace: THEME.headFontFace, fontSize: 30, bold: true, color: C.text1, valign: "middle", align: "left", margin: 0 }, text: "" } },
-    { text: { text: "ISL Reader · Review 3 · Group 03", options: { x: 0.6, y: 7.05, w: 6, h: 0.3, fontSize: 10, color: "8A93A3", margin: 0 } } },
+    { text: { text: "ISL Reader · Review 3 · Team 3: " + TEAM.map(([name, roll]) => `${name} (${roll})`).join(" · "), options: { x: 0.6, y: 7.05, w: 11.4, h: 0.3, fontSize: 9, color: "8A93A3", margin: 0 } } },
   ],
   slideNumber: { x: 12.2, y: 7.03, w: 0.5, h: 0.3, fontSize: 10, color: "8A93A3", align: "right" },
 });
@@ -100,11 +102,12 @@ pres.addSection({ title: "Opening" });
   s.addText("ISL Reader", { placeholder: "title" });
   s.addText("A 2 MB Vision Transformer, a super-resolution GAN front end and an integrated interface for Indian Sign Language", { placeholder: "body" });
   s.addText([
-    { text: "Yalamanchi Kushal · Nethi Kushala Kumar · Dhruseek Rishi Menon", options: { breakLine: true } },
-    { text: "Guide: Dr. T. Bagyammal · 23CSE473 NNDL · Group 03 · Review 3" },
-  ], { x: 0.7, y: 5.45, w: 6.9, h: 0.9, fontSize: 14, color: "9AA3B2", margin: 0, isTextBox: true });
+    { text: "Team 3", options: { bold: true, color: "E5E9F0", breakLine: true } },
+    ...TEAM.map(([name, roll]) => ({ text: `${name} · ${roll}`, options: { breakLine: true } })),
+    { text: "Guide: Dr. T. Bagyammal · 23CSE473 NNDL · Review 3" },
+  ], { x: 0.7, y: 4.85, w: 6.9, h: 1.75, fontSize: 14, color: "9AA3B2", margin: 0, isTextBox: true, paraSpaceAfter: 2 });
   img(s, "ui_capture_crop.png", 7.9, 1.45, 4.95, 4.6, { alt: "The ISL Reader capture screen reading a held-out clip" });
-  s.addNotes("ISL Reader recognises isolated Indian Sign Language words from short video. This review covers the full system: the classifier, the super-resolution GAN we added in front of the hand detector, and the web interface that ties them together. The screenshot on the right is the live app reading a held-out clip of 'Hello' at 97 % confidence.");
+  s.addNotes("ISL Reader recognises isolated Indian Sign Language words from short clips. This review covers the whole system: the classifier, the super-resolution GAN placed in front of the hand detector, and the web interface that connects them. On the right is the live app reading a held-out clip of 'Hello' at 97 % confidence.");
 }
 
 // ================================================================ 2 goal
@@ -112,16 +115,16 @@ pres.addSection({ title: "Problem and data" });
 {
   const s = content("What we set out to build", "Problem and data");
   card(s, 0.6, 1.45, 3.95, 1.8, "A model of about 2 MB", "It has to run on smart glasses, so the classifier must fit in roughly two megabytes.", C.accent1);
-  card(s, 4.69, 1.45, 3.95, 1.8, "≥ 75 % on unseen people", "Measured only on recording sessions the model never saw, on the 50 deployed words.", C.accent3);
-  card(s, 8.78, 1.45, 3.95, 1.8, "A working app", "Camera or video in, word out, with a confidence check and a way to correct mistakes.", C.accent2);
+  card(s, 4.69, 1.45, 3.95, 1.8, "≥ 75 % on unseen people", "Scored only on recording sessions the model never saw, over the 50 deployed words.", C.accent3);
+  card(s, 8.78, 1.45, 3.95, 1.8, "A working app", "Camera or video in, word out, with a confidence check and a way to correct the answer.", C.accent2);
   s.addText("Why it is hard", { x: 0.6, y: 3.65, w: 6, h: 0.45, fontSize: 18, bold: true, color: C.text1, margin: 0, isTextBox: true });
   bullets(s, [
-    "Signs are two-handed: handshape, motion and location together decide the word.",
-    "Little labelled data: about 15 clips per word in INCLUDE.",
-    "A wearable camera gives smaller, compressed video than the 1080p studio data.",
-    "Random splits leak recording sessions, so published accuracies overstate real use.",
+    "Most signs use both hands, and handshape, motion and location together decide the word.",
+    "Labelled data is scarce: INCLUDE has about 15 clips per word.",
+    "A wearable camera sends smaller, more compressed video than the 1080p studio footage.",
+    "Random splits leak recording sessions, which inflates published accuracies.",
   ], 0.6, 4.2, 12.1, 2.6, 18);
-  s.addNotes("Three targets: about 2 MB, at least 75 % top-1 on recording sessions held out from training, and a working app. Four difficulties: two-handed signs, scarce data, low-resolution wearable video, and leaky evaluation in the literature.");
+  s.addNotes("We set three targets: a model of about 2 MB, at least 75 % top-1 on recording sessions held out from training, and a working app. Four things make this hard: two-handed signs, little labelled data, low-resolution video from a wearable camera, and evaluation practice that leaks sessions between training and test.");
 }
 
 // ================================================================ 3 dataset
@@ -136,7 +139,7 @@ pres.addSection({ title: "Problem and data" });
     ["Training sessions", "2,845", "Classifier and GAN training"],
     ["Held-out test sessions", "1,010", "472 of them = the 50 deployed words"],
     ["Excluded", "402", "Words with < 6 training clips"],
-    ["Validation sessions", "888", "GAN development only"],
+    ["Validation sessions", "888", "Choosing between GAN v3 arms"],
     ["iSign (unlabelled)", "18,000", "Self-supervised pretraining"],
     ["CISLR (300 x 300 px)", "609", "Cross-corpus test"],
   ];
@@ -150,8 +153,8 @@ pres.addSection({ title: "Problem and data" });
     s.addImage({ path: path.join(dir, f), x: 9.75 + (i % 2) * 1.55, y: 1.45 + Math.floor(i / 2) * 1.0, w: 1.45, h: 0.9, objectName: "frame " + f, altText: "INCLUDE frame" });
   });
   s.addText("Frames from held-out INCLUDE clips (Sridhar et al., ACM MM 2020, CC-BY-4.0)", { x: 9.75, y: 3.5, w: 3.0, h: 0.5, fontSize: 10, color: "6B7280", margin: 0, isTextBox: true });
-  s.addText("We train on all 262 words and answer from the 50 deployed words: per-word data is fixed, so a smaller training vocabulary only removes data.", { x: 9.75, y: 4.2, w: 3.0, h: 2.4, fontSize: 13, color: C.text1, margin: 0, isTextBox: true, valign: "top" });
-  s.addNotes("INCLUDE is the labelled corpus: 4,257 usable clips of 262 words, recorded at 1080p in one studio. We rebuilt 13 recording sessions from the camera's clip numbers because the dataset has no signer labels. 2,845 clips train the model; 1,010 clips from held-out sessions test it, and 472 of those are the 50 deployed words used in every result. iSign gives 18,000 unlabelled clips for pretraining; CISLR is a second corpus for a transfer test.");
+  s.addText("We train on all 262 words and answer from the 50 deployed ones. Each word has a fixed number of clips, so training on fewer words would only discard data.", { x: 9.75, y: 4.2, w: 3.0, h: 2.4, fontSize: 13, color: C.text1, margin: 0, isTextBox: true, valign: "top" });
+  s.addNotes("INCLUDE is the labelled corpus: 4,257 usable clips of 262 words, recorded at 1080p in one studio. It has no signer labels, so we rebuilt 13 recording sessions from the camera's clip numbers. 2,845 clips train the model and 1,010 clips from held-out sessions test it; 472 of those belong to the 50 deployed words and appear in every result. iSign supplies 18,000 unlabelled clips for pretraining, and CISLR is a second corpus for a transfer test.");
 }
 
 // ================================================================ 4 protocol
@@ -163,11 +166,11 @@ pres.addSection({ title: "Problem and data" });
     ...chartBase("One pixel-only model, two splits"), showLegend: false, barGapWidthPct: 60,
   });
   bullets(s, [
-    "Camera clip numbers run in sequence; big jumps mark a new session.",
-    "Whole sessions are held out; a check refuses any overlap.",
-    "The 22.9-point gap is what the model gains from seeing the same person and room.",
+    "Camera clip numbers run in sequence, and a large jump marks a new session.",
+    "Whole sessions are held out, and the split builder rejects any overlap.",
+    "The 22.9-point gap is what the model gains from having seen the same person and room.",
   ], 6.4, 5.2, 6.3, 1.7, 14);
-  s.addNotes("INCLUDE was recorded as back-to-back takes. A random split puts near-identical takes on both sides, so the same pixel-only model scores 98.5 % there and 75.6 % on unseen sessions. Every result after this slide is on unseen sessions, with three seeds and paired McNemar tests.");
+  s.addNotes("INCLUDE was recorded as back-to-back takes. A random split puts near-identical takes on both sides, so the same pixel-only model scores 98.5 % on a random split and 75.6 % on unseen sessions. Every result after this slide uses unseen sessions, three seeds and paired McNemar tests.");
 }
 
 // ================================================================ 5 architecture
@@ -175,7 +178,7 @@ pres.addSection({ title: "Architecture and algorithms" });
 {
   const s = content("System architecture of the integrated app", "Architecture and algorithms");
   img(s, "d1.png", 0.6, 1.3, 12.1, 5.55, { alt: "Browser, server, front end and classifier" });
-  s.addNotes("The browser posts a clip to the Python server. The server decodes 32 frames, upscales low-resolution video with either bicubic or the SR-GAN, runs MediaPipe Holistic, builds three crops and hand landmarks, and runs the classifier on six views. The answer goes back with the top five words and how each crop was found. The server can load any trained checkpoint and either front end at start-up, and it restricts answers to the 50 deployed words exactly as the evaluation does.");
+  s.addNotes("The browser posts a clip to the Python server. The server decodes 32 frames, upscales low-resolution video with bicubic or a GAN generator, runs MediaPipe Holistic, cuts three crops and extracts hand landmarks, and scores six views with the classifier. The reply carries the top five words and a record of how each crop was found. Any trained checkpoint and either front end can be loaded at start-up, and answers are restricted to the 50 deployed words exactly as in the evaluation.");
 }
 
 // ================================================================ 6 pipeline
@@ -183,13 +186,13 @@ pres.addSection({ title: "Architecture and algorithms" });
   const s = content("From video to model inputs", "Architecture and algorithms");
   img(s, "fig0_how_it_works.png", 0.6, 1.3, 6.4, 5.55, { card: true, alt: "How a sign becomes a word" });
   bullets(s, [
-    "32 frames sampled uniformly, letterboxed to 1280 x 720.",
-    "MediaPipe Holistic finds hands, face and pose; a missed hand gets a second search in an upscaled forearm region, else the nearest box is reused and flagged.",
-    "Three crops per frame (left hand, right hand, face), 64 px.",
-    "21 joints per hand: shape relative to the wrist, location relative to the shoulders.",
-    "Detectors are rebuilt for every video; otherwise repeated runs disagreed on 3–6 % of frames.",
+    "32 frames sampled uniformly and letterboxed to 1280 × 720.",
+    "MediaPipe Holistic finds the hands, face and pose. A missed hand gets a second search in an upscaled forearm region; failing that, the nearest box is reused and flagged.",
+    "Three 64 px crops per frame: left hand, right hand, face.",
+    "21 joints per hand: shape measured from the wrist, location measured from the shoulders.",
+    "Detectors are rebuilt for every video. Without that, repeated runs disagreed on 3–6 % of frames.",
   ], 7.35, 1.45, 5.35, 5.3, 15);
-  s.addNotes("This is the input pipeline with real frames from a held-out clip. The landmark features are the biggest single lever in the project: the detector was already computing them, and adding them raised accuracy from 73.7 to 86.5 percent.");
+  s.addNotes("This is the input pipeline, shown with real frames from a held-out clip. Of everything we tried, the landmark features gave the largest gain: the detector was already computing them, and passing them to the model raised accuracy from 73.7 to 86.5 percent.");
 }
 
 // ================================================================ 7 classifier
@@ -208,19 +211,19 @@ pres.addSection({ title: "Architecture and algorithms" });
     { x: 6.15, y: 1.4, w: 6.55, colW: [1.9, 4.65], fontSize: 13, fontFace: THEME.bodyFontFace, border: { type: "solid", pt: 0.5, color: "D5DAE2" }, margin: 0.06 });
   s.addText([
     { text: "Why factorised: ", options: { bold: true } },
-    { text: "joint attention over every patch would be 816 tokens; the model attends over 17 tokens per crop, then 49 across the clip. Box geometry puts back the location that cropping removes." },
+    { text: "attending over every patch at once would take 816 tokens. The model attends over 17 tokens inside each crop, then 49 across the clip. Box geometry restores the location that cropping throws away." },
   ], { x: 6.15, y: 4.75, w: 6.55, h: 1.9, fontSize: 15, color: C.text1, margin: 0, valign: "top", isTextBox: true });
-  s.addNotes("A spatial ViT reads each crop on its own with shared weights; each crop's token is tagged with its stream, frame, box position, a reliability flag and the landmark features; a temporal transformer then attends across all 48 crop tokens. Width 192 and three heads match DeiT-Tiny so pretrained weights load directly.");
+  s.addNotes("A spatial ViT reads each crop separately with shared weights. Each crop's token is then tagged with its stream, frame, box position, a reliability flag and the landmark features, and a temporal transformer attends across all 48 crop tokens. Width 192 and three heads match DeiT-Tiny, so its pretrained weights load directly.");
 }
 
 // ================================================================ 8 training
 {
   const s = content("Training algorithm and compression", "Architecture and algorithms");
   img(s, "fig4_training_pipeline.png", 0.6, 1.2, 12.1, 2.85, { alt: "Training pipeline" });
-  card(s, 0.6, 4.3, 3.95, 2.45, "1. Self-supervised pretraining", "Masked image modelling (SimMIM) on 18,000 unlabelled iSign clips: 75 % of patches hidden and reconstructed.", C.accent3);
-  card(s, 4.69, 4.3, 3.95, 2.45, "2. Supervised training", "1,000 epochs on 2,845 clips, AdamW 5e-4, mixup, stream dropout, resolution jitter, EMA. The final epoch is kept: no selection on test.", C.accent1);
-  card(s, 8.78, 4.3, 3.95, 2.45, "3. 4-bit quantisation-aware", "Weights at 4 bits in groups of 128 with 16-bit scales; straight-through estimator; 300 epochs. Post-training rounding lost 3.1 points, QAT only 0.6.", C.accent2);
-  s.addNotes("Pretraining by masked image modelling on unlabelled iSign video, then supervised training for a fixed 1,000 epochs keeping the final weights, then 300 epochs of quantisation-aware training. Rounding after training cost 3.1 points; training with the rounding in the loop cost 0.6, at a seventh of the file size.");
+  card(s, 0.6, 4.3, 3.95, 2.45, "1. Self-supervised pretraining", "Masked image modelling (SimMIM) on 18,000 unlabelled iSign clips: 75 % of patches are hidden and reconstructed.", C.accent3);
+  card(s, 4.69, 4.3, 3.95, 2.45, "2. Supervised training", "1,000 epochs on 2,845 clips with AdamW 5e-4, mixup, stream dropout, resolution jitter and EMA. We keep the final epoch, so nothing is selected on test.", C.accent1);
+  card(s, 8.78, 4.3, 3.95, 2.45, "3. 4-bit quantisation-aware", "4-bit weights in groups of 128 with 16-bit scales, a straight-through estimator, 300 epochs. Rounding after training lost 3.1 points; QAT lost 0.6.", C.accent2);
+  s.addNotes("Training starts with masked image modelling on unlabelled iSign video, continues with supervised training for a fixed 1,000 epochs, keeping the final weights, and ends with 300 epochs of quantisation-aware training. Rounding after training cost 3.1 points; with the rounding inside the training loop the loss was 0.6, at a seventh of the file size.");
 }
 
 // ================================================================ 9 classifier comparison
@@ -234,8 +237,8 @@ pres.addSection({ title: "Comparisons" });
   stat(s, 8.6, 1.45, 4.1, "85.9 %", "top-1, shipped 4-bit model (seeds 84.5 / 87.5 / 85.8)");
   stat(s, 8.6, 2.95, 4.1, "96.4 %", "top-5: the right word is usually in the shortlist", C.accent3);
   stat(s, 8.6, 4.45, 4.1, "1.97 MiB", "3.89 M parameters, 4-bit", C.accent2);
-  s.addText("Answering from all 262 words instead of the 50 gives 72.0 %, so the app restricts answers exactly as the evaluation does.", { x: 8.6, y: 5.95, w: 4.1, h: 0.85, fontSize: 12, color: "4B5563", margin: 0, isTextBox: true });
-  s.addNotes("Landmarks are the big step: 73.7 to 86.5 percent. Post-training 4-bit rounding drops to 83.4; quantisation-aware training holds 85.9 at 1.97 MiB, 10.9 points above the 75 percent target. The same model answering from all 262 words scores 72.0, which is why the app restricts to the 50 deployed words.");
+  s.addText("Answering from all 262 words instead of the 50 gives 72.0 %, so the app restricts its answers the same way the evaluation does.", { x: 8.6, y: 5.95, w: 4.1, h: 0.85, fontSize: 12, color: "4B5563", margin: 0, isTextBox: true });
+  s.addNotes("The landmarks are the largest step, from 73.7 to 86.5 percent. Rounding to 4 bits after training drops that to 83.4; quantisation-aware training keeps 85.9 at 1.97 MiB, 10.9 points above the 75 percent target. Answering from all 262 words, the same model scores 72.0, which is why the app restricts its answers to the 50 deployed words.");
 }
 
 // ================================================================ 10 why a GAN
@@ -249,35 +252,52 @@ pres.addSection({ title: "Comparisons" });
     s.addText(t, { x, y: 1.45, w: 2.1, h: 0.9, fontSize: 14, bold: true, align: "center", valign: "middle", color: i === 2 ? C.background1 : C.text1, margin: 0, isTextBox: true });
     if (i < steps.length - 1) s.addShape(pres.shapes.LINE, { x: x + 2.12, y: 1.9, w: 0.34, h: 0, line: { color: "6B7280", width: 1.5, endArrowType: "triangle" }, objectName: "arrow " + i });
   });
-  card(s, 0.6, 2.7, 5.95, 2.35, "Why here", "Every clip reaches the hand detector through one resize to 720p, which was bicubic. A wearable camera would send small, compressed video through exactly this step. The GAN replaces only that resize; 1080p video never passes through it, so clean results cannot change.", C.accent1);
-  card(s, 6.75, 2.7, 5.95, 2.35, "How we tested it", "472 test clips degraded to 360p, 240p, 180p with JPEG. Front ends: bicubic, SR-L1 (same generator, no adversarial loss), SR-GAN v1, v2 and two v3 arms. Frozen 4-bit and 32-bit models, plus models fine-tuned on 360p. Paired McNemar tests; a rule fixed before the runs.", C.accent3);
+  card(s, 0.6, 2.7, 5.95, 2.35, "Why here", "Every clip reaches the hand detector through one resize to 720p, which used bicubic. Small, compressed video from a wearable camera would pass through exactly this step. The GAN replaces only that resize, and 1080p video never reaches it, so clean results cannot change.", C.accent1);
+  card(s, 6.75, 2.7, 5.95, 2.35, "How we tested it", "472 test clips degraded to 360p, 240p and 180p with JPEG. Each GAN is compared with bicubic and with a no-GAN control: SR-L1 for v1 and v2, v3 without the GAN for v3. Frozen 4-bit and 32-bit models, plus models fine-tuned on 360p. Paired McNemar tests under a rule fixed in advance.", C.accent3);
   stat(s, 0.6, 5.3, 2.9, "3", "levels: 360p, 240p, 180p, each with JPEG");
   stat(s, 3.65, 5.3, 2.9, "6", "front ends: bicubic, SR-L1, SR-GAN v1, v2, two v3 arms", C.accent3);
   stat(s, 6.7, 5.3, 2.9, "472", "test clips, identical in every run", C.accent2);
-  stat(s, 9.75, 5.3, 2.95, "p < 0.05", "and all 3 seeds agree, fixed in advance", C.accent4);
-  s.addNotes("We looked for the place where a GAN can make a measurable difference. The only upscaling step in the pipeline is the resize to 720p before hand detection, and it is exactly where low-resolution wearable video would go. SR-L1 is the key control: same network, no adversarial loss, so it separates what learned upscaling gives from what the GAN adds.");
+  stat(s, 9.75, 5.3, 2.95, "p < 0.05", "and all 3 seeds agree, fixed in advance", C.accent4);
+  s.addNotes("We put the GAN where it could make a measurable difference. The pipeline's only upscaling step is the resize to 720p before hand detection, and low-resolution wearable video would pass through it. The no-GAN controls matter most here: the same network trained without the adversarial loss separates what learned upscaling achieves from what the GAN adds on top.");
 }
 
 // ================================================================ 11 GAN architecture
 {
   const s = content("The super-resolution GAN", "Comparisons");
   img(s, "d2.png", 0.6, 1.3, 12.1, 5.55, { alt: "Generator, discriminator, losses and schedule" });
-  s.addNotes("Real-ESRGAN-style design. Generator: compact VGG-style network working at low resolution with a pixel shuffle and a residual upsample. Discriminator: U-Net with spectral normalisation, scoring each pixel. Training patches come only from training sessions and are degraded by random blur, resize, noise and JPEG applied twice. Losses: L1, VGG perceptual and adversarial. Version 3 adds a hand-landmark loss from a network we distilled from MediaPipe.");
+  s.addNotes("The design follows Real-ESRGAN. The generator is a compact VGG-style network that works at low resolution and ends in a pixel shuffle, with an upsampled copy of the input added back. The discriminator is a U-Net with spectral normalisation that scores every pixel. Training patches come only from training sessions and are degraded twice by random blur, resizing, noise and JPEG. The losses are L1, VGG perceptual and adversarial; version 3 adds a hand-landmark loss computed by a network trained to imitate MediaPipe.");
+}
+
+// ================================================================ 12 three versions
+{
+  const s = content("Three GAN versions, each built for a reason", "Comparisons");
+  const rows = [
+    ["Version", "What changed", "Why we built it", "Against its no-GAN control"],
+    ["SR-GAN v1", "Real-ESRGAN recipe: L1 + VGG19 + adversarial (BCE), 60,000 iterations from SR-L1; 0.62 M-parameter generator", "The planned design", "No reliable difference at 360p, 240p or 180p"],
+    ["SR-GAN v2", "Same generator, new discriminator, 80,000 more iterations at half the learning rate", "v1's discriminator dominated: was v1 undertrained?", "Better only at 240p (+1.5); 1.2 points worse than v1 at 360p"],
+    ["SR-GAN v3", "2.04 M-parameter generator, hand-landmark loss, relativistic adversarial loss, H.264 in training", "The remaining error is in the hand landmarks", "Better only at 240p (+2.4); found the most hands (77 % at 180p)"],
+  ];
+  s.addTable(rows.map((r, i) => r.map((c, j) => ({ text: c, options: { bold: i === 0 || j === 0, color: i === 0 ? HEX.lt1 : HEX.dk1, fill: { color: i === 0 ? HEX.dk2 : (i % 2 ? HEX.lt1 : HEX.lt2) } } }))),
+    { x: 0.6, y: 1.4, w: 12.1, colW: [1.6, 4.3, 3.0, 3.2], fontSize: 14, fontFace: THEME.bodyFontFace, border: { type: "solid", pt: 0.5, color: "D5DAE2" }, margin: 0.1, valign: "middle" });
+  stat(s, 0.6, 4.75, 3.8, "2 of 9", "GAN vs no-GAN tests passed (3 versions × 3 levels), both at 240p", C.accent2);
+  stat(s, 4.75, 4.75, 3.8, "−1.2", "points for v2 against v1 at 360p (p = 0.021): training longer did not help", C.accent4);
+  stat(s, 8.9, 4.75, 3.8, "15.5 %", "of hands missed at 180p with v3, against 22.1 % with v2 and 39.3 % with bicubic", C.accent1);
+  s.addNotes("Each version answered a question raised by the one before. Version 1 is the planned GAN. Its discriminator ended clearly ahead, so version 2 trained the same generator longer with a fresh discriminator; it was no better. Our diagnostics then put the remaining error in the hand landmarks, so version 3 added a loss that compares hand joints read from the generated and original images. Against their no-GAN controls the three GANs passed our test in only two of nine comparisons, both at 240p.");
 }
 
 // ================================================================ 12 GAN results
 {
   const s = content("GAN results on degraded test video", "Comparisons");
   s.addChart(pres.charts.BAR, D.frozen_int4.arms.map((a) => ({ name: a.label, labels: D.frozen_int4.levels.map((l) => l + " + JPEG"), values: a.values })), {
-    x: 0.6, y: 1.3, w: 8.0, h: 5.5, barDir: "col", chartColors: [HEX.accent5, HEX.accent3, HEX.accent1, "1E7A5A", HEX.accent6],
+    x: 0.6, y: 1.3, w: 8.0, h: 5.5, barDir: "col", chartColors: [HEX.accent5, HEX.accent3, HEX.accent6, HEX.accent2, HEX.accent1, "1E7A5A"],
     valAxisMinVal: 50, valAxisMaxVal: 90, ...chartBase("Shipped 4-bit model, frozen (clean 1080p: 85.9 %)"), dataLabelFontSize: 8,
     showLegend: true, legendPos: "b", legendFontSize: 10, barGapWidthPct: 40,
   });
-  stat(s, 9.0, 1.45, 3.7, "+14.5", "points at 180p, SR-GAN v2 vs bicubic (p = 7 × 10⁻³²)");
-  stat(s, 9.0, 2.95, 3.7, "+1.5", "the adversarial loss's own gain over SR-L1, at 240p only", C.accent4);
-  stat(s, 9.0, 4.45, 3.7, "0", "reliable gains for v3 over v2 or SR-L1, at any level", C.accent2);
-  s.addText("Fine-tuned on 360p: +5.2 at 240p, +12.5 at 180p over bicubic.", { x: 9.0, y: 5.95, w: 3.7, h: 0.8, fontSize: 12, color: "4B5563", margin: 0, isTextBox: true });
-  s.addNotes("Learned super-resolution helps at every degraded level: up to 14.5 points at 180p, and it still helps after the classifier is fine-tuned. But the adversarial part adds little: SR-GAN beats the non-adversarial SR-L1 only at 240p. More GAN training (v2) and the task-aware v3 did not improve on that.");
+  stat(s, 9.0, 1.45, 3.7, "+14.5", "points at 180p for SR-GAN v2 over bicubic (p = 7 × 10⁻³²)");
+  stat(s, 9.0, 2.95, 3.7, "+15.0", "points at 180p for SR-L1, which has no GAN", C.accent3);
+  stat(s, 9.0, 4.45, 3.7, "≤ 1 point", "between any two learned upscalers at 180p", C.accent2);
+  s.addText("Fine-tuned on 360p, v1 and v2 still beat bicubic by 5.2–5.7 points at 240p and 12.5–13.3 at 180p.", { x: 9.0, y: 5.95, w: 3.7, h: 0.8, fontSize: 12, color: "4B5563", margin: 0, isTextBox: true });
+  s.addNotes("On the shipped 4-bit model every learned upscaler beat bicubic at every level, by 14 to 15 points at 180p, and the gain survives fine-tuning the classifier. The 32-bit models gained nothing at 360p. The bars within each group are close: at 180p all five learned upscalers sit within a point of each other, with or without a GAN. The paired tests on the previous slide say the same thing.");
 }
 
 // ================================================================ 13 diagnosis
@@ -287,26 +307,26 @@ pres.addSection({ title: "Comparisons" });
     x: 0.6, y: 1.3, w: 7.4, h: 5.5, barDir: "col", chartColors: [HEX.accent5, HEX.accent1], valAxisMinVal: 50, valAxisMaxVal: 90,
     ...chartBase("180p + JPEG 40, frozen 4-bit (clean 85.9 %)"), showLegend: true, legendPos: "b", legendFontSize: 11, barGapWidthPct: 50,
   });
-  card(s, 8.35, 1.35, 4.35, 1.75, "Landmarks, not pixels", "With SR-GAN, 10.4 points are still missing at 180p: about 7.7 from the landmarks and 2.8 from the pixels.", C.accent1);
-  card(s, 8.35, 3.25, 4.35, 1.95, "Detector tuning fails", "Lower thresholds and wider searches found up to 99 % of hand frames, but accuracy moved at most 0.8 points: misplaced hands rose to 14 %.", C.accent4);
-  card(s, 8.35, 5.35, 4.35, 1.45, "No invented hands", "Hands found only in degraded video: 1.9 % with bicubic, 2.6 % with SR-GAN, at 180p.", C.accent3);
-  s.addNotes("We swapped clean and degraded inputs. With clean pixels and degraded landmarks the model scores 78.2; with degraded pixels and clean landmarks 83.1. So after super-resolution the problem is where the detector places the joints. Tuning the detector finds more hands but more of them are misplaced.");
+  card(s, 8.35, 1.35, 4.35, 1.75, "Landmarks, not pixels", "With SR-GAN v2, 10.4 points are still missing at 180p: about 7.7 on the landmark side and 2.8 on the pixel side.", C.accent1);
+  card(s, 8.35, 3.25, 4.35, 1.95, "Detector tuning does not help", "Lower thresholds and wider searches found up to 99 % of hand frames, yet accuracy moved at most 0.8 points, because misplaced hands rose to 14 %.", C.accent4);
+  card(s, 8.35, 5.35, 4.35, 1.45, "Few invented hands", "Hands found only in degraded video at 180p: 1.9 % with bicubic, 2.6 % with SR-GAN v2, 3.1 % with v3.", C.accent3);
+  s.addNotes("To find the remaining loss we kept one input clean and degraded the other. With clean pixels and degraded landmarks the model scores 78.2; with degraded pixels and clean landmarks it scores 83.1. After super-resolution, then, most of the problem is where the detector places the joints. Tuning the detector finds more hands, but places more of them wrongly, and accuracy barely moves.");
 }
 
 // ================================================================ 14 v3
 {
-  const s = content("A task-aware GAN (v3): what it changed", "Comparisons");
-  card(s, 0.6, 1.35, 4.0, 3.75, "Hand-landmark proxy", "ResNet-18 with heatmap head, trained on 43,682 verified hand crops to read MediaPipe's 21 joints.\n\nError on validation crops: 0.0215 of the crop, 91.4 % of points within 0.05 (MediaPipe vs itself: 0.041).\n\nThe generator is penalised when the proxy reads different joints from its output than from the original.", C.accent6);
+  const s = content("SR-GAN v3: trained to keep the hand joints", "Comparisons");
+  card(s, 0.6, 1.35, 4.0, 3.75, "Hand-landmark proxy", "A ResNet-18 with a heatmap head, trained on 43,682 verified hand crops to read MediaPipe's 21 joints.\n\nOn validation crops its error is 0.0215 of the crop, with 91.4 % of points within 0.05 (MediaPipe against itself: 0.041).\n\nThe generator is penalised when the proxy reads different joints in its output than in the original.", C.accent6);
   s.addChart(pres.charts.BAR, [{ name: "180p", labels: D.v3_validation.labels, values: D.v3_validation.present_L3 }, { name: "240p", labels: D.v3_validation.labels, values: D.v3_validation.present_L2 }], {
     x: 4.85, y: 1.3, w: 7.85, h: 3.9, barDir: "col", chartColors: [HEX.accent1, "9BD3BB"], valAxisMinVal: 30, valAxisMaxVal: 95,
     ...chartBase("Validation: hand frames found (%), clean video 88.3"), dataLabelFontSize: 8, catAxisLabelFontSize: 9, showLegend: true, legendPos: "b", legendFontSize: 10,
   });
   s.addText([
     { text: "On validation it found more hands (73.3 % vs 63.3 % for v2 at 180p). ", options: { bold: true } },
-    { text: "On the test set it was not reliably better than v2 or SR-L1, and the version without the adversarial loss was 3.1 points worse at 240p. Better detection did not become better classification." },
+    { text: "On the test set it was not reliably better than v2 or SR-L1, and v3 without the GAN was 3.1 points worse than v2 at 240p. Better detection did not become better classification." },
   ], { x: 4.85, y: 5.35, w: 7.85, h: 1.45, fontSize: 14, color: C.text1, margin: 0, valign: "top", isTextBox: true });
-  stat(s, 0.6, 5.3, 4.0, "−3.1", "points: v3 without the adversarial loss vs v2 at 240p (p = 5 × 10⁻⁶)", C.accent2);
-  s.addNotes("Because the loss is in the landmarks, version 3 trains the generator against a differentiable stand-in for the hand detector. It did what it was designed to do at detection level on validation sessions, but not at the classifier on the test set. One untested explanation: the frozen classifier was trained on clean-video landmarks; fine-tuning it on the v3 front end would test that.");
+  stat(s, 0.6, 5.3, 4.0, "−3.1", "points for v3 without the GAN against v2 at 240p (p = 5 × 10⁻⁶)", C.accent2);
+  s.addNotes("Since the loss sits in the landmarks, version 3 trains the generator against a differentiable stand-in for the hand detector. On validation sessions it did what it was built to do at the detection level, and on the test set it found the most hands, but classification did not improve. One explanation we have not tested is that the frozen classifier learned from clean-video landmarks; fine-tuning it on version 3's output would check that. Without the discriminator, the hand loss also left a dot-grid artifact in the images.");
 }
 
 // ================================================================ 15 interface
@@ -326,8 +346,8 @@ pres.addSection({ title: "Integration" });
     "Vocabulary: per-word recall on unseen sessions",
     "Enrolment: record new signers for training",
   ], 8.25, 1.9, 4.45, 3.9, 14);
-  s.addText("Runs any trained checkpoint and either upscaling front end; reached over an SSH tunnel, which also enables the camera.", { x: 8.25, y: 5.9, w: 4.45, h: 0.9, fontSize: 12, color: "4B5563", margin: 0, isTextBox: true });
-  s.addNotes("The interface is one web page served by the recognition server. These are live screenshots: Capture reading a held-out clip, the Not-sure shortlist for a look-alike word, and the sentence built from accepted words. Corrections are logged as labelled examples, and the Enrolment screen records new signers into the training folder.");
+  s.addText("Runs any trained checkpoint behind either upscaling front end. It is reached over an SSH tunnel, which also lets the browser use the camera.", { x: 8.25, y: 5.9, w: 4.45, h: 0.9, fontSize: 12, color: "4B5563", margin: 0, isTextBox: true });
+  s.addNotes("The interface is a single web page served by the recognition server. These are live screenshots: Capture reading a held-out clip, the Not-sure shortlist for a look-alike word, and a sentence built from accepted words. Corrections are logged as labelled examples, and Enrolment records new signers into the folder the training pipeline reads.");
 }
 
 // ================================================================ 16 tests
@@ -346,7 +366,7 @@ pres.addSection({ title: "Integration" });
     { x: 0.6, y: 1.4, w: 12.1, colW: [2.9, 4.6, 4.6], fontSize: 14, fontFace: THEME.bodyFontFace, border: { type: "solid", pt: 0.5, color: "D5DAE2" }, margin: 0.08 });
   img(s, "ui_capture_samples.png", 0.6, 4.55, 6.0, 2.3, { card: true, alt: "Demo clips with verdicts" });
   img(s, "ui_diagnostics.png", 6.7, 4.55, 6.0, 2.3, { card: true, alt: "Detection screen" });
-  s.addNotes("Browser tests: Playwright driving Chromium. Live tests: the running server on held-out clips. Consistency test: the server's classification code against the offline evaluation's per-clip results. We tested at three levels: automated browser tests on every screen, live end-to-end tests through the running server, and a consistency test that the app gives the same answer as the offline evaluation for the same clip and model. It matched on all 8 clips, including the 2 the model gets wrong.");
+  s.addNotes("We tested at three levels. Playwright drove Chromium through every screen at two widths. Held-out clips went through the live server end to end. A consistency test checked that the app's classification code gives the same answer as the offline evaluation for the same clip and model; it agreed on all 8 clips, including the 2 the model gets wrong.");
 }
 
 // ================================================================ 17 conclusion
@@ -355,21 +375,23 @@ pres.addSection({ title: "Close" });
   const s = pres.addSlide({ masterName: "TITLE_DARK", sectionTitle: "Close" });
   slideNo += 1;
   s.addText("What we found", { placeholder: "title" });
+  s.addText("Team 3 · " + TEAM.map(([name, roll]) => `${name} (${roll})`).join(" · "),
+    { x: 0.7, y: 6.85, w: 12.0, h: 0.35, fontSize: 11, color: "9AA3B2", margin: 0, isTextBox: true });
   s.addText([
-    { text: "85.9 % top-1 on unseen sessions from a 1.97 MiB model; random splits overstate accuracy by over 20 points.", options: { bullet: true, breakLine: true } },
-    { text: "Learned super-resolution recovers up to 14.5 points on 180p video; the adversarial loss adds little beyond it.", options: { bullet: true, breakLine: true } },
-    { text: "After upscaling, the remaining error is in landmark placement, not pixels.", options: { bullet: true, breakLine: true } },
-    { text: "The app reproduces the evaluation's answers clip for clip.", options: { bullet: true } },
+    { text: "85.9 % top-1 on unseen sessions from a 1.97 MiB model. On a random split, the pixel-only version scored 22.9 points higher.", options: { bullet: true, breakLine: true } },
+    { text: "A learned upscaler recovers up to 15 points on 180p video. Across three GAN versions, the adversarial loss beat its no-GAN control in 2 of 9 tests.", options: { bullet: true, breakLine: true } },
+    { text: "After upscaling, most of the remaining error is in where the hand joints are placed, not in the pixels.", options: { bullet: true, breakLine: true } },
+    { text: "The app gives the same answers as the offline evaluation on every clip checked.", options: { bullet: true } },
   ], { x: 0.7, y: 3.3, w: 7.2, h: 3.0, fontSize: 17, color: "E5E9F0", margin: 0, paraSpaceAfter: 10, isTextBox: true, valign: "top" });
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 8.35, y: 1.6, w: 4.35, h: 4.7, rectRadius: 0.12, fill: { color: "1E2430" }, line: { color: "2A3140" }, objectName: "next steps card" });
   s.addText("Next steps", { x: 8.65, y: 1.85, w: 3.8, h: 0.5, fontSize: 18, bold: true, color: C.background1, margin: 0, isTextBox: true });
   s.addText([
-    { text: "Fine-tune the classifier on the task-aware front end", options: { bullet: true, breakLine: true } },
+    { text: "Fine-tune the classifier on SR-GAN v3's output", options: { bullet: true, breakLine: true } },
     { text: "Re-measure the confidence curve for the shipped model", options: { bullet: true, breakLine: true } },
-    { text: "Fix hand detection for tightly framed video (CISLR)", options: { bullet: true, breakLine: true } },
+    { text: "Build a detection path for tightly framed video (CISLR)", options: { bullet: true, breakLine: true } },
     { text: "Record new signers through Enrolment; test on wearable hardware", options: { bullet: true } },
   ], { x: 8.65, y: 2.45, w: 3.8, h: 3.6, fontSize: 15, color: "C9CFDA", margin: 0, paraSpaceAfter: 8, isTextBox: true, valign: "top" });
-  s.addNotes("Limitations: one studio, inferred sessions, no successful cross-corpus transfer yet, synthetic degradation, latency measured on a desktop CPU, isolated words only. Thank you; we can run the live demo now.");
+  s.addNotes("Limitations: one studio, sessions inferred rather than labelled, no cross-corpus transfer yet, synthetic degradation, only version 1 of the GAN pre-registered, latency measured on a desktop CPU, and isolated words only. Thank you; we can run the live demo now.");
 }
 
 (async () => {
