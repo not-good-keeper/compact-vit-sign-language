@@ -38,11 +38,27 @@
     ]
    },
    {
-    "label": "SR-L1 (no adversarial loss)",
+    "label": "SR-L1 (no GAN)",
     "values": [
      83.545,
      80.862,
      75.989
+    ]
+   },
+   {
+    "label": "v3 without the GAN",
+    "values": [
+     83.828,
+     79.237,
+     75.636
+    ]
+   },
+   {
+    "label": "SR-GAN v1",
+    "values": [
+     84.322,
+     81.78,
+     75.353
     ]
    },
    {
@@ -54,19 +70,11 @@
     ]
    },
    {
-    "label": "v3: GAN + hand loss",
+    "label": "SR-GAN v3",
     "values": [
      84.04,
      81.638,
      75.424
-    ]
-   },
-   {
-    "label": "v3: hand loss, no GAN",
-    "values": [
-     83.828,
-     79.237,
-     75.636
     ]
    }
   ]
@@ -84,6 +92,14 @@
      83.545,
      77.895,
      64.407
+    ]
+   },
+   {
+    "label": "SR-GAN v1",
+    "values": [
+     84.605,
+     83.616,
+     77.754
     ]
    },
    {
@@ -125,12 +141,12 @@
  "v3_validation": {
   "labels": [
    "Bicubic",
-   "SR-L1 (v1)",
+   "SR-L1",
    "SR-GAN v2",
-   "v3 pixel L1",
-   "v3 GAN",
-   "v3 GAN + hand loss",
-   "v3 hand loss, no GAN"
+   "v3 base (L1)",
+   "v3 GAN, no hand loss",
+   "SR-GAN v3",
+   "v3 without the GAN"
   ],
   "present_L3": [
    43.32,

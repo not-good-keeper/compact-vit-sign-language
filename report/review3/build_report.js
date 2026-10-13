@@ -66,11 +66,11 @@ function cell(content, width, opts = {}) {
 for (const block of C.body) {
   if (block.h1) {
     h1 += 1; h2 = 0;
-    out.push(new Paragraph({ heading: HeadingLevel.HEADING_1, spacing: { before: 300, after: 120 },
+    out.push(new Paragraph({ heading: HeadingLevel.HEADING_1, keepNext: true, spacing: { before: 300, after: 120 },
       children: [new TextRun({ text: `${h1} ${block.h1}`, bold: true, font: FONT, size: 24 })] }));
   } else if (block.h2) {
     h2 += 1;
-    out.push(new Paragraph({ heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 80 },
+    out.push(new Paragraph({ heading: HeadingLevel.HEADING_2, keepNext: true, spacing: { before: 200, after: 80 },
       children: [new TextRun({ text: `${h1}.${h2} ${block.h2}`, bold: true, italics: true, font: FONT, size: 21 })] }));
   } else if (block.p) {
     out.push(new Paragraph({ alignment: AlignmentType.JUSTIFIED, spacing: { after: 120, line: 264 }, children: runs(block.p) }));
@@ -109,7 +109,7 @@ for (const block of C.body) {
 }
 
 // ---- references
-out.push(new Paragraph({ heading: HeadingLevel.HEADING_1, spacing: { before: 300, after: 120 },
+out.push(new Paragraph({ heading: HeadingLevel.HEADING_1, keepNext: true, spacing: { before: 300, after: 120 },
   children: [new TextRun({ text: "References", bold: true, font: FONT, size: 24 })] }));
 C.references.forEach((ref, i) => {
   out.push(new Paragraph({ spacing: { after: 60 }, indent: { left: 400, hanging: 400 },
