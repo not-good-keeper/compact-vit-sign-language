@@ -1,0 +1,840 @@
+[
+ {
+  "url": "https://arxiv.org/abs/1308.3432",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://arxiv.org/abs/1308.3432"
+ },
+ {
+  "url": "https://arxiv.org/abs/1803.11316",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://arxiv.org/abs/1803.11316"
+ },
+ {
+  "url": "https://arxiv.org/abs/1906.08172",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://arxiv.org/abs/1906.08172"
+ },
+ {
+  "url": "https://arxiv.org/abs/2006.10214",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://arxiv.org/abs/2006.10214"
+ },
+ {
+  "url": "https://arxiv.org/abs/2106.08295",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://arxiv.org/abs/2106.08295"
+ },
+ {
+  "url": "https://doi.org/10.1007/978-3-030-01231-1_33",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://link.springer.com/10.1007/978-3-030-01231-1_33"
+ },
+ {
+  "url": "https://doi.org/10.1007/978-3-030-11021-5_5",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://link.springer.com/10.1007/978-3-030-11021-5_5"
+ },
+ {
+  "url": "https://doi.org/10.1007/978-3-319-46475-6_43",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://link.springer.com/10.1007/978-3-319-46475-6_43"
+ },
+ {
+  "url": "https://doi.org/10.1007/978-3-319-46493-0_39",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://link.springer.com/10.1007/978-3-319-46493-0_39"
+ },
+ {
+  "url": "https://doi.org/10.1007/BF02295996",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://www.cambridge.org/core/journals/psychometrika/article/abs/note-on-the-sampling-error-of-the-difference-between-correlated-proportions-or-percentages/698C2461BE63F5848763502D54E534FD"
+ },
+ {
+  "url": "https://doi.org/10.1016/j.patter.2023.100804",
+  "kind": "http",
+  "ok": false,
+  "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
+ },
+ {
+  "url": "https://doi.org/10.1038/s41598-025-12667-3",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://www.nature.com/articles/s41598-025-12667-3"
+ },
+ {
+  "url": "https://doi.org/10.1038/s41598-026-38478-8",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://www.nature.com/articles/s41598-026-38478-8"
+ },
+ {
+  "url": "https://doi.org/10.1038/s41598-026-40181-7",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://www.nature.com/articles/s41598-026-40181-7"
+ },
+ {
+  "url": "https://doi.org/10.1049/ipr2.70000",
+  "kind": "http",
+  "ok": true,
+  "status": 403,
+  "final": "https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/ipr2.70000",
+  "note": "refused scripted access"
+ },
+ {
+  "url": "https://doi.org/10.1109/ACCESS.2020.3028072",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9210578/"
+ },
+ {
+  "url": "https://doi.org/10.1109/CVPR.2016.308",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/7780677/"
+ },
+ {
+  "url": "https://doi.org/10.1109/CVPR.2016.90",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/7780459/"
+ },
+ {
+  "url": "https://doi.org/10.1109/CVPR.2017.19",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/8099502/"
+ },
+ {
+  "url": "https://doi.org/10.1109/CVPR.2018.00286",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/8578384/"
+ },
+ {
+  "url": "https://doi.org/10.1109/CVPR.2018.00652",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/8578750/"
+ },
+ {
+  "url": "https://doi.org/10.1109/CVPR42600.2020.00823",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9157564/"
+ },
+ {
+  "url": "https://doi.org/10.1109/CVPR42600.2020.01004",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9156773/"
+ },
+ {
+  "url": "https://doi.org/10.1109/CVPR52688.2022.00943",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9880205/"
+ },
+ {
+  "url": "https://doi.org/10.1109/CVPRW53098.2021.00380",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9523142/"
+ },
+ {
+  "url": "https://doi.org/10.1109/ICCV48922.2021.00676",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9710415/"
+ },
+ {
+  "url": "https://doi.org/10.1109/ICCV48922.2021.01090",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9709967/"
+ },
+ {
+  "url": "https://doi.org/10.1109/ICCVW54120.2021.00217",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9607421/"
+ },
+ {
+  "url": "https://doi.org/10.1109/WACV.2016.7477613",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/7477613/"
+ },
+ {
+  "url": "https://doi.org/10.1109/WACV45572.2020.9093512",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9093512/"
+ },
+ {
+  "url": "https://doi.org/10.1109/WACVW54805.2022.00024",
+  "kind": "http",
+  "ok": true,
+  "status": 202,
+  "final": "https://ieeexplore.ieee.org/document/9707552/"
+ },
+ {
+  "url": "https://doi.org/10.1145/3394171.3413528",
+  "kind": "http",
+  "ok": true,
+  "status": 403,
+  "final": "https://dl.acm.org/doi/10.1145/3394171.3413528",
+  "note": "refused scripted access"
+ },
+ {
+  "url": "https://doi.org/10.1609/aaai.v34i05.6409",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://ojs.aaai.org/index.php/AAAI/article/view/6409"
+ },
+ {
+  "url": "https://doi.org/10.18653/v1/2022.acl-long.150",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://aclanthology.org/2022.acl-long.150/"
+ },
+ {
+  "url": "https://doi.org/10.18653/v1/2022.emnlp-main.707",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://aclanthology.org/2022.emnlp-main.707/"
+ },
+ {
+  "url": "https://doi.org/10.18653/v1/2024.findings-acl.643",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://aclanthology.org/2024.findings-acl.643/"
+ },
+ {
+  "url": "https://doi.org/10.3390/s25123652",
+  "kind": "http",
+  "ok": true,
+  "status": 403,
+  "final": "https://www.mdpi.com/1424-8220/25/12/3652",
+  "note": "refused scripted access"
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language",
+  "kind": "http",
+  "ok": true,
+  "status": 200,
+  "final": "https://github.com/not-good-keeper/compact-vit-sign-language"
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/crosscorpus_eval.log",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/docs/CAPTURE_PROTOCOL.md",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/crops.py#L163-L204",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 820
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/crops.py#L305-L351",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 820
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/crops.py#L362-L374",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 820
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/crops.py#L413-L428",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 820
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/crops.py#L490-L564",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 820
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/refetch_raw.py",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/splits.py#L118-L136",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 460
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/splits.py#L170-L206",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 460
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/splits.py#L209-L299",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 460
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/demo.py#L69-L118",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 205
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/export.py#L181-L200",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 379
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/export.py#L202-L220",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 379
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/export.py#L223-L238",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 379
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/export.py#L246-L294",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 379
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/gan_report.py#L98-L117",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 792
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/int4_eval.py",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/mask50.py#L45-L53",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 138
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/mask50.py#L56-L108",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 138
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/models/isl_vit.py#L136-L299",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 421
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/models/isl_vit.py#L312-L344",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 421
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/models/isl_vit.py#L87-L133",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 421
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/predict.py#L42-L107",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 170
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/predict.py#L42-L57",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 170
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/pretrain.py#L182-L258",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 424
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/qat.py#L50-L84",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 234
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/release.py",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/serve.py#L102-L202",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 1023
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/serve.py#L50-L99",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 1023
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/sr/degrade.py#L122-L149",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 149
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/sr/degrade.py#L35-L43",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 149
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/sr/models.py",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/sr/models.py#L32-L48",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 139
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/sr/models.py#L51-L81",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 139
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/sr/train.py#L100-L109",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 386
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/sr/train.py#L137-L382",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 386
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/train.py#L244-L730",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 734
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/train.py#L75-L116",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 734
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/tta.py#L46-L62",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 156
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/tta.py#L65-L75",
+  "kind": "git",
+  "ok": true,
+  "anchor_ok": true,
+  "lines": 156
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_ablation_res.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_clean_test.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_crosscorpus_eval.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_dev_screen.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_frames32.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_gan_study.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_gan_study_v2.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_gan_v3.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_gan_v3_test.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_grokking.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_isign_pipeline.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_iter3.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_landmarks.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_lever2.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_lm_qat.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_lm_s2_resume.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_longtrain.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_narrow.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_phase2.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_push75.sh",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/abl112__take-group/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/abl128__take-group/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/abl64__take-group/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/baseline_random_s0/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/dev_lm_base_s0/val50.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_262w_lm_s0/masked50_clean.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_262w_lm_s0/masked50_fresh.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_262w_lm_s0/ptq4_clean.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_262w_lm_s0_qat4/masked50_clean.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_262w_s0/masked50_clean.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_262w_s0_narrow/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_clean_s0/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_clean_s1/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_long4k_s0/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f24_clean_s0/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f32_clean_s0/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f8_clean_s0/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/full263_v2__random-video/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/full263_v2__take-group/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/gan_study/detection/cislr_bicubic.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/gate_mixed.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/grok_wd005/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/long2000_s1/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/sd263_foldval/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/sd263_lastsel/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/sd263_ssl_foldval/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/sd_full263/summary.json",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/splits/_test472_paths.csv",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/splits/full263__session-disjoint-foldval.csv",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/splits/vocab50__random-video.csv",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/splits/vocab50clean__session-disjoint.csv",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/islvit/ui/src",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/release",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/runs/gan_study",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/runs/gan_study/detection",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/runs/gan_study/diagnostics",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/runs/gan_study/frozen_int4",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/runs/gan_study_v1",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/runs/gan_study_v1/frozen_int4",
+  "kind": "git",
+  "ok": true
+ }
+]

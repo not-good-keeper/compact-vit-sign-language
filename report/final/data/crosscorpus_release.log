@@ -1,0 +1,28 @@
+INFO: INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+Created TensorFlow Lite XNNPACK delegate for CPU.
+restricted to 609 clips from splits/crosscorpus__cislr-test.csv (test)
+609 cached clips, 0 already done, 609 to extract
+  100/609  1.02 clips/s  eta 8 min  failures 0
+  200/609  1.06 clips/s  eta 6 min  failures 0
+  300/609  1.08 clips/s  eta 5 min  failures 0
+  400/609  1.08 clips/s  eta 3 min  failures 0
+  500/609  1.09 clips/s  eta 2 min  failures 0
+  600/609  1.10 clips/s  eta 0 min  failures 0
+  609/609  1.10 clips/s  eta 0 min  failures 0
+done 609/609; hand coverage left 25.0% right 48.8%
+wrote 609 rows to report/final/data/crosscorpus_cislr_test_as_include.csv
+[isl_vit_tiny_lm_int4_s0.pt] 98 clips, 50 deployed words of 262 head columns
+  wide_plain    top1   9.5%  top5  22.8%  balanced   9.4%
+  wide_tta      top1   9.5%  top5  23.2%  balanced   9.4%
+  masked_plain  top1  31.6%  top5  48.0%  balanced  32.7%
+  masked_tta    top1  29.6%  top5  48.0%  balanced  30.9%
+[isl_vit_tiny_lm_int4_s1.pt] 98 clips, 50 deployed words of 262 head columns
+  wide_plain    top1   9.2%  top5  19.4%  balanced   9.3%
+  wide_tta      top1   8.7%  top5  19.0%  balanced   9.0%
+  masked_plain  top1  26.5%  top5  43.9%  balanced  26.4%
+  masked_tta    top1  27.6%  top5  43.9%  balanced  26.9%
+[isl_vit_tiny_lm_int4_s2.pt] 98 clips, 50 deployed words of 262 head columns
+  wide_plain    top1  10.5%  top5  25.1%  balanced  11.5%
+  wide_tta      top1  10.5%  top5  25.0%  balanced  11.7%
+  masked_plain  top1  29.6%  top5  46.9%  balanced  30.4%
+  masked_tta    top1  30.6%  top5  46.9%  balanced  30.9%

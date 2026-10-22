@@ -1,0 +1,59 @@
+  answering from the 50 deployed words (as evaluated); --all-words for all 262
+  10 demo clips from demo_samples/
+
+  ISL Reader � f16_262w_s0, 262 signs, 16f/64px on cuda
+  open  http://127.0.0.1:7871/
+
+  listening on http://127.0.0.1:7871/
+  from your computer:  ssh -N -L 7871:127.0.0.1:7871 <user>@<this machine>   then open http://localhost:7871
+  127.0.0.1 "GET /info HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
+  127.0.0.1 "POST /predict HTTP/1.1" 200 -
