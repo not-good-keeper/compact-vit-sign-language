@@ -268,11 +268,6 @@
   "final": "https://github.com/not-good-keeper/compact-vit-sign-language"
  },
  {
-  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/crosscorpus_eval.log",
-  "kind": "git",
-  "ok": true
- },
- {
   "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/docs/CAPTURE_PROTOCOL.md",
   "kind": "git",
   "ok": true
@@ -311,11 +306,6 @@
   "ok": true,
   "anchor_ok": true,
   "lines": 820
- },
- {
-  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/refetch_raw.py",
-  "kind": "git",
-  "ok": true
  },
  {
   "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/islvit/data/splits.py#L118-L136",
@@ -553,16 +543,6 @@
   "ok": true
  },
  {
-  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_crosscorpus_eval.sh",
-  "kind": "git",
-  "ok": true
- },
- {
-  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_dev_screen.sh",
-  "kind": "git",
-  "ok": true
- },
- {
   "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_frames32.sh",
   "kind": "git",
   "ok": true
@@ -628,11 +608,6 @@
   "ok": true
  },
  {
-  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_narrow.sh",
-  "kind": "git",
-  "ok": true
- },
- {
   "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/run_phase2.sh",
   "kind": "git",
   "ok": true
@@ -663,11 +638,6 @@
   "ok": true
  },
  {
-  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/dev_lm_base_s0/val50.json",
-  "kind": "git",
-  "ok": true
- },
- {
   "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_262w_lm_s0/masked50_clean.json",
   "kind": "git",
   "ok": true
@@ -689,11 +659,6 @@
  },
  {
   "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_262w_s0/masked50_clean.json",
-  "kind": "git",
-  "ok": true
- },
- {
-  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/runs/f16_262w_s0_narrow/summary.json",
   "kind": "git",
   "ok": true
  },
@@ -804,6 +769,11 @@
  },
  {
   "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/release",
+  "kind": "git",
+  "ok": true
+ },
+ {
+  "url": "https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943/report/review3/assets",
   "kind": "git",
   "ok": true
  },
