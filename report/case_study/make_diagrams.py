@@ -227,8 +227,8 @@ def evaluation_split():
     shared = d.box("Same sessions both sides", 90, 420, 200, 70, kind="bad")
     unseen = d.box("Test sessions unseen", 570, 420, 200, 70, kind="output")
     high = d.box("98.5 %", 90, 530, 200, kind="bad", bold=True, size=20)
-    honest = d.box("75.6 %", 570, 530, 200, kind="output", bold=True, size=20)
-    d.text("leakage", 330, 535, 200, 50, size=18)
+    honest = d.box("70.1 %", 570, 530, 200, kind="output", bold=True, size=20)
+    d.text("28 pts leakage", 330, 535, 200, 50, size=18)
     for src, dst in ((clips, numbers), (numbers, sessions), (random, shared),
                      (session, unseen), (shared, high), (unseen, honest)):
         d.arrow(src, dst)

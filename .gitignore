@@ -42,7 +42,6 @@ cislr_crops.png
 logs_*.txt
 
 # Assistant/editor state
-.claude/
 .cursor/
 *.code-workspace
 

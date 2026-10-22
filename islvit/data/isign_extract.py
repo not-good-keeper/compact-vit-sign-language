@@ -7,7 +7,7 @@ need another 54 GB this machine does not have spare, so ``ConcatFile`` presents
 both parts as one seekable stream and lets `zipfile` read the real archive
 without a copy.
 
-The corpus holds 127k segments cut from 5,999 source videos/signers. Extracting
+The corpus holds 127,237 segments cut from 18,139 source videos/signers. Extracting
 all of them would need ~280 GB of crop cache at CISLR's per-clip rate -- self-
 defeating, since the entire point of this corpus is signer diversity, not volume.
 Diversity is exactly what capping *segments per source video* preserves: every

@@ -867,8 +867,8 @@ The red line at the bottom. Address it head-on rather than letting it be spotted
 > we do not have.
 >
 > We also use three further corpora, none for headline results: **CISLR** for
-> pretraining and as the cross-corpus test set, **iSign** — 18,000 clips from about
-> 11,000 distinct source videos — for scaled pretraining, and **ISL-CSLTR** for
+> pretraining and as the cross-corpus test set, **iSign** — 18,000 clips, each from a
+> different source video (17,896 of them pass the detection filter) — for scaled pretraining, and **ISL-CSLTR** for
 > auxiliary work. Each under its own licence, none redistributed by us.
 
 ### Emphasise

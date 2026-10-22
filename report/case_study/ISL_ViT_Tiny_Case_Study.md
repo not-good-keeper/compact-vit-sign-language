@@ -14,7 +14,7 @@ Faculty guide: Dr. T. Bagyammal
 
 # Abstract {.unnumbered}
 
-Published Indian Sign Language (ISL) recognisers report accuracies above 94 %, but most are measured on random splits, where clips recorded in the same session fall on both sides of the train–test boundary. We present ISL-ViT-Tiny, a factorised video Vision Transformer that reads three cropped streams per frame (left hand, right hand, face) together with the hand landmarks its detector already computes, and we test it only on recording sessions it never saw in training. INCLUDE ships no signer identifiers, so we reconstructed 13 recording sessions from the camera's clip counter and held whole sessions out. With the model and recipe unchanged, the same 50 words score 98.5 % on a random split and 75.6 % on the session split; the difference is leakage. We then raised the honest number. Training on all 262 words and scoring the 50 deployed words, sampling 16 frames from a 32-frame cache, initialising from self-supervised pretraining on unlabelled iSign video, and adding hand-landmark features took top-1 accuracy on the same 472 held-out clips from 51.7 % to 87.1 %. Quantisation-aware training to 4-bit weights keeps 86.0 % top-1 and 96.1 % top-5 (mean of two seeds) in a 1.97 MiB file holding 3.89 M parameters. Checkpoints tested on a second corpus, CISLR, scored at chance, so these results describe INCLUDE-like video, not ISL recognition in general.
+Published Indian Sign Language (ISL) recognisers report accuracies above 94 %, but most are measured on random splits, where clips recorded in the same session fall on both sides of the train–test boundary. We present ISL-ViT-Tiny, a factorised video Vision Transformer that reads three cropped streams per frame (left hand, right hand, face) together with the hand landmarks its detector already computes, and we test it only on recording sessions it never saw in training. INCLUDE ships no signer identifiers, so we reconstructed 13 recording sessions from the camera's clip counter and held whole sessions out. With the recipe unchanged, a 50-word model scores 98.5 % on a random split and 70.1 % (mean of two seeds) on the session split; the difference is leakage. We then raised the honest number. Training on all 262 words and scoring the 50 deployed words, sampling 16 frames from a 32-frame cache, initialising from self-supervised pretraining on unlabelled iSign video, and adding hand-landmark features took top-1 accuracy on the same 472 held-out clips from 51.7 % to 86.5 %. Quantisation-aware training to 4-bit weights keeps 85.9 % top-1 and 96.4 % top-5 (mean of three seeds) in a 1.97 MiB file holding 3.89 M parameters. Checkpoints tested on a second corpus, CISLR, scored at chance, so these results describe INCLUDE-like video, not ISL recognition in general.
 
 ::: {.keywords custom-style="Keywords"}
 **Keywords:** Indian Sign Language · Vision Transformer · isolated sign recognition · signer-independent evaluation · data leakage · quantisation-aware training · edge deployment
@@ -26,14 +26,14 @@ Indian Sign Language is the everyday language of a large deaf community in India
 
 Three properties make the task hard. ISL is largely two-handed, and meaning depends on handshape, motion and location together; the same handshape at the forehead and at the chest can be different words. Labelled data is scarce: INCLUDE [16], the main public ISL word corpus, holds 4,257 clips over 262 words, a median of 15 clips per word. Transformers usually train on several orders of magnitude more. And the compute budget rules out the large video models that dominate recent sign recognition work [8].
 
-The accuracy figures in the literature hide a fourth problem. INCLUDE was recorded as back-to-back takes: a signer performs a word several times in a row, and the camera numbers each take consecutively. A random split therefore places near-identical takes of the same word, by the same person, in the same room, on both sides of the split. In our own control run the model scored 98.5 % under such a split and 75.6 % when whole recording sessions were held out (Section 4.1). A deployed device only ever meets the second situation.
+The accuracy figures in the literature hide a fourth problem. INCLUDE was recorded as back-to-back takes: a signer performs a word several times in a row, and the camera numbers each take consecutively. A random split therefore places near-identical takes of the same word, by the same person, in the same room, on both sides of the split. In our own control run, a 50-word model scored 98.5 % under such a split, and the same recipe scored 70.1 % (mean of two seeds) when whole recording sessions were held out (Section 4.1). A deployed device only ever meets the second situation.
 
 Our objective was a single model of about 2 MB that reaches at least 75 % top-1 accuracy on a 50-word vocabulary when tested on unseen recording sessions. The work makes four contributions:
 
 1. A session-disjoint protocol for INCLUDE, rebuilt from camera metadata because the dataset has no signer labels, and a measurement of how much of the standard benchmark it removes.
 2. A factorised Vision Transformer that reads anatomical crops instead of full frames, is told where each crop came from and whether its detection was real, and receives the hand landmarks the detector already produced (91 k extra parameters).
 3. A controlled sequence of training interventions, each judged against a measured seed-to-seed noise floor, with the failed ones reported alongside the successes.
-4. A 4-bit, quantisation-aware version of the model in a 1.97 MiB file that keeps 86.0 % top-1 accuracy.
+4. A 4-bit, quantisation-aware version of the model in a 1.97 MiB file that keeps 85.9 % top-1 accuracy.
 
 # Related Work
 
@@ -71,7 +71,7 @@ Fig. 2 shows the system in plain terms, using real images from one held-out clip
 
 ## Dataset
 
-INCLUDE [16] contains 4,257 clips of 262 ISL words in 15 categories, recorded at 1920 × 1080 and 25 fps in a single studio in Chennai and released under CC-BY-4.0. Clips last two to five seconds. The deployed vocabulary is a 50-word subset (INCLUDE-50). We train on all 262 words and restrict the output to the 50 deployed words at test time, because per-word support is fixed and a smaller training vocabulary simply means less data. Self-supervised pretraining used 18,000 unlabelled clips from iSign [18]. CISLR [17] served only as a cross-corpus test.
+INCLUDE [16] contains 4,257 clips of 262 ISL words in 15 categories, recorded at 1920 × 1080 and 25 fps in a single studio in Chennai and released under CC-BY-4.0. Clips last two to five seconds. The deployed vocabulary is a 50-word subset (INCLUDE-50). We train on all 262 words and restrict the output to the 50 deployed words at test time, because per-word support is fixed and a smaller training vocabulary simply means less data. Self-supervised pretraining used 17,896 of 18,000 extracted unlabelled clips from iSign [18]. CISLR [17] served only as a cross-corpus test.
 
 ## Evaluation protocol
 
@@ -79,7 +79,7 @@ Every INCLUDE file is named after the camera's running counter (MVI_5177, for ex
 
 The resulting 262-word split has 2,845 training clips and 1,010 test clips; 402 test-session clips of words with fewer than six training examples are excluded, because scoring them measures how little those words were trained on. The 50-word test set is the 472 test clips belonging to the deployed words, covering all 50. It is identical, clip for clip, in every experiment reported here. Session identity is inferred rather than given, so the protocol approximates signer independence; it does not guarantee it.
 
-![**Fig. 4** Building the evaluation split. The same model scores 98.5 % when sessions are shared and 75.6 % when test sessions are unseen.](diagrams/fig3_evaluation_split.png){width=62%}
+![**Fig. 4** Building the evaluation split. The same recipe scores 98.5 % when sessions are shared and 70.1 % when test sessions are unseen.](diagrams/fig3_evaluation_split.png){width=62%}
 
 ## Input pipeline
 
@@ -120,7 +120,7 @@ Factorising attention is what makes the model affordable. Attending jointly over
 
 ## Training procedure
 
-Training has two phases (Fig. 7). The encoder, both stages, is first pretrained without labels on 18,000 iSign clips by masked image modelling in the style of SimMIM [22]: 75 % of patches are hidden and the network learns to reconstruct them. Hands in the unlabelled corpora are small in the frame and upscaled when cropped, so their crops are blurrier than INCLUDE's (2.1 times blurrier, for CISLR). Fine-tuning therefore degrades each INCLUDE crop to a random lower resolution and back (resolution jitter 0.5), so that the encoder sees the kind of input it was pretrained on. In an earlier comparison on CISLR, pretraining without this matching added 1.9 points (p = 0.36); with it, 9.5 points. Applying the jitter during pretraining as well was tested under four seeds and gave no further gain.
+Training has two phases (Fig. 7). The encoder, both stages, is first pretrained without labels on 17,896 of 18,000 extracted iSign clips by masked image modelling in the style of SimMIM [22]: 75 % of patches are hidden and the network learns to reconstruct them. Hands in the unlabelled corpora are small in the frame and upscaled when cropped, so their crops are blurrier than INCLUDE's (2.1 times blurrier, for CISLR). Fine-tuning therefore degrades each INCLUDE crop to a random lower resolution and back (resolution jitter 0.5), so that the encoder sees the kind of input it was pretrained on. In an earlier comparison on CISLR, pretraining without this matching added 1.9 points (p = 0.36); with it, 9.5 points. Applying the jitter during pretraining as well was tested under four seeds and gave no further gain.
 
 ![**Fig. 7** Training pipeline, from unlabelled pretraining to the 2 MB deployed model.](diagrams/fig4_training_pipeline.png){width=100%}
 
@@ -161,15 +161,15 @@ We report top-1 and top-5 accuracy on the 472-clip, 50-word test set, and balanc
 
 ## How much of the standard benchmark is leakage
 
-Fig. 9 compares the same pixel-only model, trained with the same recipe on the same 50 words, under the two splits. A random split gives 98.5 %, measured on 200 held-out clips of which 90 % share a take group with a training clip. Holding out whole sessions gives 75.6 %. The 22.9-point difference is what the model gains from having seen the same person, room and take before. Over the course of the project the gap narrowed from 53 points to 23, because the honest number rose while the leaky one had little room left.
+Fig. 9 compares one recipe (50 words, pixel crops, 16 frames, 2,000 epochs) under the two splits. A random split gives 98.5 % for one seed, measured on 200 held-out clips of which 90 % share a take group with a training clip. Holding out whole sessions gives 69.9 % and 70.3 % for two seeds on the 472 deployed-word test clips (mean 70.1 %). The 28-point difference is what the model gains from having seen the same person, room and take before. The 262-word model masked to the 50 deployed words reaches 75.6 % on those clips, but it is a different model, so it is not used for this comparison. Over the course of the project the session-split figure for this recipe rose from 51.7 % to 70.1 %, while the random-split figure had little room left to rise.
 
-![**Fig. 9** Left: one model, two splits. Right: the gap between them at the start and end of the project.](../../docs/figures/fig10_leakage_now.png){width=100%}
+![**Fig. 9** Left: one recipe, two splits. Right: how the session-split number rose over the project, against the random-split control.](../../docs/figures/fig10_leakage_now.png){width=100%}
 
 ## What raised the honest number
 
 Fig. 10 shows every intervention tested on the 472-clip test set, in order. The starting point, a 50-word model trained for 250 epochs on 8 frames, scored 51.7 %. Four changes survived the noise floor. Training for 2,000 epochs instead of 250 added 8.0 points; the loss curves showed every earlier run had stopped while still improving. Sampling 16 frames from a 32-frame cache, instead of from a 16-frame cache, brought the model to 70.1 %: the model and its inference cost are unchanged, but training now sees different frames on each pass. Training on all 262 words and restricting the output to the 50 deployed words at test time reached 75.6 % as a single model, within one clip of a five-model ensemble (75.8 %) that needed 18.5 MB.
 
-The largest single gain came from the hand landmarks. With everything else fixed, they raised the two-seed mean from 73.7 % to 87.1 %. On identical clips the landmark model fixed 72 and 86 clips the pixel model got wrong, against 15 and 21 it broke (McNemar p ≈ 4 × 10⁻¹⁰ and 2 × 10⁻¹⁰). Blanking inputs at test time shows the two sources are complementary: landmarks alone reach about 70 %, pixels and landmarks together about 87 %. The pipeline had been computing these joints on every frame and discarding them.
+The largest single gain came from the hand landmarks. With everything else fixed, they raised the three-seed mean from 73.7 % to 86.5 %. On identical clips the landmark model fixed 76, 83 and 88 clips the pixel model got wrong (one count per seed), against 18, 21 and 26 it broke (McNemar p ≤ 5 × 10⁻⁹ on every seed). Blanking inputs at test time shows the two sources are complementary: landmarks alone reach about 70 %, pixels and landmarks together about 87 %. The pipeline had been computing these joints on every frame and discarding them.
 
 ![**Fig. 10** Every intervention on the 50-word session-disjoint test set. Green: confirmed gain. Amber: inside the 2.7-point noise floor. Red: rejected.](../../docs/figures/fig13_intervention_waterfall.png){width=100%}
 
@@ -177,16 +177,16 @@ Several ideas failed, and we report them because they bound what the successes m
 
 ## Meeting the size budget
 
-Table 3 and Fig. 11 place each version of the model by file size and accuracy. Post-training rounding to 4 bits costs 3.0 points; quantisation-aware training recovers most of it. The deployed model scores 86.0 % top-1, 96.1 % top-5 and 85.9 % balanced accuracy, the mean of seeds at 84.5 % and 87.5 %. Against the project's requirement of at least 75 % from one model of about 2 MB, it is 11 points above the accuracy target at the size target.
+Table 3 and Fig. 11 place each version of the model by file size and accuracy. Post-training rounding to 4 bits costs 3.1 points; quantisation-aware training recovers most of it. The deployed model scores 85.9 % top-1, 96.4 % top-5 and 85.8 % balanced accuracy, the mean of three seeds at 84.5 %, 87.5 % and 85.8 %. Against the project's requirement of at least 75 % from one model of about 2 MB, it is 11 points above the accuracy target at the size target.
 
 : **Table 3** Accuracy against measured file size on the 472-clip, 50-word test set, with six-view averaging. Means over seeds; individual seeds in brackets.
 
 | Model | File size | Top-1 | Top-5 |
 |---|---|---|---|
 | Pixel-only, 32-bit (3 seeds) | 14.55 MB | 73.7 % (75.0 / 73.7 / 72.2) | — |
-| + landmarks, 32-bit (2 seeds) | 14.9 MB | 87.1 % (87.3 / 86.9) | — |
-| + landmarks, 4-bit after training | ≈ 2 MB | 84.1 % (83.1 / 85.2) | — |
-| **+ landmarks, 4-bit quantisation-aware** | **1.97 MiB** | **86.0 % (84.5 / 87.5)** | **96.1 %** |
+| + landmarks, 32-bit (3 seeds) | 14.9 MB | 86.5 % (87.3 / 86.9 / 85.4) | — |
+| + landmarks, 4-bit after training | ≈ 2 MB | 83.4 % (83.1 / 85.2 / 82.0) | — |
+| **+ landmarks, 4-bit quantisation-aware** | **1.97 MiB** | **85.9 % (84.5 / 87.5 / 85.8)** | **96.4 %** |
 
 ![**Fig. 11** Accuracy against measured file size. The dashed line marks the 2 MB budget and the dotted line the 75 % target.](../../docs/figures/fig20_size_ladder.png){width=92%}
 
@@ -200,7 +200,7 @@ Other limits follow from the data and the setup. INCLUDE comes from one studio i
 
 # Conclusion
 
-On INCLUDE, a random split overstates sign recognition accuracy by about 23 points for the same model, because the dataset's back-to-back takes leak across the split. Measured on recording sessions the model never saw, a 3.89 M-parameter factorised Vision Transformer reaches 86.0 % top-1 on 50 ISL words from a 1.97 MiB, 4-bit file. Nearly all of that improvement came from how the model was trained and what it was shown, not from the network: longer training, deeper frame caching, a larger training vocabulary and, above all, the hand landmarks the detector was already computing. The architecture itself was never changed beyond the 91 k parameters that read the landmarks.
+On INCLUDE, a random split overstates sign recognition accuracy by about 28 points under the same recipe, because the dataset's back-to-back takes leak across the split. Measured on recording sessions the model never saw, a 3.89 M-parameter factorised Vision Transformer reaches 85.9 % top-1 on 50 ISL words from a 1.97 MiB, 4-bit file. Nearly all of that improvement came from how the model was trained and what it was shown, not from the network: longer training, deeper frame caching, a larger training vocabulary and, above all, the hand landmarks the detector was already computing. The architecture itself was never changed beyond the 91 k parameters that read the landmarks.
 
 The result does not establish that the model recognises ISL in general. It fails on a second corpus, and INCLUDE has one studio and no signer labels. The next steps, in order, are to test the landmark model across corpora, to record new signers in different rooms and on a head-mounted camera, to re-measure the confidence gate for the final model, and to benchmark the 4-bit model on wearable hardware.
 
