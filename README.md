@@ -41,8 +41,12 @@ python -m islvit.predict --run release/isl_vit_tiny_lm_int4_s0.pt --video path/t
 # Local web UI (record, predict, correct, enrol new takes)
 python -m islvit.serve --run release/isl_vit_tiny_lm_int4_s0.pt
 
-# Reproduce the headline on the held-out clips (needs the INCLUDE crop + landmark caches)
-python -m islvit.mask50 --run release/isl_vit_tiny_lm_int4_s0.pt
+# The seven-screen interface with ten built-in demo clips (SSH-tunnel friendly; see islvit/demo.py)
+python -m islvit.demo
+
+# Reproduce the headline on the held-out clips (needs the 472-clip test caches, built by run_clean_test.sh)
+ISLVIT_CACHE=cache128_f32_test ISLVIT_CACHE_LM=cache_lm_f32_test \
+  python -m islvit.mask50 --run release/isl_vit_tiny_lm_int4_s0.pt
 ```
 
 `release/` holds three INT4 models, one per training seed. Seed 0 is the default by
@@ -50,6 +54,16 @@ convention, not because it scored best: picking the best-scoring seed would be s
 the test set. Expect the three-seed mean, 85.9 %, from any of them. Each file contains the
 4-bit weights, FP16 scales, the config and the word list; `islvit/release.py` writes them and
 `islvit.export.load_release` reads them.
+
+## Low-resolution video: a super-resolution front end
+
+A phone or glasses camera may send small, compressed video, and the pipeline's only upscaling step (a bicubic
+resize to 720p before hand detection) is where it fails. `islvit/sr/` replaces that one resize with a trained
+×4 generator, off by default (`--sr`); 1080p video never reaches it. On the 472 held-out clips degraded to 180p
+the shipped INT4 model scores **61.0 %** with bicubic and **75.4 to 76.0 %** with a learned upscaler, against
+85.9 % on clean video. Whether the upscaler is trained as a GAN matters little: across three GAN versions, the
+GAN beat its own no-GAN control in 2 of 9 pre-registered comparisons. The remaining error sits mostly in where
+the hand detector places the joints. Full study: [docs/GAN_COMPARATIVE_STUDY.md](docs/GAN_COMPARATIVE_STUDY.md).
 
 ## The measurement problem this project is really about
 
@@ -148,14 +162,21 @@ islvit/
   qat.py  export.py     quantisation-aware training, INT4 packing and the release format
   mask50.py             the deployed metric: 262-word head masked to 50 words
   predict.py  serve.py  live inference from a video file, and the local web UI
-  figures.py report.py  every figure and table in the report
+  demo.py  demo_samples.py  the seven-screen interface launcher and its ten demo clips
+  ui/                   the interface sources (one folder per screen) and the bundled index.html
+  sr/                   super-resolution GAN front end: networks, training, hand proxy, study helpers
+  figures.py figures_v2.py report.py gan_report.py   every figure and table in the reports
 configs/                YAML configs, one per experiment
-splits/                 19 split definitions -- the four protocols, plus cross-corpus
-runs/                   75 runs: summary.json + history.csv (checkpoints not tracked)
-docs/                   technical report, figures, capture protocol
+splits/                 22 split definitions -- the four protocols, vocabulary tiers, cross-corpus, the 472-clip test list
+runs/                   129 entries: summary.json + history.csv, scoring JSON, the GAN study (checkpoints not tracked)
+docs/                   technical report, GAN study, project context, figures, capture protocol
+report/                 Review 2 case study and the Review 3 report and slides, with their builders
 release/                the shipped INT4 models (one per seed)
 run_*.sh                the experiment scripts, one per investigation
 ```
+
+For a single account of the whole project (what each file does, how each result was produced, and where
+to read it) see [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md).
 
 ## What is deliberately not in this repository
 
@@ -167,13 +188,13 @@ No source video, no preprocessed caches, and no training checkpoints -- only the
 | Crop caches (`cache*/`) | ~70 GB | Regenerate with `islvit.data.crops` |
 | Training checkpoints (`runs/*/best.pt`) | ~1 GB | Retrain via the `run_*.sh` script for that experiment |
 
-What *is* tracked is everything needed to verify the claims: all code, all configs, all 19 split definitions, and per-run `summary.json` / `history.csv` for all 75 runs — every accuracy value in the report is read directly from those files. See §19.2 of the report for the full reproduction sequence.
+What *is* tracked is everything needed to verify the claims: all code, all configs, all 22 split definitions, and per-run `summary.json` / `history.csv` and scoring JSON for every run — most accuracy values in the reports are read directly from those files (docs/PROJECT_CONTEXT.md §14.3 lists the few that are not). See §19.2 of the report for the full reproduction sequence.
 
 ## Data sources
 
 - **INCLUDE** — Sridhar et al., ACM MM 2020. Zenodo record 4010759. CC-BY-4.0. 4,257 clips, 262 word-level signs, 1920×1080 @ 25 fps, single studio in Chennai.
 - **CISLR** — pretraining corpus and cross-corpus test set.
-- **iSign** — 18,000 clips from ~11,000 distinct source videos, used for scaled pretraining.
+- **iSign** — 18,000 clips, each from a different source video (of 18,139 available; 127,237 segments in all), of which 17,896 pass the hand-detection filter and are used for scaled pretraining.
 - **ISL-CSLTR** — continuous-signing corpus, used for auxiliary experiments.
 
 Each is obtained from its original source under its own licence; no source video or preprocessed cache is redistributed here. **Exception:** a small number of illustrative figures (`docs/figures/fig16_crop_montage.png`, `fig19_walkthrough.png`, the case-study images in `report/case_study/assets/`, `docs/figures/fig23_gan_montage.png`, the interface screenshots in `report/review3/assets/`, and documents embedding them) show frames and crops of an INCLUDE signer. These are reproduced from INCLUDE (Sridhar et al., ACM MM 2020, Zenodo 4010759) under CC-BY-4.0, with attribution.

@@ -144,15 +144,17 @@ axes[0].set_ylim(30, 92)
 axes[0].text(0.01, 0.97, "solid: 180p   faded: 240p", transform=axes[0].transAxes, fontsize=8, va="top", color=MUTED)
 save(fig, "c4_v3_validation.png")
 
-# 5. Leakage: the random-split figure is read from its run; the session-disjoint 75.6 % is the
-#    project's earlier controlled single-model result (PRELIMINARY_MODEL_REPORT.md, s11.4).
+# 5. Leakage, same recipe: the random-split control (one seed, 200 clips) against the mean of the two
+#    session-disjoint models trained with that recipe (472 clips). The 262-word model masked to 50 (75.6 %)
+#    is a different model and is deliberately not used here.
 rand = json.loads((RUNS / "baseline_random_s0/summary.json").read_text())["test"]["top1"] * 100
+sess = 100 * st.mean(json.loads((RUNS / f"f16_clean_s{s}/summary.json").read_text())["test"]["top1"] for s in (0, 1))
 fig, ax = plt.subplots(figsize=(4.4, 3.3))
-rects = ax.bar(["Random video split", "Held-out sessions"], [rand, 75.6], color=[COL["srgan_v1"], COL["srgan"]], width=0.55)
-for rect, v in zip(rects, [rand, 75.6]):
+rects = ax.bar(["Random video split", "Held-out sessions"], [rand, sess], color=[COL["srgan_v1"], COL["srgan"]], width=0.55)
+for rect, v in zip(rects, [rand, sess]):
     ax.text(rect.get_x() + rect.get_width() / 2, v + 1.2, f"{v:.1f}", ha="center", fontsize=9, color=INK)
 ax.set_ylim(0, 105); ax.set_ylabel("Top-1 accuracy (%)")
-ax.set_title("One pixel-only model, two splits", fontsize=10.5, color=INK); grid(ax)
+ax.set_title("Same recipe, two splits (50 words)", fontsize=10.5, color=INK); grid(ax)
 save(fig, "c5_leakage.png")
 
 # 6. Every plotted number, for the slide deck's native (editable) charts.
@@ -173,7 +175,7 @@ data = {
     "v3_validation": {"labels": [l for _, l, _ in order],
                       **{f"{m}_{lv}": [round(100 * dev[lv][f"{lv}_{k}"][key], 3) for k, _, _ in order]
                          for m, key in (("present", "present"), ("shape_err", "points_err_med")) for lv in ("L3", "L2")}},
-    "leakage": {"random": round(rand, 3), "sessions": 75.6},
+    "leakage": {"random": round(rand, 3), "sessions": round(sess, 3)},
 }
 (OUT / "chart_data.json").write_text(json.dumps(data, indent=1), encoding="utf-8")
 print("wrote chart_data.json")

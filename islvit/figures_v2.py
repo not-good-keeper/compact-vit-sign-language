@@ -53,44 +53,54 @@ def top1(tag: str, tta: bool = False) -> float:
 
 # --------------------------------------------------------------------------- 1
 def fig_leakage_now():
-    """The control against the honest number, and how the gap has narrowed.
+    """The random-split control against the honest number, for matched models.
 
-    The control is the measured 98.5 % of ``baseline_random_s0``, not the ~97.9 %
-    probe quoted while that run was still training. The honest bar is the 1.95 MB
-    INT4 single model, not the 18.5 MB ensemble: quoting a headline the product
-    cannot ship is the same category of dishonesty this figure exists to expose.
+    Both bars are the same recipe: a 50-word, pixel-only model, 16 frames, 2,000
+    epochs, iSign initialisation. The random-split control is ``baseline_random_s0``
+    (one seed, 200 test clips); the session-disjoint bar is the mean of
+    ``f16_clean_s0`` and ``f16_clean_s1`` (two seeds, the 472 deployed-word test
+    clips). An earlier version paired the control with the 262-word model masked to
+    50 words (75.6 %), which differs in vocabulary trained and in epochs, and so
+    understated the gap. That model is not part of this comparison.
     """
+    control = summary("baseline_random_s0")["test"]["top1"]
+    seeds = [top1("f16_clean_s0"), top1("f16_clean_s1")]
+    honest = float(np.mean(seeds))
+    gap = 100 * (control - honest)
     fig, (left, right) = plt.subplots(1, 2, figsize=(11, 4.2), gridspec_kw={"width_ratios": [1, 1.15]})
 
-    names = ["random split\n(control)", "session-disjoint\n(honest)"]
-    values = [0.985, 0.756]
+    names = ["random split\n(1 seed, 200 clips)", "session-disjoint\n(2 seeds, 472 clips)"]
+    values = [control, honest]
     bars = left.bar(names, values, color=[ORANGE, AQUA], width=0.55)
     for bar, value in zip(bars, values):
         left.text(bar.get_x() + bar.get_width() / 2, value + 0.015, f"{value:.1%}",
                   ha="center", color=INK, fontsize=11, fontweight="600")
-    left.annotate("", xy=(0.5, 0.756), xytext=(0.5, 0.985),
+    left.annotate("", xy=(0.5, honest), xytext=(0.5, control),
                   arrowprops=dict(arrowstyle="<->", color=RED, lw=1.6))
-    left.text(0.56, 0.871, "-22.9 pts\nleakage", color=RED, fontsize=10, fontweight="600", va="center")
+    left.text(0.56, (control + honest) / 2, f"-{gap:.1f} pts\nleakage", color=RED, fontsize=10,
+              fontweight="600", va="center")
     left.set_ylim(0, 1.12)
-    style(left, "Same 50 words, same model, same recipe", ylabel="top-1 accuracy")
+    style(left, "Same 50-word recipe, two splits", ylabel="top-1 accuracy")
     left.yaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
 
-    # The control barely moves; the honest number is what the project improved.
-    stages = ["Aug\nbaseline", "Sep\ncurrent"]
-    control, honest = [0.954, 0.985], [0.421, 0.756]
+    # The control is fixed; the honest number is what the project improved.
+    start = float(np.mean([top1("vocab50_s0"), top1("vocab50_s1")]))
+    stages = ["250 epochs,\n8 frames\n(start of the sweep)", "2,000 epochs,\n16 frames from a\n32-frame cache"]
     x = np.arange(2)
-    right.plot(x, control, "-o", color=ORANGE, lw=2.2, ms=8, label="random split (control)")
-    right.plot(x, honest, "-o", color=AQUA, lw=2.2, ms=8, label="session-disjoint (honest)")
-    right.fill_between(x, honest, control, color=RED, alpha=0.10)
-    for i, (c, h) in enumerate(zip(control, honest)):
-        right.text(i, (c + h) / 2, f"{100*(c-h):.0f} pts",
-                   ha="left" if i == 0 else "right", color=RED,
-                   fontsize=10, fontweight="600")
+    right.plot(x, [start, honest], "-o", color=AQUA, lw=2.2, ms=8, label="session-disjoint, 472 clips")
+    right.axhline(control, color=ORANGE, lw=2.2, ls="--", label="random-split control (final recipe)")
+    right.fill_between(x, [start, honest], control, color=RED, alpha=0.10)
+    for i, value in enumerate([start, honest]):
+        if i == 0:
+            right.text(i, value - 0.045, f"{value:.1%}", ha="center", color=INK, fontsize=10, fontweight="600")
+        else:
+            right.text(i + 0.04, value, f"{value:.1%}", ha="left", va="center", color=INK, fontsize=10, fontweight="600")
+    right.text(1.0, (control + honest) / 2, f"{gap:.0f} pts", ha="right", color=RED, fontsize=10, fontweight="600")
     right.set_xlim(-0.3, 1.3)
     right.set_xticks(x)
     right.set_xticklabels(stages)
     right.set_ylim(0.3, 1.05)
-    style(right, "The gap closed by 30 points", ylabel="top-1 accuracy")
+    style(right, f"The honest number rose {100 * (honest - start):.0f} points", ylabel="top-1 accuracy")
     right.yaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
     right.legend(frameon=False, fontsize=9, loc="lower right")
     save(fig, "fig10_leakage_now.png")
