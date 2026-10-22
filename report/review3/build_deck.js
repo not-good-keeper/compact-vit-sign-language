@@ -140,7 +140,7 @@ pres.addSection({ title: "Problem and data" });
     ["Held-out test sessions", "1,010", "472 of them = the 50 deployed words"],
     ["Excluded", "402", "Words with < 6 training clips"],
     ["Validation sessions", "888", "Choosing between GAN v3 arms"],
-    ["iSign (unlabelled)", "18,000", "Self-supervised pretraining"],
+    ["iSign (unlabelled)", "18,000", "Self-supervised pretraining; 17,896 kept"],
     ["CISLR (300 x 300 px)", "609", "Cross-corpus test"],
   ];
   s.addTable(rows.map((r, i) => r.map((c) => ({ text: c, options: {
@@ -154,7 +154,7 @@ pres.addSection({ title: "Problem and data" });
   });
   s.addText("Frames from held-out INCLUDE clips (Sridhar et al., ACM MM 2020, CC-BY-4.0)", { x: 9.75, y: 3.5, w: 3.0, h: 0.5, fontSize: 10, color: "6B7280", margin: 0, isTextBox: true });
   s.addText("We train on all 262 words and answer from the 50 deployed ones. Each word has a fixed number of clips, so training on fewer words would only discard data.", { x: 9.75, y: 4.2, w: 3.0, h: 2.4, fontSize: 13, color: C.text1, margin: 0, isTextBox: true, valign: "top" });
-  s.addNotes("INCLUDE is the labelled corpus: 4,257 usable clips of 262 words, recorded at 1080p in one studio. It has no signer labels, so we rebuilt 13 recording sessions from the camera's clip numbers. 2,845 clips train the model and 1,010 clips from held-out sessions test it; 472 of those belong to the 50 deployed words and appear in every result. iSign supplies 18,000 unlabelled clips for pretraining, and CISLR is a second corpus for a transfer test.");
+  s.addNotes("INCLUDE is the labelled corpus: 4,257 usable clips of 262 words, recorded at 1080p in one studio. It has no signer labels, so we rebuilt 13 recording sessions from the camera's clip numbers. 2,845 clips train the model and 1,010 clips from held-out sessions test it; 472 of those belong to the 50 deployed words and appear in every result. iSign supplies 18,000 unlabelled clips (17,896 pass a detection filter) for pretraining, and CISLR is a second corpus for a transfer test.");
 }
 
 // ================================================================ 4 protocol
@@ -163,14 +163,14 @@ pres.addSection({ title: "Problem and data" });
   img(s, "fig3_evaluation_split.png", 0.6, 1.35, 5.4, 4.6, { card: true, alt: "Building the session split" });
   s.addChart(pres.charts.BAR, [{ name: "Top-1 accuracy (%)", labels: ["Random video split", "Held-out sessions"], values: [D.leakage.random, D.leakage.sessions] }], {
     x: 6.4, y: 1.35, w: 6.3, h: 3.7, barDir: "col", chartColors: [HEX.accent2, HEX.accent1], valAxisMinVal: 0, valAxisMaxVal: 100,
-    ...chartBase("One pixel-only model, two splits"), showLegend: false, barGapWidthPct: 60,
+    ...chartBase("Same recipe, two splits (50 words)"), showLegend: false, barGapWidthPct: 60,
   });
   bullets(s, [
     "Camera clip numbers run in sequence, and a large jump marks a new session.",
     "Whole sessions are held out, and the split builder rejects any overlap.",
-    "The 22.9-point gap is what the model gains from having seen the same person and room.",
+    "The 28-point gap is what the model gains from having seen the same person and room.",
   ], 6.4, 5.2, 6.3, 1.7, 14);
-  s.addNotes("INCLUDE was recorded as back-to-back takes. A random split puts near-identical takes on both sides, so the same pixel-only model scores 98.5 % on a random split and 75.6 % on unseen sessions. Every result after this slide uses unseen sessions, three seeds and paired McNemar tests.");
+  s.addNotes("INCLUDE was recorded as back-to-back takes. A random split puts near-identical takes on both sides, so the same recipe scores 98.5 % on a random split and about 70 % on unseen sessions. Every result after this slide uses unseen sessions, three seeds and paired McNemar tests.");
 }
 
 // ================================================================ 5 architecture
@@ -186,7 +186,7 @@ pres.addSection({ title: "Architecture and algorithms" });
   const s = content("From video to model inputs", "Architecture and algorithms");
   img(s, "fig0_how_it_works.png", 0.6, 1.3, 6.4, 5.55, { card: true, alt: "How a sign becomes a word" });
   bullets(s, [
-    "32 frames sampled uniformly and letterboxed to 1280 × 720.",
+    "32 frames sampled uniformly and letterboxed to 1280 × 720.",
     "MediaPipe Holistic finds the hands, face and pose. A missed hand gets a second search in an upscaled forearm region; failing that, the nearest box is reused and flagged.",
     "Three 64 px crops per frame: left hand, right hand, face.",
     "21 joints per hand: shape measured from the wrist, location measured from the shoulders.",
@@ -220,7 +220,7 @@ pres.addSection({ title: "Architecture and algorithms" });
 {
   const s = content("Training algorithm and compression", "Architecture and algorithms");
   img(s, "fig4_training_pipeline.png", 0.6, 1.2, 12.1, 2.85, { alt: "Training pipeline" });
-  card(s, 0.6, 4.3, 3.95, 2.45, "1. Self-supervised pretraining", "Masked image modelling (SimMIM) on 18,000 unlabelled iSign clips: 75 % of patches are hidden and reconstructed.", C.accent3);
+  card(s, 0.6, 4.3, 3.95, 2.45, "1. Self-supervised pretraining", "Masked image modelling (SimMIM) on 17,896 of 18,000 unlabelled iSign clips: 75 % of patches are hidden and reconstructed.", C.accent3);
   card(s, 4.69, 4.3, 3.95, 2.45, "2. Supervised training", "1,000 epochs on 2,845 clips with AdamW 5e-4, mixup, stream dropout, resolution jitter and EMA. We keep the final epoch, so nothing is selected on test.", C.accent1);
   card(s, 8.78, 4.3, 3.95, 2.45, "3. 4-bit quantisation-aware", "4-bit weights in groups of 128 with 16-bit scales, a straight-through estimator, 300 epochs. Rounding after training lost 3.1 points; QAT lost 0.6.", C.accent2);
   s.addNotes("Training starts with masked image modelling on unlabelled iSign video, continues with supervised training for a fixed 1,000 epochs, keeping the final weights, and ends with 300 epochs of quantisation-aware training. Rounding after training cost 3.1 points; with the rounding inside the training loop the loss was 0.6, at a seventh of the file size.");
@@ -280,7 +280,7 @@ pres.addSection({ title: "Comparisons" });
   s.addTable(rows.map((r, i) => r.map((c, j) => ({ text: c, options: { bold: i === 0 || j === 0, color: i === 0 ? HEX.lt1 : HEX.dk1, fill: { color: i === 0 ? HEX.dk2 : (i % 2 ? HEX.lt1 : HEX.lt2) } } }))),
     { x: 0.6, y: 1.4, w: 12.1, colW: [1.6, 4.3, 3.0, 3.2], fontSize: 14, fontFace: THEME.bodyFontFace, border: { type: "solid", pt: 0.5, color: "D5DAE2" }, margin: 0.1, valign: "middle" });
   stat(s, 0.6, 4.75, 3.8, "2 of 9", "GAN vs no-GAN tests passed (3 versions × 3 levels), both at 240p", C.accent2);
-  stat(s, 4.75, 4.75, 3.8, "−1.2", "points for v2 against v1 at 360p (p = 0.021): training longer did not help", C.accent4);
+  stat(s, 4.75, 4.75, 3.8, "−1.2", "points for v2 against v1 at 360p (p = 0.021): training longer did not help", C.accent4);
   stat(s, 8.9, 4.75, 3.8, "15.5 %", "of hands missed at 180p with v3, against 22.1 % with v2 and 39.3 % with bicubic", C.accent1);
   s.addNotes("Each version answered a question raised by the one before. Version 1 is the planned GAN. Its discriminator ended clearly ahead, so version 2 trained the same generator longer with a fresh discriminator; it was no better. Our diagnostics then put the remaining error in the hand landmarks, so version 3 added a loss that compares hand joints read from the generated and original images. Against their no-GAN controls the three GANs passed our test in only two of nine comparisons, both at 240p.");
 }
@@ -293,7 +293,7 @@ pres.addSection({ title: "Comparisons" });
     valAxisMinVal: 50, valAxisMaxVal: 90, ...chartBase("Shipped 4-bit model, frozen (clean 1080p: 85.9 %)"), dataLabelFontSize: 8,
     showLegend: true, legendPos: "b", legendFontSize: 10, barGapWidthPct: 40,
   });
-  stat(s, 9.0, 1.45, 3.7, "+14.5", "points at 180p for SR-GAN v2 over bicubic (p = 7 × 10⁻³²)");
+  stat(s, 9.0, 1.45, 3.7, "+14.5", "points at 180p for SR-GAN v2 over bicubic (p = 7 × 10⁻³²)");
   stat(s, 9.0, 2.95, 3.7, "+15.0", "points at 180p for SR-L1, which has no GAN", C.accent3);
   stat(s, 9.0, 4.45, 3.7, "≤ 1 point", "between any two learned upscalers at 180p", C.accent2);
   s.addText("Fine-tuned on 360p, v1 and v2 still beat bicubic by 5.2–5.7 points at 240p and 12.5–13.3 at 180p.", { x: 9.0, y: 5.95, w: 3.7, h: 0.8, fontSize: 12, color: "4B5563", margin: 0, isTextBox: true });
@@ -325,7 +325,7 @@ pres.addSection({ title: "Comparisons" });
     { text: "On validation it found more hands (73.3 % vs 63.3 % for v2 at 180p). ", options: { bold: true } },
     { text: "On the test set it was not reliably better than v2 or SR-L1, and v3 without the GAN was 3.1 points worse than v2 at 240p. Better detection did not become better classification." },
   ], { x: 4.85, y: 5.35, w: 7.85, h: 1.45, fontSize: 14, color: C.text1, margin: 0, valign: "top", isTextBox: true });
-  stat(s, 0.6, 5.3, 4.0, "−3.1", "points for v3 without the GAN against v2 at 240p (p = 5 × 10⁻⁶)", C.accent2);
+  stat(s, 0.6, 5.3, 4.0, "−3.1", "points for v3 without the GAN against v2 at 240p (p = 5 × 10⁻⁶)", C.accent2);
   s.addNotes("Since the loss sits in the landmarks, version 3 trains the generator against a differentiable stand-in for the hand detector. On validation sessions it did what it was built to do at the detection level, and on the test set it found the most hands, but classification did not improve. One explanation we have not tested is that the frozen classifier learned from clean-video landmarks; fine-tuning it on version 3's output would check that. Without the discriminator, the hand loss also left a dot-grid artifact in the images.");
 }
 
@@ -378,7 +378,7 @@ pres.addSection({ title: "Close" });
   s.addText("Team 3 · " + TEAM.map(([name, roll]) => `${name} (${roll})`).join(" · "),
     { x: 0.7, y: 6.85, w: 12.0, h: 0.35, fontSize: 11, color: "9AA3B2", margin: 0, isTextBox: true });
   s.addText([
-    { text: "85.9 % top-1 on unseen sessions from a 1.97 MiB model. On a random split, the pixel-only version scored 22.9 points higher.", options: { bullet: true, breakLine: true } },
+    { text: "85.9 % top-1 on unseen sessions from a 1.97 MiB model. Under the same recipe, a random split scored about 28 points higher.", options: { bullet: true, breakLine: true } },
     { text: "A learned upscaler recovers up to 15 points on 180p video. Across three GAN versions, the adversarial loss beat its no-GAN control in 2 of 9 tests.", options: { bullet: true, breakLine: true } },
     { text: "After upscaling, most of the remaining error is in where the hand joints are placed, not in the pixels.", options: { bullet: true, breakLine: true } },
     { text: "The app gives the same answers as the offline evaluation on every clip checked.", options: { bullet: true } },

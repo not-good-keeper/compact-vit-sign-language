@@ -98,8 +98,8 @@ noticeably less predictable (sd 4.2 vs sd 0.1). Two other interventions — a
 labelled-CISLR merge and a checkpoint-selection fix superseded by folding val into
 train — remain negative or unresolved.
 
-Scaling the same recipe to **iSign** (18,000 clips from ~11,000 distinct source
-videos, against CISLR's 6,096) improved it further to **42.1 % top-1, ~44 % with
+Scaling the same recipe to **iSign** (17,896 clips, each from a different source
+video, against CISLR's 6,096) improved it further to **42.1 % top-1, ~44 % with
 TTA** across two tightly-agreeing seeds — the project's best INCLUDE result.
 
 **Two further levers, both outside the model, were then found to be larger than
