@@ -1,6 +1,6 @@
 # Final technical report: ISL-ViT-Tiny / ISL Reader
 
-Evidence-audited report for 23CSE473 Neural Networks and Deep Learning (Amrita School of Computing, Coimbatore), written against commit `ea092f3e25124fcd8929929900e53879d7084943` of this repository (`main`, 23 October 2026).
+Evidence-audited report for 23CSE473 Neural Networks and Deep Learning (Amrita School of Computing, Coimbatore), written against commit `3330b87d607eac34615517c092f79fc3e3abf1b6` of this repository (`main`, 23 October 2026).
 
 | Deliverable | File |
 |---|---|

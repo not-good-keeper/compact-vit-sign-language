@@ -19,7 +19,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-PIN = "ea092f3e25124fcd8929929900e53879d7084943"
+PIN = "3330b87d607eac34615517c092f79fc3e3abf1b6"
 PREFIXES = (f"https://github.com/not-good-keeper/compact-vit-sign-language/blob/{PIN}/",
             f"https://github.com/not-good-keeper/compact-vit-sign-language/tree/{PIN}/")
 

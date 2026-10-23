@@ -1,10 +1,10 @@
 # Evidence ledger
 
-Every headline claim in `latex/main.pdf`, with the code that produces it, the command that launched it, the file it is read from, and how well it is backed. Repository links are pinned to the audited commit `ea092f3e25124fcd8929929900e53879d7084943` (shown below as `@ea092f3`). Files under `report/final/` are new in this report.
+Every headline claim in `latex/main.pdf`, with the code that produces it, the command that launched it, the file it is read from, and how well it is backed. Repository links are pinned to the audited commit `3330b87d607eac34615517c092f79fc3e3abf1b6` (shown below as `@3330b87`). Files under `report/final/` are new in this report.
 
 **Status key.** *Verified*: recomputed in this audit from a tracked machine-readable file (and, where marked, re-measured). *Verified (new)*: measured for the first time in this audit; script and output are in `report/final/`. *Partially verified*: the machine-readable file exists but part of the claim rests on prose or a log. *Prose only*: stated in a project document, no committed artifact; not used as evidence in the report.
 
-Base URL: `https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/`
+Base URL: `https://github.com/not-good-keeper/compact-vit-sign-language/blob/3330b87d607eac34615517c092f79fc3e3abf1b6/`
 
 | ID | Claim (as written in the report) | Value | Model / data / split / metric / seeds | Code | Launch | Raw result | Status | Caveat |
 |---|---|---|---|---|---|---|---|---|
@@ -40,7 +40,7 @@ Base URL: `https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea0
 | C30 | Browser screens tested with Playwright, no console errors | — | 7 screens | `islvit/ui/src/` | not committed | screenshots `report/review3/assets/ui_*.png` | Prose only | harness not committed |
 | C31 | Gating curve shown in Settings screen | 88.7 % accuracy at 75.2 % coverage, τ = 0.4 | older pixel-only 3-model ensemble | `islvit/gate.py` | — | `runs/gate_mixed.json` | Verified (file) | not the released model |
 | C32 | iSign pretraining data | 17,896 clips, 100 epochs, final loss 0.351 | — | `islvit/pretrain.py#L182-L258` | `run_isign_pipeline.sh` | `runs/isign_mim/summary.json` | Verified | pretraining cache no longer on disk |
-| C33 | Error analysis: ~70 % of errors in six look-alike groups | — | validation clips | — | — | commit message `42080f0` | Prose only | quoted with that qualification |
+| C33 | Error analysis: ~70 % of errors in six look-alike groups | — | validation clips | — | — | commit message `2679a25` | Prose only | quoted with that qualification |
 
 ## Figures
 

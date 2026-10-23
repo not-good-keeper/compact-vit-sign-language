@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | Repository | `D:\nn_dl_prac` (GitHub: `not-good-keeper/compact-vit-sign-language`, branch `main`) |
-| State described | `main` at commit `fcc2165` (2026-10-13), plus the working tree on the same day |
+| State described | `main` at commit `3748827` (2026-10-13), plus the working tree on the same day |
 | Course | 23CSE473 Neural Networks and Deep Learning, Amrita School of Computing, Amrita Vishwa Vidyapeetham, Coimbatore |
 | Team 3 | Yalamanchi Kushal (CB.SC.U4CSE23766), Nethi Kushala Kumar (CB.SC.U4CSE23735), Dhruseek Rishi Menon (CB.SC.U4CSE23716) |
 | Faculty guide | Dr. T. Bagyammal |
@@ -39,7 +39,7 @@
 ### 0.1 Conventions
 
 * **Paths** are relative to the repository root `D:\nn_dl_prac` unless they begin with `C:/` (the off-repo GAN work directory, §2.4). Forward slashes are used throughout.
-* **Line numbers** (`file.py:123`) are as of commit `fcc2165` and will drift as code changes; the function name is the stable handle.
+* **Line numbers** (`file.py:123`) are as of commit `3748827` and will drift as code changes; the function name is the stable handle.
 * **A "result" is always given with four things:** the value, the algorithm that produced it, why that algorithm was chosen, and where the number can be read. The last is a file path plus, for JSON, the key.
 * **Evidence tags** say how well a number is backed inside the repository:
 
@@ -60,7 +60,7 @@
 | **6-view TTA** | Probabilities (not logits) averaged over three temporal phases (0.25, 0.5, 0.75 of each sampling segment) with and without a horizontal flip that swaps the two hand streams. | `islvit/tta.py:42-43,46`, `islvit/mask50.py:56` |
 | **session-disjoint** | Whole recording sessions held out for test, so no signer, room, outfit or lighting is shared with training. | `islvit/data/splits.py:209 split_by_session` |
 | **McNemar** | Exact two-sided paired test on the clips two models classify differently. | `islvit/gan_report.py` (`mcnemar`, `compare`) |
-| **seed mean** | Every headline figure is the mean of 3 independently trained seeds; the best seed is never quoted. | rule stated in `islvit/release.py`, commit `a5fef61` |
+| **seed mean** | Every headline figure is the mean of 3 independently trained seeds; the best seed is never quoted. | rule stated in `islvit/release.py`, commit `cf63120` |
 
 ### 0.3 Units
 
@@ -115,13 +115,13 @@ From `git log` (first commit to latest):
 | Date | Commit | What it contains |
 |---|---|---|
 | 2026-09-02 | `73c2caa`, `ab5bfbd` | Factorised ViT, crop pipeline, four split protocols, leakage analysis, report |
-| 2026-09-09 | `a71cde5`, `0a34f11`, `0cc142b` | 32-frame cache, INT8 export, distillation harness, frame sweep, three failed levers, review deliverables |
-| 2026-09-18 | `5fa43f3` | 2 MB budget met by one INT4 QAT model at 75.6 % |
-| 2026-09-24 to 09-28 | `6cf84de`, `edd6ddf`, `cab93b4`, `594c537`, `c6629c3`, `160f31e` | Landmark stream (86 %), deterministic MediaPipe, clean test cache, honest INT4 QAT, third seed |
-| 2026-09-29 to 09-30 | `d2b95f0`, `42080f0`, `8d0bc41` | Validation-based screening of landmark levers; none survives |
-| 2026-10-08 | `a5fef61`, `b1fd1f2` | Shipped INT4 models in `release/`, loader, CPU path, case study |
-| 2026-10-12 | `10b9d4a`, `cc90912`, `5f7d9cf`, `2c392fe` | SR-GAN front end and study, seven-screen interface and demo launcher, Review 3 report and slides |
-| 2026-10-13 | `d930605`, `fcc2165` | Rewritten GAN study; revised report and slides; team details |
+| 2026-09-09 | `11eb2e1`, `d830106`, `d6388ec` | 32-frame cache, INT8 export, distillation harness, frame sweep, three failed levers, review deliverables |
+| 2026-09-18 | `a4926ca` | 2 MB budget met by one INT4 QAT model at 75.6 % |
+| 2026-09-24 to 09-28 | `3900b02`, `8b38400`, `82ecdaf`, `2a03652`, `1c1ccad`, `3bd01a8` | Landmark stream (86 %), deterministic MediaPipe, clean test cache, honest INT4 QAT, third seed |
+| 2026-09-29 to 09-30 | `fd8d884`, `2679a25`, `2c9cd0b` | Validation-based screening of landmark levers; none survives |
+| 2026-10-08 | `cf63120`, `aa8dbd7` | Shipped INT4 models in `release/`, loader, CPU path, case study |
+| 2026-10-12 | `b81330e`, `116c169`, `0510814`, `307f6f4` | SR-GAN front end and study, seven-screen interface and demo launcher, Review 3 report and slides |
+| 2026-10-13 | `acb4a77`, `3748827` | Rewritten GAN study; revised report and slides; team details |
 
 ---
 
@@ -156,7 +156,7 @@ From `git log` (first commit to latest):
 
 ### 2.2 `islvit/`: the code, file by file
 
-Function index with line numbers as of `fcc2165`. "Doc" files are covered in the section named.
+Function index with line numbers as of `3748827`. "Doc" files are covered in the section named.
 
 **Model and training**
 
@@ -366,12 +366,12 @@ About 65 points of the standard number is near-duplicate takes, a further ~7 is 
 
 | Rule | Detail | Where |
 |---|---|---|
-| **Seed mean, never best seed** | Choosing the best seed would be selection on the test set. Seed 0 is only the default model by convention | `islvit/release.py`; commit `a5fef61` |
+| **Seed mean, never best seed** | Choosing the best seed would be selection on the test set. Seed 0 is only the default model by convention | `islvit/release.py`; commit `cf63120` |
 | **Measured noise floor** | Five seeds of one configuration (INCLUDE-263 session-disjoint): top-1 **35.0 ± 1.9 %** (range 33.2 to 38.0), balanced 38.4 ± 1.5, with TTA 37.5 ± 2.2. The difference between two single runs therefore has sd ≈ 2.7 points; claims under ~5 points from single runs are unresolved | `runs/sd263_ssl_foldval{,_s1,_s2,_s3,_s4}/summary.json` `[file]`, keys `test`, `test_tta` (recomputed for this document) |
 | **McNemar exact test** | Paired comparison on identical clips, only discordant clips carry information. Holds seed fixed, so it cannot see run-to-run variation; the noise floor answers "does the intervention help?" | `islvit/gan_report.py` `mcnemar`, `compare` |
 | **Pre-registered rule for the GAN study** | "Helps" needs: higher mean, all three seeds the same direction, pooled p < 0.05. "Hurts" is the mirror; anything else is "no reliable difference" | fixed before the first test run; `islvit/gan_report.py` `compare` |
 | **Fixed budgets, final weights** | Epoch/iteration counts and loss weights fixed in advance; the final epoch or final EMA weights are kept. No checkpoint is chosen by test accuracy | `--select last` in `islvit/train.py`; `selection` field in every GAN `summary.json` |
-| **Development on validation only** | From the landmark screening onward, all lever choices were made on the 888 validation clips (154 deployed-word clips), never on the 472 test clips; the winning recipe is retrained once and scored once | commit `d2b95f0`; `run_dev_screen.sh` |
+| **Development on validation only** | From the landmark screening onward, all lever choices were made on the 888 validation clips (154 deployed-word clips), never on the 472 test clips; the winning recipe is retrained once and scored once | commit `fd8d884`; `run_dev_screen.sh` |
 | **A second seed before any claim** | Four separate claims in the project were overturned by a controlled follow-up (§8 R6, R7, R12, R14) | technical report §11.4, §11.5, §11.10, §11.11 |
 
 ### 4.4 A strict split can still be unusable
@@ -617,7 +617,7 @@ Three things make QAT correct rather than approximately correct, two of which we
 `islvit/release.py` writes `release/isl_vit_tiny_lm_int4_s{0,1,2}.pt` from the three QAT runs in the compact `export.save_int4` container (4-bit nibbles, FP16 scales, leftovers, plus the config and the word list, so each file is a complete deliverable; per-tensor `torch.save` overhead that pushed a 2,004 KiB model into a 2,052 KiB file is gone). Each file is **2,069,700 bytes (1.974 MiB)**. `islvit.export.load_release` reads them and `islvit.eval.load_run` accepts them, so `predict`, `serve`, `mask50` and `demo` all take `--run release/<file>.pt`.
 
 * **Seed 0 is the default by convention, not by score**; choosing the best seed would be selection on test. The expected accuracy is the three-seed mean, 85.9 %.
-* **Verified, not assumed:** loading each release file and scoring the clean test set reproduces the measured checkpoints exactly (84.5 / 87.5 / 85.8 %), so the FP16-scale reconstruction loses nothing (commit `a5fef61`, message).
+* **Verified, not assumed:** loading each release file and scoring the clean test set reproduces the measured checkpoints exactly (84.5 / 87.5 / 85.8 %), so the FP16-scale reconstruction loses nothing (commit `cf63120`, message).
 * Fixed while shipping: `torch.autocast("cuda", enabled=False)` still queries the GPU on construction, so `predict` and `serve` crashed on machines without a usable GPU; off-GPU they now skip autocast.
 
 ### 7.6 Things built and not shipped
@@ -861,11 +861,11 @@ Found while verifying that live inference reproduces offline numbers. Fixed by `
 
 ### R20. Shipping (§7.5)
 
-`release/*.pt`, loader, CPU path, verified identical scores (84.5 / 87.5 / 85.8). Commit `a5fef61`.
+`release/*.pt`, loader, CPU path, verified identical scores (84.5 / 87.5 / 85.8). Commit `cf63120`.
 
 ### R21. Validation screening of landmark levers: none survives
 
-* **Why a new protocol:** pushing past 85.9 % means trying many ideas, and choosing between them on the 472 test clips would slowly fit the test set. Screening therefore used the *original* session-disjoint split: train 1,957 clips, validation 888 (154 deployed-word clips, all 50 words present), test untouched; the winner would be retrained on train + validation and scored on test once (`mask50 --eval-file/--eval-split`, commit `d2b95f0`).
+* **Why a new protocol:** pushing past 85.9 % means trying many ideas, and choosing between them on the 472 test clips would slowly fit the test set. Screening therefore used the *original* session-disjoint split: train 1,957 clips, validation 888 (154 deployed-word clips, all 50 words present), test untouched; the winner would be retrained on train + validation and scored on test once (`mask50 --eval-file/--eval-split`, commit `fd8d884`).
 * **Result (masked-50 TTA on the 154 validation clips, 500 epochs):**
 
 | Variant | Top-1 | Verdict |
@@ -880,13 +880,13 @@ Found while verifying that live inference reproduces offline numbers. Fixed by `
 | 1,000 epochs | 83.1 | null |
 
 * **The error analysis that motivated the levers:** wrong clips had the same hand coverage as right ones (~90 %), so detection was not the bottleneck; ~70 % of errors fell in six confusion pairs (you / you-plural, big / wide / narrow, short / small, good / bad / wet, Dress / T-Shirt), distinguished by wrist trajectory or two-hand relation, neither an explicit input. The levers addressed that and still did not pay.
-* **Evidence:** `runs/dev_lm_*/val50.json` `[file]` (key `masked_tta.top1`, n = 154); `dev_screen.log`, `dev_aug.log`, `dev_pair.log` `[log]`; commit messages `42080f0`, `8d0bc41`; the confusion groups are hard-coded in `islvit/ui/src/core.js` (`DATA.lookalikes`) and drive the Enrolment queue.
+* **Evidence:** `runs/dev_lm_*/val50.json` `[file]` (key `masked_tta.top1`, n = 154); `dev_screen.log`, `dev_aug.log`, `dev_pair.log` `[log]`; commit messages `2679a25`, `2c9cd0b`; the confusion groups are hard-coded in `islvit/ui/src/core.js` (`DATA.lookalikes`) and drive the Enrolment queue.
 
 ### R22. The ensemble ceiling
 
 * **Method:** `islvit/ensemble_val.py` averages the ten train-only validation models.
 * **Result:** single models 82.1 % mean; ensembles of 3 reach 84.1 %; all ten 82.5 %. Averaging is worth ~2 points, so distilling an ensemble would recover perhaps 1. The remaining errors are look-alike pairs that ~16 clips per word do not separate.
-* **Evidence:** commit `8d0bc41` message `[report]`; cached probabilities `runs/_val_probs/*.npz` `[local]`.
+* **Evidence:** commit `2c9cd0b` message `[report]`; cached probabilities `runs/_val_probs/*.npz` `[local]`.
 
 ### R23. Error structure of the model
 

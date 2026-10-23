@@ -45,8 +45,8 @@
 % Evidence links. Every code and result link is pinned to the audited commit.
 % \ev{path#anchor}{shown text}: the shown text is typeset as a breakable URL.
 % ---------------------------------------------------------------------------
-\newcommand{\repo}{https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943}
-\newcommand{\treeurl}{https://github.com/not-good-keeper/compact-vit-sign-language/tree/ea092f3e25124fcd8929929900e53879d7084943}
+\newcommand{\repo}{https://github.com/not-good-keeper/compact-vit-sign-language/blob/3330b87d607eac34615517c092f79fc3e3abf1b6}
+\newcommand{\treeurl}{https://github.com/not-good-keeper/compact-vit-sign-language/tree/3330b87d607eac34615517c092f79fc3e3abf1b6}
 \newcommand{\ev}[2]{\href{\repo/#1}{\nolinkurl{#2}}}
 \newcommand{\evdir}[2]{\href{\treeurl/#1}{\nolinkurl{#2}}}
 \newcommand{\new}[1]{\nolinkurl{#1}}
@@ -94,7 +94,7 @@ The second requirement is the harder one to meet with public ISL data. INCLUDE, 
 
 Transformer video models~\cite{arnab2021vivit,bertasius2021timesformer} and pose-based sign recognisers~\cite{bohacek2022spoter,jiang2021samslr,selvaraj2022openhands} give strong results on sign data, and recent work targets edge hardware~\cite{lamaakal2026tinymslr,venkatappa2026kannada}. In the sources we reviewed (Section~\ref{sec:related}) we did not find an ISL word recogniser that reports, in one place, a hard size budget, a measured quantisation cost, a split that holds out whole recording sessions, and an application tested against the offline evaluation.
 
-The project's objectives were to (i) reach at least 75\% top-1 accuracy on 50 deployable words measured on held-out recording sessions; (ii) keep the model near 2\,MB; (iii) use an evaluation protocol that does not reward memorising a session; (iv) integrate the model into a working interface; and (v) test a generative adversarial network (GAN) in a position where its contribution can be isolated. This report describes the implementation at commit \texttt{ea092f3} of the public repository and the measurements made on it.
+The project's objectives were to (i) reach at least 75\% top-1 accuracy on 50 deployable words measured on held-out recording sessions; (ii) keep the model near 2\,MB; (iii) use an evaluation protocol that does not reward memorising a session; (iv) integrate the model into a working interface; and (v) test a generative adversarial network (GAN) in a position where its contribution can be isolated. This report describes the implementation at commit \texttt{3330b87} of the public repository and the measurements made on it.
 
 The contributions are:
 \begin{enumerate}
@@ -548,7 +548,7 @@ We carried out this work for the course 23CSE473 Neural Networks and Deep Learni
 \section*{Declarations}
 
 \bmhead{Code availability}
-All code, configurations, split definitions, result files and the three released models are in the public repository \url{https://github.com/not-good-keeper/compact-vit-sign-language}. Links in this paper point to commit \texttt{ea092f3e25124fcd8929929900e53879d7084943}. Files written for this paper are under \texttt{report/final/} (scripts, extracted data, figure sources and the evidence ledger).
+All code, configurations, split definitions, result files and the three released models are in the public repository \url{https://github.com/not-good-keeper/compact-vit-sign-language}. Links in this paper point to commit \texttt{3330b87d607eac34615517c092f79fc3e3abf1b6}. Files written for this paper are under \texttt{report/final/} (scripts, extracted data, figure sources and the evidence ledger).
 
 \bmhead{Data availability}
 INCLUDE (Zenodo record 4010759), CISLR and iSign are available from their authors. The repository does not redistribute video.
@@ -562,7 +562,7 @@ The audit scripts, figures and draft text of this paper were prepared with the a
 \section{Experiment traceability}\label{app:trace}
 
 \begin{widetable}[h]
-\caption{Experiment traceability. Links are pinned to commit \texttt{ea092f3}.}\label{tab:trace}
+\caption{Experiment traceability. Links are pinned to commit \texttt{3330b87}.}\label{tab:trace}
 \scriptsize
 \setlength{\tabcolsep}{2.5pt}
 \begin{tabularx}{\textwidth}{@{}L{0.5cm}L{2.5cm}L{2.5cm}YL{1.4cm}@{}}

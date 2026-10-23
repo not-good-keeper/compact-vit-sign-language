@@ -1,6 +1,6 @@
 # Rubric compliance matrix
 
-Requirements as supplied with the assessment instructions (latest dated 16 October 2026). Statuses: *Verified complete*, *Partially evidenced*, *Implemented but not demonstrated*, *Missing evidence*, *Requires confirmation*. Links are pinned to commit `ea092f3` unless marked new.
+Requirements as supplied with the assessment instructions (latest dated 16 October 2026). Statuses: *Verified complete*, *Partially evidenced*, *Implemented but not demonstrated*, *Missing evidence*, *Requires confirmation*. Links are pinned to commit `3330b87` unless marked new.
 
 | Requirement | Evidence in the implementation | Evidence in the report | Direct files | Status | Remaining action |
 |---|---|---|---|---|---|

@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 DATA = ROOT / "report" / "final" / "data"
-PIN = "https://github.com/not-good-keeper/compact-vit-sign-language/blob/ea092f3e25124fcd8929929900e53879d7084943/"
+PIN = "https://github.com/not-good-keeper/compact-vit-sign-language/blob/3330b87d607eac34615517c092f79fc3e3abf1b6/"
 TREE = PIN.replace("/blob/", "/tree/")
 
 
