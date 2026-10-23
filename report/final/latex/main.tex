@@ -17,6 +17,7 @@
 \usepackage{tabularx}%
 \usepackage{xurl}%
 \usepackage{tikz}%
+\usepackage{stfloats}%
 \usetikzlibrary{arrows.meta,positioning,fit,calc,backgrounds}%
 \geometry{reset,paperwidth=210mm,paperheight=297mm,left=13.5mm,right=13.5mm,top=20mm,bottom=18mm,headheight=5.5pt,headsep=5.6mm,footskip=8mm,twocolumn,columnsep=6.3mm}
 \setlength\columnsep{6.3mm}
@@ -570,12 +571,12 @@ INCLUDE (Zenodo record 4010759), CISLR and iSign are available from their author
 \bmhead{Use of AI assistance}
 The audit scripts, figures and draft text of this paper were prepared with the assistance of an AI model and checked against the repository's result files.
 
-\onecolumn
+\clearpage
 \begin{appendices}
 
 \section{Experiment traceability}\label{app:trace}
 
-\begin{widetable}[h]
+\begin{widetable}[tb]
 \caption{Experiment traceability. Links are pinned to commit \texttt{3330b87}.}\label{tab:trace}
 \scriptsize
 \setlength{\tabcolsep}{2.5pt}
@@ -616,7 +617,7 @@ Inside each stage the building blocks are those of ViT~\cite{dosovitskiy2021vit}
 
 The self-supervised initialisation follows SimMIM~\cite{xie2022simmim} rather than the masked autoencoder (MAE) of He et al.~\cite{he2022mae}. The mask hides 75\% of the patches and is drawn jointly over time, stream and space, because a mask drawn inside each crop would let Stage~A solve the task alone and leave Stage~B untrained. MAE removes the masked tokens and encodes only the visible ones. With 16 patches per crop and a mask drawn over the whole clip, that would leave about four visible patches per crop, a different number in each crop. SimMIM instead replaces each masked patch with a learned mask token inside the encoder, so every crop keeps 17 tokens and the encoder that is pretrained is exactly the encoder that is later fine-tuned.
 
-\begin{widetable}[h]
+\begin{widetable}[tb]
 \caption{Components taken from earlier Vision Transformers and what ISL-ViT-Tiny changes.}\label{tab:borrow}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -650,7 +651,7 @@ Rounding a trained FP32 model this way lowered masked-50 accuracy from 86.5\% to
 
 The FP32 model reached 86.5\% only after more than 80 recorded training and pretraining runs, spread over successive iterations of the network, its inputs and its training recipe, and only then was the landmark model quantised. Table~\ref{tab:iter} lists the steps that changed accuracy, in the order they were made. Three test sets were used along the way, so a comparison is valid only within a block of the table. Steps 1 to 4 were scored on all 262 words of the 1,010 held-out-session INCLUDE clips; steps 5 to 8 trained on the 50 deployed words only and were scored on the 472 test clips; steps 9 to 12 are the final protocol of Section~\ref{sec:method:metrics}.
 
-\begin{widetable}[h]
+\begin{widetable}[tb]
 \caption{Model iterations in the order they were made. Each step keeps everything above it in the same block. Values are means over the seeds shown.}\label{tab:iter}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -684,7 +685,6 @@ Apart from the landmark inputs, the steps that mattered most were not architectu
 Several candidates were measured and dropped. A 96-pixel input lowered 16-frame accuracy from 66.1\% to 61.0\% (\ev{runs/cap_16f96/summary.json}{cap_16f96}, one seed). Pretraining natively on 16-frame clips reached a lower reconstruction loss but transferred worse, 60.0\% against 70.1\% (\ev{runs/f16_mim16_s0/summary.json}{f16_mim16_s0}). Fine-tuning the 262-word model on the 50-word softmax moved two seeds significantly in opposite directions (\ev{runs/f16_262w_s0_narrow/summary.json}{f16_262w_s*_narrow}). Five further landmark variants, screened on validation clips with the test set untouched, gave no gain that held across seeds. The first two of these decisions rest on one seed each.
 
 \end{appendices}
-\twocolumn
 
 \bibliography{references}
 
