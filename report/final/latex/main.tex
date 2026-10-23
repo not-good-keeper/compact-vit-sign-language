@@ -601,6 +601,88 @@ E13 & Released model on CISLR; corpus & \new{run_crosscorpus_release.sh}$^{*}$ &
 \footnotetext{$^{*}$New in this report (\texttt{report/final/}). Evaluator for E1 to E3 and E11: \ev{islvit/mask50.py\#L56-L108}{mask50.py}; for E4 to E10: \ev{islvit/train.py\#L244-L730}{train.py}, which scores the test split at the end of training.}
 \end{widetable}
 
+
+\section{Architecture design and model iterations}\label{app:design}
+
+This appendix explains where the ISL-ViT-Tiny architecture comes from, what it changes in the designs it borrows, how its weights reach 2\,MB, and the sequence of models that preceded the released one. It adds no measurement beyond those in the main text and the run files it links.
+
+\subsection{What the architecture borrows}
+
+ISL-ViT-Tiny is assembled from four published designs; Table~\ref{tab:borrow} lists what each contributes and what was changed. The largest borrowing is the \emph{factorised encoder} of ViViT~\cite{arnab2021vivit}. ViViT describes four ways to apply a Transformer to video. Its Model~1 attends jointly over every space--time token; Model~2, the factorised encoder, runs a spatial Transformer on the tokens of each frame, reads out one [CLS] embedding per frame, and passes the sequence of frame embeddings to a temporal Transformer; Models~3 and~4 factorise attention inside each block instead. TimeSformer's divided space--time attention~\cite{bertasius2021timesformer} belongs to the second family, alternating temporal and spatial attention within every block. ISL-ViT-Tiny follows Model~2 because it is the cheapest of the four: the spatial stage never attends outside one image, and the temporal stage sees one token per image.
+
+The change from ViViT is the unit that the spatial stage encodes. ViViT encodes a whole frame; ISL-ViT-Tiny encodes a detected crop, three per frame, so Stage~B receives $T\cdot S=48$ tokens rather than $T=16$ and needs a stream embedding to tell the left hand, the right hand and the face apart. Stage~B therefore attends across time and across body parts in one sequence, so it can relate the two hands to each other and to the face at any pair of frames. The attention cost of this arrangement can be counted directly. Per head and per layer, Stage~A computes $48\times17^2=13{,}872$ attention scores and Stage~B $49^2=2{,}401$, a total of 16,273. Joint attention over the 816 patch tokens of the clip would compute $816^2=665{,}856$, about 41 times as many.
+
+Inside each stage the building blocks are those of ViT~\cite{dosovitskiy2021vit}: a strided convolution as patch embedding, a learned [CLS] token, a learned position embedding and pre-norm Transformer blocks. The dimensions are those of DeiT-Tiny~\cite{touvron2021deit} (width 192, three heads, MLP width 768), chosen so that ImageNet weights load into Stage~A without a projection layer. The loader copies the patch embedding, the [CLS] token and the first four of the twelve pretrained blocks, and resizes the $14\times14$ position grid to the $4\times4$ grid of a 64-pixel crop by bicubic interpolation (\ev{islvit/models/isl_vit.py\#L347-L377}{isl_vit.py:347}). The same width is what the iSign self-supervised checkpoint was trained at, which is why the model was never made narrower.
+
+The self-supervised initialisation follows SimMIM~\cite{xie2022simmim} rather than the masked autoencoder (MAE) of He et al.~\cite{he2022mae}. MAE removes the masked tokens and encodes only the visible ones; with 16 patches per crop and 75\% masking that would leave four visible patches per crop and batches of uneven length. SimMIM replaces each masked patch with a learned mask token inside the encoder, so the encoder that is pretrained is exactly the encoder that is later fine-tuned. The mask is drawn jointly over time, stream and space; a mask drawn inside each crop would let Stage~A solve the task alone and leave Stage~B untrained.
+
+\begin{widetable}[h]
+\caption{Components taken from earlier Vision Transformers and what ISL-ViT-Tiny changes.}\label{tab:borrow}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{@{}L{2.4cm}L{2.0cm}YY@{}}
+\toprule
+Component & Source & Kept & Changed \\
+\midrule
+Factorised encoder & ViViT Model~2~\cite{arnab2021vivit} & spatial Transformer per image, [CLS] readout, temporal Transformer over the readouts & the image is a hand or face crop, not a frame; 48 tokens per clip with stream embeddings \\
+Patch embedding, [CLS], position embedding, pre-norm block & ViT~\cite{dosovitskiy2021vit} & all, unchanged & 64-pixel input gives a $4\times4$ grid of 16 patches \\
+Width 192, 3 heads, MLP 768 & DeiT-Tiny~\cite{touvron2021deit} & dimensions and the first four pretrained blocks & four blocks per stage instead of twelve \\
+Masked image modelling & SimMIM~\cite{xie2022simmim} & learned mask token inside the encoder, pixel regression on masked patches & mask drawn across time, stream and space; crops without a real detection excluded from the loss \\
+Stochastic depth & Huang et al.~\cite{huang2016stochdepth} & drop rate rising to 0.1 with depth & -- \\
+Token conditioning & this work & -- & crop geometry, missing-detection flag, hand-landmark and body-pose vectors added to the crop tokens through zero-initialised MLPs \\
+\botrule
+\end{tabularx}
+\end{widetable}
+
+\subsection{What is added, and why}
+
+Cropping removes two things a sign depends on: where the hand is, and its exact shape, which 64 pixels resolve only coarsely. The additions put both back without adding a single token. The box centre and size, a flag for crops that were interpolated rather than detected, a 65-number handshape and wrist-position vector per hand and a 21-number body-pose vector are each mapped to width 192 and added to the crop token they describe (Eq.~\eqref{eq:token}). The attention pattern, the sequence length and the temporal stage are therefore the same as in the pixel-only model. The last layer of every added MLP starts at zero, so at the first training step the network computes exactly what the pretrained pixel-only network computes, and the side inputs are learned on top of transferred weights rather than in competition with them. The landmark features are computed inside the model from raw joint coordinates, so training, offline evaluation and the application cannot compute them differently.
+
+\subsection{How the model reaches 2\,MB}
+
+The architecture fixes the parameter count at 3,894,214; quantisation sets the bytes. Stored in FP32, the weights take $3{,}894{,}214\times4=15{,}576{,}856$ bytes, about 15.6\,MB. Packing 8-bit weights would leave about 3.7\,MB, still above the budget (\ev{islvit/export.py\#L246-L262}{export.py:246}). Making the network smaller was the other route, and it was costly in a specific way: the width cannot fall below 192 without losing both the ImageNet and the self-supervised initialisations. A distillation student with two blocks per stage at width 192 was built for this purpose and measures 1.95\,MB packed (\ev{islvit/distill.py}{distill.py}), but it was never trained, because 4-bit weights met the budget with the full model.
+
+The 4-bit format stores every weight matrix in groups of 128 consecutive weights (Eq.~\eqref{eq:int4}). Each group keeps one FP16 scale, $\sigma_G=\max_{w\in G}|w|/7$, and 128 signed codes in $[-8,7]$, packed two per byte. One group therefore costs $128\times4+16=528$ bits, or 4.125 bits per weight, and the scales add 3.1\% to the codes. A single scale per matrix would be cheaper still, but the largest weight in a $768\times192$ matrix would then set the step size for all 147,456 weights and leave most of them on a few levels; a group of 128 confines each outlier's effect to its own group. Embeddings, LayerNorm parameters and biases stay in FP16. At 4.125 bits per weight the 3.89\,M parameters need about 2.0\,MB; the released file is 2,069,700 bytes because it also holds the FP16 tensors, the configuration and the word list. Relative to FP32 the file is 7.5 times smaller.
+
+Rounding a trained FP32 model this way lowered masked-50 accuracy from 86.5\% to 83.4\% (\ev{runs/f16_262w_lm_s0/ptq4_clean.json}{ptq4_clean.json}). Quantisation-aware training recovers most of the loss. For 300 further epochs the forward pass uses the rounded weights and the gradient updates full-precision master weights through a straight-through estimator~\cite{bengio2013ste,jacob2018quant}; the released model scores 85.9\%, within seed noise of FP32. The scale is rounded to FP16 before the weights are reconstructed, and training and export call the same rounding functions, so the model that is scored is the file that is shipped (\ev{islvit/export.py\#L202-L238}{export.py:202}).
+
+\subsection{Model iterations}
+
+The FP32 model reached 86.5\% only after more than 80 recorded training and pretraining runs, spread over successive iterations of the network, its inputs and its training recipe, and only then was the landmark model quantised. Table~\ref{tab:iter} lists the steps that changed accuracy, in the order they were made. Three test sets were used along the way, so a comparison is valid only within a block of the table. Steps 1 to 4 were scored on all 262 words of the 1,010 held-out-session INCLUDE clips; steps 5 to 8 trained on the 50 deployed words only and were scored on the 472 test clips; steps 9 to 12 are the final protocol of Section~\ref{sec:method:metrics}.
+
+\begin{widetable}[h]
+\caption{Model iterations in the order they were made. Each step keeps everything above it in the same block. Values are means over the seeds shown.}\label{tab:iter}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{@{}L{0.7cm}YL{1.0cm}L{0.8cm}L{3.5cm}@{}}
+\toprule
+Step & Change & Top-1 (\%) & Seeds & Run \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{262 words, 1,010 test clips, single view}} \\
+1 & Factorised crop ViT, 8 frames, ImageNet initialisation, best-validation checkpoint & 22.1 & 1 & \ev{runs/sd_full263/summary.json}{sd_full263} \\
+2 & Final weights kept; validation clips folded into training (1,957 to 2,845 clips) & 33.0 & 1 & \ev{runs/sd263_foldval/summary.json}{sd263_foldval} \\
+3 & Masked image modelling on CISLR; resolution jitter during fine-tuning & 39.9 & 2 & \ev{runs/sd263_ssl_rj_s0/summary.json}{sd263_ssl_rj_s*} \\
+4 & Masked image modelling on 17,896 iSign clips instead & 42.1 & 2 & \ev{runs/sd263_isign_rj_s0/summary.json}{sd263_isign_rj_s*} \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{50 words, 472 test clips, single view}} \\
+5 & Step 4 recipe on the 50-word tier, 250 epochs & 51.7 & 2 & \ev{runs/vocab50_s0/summary.json}{vocab50_s*} \\
+6 & 2,000 epochs & 59.6 & 2 & \ev{runs/long2000_s1/summary.json}{long2000_s1}, \ev{runs/grok_wd005/summary.json}{grok_wd005} \\
+7 & 16 frames instead of 8 & 66.1 & 2 & \ev{runs/cap_16f64/summary.json}{cap_16f64}, \ev{runs/cap_16f64_s1/summary.json}{cap_16f64_s1} \\
+8 & 16 frames drawn from a 32-frame cache; CISLR clips removed from training & 70.1 & 2 & \ev{runs/f16_clean_s0/summary.json}{f16_clean_s*} \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{262 words trained, restricted to 50 at test, 472 test clips, six-view TTA}} \\
+9 & Train on all 262 words, 1,000 epochs & 73.7 & 3 & \ev{runs/f16_262w_s0/masked50_clean.json}{f16_262w_s*} \\
+10 & Hand-landmark and body-pose inputs & 86.5 & 3 & \ev{runs/f16_262w_lm_s0/masked50_clean.json}{f16_262w_lm_s*} \\
+11 & 4-bit, rounded after training & 83.4 & 3 & \ev{runs/f16_262w_lm_s0/ptq4_clean.json}{ptq4_clean.json} \\
+12 & 4-bit, quantisation-aware training (released, 2,069,700 bytes) & 85.9 & 3 & \ev{runs/f16_262w_lm_s0_qat4/masked50_clean.json}{f16_262w_lm_s*_qat4} \\
+\botrule
+\end{tabularx}
+\end{widetable}
+
+Apart from the landmark inputs, the steps that mattered most were not architectural. Fixing checkpoint selection and folding validation into training (step 2) and training for longer (step 6) changed the recipe, not the network. Self-supervised initialisation helped once the input blur of the pretraining corpus was matched by resolution jitter (step 3). Doubling the frames from 8 to 16 (step 7) was the largest change to the model's input until landmarks, and the 32-frame cache helped further because the sampler could then jitter within each segment. Training on all 262 words and restricting the output to 50 at test time (step 9) scored 73.7\% against 72.7\% for the 50-word models of step 8 under the same six-view protocol, a difference within seed noise, and it keeps the other 212 words available. The hand landmarks (step 10) added 12.8 points for 91,008 parameters, more than every earlier change to resolution, capacity or schedule.
+
+Several candidates were measured and dropped. A 96-pixel input lowered 16-frame accuracy from 66.1\% to 61.0\% (\ev{runs/cap_16f96/summary.json}{cap_16f96}, one seed). Pretraining natively on 16-frame clips reached a lower reconstruction loss but transferred worse, 60.0\% against 70.1\% (\ev{runs/f16_mim16_s0/summary.json}{f16_mim16_s0}). Fine-tuning the 262-word model on the 50-word softmax moved two seeds significantly in opposite directions (\ev{runs/f16_262w_s0_narrow/summary.json}{f16_262w_s*_narrow}). Five further landmark variants, screened on validation clips with the test set untouched, did not replicate. Each of these was decided by a seed-replicated comparison against a matched control rather than by a single run.
+
 \end{appendices}
 \twocolumn
 
