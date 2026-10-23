@@ -1277,7 +1277,7 @@ FUNCTION {clearpage}
     { t empty$ not }
     {
       t #1 #1 substring$ 's :=
-      s is.num not
+      s is.num not s "e" = not and
         'skip$
         {	l  s * 'l := 	}
       if$
