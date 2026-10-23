@@ -1,0 +1,48 @@
+pixel_fp32                               top1 73.7 (75.0 / 73.7 / 72.2)  top5 93.5  bal 73.3  n=[472, 472, 472]
+landmark_fp32                            top1 86.5 (87.3 / 86.9 / 85.4)  top5 96.5  bal 86.5  n=[472, 472, 472]
+landmark_ptq_int4                        top1 83.4 (83.1 / 85.2 / 82.0)  top5 95.8  bal 83.3  n=[472, 472, 472]
+landmark_qat_int4                        top1 85.9 (84.5 / 87.5 / 85.8)  top5 96.4  bal 85.8  n=[472, 472, 472]
+landmark_qat_int4_wide262                top1 72.0 (69.7 / 75.8 / 70.3)  top5 92.7  bal 71.5  n=[472, 472, 472]
+landmark_qat_int4_masked_single_view     top1 85.5 (83.3 / 87.9 / 85.2)  top5 96.3  bal 85.2  n=[472, 472, 472]
+paired_landmark_vs_pixel [(76, 18, '1.2e-09'), (83, 21, '6.7e-10'), (88, 26, '4.6e-09')] pooled {'gained': 247, 'lost': 65, 'p': 3.944100803402431e-26}
+paired_qat_vs_ptq [(30, 23, '0.41'), (20, 9, '0.061'), (27, 9, '0.0039')] pooled {'gained': 77, 'lost': 41, 'p': 0.001178393103085455}
+paired_qat_vs_fp32 [(11, 24, '0.041'), (11, 8, '0.65'), (15, 13, '0.85')] pooled {'gained': 37, 'lost': 45, 'p': 0.4397054291858219}
+test-set identity {'n_test_rows_vocab50clean': 472, 'n_test472_list': 472, 'test472_equals_split_test_rows': True, 'all_headline_files_score_same_clips': True, 'headline_clips_equal_split_test_rows': True}
+release {'isl_vit_tiny_lm_int4_s0.pt': 2069700, 'isl_vit_tiny_lm_int4_s1.pt': 2069700, 'isl_vit_tiny_lm_int4_s2.pt': 2069700}
+leakage gap 28.4
+noise floor 35.0 +- 1.9
+L1 {'bicubic': '81.2', 'srl1': '83.5', 'srgan_v1': '84.3', 'srgan': '83.1', 'sr3_l1_task': '83.8', 'sr3_gan_task': '84.0'}
+L2 {'bicubic': '76.0', 'srl1': '80.9', 'srgan_v1': '81.8', 'srgan': '82.3', 'sr3_l1_task': '79.2', 'sr3_gan_task': '81.6'}
+L3 {'bicubic': '61.0', 'srl1': '76.0', 'srgan_v1': '75.4', 'srgan': '75.5', 'sr3_l1_task': '75.6', 'sr3_gan_task': '75.4'}
+  L1:srl1_vs_bicubic               +2.3  66/33  p=0.0012  helps
+  L1:srgan_vs_bicubic              +1.9  73/46  p=0.017  helps
+  L1:srgan_v1_vs_bicubic           +3.1  75/31  p=2.3e-05  helps
+  L1:sr3_gan_task_vs_bicubic       +2.8  71/31  p=9.3e-05  helps
+  L1:srgan_v1_vs_srl1              +0.8  35/24  p=0.19  no reliable difference
+  L1:srgan_vs_srl1                 -0.4  28/34  p=0.53  no reliable difference
+  L1:sr3_gan_task_vs_sr3_l1_task   +0.2  33/30  p=0.8  no reliable difference
+  L1:srgan_vs_srgan_v1             -1.2  16/33  p=0.021  hurts
+  L1:sr3_gan_task_vs_srgan         +0.9  40/27  p=0.14  no reliable difference
+  L1:sr3_gan_task_vs_srl1          +0.5  30/23  p=0.41  no reliable difference
+  L2:srl1_vs_bicubic               +4.9  125/56  p=3.1e-07  helps
+  L2:srgan_vs_bicubic              +6.4  142/52  p=7.6e-11  helps
+  L2:srgan_v1_vs_bicubic           +5.8  138/56  p=3.6e-09  helps
+  L2:sr3_gan_task_vs_bicubic       +5.6  140/60  p=1.5e-08  helps
+  L2:srgan_v1_vs_srl1              +0.9  43/30  p=0.16  no reliable difference
+  L2:srgan_vs_srl1                 +1.5  49/28  p=0.022  helps
+  L2:sr3_gan_task_vs_sr3_l1_task   +2.4  68/34  p=0.00099  helps
+  L2:srgan_vs_srgan_v1             +0.6  31/23  p=0.34  no reliable difference
+  L2:sr3_gan_task_vs_srgan         -0.7  38/48  p=0.33  no reliable difference
+  L2:sr3_gan_task_vs_srl1          +0.8  52/41  p=0.3  no reliable difference
+  L3:srl1_vs_bicubic               +15.0  269/57  p=4.5e-34  helps
+  L3:srgan_vs_bicubic              +14.5  265/60  p=7e-32  helps
+  L3:srgan_v1_vs_bicubic           +14.3  261/58  p=6.8e-32  helps
+  L3:sr3_gan_task_vs_bicubic       +14.4  265/61  p=1.9e-31  helps
+  L3:srgan_v1_vs_srl1              -0.6  56/65  p=0.47  no reliable difference
+  L3:srgan_vs_srl1                 -0.5  56/63  p=0.58  no reliable difference
+  L3:sr3_gan_task_vs_sr3_l1_task   -0.2  59/62  p=0.86  no reliable difference
+  L3:srgan_vs_srgan_v1             +0.1  39/37  p=0.91  no reliable difference
+  L3:sr3_gan_task_vs_srgan         -0.1  62/63  p=1  no reliable difference
+  L3:sr3_gan_task_vs_srl1          -0.6  53/61  p=0.51  no reliable difference
+splits {'full263__session-disjoint.csv': ({'test': 1010, 'train': 1957, 'val': 888, 'unused': 402}, 0), 'full263__session-disjoint-foldval.csv': ({'test': 1010, 'train': 2845, 'unused': 402}, 0), 'full263__random-video.csv': ({'train': 2843, 'test': 872, 'val': 542}, 666), 'full263__take-group.csv': ({'train': 2656, 'test': 878, 'val': 723}, 0), 'vocab50clean__session-disjoint.csv': ({'test': 472, 'train': 571}, 0), 'vocab50__random-video.csv': ({'train': 701, 'test': 200, 'val': 142}, 159), 'include50__session-disjoint.csv': ({'train': 512, 'val': 166, 'test': 252, 'unused': 13}, 0), 'crosscorpus__cislr-test.csv': ({'train': 3855, 'test': 609}, 0)}
+session blocks {'n_blocks_corpus': 13, 'full263__session-disjoint-foldval.csv': {'blocks_with_rows': 13, 'blocks_on_both_sides': 0, 'test_blocks': [0, 5, 6]}, 'vocab50clean__session-disjoint.csv': {'blocks_with_rows': 7, 'blocks_on_both_sides': 0, 'test_blocks': [0, 5, 6]}, 'full263__take-group.csv': {'blocks_with_rows': 13, 'blocks_on_both_sides': 13, 'test_blocks': []}, 'vocab50__random-video.csv': {'blocks_with_rows': 7, 'blocks_on_both_sides': 7, 'test_blocks': []}}

@@ -1,0 +1,64 @@
+{
+ "environment": {
+  "python": "3.11.15",
+  "torch": "2.6.0+cu124",
+  "cpu": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+  "threads": 6,
+  "os": "Windows-10-10.0.26200-SP0"
+ },
+ "pixel_only_262": {
+  "params": {
+   "total": 3803206,
+   "by_module": {
+    "spatial": 1930944,
+    "geometry_proj": 37824,
+    "blocks": 1779456,
+    "norm": 384,
+    "head": 50566
+   },
+   "free_parameters": 4032
+  },
+  "flops_8f": 1647506688,
+  "gmacs_8f": 0.823753344,
+  "flops_16f": 3291373824,
+  "gmacs_16f": 1.645686912
+ },
+ "landmark_262": {
+  "params": {
+   "total": 3894214,
+   "by_module": {
+    "spatial": 1930944,
+    "geometry_proj": 37824,
+    "hand_proj": 49728,
+    "pose_proj": 41280,
+    "blocks": 1779456,
+    "norm": 384,
+    "head": 50566
+   },
+   "free_parameters": 4032
+  },
+  "flops_8f": 1649740032,
+  "gmacs_8f": 0.824870016,
+  "flops_16f": 3295840512,
+  "gmacs_16f": 1.647920256
+ },
+ "resolution_ablation_gmacs_8f": {
+  "64": 0.82371264,
+  "112": 2.341919616,
+  "128": 3.032013696
+ },
+ "release_s0": {
+  "config": {
+   "n_frames": 16,
+   "img_size": 64
+  },
+  "n_classes": 262,
+  "params": 3894214,
+  "latency_one_view_cpu": {
+   "median_ms": 20.88845000002948,
+   "q1_ms": 20.226424999805204,
+   "q3_ms": 21.88524999985475,
+   "runs": 100
+  }
+ }
+}
