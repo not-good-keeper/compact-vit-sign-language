@@ -1,0 +1,1018 @@
+{
+ "shots": [
+  {
+   "file": "app_01_capture_idle.png",
+   "sha256": "ad7df77521822663258f939c412d803b774d2b880c70f6cf02215d784402f097",
+   "note": "Capture screen after load, before any clip",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Capture",
+    "kicker": "Waiting for a sign",
+    "word": "\u2014",
+    "conf": "",
+    "status": "",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": null,
+   "screen": "capture"
+  },
+  {
+   "file": "app_02_capture_reading.png",
+   "sha256": "640b9ca031654060035925bb046fdd8e9d069045584ec677ec25248cd32cc376",
+   "note": "Capture screen while the server reads the Brother clip",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Capture",
+    "kicker": "Reading the clip",
+    "word": "\u2026",
+    "conf": "",
+    "status": "Reading the clip \u00b7 4.0 s",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": null,
+   "screen": "capture",
+   "clip": "05_brother.mp4"
+  },
+  {
+   "file": "app_03_capture_confident.png",
+   "sha256": "aa4da5679f1c6f8e60724c7bf043b0cfea01fdfedd34997fc2d1d4e244300c3a",
+   "note": "Capture screen after a confident answer (Hello)",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Capture",
+    "kicker": "Recognised",
+    "word": "Hello",
+    "conf": "97% confident",
+    "status": "Read in 4.4 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:19.933Z",
+    "top": {
+     "word": "48. Hello",
+     "p": 0.9675518274307251
+    },
+    "confidence": 0.9675518274307251,
+    "detection_rate": 0.953125,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "48. Hello",
+      0.9676
+     ],
+     [
+      "89. warm",
+      0.0016
+     ],
+     [
+      "95. bad",
+      0.0011
+     ],
+     [
+      "82. narrow",
+      0.001
+     ],
+     [
+      "96. wet",
+      0.0009
+     ]
+    ]
+   },
+   "screen": "capture",
+   "clip": "04_hello.mp4"
+  },
+  {
+   "file": "app_04_capture_lower_confidence.png",
+   "sha256": "6dbdf8f319d2d0b8d32afc4f216e39803f30cb57f5877bb319467551a5b92bbc",
+   "note": "Capture screen after the Dress clip, the lowest-confidence reliable demo clip",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Capture",
+    "kicker": "Recognised",
+    "word": "Dress",
+    "conf": "66% confident",
+    "status": "Read in 4.5 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:35.383Z",
+    "top": {
+     "word": "38. Dress",
+     "p": 0.659808874130249
+    },
+    "confidence": 0.659808874130249,
+    "detection_rate": 0.9375,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "38. Dress",
+      0.6598
+     ],
+     [
+      "83. big large",
+      0.0207
+     ],
+     [
+      "43. Pant",
+      0.0165
+     ],
+     [
+      "51. Good Morning",
+      0.0162
+     ],
+     [
+      "90. cool",
+      0.0147
+     ]
+    ]
+   },
+   "screen": "capture",
+   "clip": "08_dress.mp4"
+  },
+  {
+   "file": "app_05_capture_unsure.png",
+   "sha256": "775f40561217653c2f0b4893ff2613c96aa36552f404e9bab6c1d1e429c3530e",
+   "note": "Capture screen after the look-alike clip (wide), below tau",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Capture",
+    "kicker": "Not sure",
+    "word": "wide",
+    "conf": "7% confident",
+    "status": "Read in 7.5 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:46.494Z",
+    "top": {
+     "word": "81. wide",
+     "p": 0.07292274385690689
+    },
+    "confidence": 0.07292274385690689,
+    "detection_rate": 0.859375,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "81. wide",
+      0.0729
+     ],
+     [
+      "98. sick",
+      0.0598
+     ],
+     [
+      "50. Alright",
+      0.0579
+     ],
+     [
+      "83. big large",
+      0.051
+     ],
+     [
+      "37. Hat",
+      0.0368
+     ]
+    ]
+   },
+   "screen": "capture",
+   "clip": "25_wide.mp4"
+  },
+  {
+   "file": "app_06_notsure.png",
+   "sha256": "37bbf845194a5d74017aa9707022a80701017e2a37ea8af51111f39ff63b84e8",
+   "note": "Not sure screen: the five candidates for the look-alike clip",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Not sure",
+    "kicker": "Not sure",
+    "word": "wide",
+    "conf": "7% confident",
+    "status": "Read in 7.5 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:46.494Z",
+    "top": {
+     "word": "81. wide",
+     "p": 0.07292274385690689
+    },
+    "confidence": 0.07292274385690689,
+    "detection_rate": 0.859375,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "81. wide",
+      0.0729
+     ],
+     [
+      "98. sick",
+      0.0598
+     ],
+     [
+      "50. Alright",
+      0.0579
+     ],
+     [
+      "83. big large",
+      0.051
+     ],
+     [
+      "37. Hat",
+      0.0368
+     ]
+    ]
+   },
+   "screen": "notsure",
+   "clip": "25_wide.mp4"
+  },
+  {
+   "file": "app_07_sentence.png",
+   "sha256": "18b8a2bd715281d259145ddf01de38a362b73b6612c4564856fc037970458af0",
+   "note": "Sentence screen with the three accepted words and the clip timeline",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Sentence",
+    "kicker": "Not sure",
+    "word": "wide",
+    "conf": "7% confident",
+    "status": "Read in 7.5 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:46.494Z",
+    "top": {
+     "word": "81. wide",
+     "p": 0.07292274385690689
+    },
+    "confidence": 0.07292274385690689,
+    "detection_rate": 0.859375,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "81. wide",
+      0.0729
+     ],
+     [
+      "98. sick",
+      0.0598
+     ],
+     [
+      "50. Alright",
+      0.0579
+     ],
+     [
+      "83. big large",
+      0.051
+     ],
+     [
+      "37. Hat",
+      0.0368
+     ]
+    ]
+   },
+   "screen": "sentence"
+  },
+  {
+   "file": "app_08_settings.png",
+   "sha256": "388e0c04a65e2cc3ad3edb9c5629d8182e78d927ca5c6fb3727941ca9cf89fe2",
+   "note": "Settings screen at the default tau and view count",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Settings",
+    "kicker": "Not sure",
+    "word": "wide",
+    "conf": "7% confident",
+    "status": "Read in 7.5 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:46.494Z",
+    "top": {
+     "word": "81. wide",
+     "p": 0.07292274385690689
+    },
+    "confidence": 0.07292274385690689,
+    "detection_rate": 0.859375,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "81. wide",
+      0.0729
+     ],
+     [
+      "98. sick",
+      0.0598
+     ],
+     [
+      "50. Alright",
+      0.0579
+     ],
+     [
+      "83. big large",
+      0.051
+     ],
+     [
+      "37. Hat",
+      0.0368
+     ]
+    ]
+   },
+   "screen": "settings"
+  },
+  {
+   "file": "app_09_detection.png",
+   "sha256": "471b741c102cbfaee41fc55d2c2bd4da513faf4f5c6aa5dcfdad4f02e987e065",
+   "note": "Detection screen after the session's clips",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Detection",
+    "kicker": "Not sure",
+    "word": "wide",
+    "conf": "7% confident",
+    "status": "Read in 7.5 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:46.494Z",
+    "top": {
+     "word": "81. wide",
+     "p": 0.07292274385690689
+    },
+    "confidence": 0.07292274385690689,
+    "detection_rate": 0.859375,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "81. wide",
+      0.0729
+     ],
+     [
+      "98. sick",
+      0.0598
+     ],
+     [
+      "50. Alright",
+      0.0579
+     ],
+     [
+      "83. big large",
+      0.051
+     ],
+     [
+      "37. Hat",
+      0.0368
+     ]
+    ]
+   },
+   "screen": "diagnostics"
+  },
+  {
+   "file": "app_10_vocabulary.png",
+   "sha256": "b2544c6a7d496341892ef9ea4e8ecd374ffb5cd4db550679da5db2ed898aba3d",
+   "note": "Vocabulary screen: per-word recall of the shipped model",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Vocabulary",
+    "kicker": "Not sure",
+    "word": "wide",
+    "conf": "7% confident",
+    "status": "Read in 7.5 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:46.494Z",
+    "top": {
+     "word": "81. wide",
+     "p": 0.07292274385690689
+    },
+    "confidence": 0.07292274385690689,
+    "detection_rate": 0.859375,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "81. wide",
+      0.0729
+     ],
+     [
+      "98. sick",
+      0.0598
+     ],
+     [
+      "50. Alright",
+      0.0579
+     ],
+     [
+      "83. big large",
+      0.051
+     ],
+     [
+      "37. Hat",
+      0.0368
+     ]
+    ]
+   },
+   "screen": "vocabulary"
+  },
+  {
+   "file": "app_11_enrolment.png",
+   "sha256": "6436eff8872835e8a156edf17aca0668413c09dee0f0b74d4873e3ed9ae5fba1",
+   "note": "Enrolment screen: the take queue",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Enrolment",
+    "kicker": "Not sure",
+    "word": "wide",
+    "conf": "7% confident",
+    "status": "Read in 7.5 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:46.494Z",
+    "top": {
+     "word": "81. wide",
+     "p": 0.07292274385690689
+    },
+    "confidence": 0.07292274385690689,
+    "detection_rate": 0.859375,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "81. wide",
+      0.0729
+     ],
+     [
+      "98. sick",
+      0.0598
+     ],
+     [
+      "50. Alright",
+      0.0579
+     ],
+     [
+      "83. big large",
+      0.051
+     ],
+     [
+      "37. Hat",
+      0.0368
+     ]
+    ]
+   },
+   "screen": "enrolment"
+  },
+  {
+   "file": "app_12_shortcuts.png",
+   "sha256": "c371b8fa68ee686e34a3517c394d9badbc5ed8aa8d877e8668668a2d4573a8e5",
+   "note": "Keyboard-shortcuts dialog",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Capture",
+    "kicker": "Not sure",
+    "word": "wide",
+    "conf": "7% confident",
+    "status": "Read in 7.5 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": {
+    "at": "2026-10-23T10:06:46.494Z",
+    "top": {
+     "word": "81. wide",
+     "p": 0.07292274385690689
+    },
+    "confidence": 0.07292274385690689,
+    "detection_rate": 0.859375,
+    "frames": 32,
+    "views": 6,
+    "candidates": [
+     [
+      "81. wide",
+      0.0729
+     ],
+     [
+      "98. sick",
+      0.0598
+     ],
+     [
+      "50. Alright",
+      0.0579
+     ],
+     [
+      "83. big large",
+      0.051
+     ],
+     [
+      "37. Hat",
+      0.0368
+     ]
+    ]
+   },
+   "screen": "help"
+  },
+  {
+   "file": "app_13_capture_180p_bicubic.png",
+   "sha256": "6ff77c6e1f349c155cb8c4e67fd1fe8cd4a85c038839ba0b36704ac9bee5c048",
+   "note": "Capture screen after uploading 56. Grey/MVI_4924.mkv (180p, JPEG 40) to the server on port 7860",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Capture",
+    "kicker": "Not sure",
+    "word": "warm",
+    "conf": "37% confident",
+    "status": "Read in 6.4 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "Hands were found in 59% of frames. Treat this answer with caution.",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": null,
+   "screen": "capture",
+   "clip": "scratch_degraded180/Colours/56. Grey/MVI_4924.mkv"
+  },
+  {
+   "file": "app_14_capture_180p_srgan_v2.png",
+   "sha256": "945fcaa208322df921c10ce141968801985edd79a650a21198e6eb8ee7db023e",
+   "note": "Capture screen after uploading 56. Grey/MVI_4924.mkv (180p, JPEG 40) to the server on port 7861",
+   "port": 7861,
+   "on_screen": {
+    "screen_title": "Capture",
+    "kicker": "Recognised",
+    "word": "Grey",
+    "conf": "93% confident",
+    "status": "Read in 28.7 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": null,
+   "screen": "capture",
+   "clip": "scratch_degraded180/Colours/56. Grey/MVI_4924.mkv"
+  },
+  {
+   "file": "app_15_capture_cislr_low_detection.png",
+   "sha256": "9fce5cfce35f8f36899a0a5535b64a52244db28542731193d2fcc24c9c5435e8",
+   "note": "Capture screen after uploading CISLR_v1.5-a_videos/LVx3EA_f0yo_1.mp4 (180p, JPEG 40) to the server on port 7860",
+   "port": 7860,
+   "on_screen": {
+    "screen_title": "Capture",
+    "kicker": "Recognised",
+    "word": "quiet",
+    "conf": "91% confident",
+    "status": "Read in 5.1 s \u00b7 6 views \u00b7 32 frames",
+    "warning": "Hands were found in only 17% of frames. This answer reflects the background more than the sign. Move into better light and keep both hands in the frame.",
+    "tau": "0.40",
+    "views": "6"
+   },
+   "server_answer": null,
+   "screen": "capture",
+   "clip": "CISLR/CISLR_v1.5-a_videos/LVx3EA_f0yo_1.mp4"
+  }
+ ],
+ "model_shown_in_app": {
+  "run": "isl_vit_tiny_lm_int4_s0.pt",
+  "spec": "262 words \u00b7 50 deployed16 frames \u00b7 64 px crops3.89 M parameters"
+ },
+ "manifest": [
+  {
+   "index": 0,
+   "file": "01_loud.mp4",
+   "word": "loud",
+   "source": "INCLUDE Adjectives/1. loud/MVI_5177.MOV",
+   "server_p_at_build": 0.9195
+  },
+  {
+   "index": 1,
+   "file": "02_hat.mp4",
+   "word": "Hat",
+   "source": "INCLUDE Clothes/37. Hat/MVI_4865.MOV",
+   "server_p_at_build": 0.8697
+  },
+  {
+   "index": 2,
+   "file": "03_brown.mp4",
+   "word": "Brown",
+   "source": "INCLUDE Colours/51. Brown/MVI_4909.MOV",
+   "server_p_at_build": 0.9456
+  },
+  {
+   "index": 3,
+   "file": "04_hello.mp4",
+   "word": "Hello",
+   "source": "INCLUDE Greetings/48. Hello/MVI_0037.MOV",
+   "server_p_at_build": 0.9676
+  },
+  {
+   "index": 4,
+   "file": "05_brother.mp4",
+   "word": "Brother",
+   "source": "INCLUDE People/66. Brother/MVI_4955.MOV",
+   "server_p_at_build": 0.9605
+  },
+  {
+   "index": 5,
+   "file": "06_i.mp4",
+   "word": "I",
+   "source": "INCLUDE Pronouns/40. I/MVI_0012.MOV",
+   "server_p_at_build": 0.969
+  },
+  {
+   "index": 6,
+   "file": "07_quiet.mp4",
+   "word": "quiet",
+   "source": "INCLUDE Adjectives/2. quiet/MVI_5180.MOV",
+   "server_p_at_build": 0.9582
+  },
+  {
+   "index": 7,
+   "file": "08_dress.mp4",
+   "word": "Dress",
+   "source": "INCLUDE Clothes/38. Dress/MVI_4868.MOV",
+   "server_p_at_build": 0.6598
+  },
+  {
+   "index": 8,
+   "file": "09_grey.mp4",
+   "word": "Grey",
+   "source": "INCLUDE Colours/56. Grey/MVI_4924.MOV",
+   "server_p_at_build": 0.8723
+  },
+  {
+   "index": 9,
+   "file": "25_wide.mp4",
+   "word": "wide",
+   "source": "INCLUDE Adjectives/81. wide/MVI_5277.MOV",
+   "server_p_at_build": 0.0729
+  }
+ ],
+ "figures": {
+  "appfig_idle": {
+   "raw": "app_01_capture_idle.png",
+   "boxes": [
+    [
+     0,
+     0,
+     1440,
+     560
+    ]
+   ],
+   "size": [
+    1440,
+    560
+   ],
+   "sha256": "37b9e2f29749a19e9400764b0f14ce943b64e591a4fdd528bc82601b23354dff",
+   "raw_sha256": "ad7df77521822663258f939c412d803b774d2b880c70f6cf02215d784402f097"
+  },
+  "appfig_reading": {
+   "raw": "app_02_capture_reading.png",
+   "boxes": [
+    [
+     285,
+     105,
+     1420,
+     553
+    ]
+   ],
+   "size": [
+    1135,
+    448
+   ],
+   "sha256": "a526a9bfe94278d973a6502770713367fec3c6c511a1fb517e78946cbcccf75c",
+   "raw_sha256": "640b9ca031654060035925bb046fdd8e9d069045584ec677ec25248cd32cc376"
+  },
+  "appfig_tray": {
+   "raw": "app_05_capture_unsure.png",
+   "boxes": [
+    [
+     285,
+     605,
+     1415,
+     1108
+    ]
+   ],
+   "size": [
+    1130,
+    503
+   ],
+   "sha256": "e782a52f16a98b6ed4d05a522c1cf677487271b155861fa666674356f0039c90",
+   "raw_sha256": "775f40561217653c2f0b4893ff2613c96aa36552f404e9bab6c1d1e429c3530e"
+  },
+  "appfig_notsure": {
+   "raw": "app_06_notsure.png",
+   "boxes": [
+    [
+     285,
+     105,
+     1415,
+     625
+    ]
+   ],
+   "size": [
+    1130,
+    520
+   ],
+   "sha256": "086b2994f0178f6ddcc6010cd5f3156703827247c91629f6042b317e1532eb81",
+   "raw_sha256": "37bbf845194a5d74017aa9707022a80701017e2a37ea8af51111f39ff63b84e8"
+  },
+  "appfig_sentence": {
+   "raw": "app_07_sentence.png",
+   "boxes": [
+    [
+     285,
+     105,
+     1415,
+     520
+    ]
+   ],
+   "size": [
+    1130,
+    415
+   ],
+   "sha256": "1c8918149966856e4d07dcce472d1467ed01541d06ec313515c2a766349fb521",
+   "raw_sha256": "18b8a2bd715281d259145ddf01de38a362b73b6612c4564856fc037970458af0"
+  },
+  "appfig_shortcuts": {
+   "raw": "app_12_shortcuts.png",
+   "boxes": [
+    [
+     455,
+     275,
+     985,
+     665
+    ]
+   ],
+   "size": [
+    530,
+    390
+   ],
+   "sha256": "f028f07f538d65c118ff65b06fa49c21299441f3728288a981043f92709ce981",
+   "raw_sha256": "c371b8fa68ee686e34a3517c394d9badbc5ed8aa8d877e8668668a2d4573a8e5"
+  },
+  "appfig_settings": {
+   "raw": "app_08_settings.png",
+   "boxes": [
+    [
+     285,
+     105,
+     1405,
+     1205
+    ]
+   ],
+   "size": [
+    1120,
+    1100
+   ],
+   "sha256": "248999daa36d40c22a69495e653515dbd54b86c18bd3d95286eaab1e9e900360",
+   "raw_sha256": "388e0c04a65e2cc3ad3edb9c5629d8182e78d927ca5c6fb3727941ca9cf89fe2"
+  },
+  "appfig_detection": {
+   "raw": "app_09_detection.png",
+   "boxes": [
+    [
+     285,
+     105,
+     1415,
+     1125
+    ]
+   ],
+   "size": [
+    1130,
+    1020
+   ],
+   "sha256": "9a183528ee688cac9778f8e0c5e7d41bf2d531c9ea6eb72caa307a64a09f579c",
+   "raw_sha256": "471b741c102cbfaee41fc55d2c2bd4da513faf4f5c6aa5dcfdad4f02e987e065"
+  },
+  "appfig_vocab": {
+   "raw": "app_10_vocabulary.png",
+   "boxes": [
+    [
+     285,
+     105,
+     1415,
+     645
+    ]
+   ],
+   "size": [
+    1130,
+    540
+   ],
+   "sha256": "32d8963bb8fcc51c6694a55fe81998153ad6f222f90133fe5d65a24e3059d212",
+   "raw_sha256": "b2544c6a7d496341892ef9ea4e8ecd374ffb5cd4db550679da5db2ed898aba3d"
+  },
+  "appfig_enrol": {
+   "raw": "app_11_enrolment.png",
+   "boxes": [
+    [
+     285,
+     105,
+     1415,
+     990
+    ]
+   ],
+   "size": [
+    1130,
+    885
+   ],
+   "sha256": "82e2849b70ebc9c0b763f077fb6dff3de5806625559740cadb0bebb5b834433b",
+   "raw_sha256": "6436eff8872835e8a156edf17aca0668413c09dee0f0b74d4873e3ed9ae5fba1"
+  },
+  "appfig_confident": {
+   "raw": "app_03_capture_confident.png",
+   "boxes": [
+    [
+     285,
+     105,
+     1420,
+     553
+    ],
+    [
+     285,
+     1122,
+     1405,
+     1388
+    ]
+   ],
+   "size": [
+    1135,
+    724
+   ],
+   "sha256": "3544253c7fc2355309ec90eb45f114b47cf120d306d47ff0332c3b4422d6c9f1",
+   "raw_sha256": "aa4da5679f1c6f8e60724c7bf043b0cfea01fdfedd34997fc2d1d4e244300c3a"
+  },
+  "appfig_case_dress": {
+   "raw": "app_04_capture_lower_confidence.png",
+   "boxes": [
+    [
+     1050,
+     105,
+     1420,
+     600
+    ],
+    [
+     285,
+     1122,
+     785,
+     1388
+    ],
+    [
+     800,
+     1122,
+     1405,
+     1388
+    ]
+   ],
+   "size": [
+    985,
+    542
+   ],
+   "sha256": "58e6c4da417d7b6ff591b77575dab35de0ddbb392b42c595fd6b1688225378b8",
+   "raw_sha256": "6dbdf8f319d2d0b8d32afc4f216e39803f30cb57f5877bb319467551a5b92bbc"
+  },
+  "appfig_case_wide": {
+   "raw": "app_05_capture_unsure.png",
+   "boxes": [
+    [
+     1050,
+     105,
+     1420,
+     600
+    ],
+    [
+     285,
+     1122,
+     785,
+     1388
+    ],
+    [
+     800,
+     1122,
+     1405,
+     1388
+    ]
+   ],
+   "size": [
+    985,
+    542
+   ],
+   "sha256": "76ea00ad951e0c55628a287dddd11482416992d179648ef2176ec57b07317aed",
+   "raw_sha256": "775f40561217653c2f0b4893ff2613c96aa36552f404e9bab6c1d1e429c3530e"
+  },
+  "appfig_case_180_bicubic": {
+   "raw": "app_13_capture_180p_bicubic.png",
+   "boxes": [
+    [
+     1050,
+     105,
+     1420,
+     640
+    ],
+    [
+     285,
+     1125,
+     785,
+     1390
+    ],
+    [
+     800,
+     1125,
+     1405,
+     1390
+    ]
+   ],
+   "size": [
+    985,
+    540
+   ],
+   "sha256": "76edba552f84e6eae6ae0ebdd2bdaa3022d799c73741c2213ee90e3dabfaa975",
+   "raw_sha256": "6ff77c6e1f349c155cb8c4e67fd1fe8cd4a85c038839ba0b36704ac9bee5c048"
+  },
+  "appfig_case_180_srgan": {
+   "raw": "app_14_capture_180p_srgan_v2.png",
+   "boxes": [
+    [
+     1050,
+     105,
+     1420,
+     640
+    ],
+    [
+     285,
+     1122,
+     785,
+     1388
+    ],
+    [
+     800,
+     1122,
+     1405,
+     1388
+    ]
+   ],
+   "size": [
+    985,
+    542
+   ],
+   "sha256": "c2c503ef58fc6e8ff3be972966bdc7d4f7c6ce27636dea659f1356c72f23f2c5",
+   "raw_sha256": "945fcaa208322df921c10ce141968801985edd79a650a21198e6eb8ee7db023e"
+  },
+  "appfig_case_cislr": {
+   "raw": "app_15_capture_cislr_low_detection.png",
+   "boxes": [
+    [
+     1050,
+     105,
+     1420,
+     640
+    ],
+    [
+     285,
+     1165,
+     785,
+     1431
+    ],
+    [
+     800,
+     1165,
+     1405,
+     1431
+    ]
+   ],
+   "size": [
+    985,
+    542
+   ],
+   "sha256": "c3aeaeb2418a1aa648cbf61142809643d2298ed3a0b813a20f49e574d48d3e9c",
+   "raw_sha256": "9fce5cfce35f8f36899a0a5535b64a52244db28542731193d2fcc24c9c5435e8"
+  }
+ }
+}

@@ -159,10 +159,22 @@ where $x_v$ is view $v$ of the clip and $\mathcal{V}$ is the set of test-time vi
 \subsection{Data and vocabulary}\label{sec:method:data}
 The classifier is trained only on INCLUDE~\cite{sridhar2020include} (CC-BY-4.0): 4,257 clips of 262 words at 1920$\times$1080 pixels and 25 frames per second, all from the original 1080p sources. Two other corpora enter as unlabelled or test data. iSign~\cite{joshi2024isign} supplied 17,896 clips (one per source video, after a hand-detection filter) for self-supervised pretraining, and CISLR v1.5-a~\cite{joshi2022cislr} supplied 609 clips of 218 shared words as a cross-corpus test.
 
+\begin{figure*}[tp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_ex_dataset.png}
+\caption{Examples from the corpora. (a)~INCLUDE~\cite{sridhar2020include}: the middle frame of one training clip from each of ten of its fifteen word categories. Every clip is 1920$\times$1080 and shows one signer standing in front of a wall. (b)~Eight frames, evenly spaced from 5\% to 95\% of one clip of ``Thank you''. (c)~Six CISLR~\cite{joshi2022cislr} clips, used only as the cross-corpus test: they are 300 pixels across and show other signers, backgrounds and cameras. Frames from the iSign~\cite{joshi2024isign} clips used for unlabelled pretraining are not shown.}\label{fig:exdata}
+\end{figure*}
+
 \subsection{Region extraction and missing detections}\label{sec:method:pre}
 One code path builds the training cache, the test cache and the application input (\ev{islvit/data/crops.py\#L490-L564}{crops.py:490}, reused by \ev{islvit/predict.py\#L42-L57}{predict.py:42}). Thirty-two frames are sampled uniformly from the clip, resized to a height of 720 pixels and letterboxed to 1280$\times$720 (\ev{islvit/data/crops.py\#L163-L204}{crops.py:163}). This resize is also where the super-resolution front end is inserted (Section~\ref{sec:method:sr}). MediaPipe Holistic~\cite{lugaresi2019mediapipe} locates the hands and face; a hand box is a square around the 21 hand landmarks enlarged 1.5 times. When Holistic misses a hand, a region around the forearm predicted by the body pose is upscaled to 256 pixels and passed to a dedicated hand landmarker~\cite{zhang2020mphands} (\ev{islvit/data/crops.py\#L305-L351}{crops.py:305}). If both fail, the nearest real box is carried into the gap and the frame is flagged as interpolated (\ev{islvit/data/crops.py\#L362-L374}{crops.py:362}). Crops are stored at 128 pixels and resized to 64 pixels at model input.
 
 Two observations during development shaped this design. A fallback box synthesised from pose geometry alone can land on clothing or background, so every crop carries a provenance code (direct, region rescue, interpolated, missing) that the model receives as input. MediaPipe's detectors also keep state between videos even in image mode, so the detectors are rebuilt at the start of every video (\ev{islvit/data/crops.py\#L413-L428}{crops.py:413}); the 472 test clips were extracted this way into a separate cache, and every headline number uses that cache.
+
+\begin{figure*}[tp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_ex_crops.png}
+\caption{Region extraction on training clips. (a)~One clip (``they''). Each letterboxed frame carries the left-hand, right-hand and face boxes (blue, orange, green), and the three crops under it are the 128-pixel images stored in the cache; the model reads them at 64 pixels. The columns are every fourth of the 32 stored frames, and the model uses 16 of the 32. (b)~The three crops at frame 17 of four other words. (c)~Crops grouped by how their box was obtained. \emph{Direct}: from the holistic landmarks. \emph{Forearm region rescue}: the dedicated hand detector found the hand inside the region predicted from the body pose. \emph{Interpolated}: no detector fired on that frame, so the nearest real box was reused and the frame is flagged. \emph{No box}: the detectors fired on no frame of the clip, and the crop is a zero tensor.}\label{fig:excrops}
+\end{figure*}
 
 \subsection{Landmark features}\label{sec:method:lm}
 For each hand $h$ and frame $t$, MediaPipe returns joints $\mathbf{J}_{t,h}\in\mathbb{R}^{21\times3}$ in frame-normalised coordinates. The model computes its own invariant features (\ev{islvit/models/isl_vit.py\#L312-L344}{isl_vit.py:312}), so every inference path computes them identically. Let $\tilde{\mathbf{J}}=\mathbf{J}\operatorname{diag}(a,1,1)$ with $a=16/9$, which undoes the letterbox aspect ratio, and let $\tilde{\mathbf{j}}_{0}$ be the wrist row. The handshape descriptor is
@@ -275,6 +287,12 @@ Test inputs are the 472 test clips degraded deterministically inside the frame r
 \src{Source: \ev{islvit/sr/models.py}{sr/models.py} (networks), \ev{islvit/sr/train.py\#L137-L382}{sr/train.py:137} (training), \ev{islvit/data/crops.py\#L163-L204}{crops.py:163} (insertion point); drivers \ev{run_gan_study.sh}{run_gan_study.sh}, \ev{run_gan_v3.sh}{run_gan_v3.sh}. Generator SHA-256 hashes are recorded in \evdir{runs/gan_study/detection}{runs/gan_study/detection/*.json}.}
 \end{widefigure}
 
+\begin{figure*}[tp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_ex_gan.png}
+\caption{What each front end does to the hand region of a 180p clip. For three test clips drawn at random, the hand box that the detector finds in the middle frame of the 1080p clip (first column) is cut from the frame the detector would see after each front end. The second column is the 180p, JPEG-quality-40 input enlarged by nearest neighbour; the other columns are the 720p result of bicubic interpolation, the generator trained with L1 loss only, and the GAN generators v2 and v3. PSNR is measured on the crop against the 1080p source; the figures over 1,200 held-out patches are in Table~\ref{tab:gan}.}\label{fig:exgan}
+\end{figure*}
+
 \subsection{Evaluation protocol}\label{sec:method:eval}
 INCLUDE file names carry the camera's running clip counter (\texttt{MVI\_xxxx}). Clips of one word whose counters differ by at most 5 form a \emph{take-group} of back-to-back recordings (\ev{islvit/data/splits.py\#L118-L136}{splits.py:118}); the gap histogram is bimodal, and thresholds from 5 to 20 give the same partition. Clustering the counters of the whole corpus with the same gap gives 13 contiguous \emph{session blocks} (\ev{islvit/data/splits.py\#L170-L206}{splits.py:170}), the recording-session structure that INCLUDE's metadata makes available. The session-disjoint split assigns whole blocks to test by random search over 20,000 candidate assignments, scored mainly on how many test words keep at least six training clips (\ev{islvit/data/splits.py\#L209-L299}{splits.py:209}). Blocks 0, 5 and 6 form the test side. Figure~\ref{fig:protocols} contrasts the three protocols.
 
@@ -337,6 +355,65 @@ The application is a standard-library HTTP server (\ev{islvit/serve.py\#L102-L20
 \src{Source: online path \ev{islvit/predict.py\#L42-L107}{predict.py:42-107}, \ev{islvit/serve.py\#L50-L99}{serve.py:50-99}, \ev{islvit/demo.py\#L69-L118}{demo.py:69-118}; training commands \ev{run_isign_pipeline.sh}{run_isign_pipeline.sh}, \ev{run_landmarks.sh}{run_landmarks.sh}, \ev{run_lm_qat.sh}{run_lm_qat.sh}; release file \ev{islvit/release.py}{release.py}.}
 \end{widefigure}
 
+\begin{figure*}[!t]
+\centering
+\noindent\hfil\parbox{7.20in}{\centering\includegraphics[width=7.20in]{figures/appfig_idle.png}\\[2pt]
+{\footnotesize\raggedright (a) Capture before any clip. The header shows the live CPU server, $\tau=0.40$ and six views per clip; a clip comes from the camera (Record 3\,s), a chosen file or a dropped video, and the ring waits for a sign.\par}}\hfil\par\medskip
+\noindent\hfil\parbox{5.67in}{\centering\includegraphics[width=5.67in]{figures/appfig_reading.png}\\[2pt]
+{\footnotesize\raggedright (b) The server reading a demo clip (Brother). The video plays in the frame and the status line counts seconds; the ring shows no word until the six views have been averaged.\par}}\hfil\par\medskip
+\caption{The application's Capture screen. The rail on the left lists the seven screens, switched with Alt 1 to 7. \emph{Capture} reads one clip and answers. \emph{Not sure} offers five candidates when the answer is below $\tau$ and logs a correction. \emph{Sentence} collects the accepted words. \emph{Settings} changes $\tau$ and the number of views. \emph{Detection} shows where each crop came from. \emph{Vocabulary} gives per-word recall. \emph{Enrolment} records takes from new signers.}\label{fig:appcapture}
+\src{Screens: \ev{islvit/ui/src/screens/capture.js}{capture.js}, \ev{islvit/ui/src/shell.html}{shell.html} (rail and header), \ev{islvit/ui/src/core.js}{core.js}; server \ev{islvit/demo.py}{demo.py} with the released model. Clip \new{demo_samples/05_brother.mp4} (INCLUDE People/66. Brother/MVI\_4955.MOV, listed in \new{demo_samples/manifest.json}). Captured by \new{report/final/scripts/capture_app_screens.js} and \new{crop_app_screens.py}; raw files \new{app_screens_raw/app_01_capture_idle.png} and \new{app_02_capture_reading.png} in \new{report/final/data/app_screens_raw/}; hashes and on-screen values in \new{report/final/data/app_screens_log.json}.}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\noindent\hfil\parbox{5.67in}{\centering\includegraphics[width=5.67in]{figures/appfig_confident.png}\\[2pt]
+{\footnotesize\raggedright (a) A confident answer (Hello, 97\%, read in 4.4\,s). The ring lights 21 ticks, one per tracked hand joint, in proportion to confidence, with a notch at $\tau$; below it are the next candidates and the share of frames where each crop was a real detection.\par}}\hfil\par\medskip
+\noindent\hfil\parbox{5.65in}{\centering\includegraphics[width=5.65in]{figures/appfig_tray.png}\\[2pt]
+{\footnotesize\raggedright (b) The ten demo clips after five reads: four answered correctly (green) and the look-alike clip \emph{wide} marked Not sure. The clips are held-out INCLUDE test recordings that the server hands out read-only.\par}}\hfil\par\medskip
+\caption{Capture after a clip is read: a confident answer, and the demo-clip tray.}\label{fig:appanswer}
+\src{Screens: \ev{islvit/ui/src/screens/capture.js}{capture.js} (ring, health tiles, tray), \ev{islvit/demo_samples.py}{demo_samples.py} and \ev{islvit/demo.py}{demo.py} (read-only \texttt{/samples}). Clips \new{demo_samples/04_hello.mp4} (INCLUDE Greetings/48. Hello/MVI\_0037.MOV), \new{01_loud.mp4}, \new{05_brother.mp4}, \new{08_dress.mp4}, \new{25_wide.mp4}; outcomes in \new{demo_samples/manifest.json}. Raw files \new{app_03_capture_confident.png} and \new{app_05_capture_unsure.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}.}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\noindent\hfil\parbox{5.65in}{\centering\includegraphics[width=5.65in]{figures/appfig_notsure.png}\\[2pt]
+{\footnotesize\raggedright (a) Not sure. For a clip below $\tau$ (wide, 7\%) the five most probable words are offered as tiles, pairs known to be look-alikes are tagged, and a pick is saved to \texttt{runs/corrections.jsonl}; no pick was made for this capture.\par}}\hfil\par\medskip
+\noindent\hfil\parbox{5.65in}{\centering\includegraphics[width=5.65in]{figures/appfig_sentence.png}\\[2pt]
+{\footnotesize\raggedright (b) Sentence. Accepted words in signing order, with Speak, Copy, Export and Clear, a switch that merges repeated words, and a timeline of every clip in the session with its confidence and share of hands found.\par}}\hfil\par\medskip
+\noindent\hfil\parbox{2.65in}{\centering\includegraphics[width=2.65in]{figures/appfig_shortcuts.png}\\[2pt]
+{\footnotesize\raggedright (c) Keyboard shortcuts: Alt 1--7 switch screens, Space records, A accepts, W rejects, 1--5 pick from the shortlist, R signs again.\par}}\hfil\par\medskip
+\caption{The screens that follow an uncertain or an accepted answer.}\label{fig:appnotsure}
+\src{Screens: \ev{islvit/ui/src/screens/notsure.js}{notsure.js}, \ev{islvit/ui/src/screens/sentence.js}{sentence.js}, \ev{islvit/ui/src/shell.html}{shell.html} (shortcuts dialog); the correction route is \ev{islvit/serve.py}{serve.py} (\texttt{POST /correct}). Raw files \new{app_06_notsure.png}, \new{app_07_sentence.png}, \new{app_12_shortcuts.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}. The correction log was not written by these captures.}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\noindent\hfil\parbox{5.60in}{\centering\includegraphics[width=5.60in]{figures/appfig_settings.png}\\[2pt]
+{\footnotesize\raggedright Settings. $\tau$ sets when the app says Not sure and is drawn on a coverage and accuracy curve measured on an earlier pixel-only ensemble (labelled so on screen, not the released model). Views per clip can be six or one, and a warning floor flags answers when hands are found in fewer than 25\% of frames.\par}}\hfil\par\medskip
+\caption{The Settings screen.}\label{fig:appsettings}
+\src{Screen: \ev{islvit/ui/src/screens/settings.js}{settings.js}; curve from \new{runs/gate_mixed.json}, read by the page. Raw file \new{app_08_settings.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}. The lower part of the screen (loaded model, vocabulary and controls the server cannot change) is cropped out.}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\noindent\hfil\parbox{5.65in}{\centering\includegraphics[width=5.65in]{figures/appfig_detection.png}\\[2pt]
+{\footnotesize\raggedright (a) Detection. Where each crop box came from (direct, ROI-rescued, interpolated, missing) for each stream, the share of hands found clip by clip, a per-clip table, and the INCLUDE and CISLR reference rates (left hand 91.1\% and 25.4\%) to compare against.\par}}\hfil\par\medskip
+\noindent\hfil\parbox{5.65in}{\centering\includegraphics[width=5.65in]{figures/appfig_vocab.png}\\[2pt]
+{\footnotesize\raggedright (b) Vocabulary. Per-word recall of seed 0 of the released model on the 472 held-out clips (84.5\% overall), one dot per word: 31 words are reliable, 13 patchy and 6 weak; filters select a band or the look-alike groups.\par}}\hfil\par\medskip
+\caption{The screens that report on the data: detection quality and per-word recall.}\label{fig:appdetect}
+\src{Screens: \ev{islvit/ui/src/screens/diagnostics.js}{diagnostics.js}, \ev{islvit/ui/src/screens/vocabulary.js}{vocabulary.js}. Vocabulary data from \new{runs/f16_262w_lm_s0_qat4/masked50_clean.json} (on-screen source line); reference rates from the 32-frame caches. Raw files \new{app_09_detection.png} and \new{app_10_vocabulary.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}.}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\noindent\hfil\parbox{5.65in}{\centering\includegraphics[width=5.65in]{figures/appfig_enrol.png}\\[2pt]
+{\footnotesize\raggedright Enrolment. Three steps (signer, word, three takes) for recording new signers; the queue lists the weakest and look-alike words first, and takes are saved on the server under \texttt{custom/} by signer, word and take number. The camera is off in this capture.\par}}\hfil\par\medskip
+\caption{The Enrolment screen.}\label{fig:appenrol}
+\src{Screen: \ev{islvit/ui/src/screens/enrolment.js}{enrolment.js}; server route \ev{islvit/serve.py}{serve.py} (\texttt{POST /enrol}). Raw file \new{app_11_enrolment.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}. No take was recorded.}
+\end{figure*}
+
+\clearpage
 \subsection{Software and hardware}
 Experiments ran on one desktop: NVIDIA GeForce RTX 3060 (12\,GB), AMD Ryzen 5 5500, 32\,GB RAM, Windows 11, Python 3.11.15, PyTorch 2.6.0 with CUDA 12.4, MediaPipe 1.0.0 (Tasks API), timm 1.0.28 and OpenCV. Training seeds were 0, 1 and 2; split construction used seed 1337.
 
@@ -491,11 +568,40 @@ SR-GAN v3 & yes & 75.4 & 77.6 & 29.76 & 0.870 \\
 
 Every learned upscaler beat bicubic at every resolution; at 180p the gain was 14.3 to 15.0 points (SR-L1: +15.0, 269 clips gained and 57 lost, $p=4.5\times10^{-34}$). The adversarial term added a further gain at 240p, where v2 over SR-L1 (+1.5 points, $p=0.022$) and v3 over its control (+2.4, $p=0.001$) both met the pre-registered rule; at 180p and 360p the GAN and no-GAN arms of each version were within about one point of each other, so learned upscaling accounts for nearly all of the recovery. SR-GAN v3 found the most hands at 180p (77.6\% of frames against 68.2\% for SR-L1). In line with the perception--distortion trade-off~\cite{blau2018pd}, the GANs produced sharper patches with lower PSNR than SR-L1.
 
+\begin{figure*}[tp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_ex_detect.png}
+\caption{Landmark detection after each front end on one 180p frame. Each row is a frame from a test clip, shown in a window around the signer, with the box and 21 joints of every hand the detector returned; blue marks the left hand and orange the right. A hand counts as \emph{found} when its box overlaps the box found on the 1080p frame (intersection over union of at least 0.3), as \emph{misplaced} when a box is returned elsewhere, and as \emph{missed} when none is returned. The frames came from 36 test clips taken in random order: rows 1 and 2 are frames where every learned front end found more hands than bicubic, and row 3 is a frame where all four front ends found both. They were chosen to show the mechanism and say nothing about rates, which are in Table~
+ef{tab:gan}.}\label{fig:exdetect}
+\end{figure*}
+
 After the classifiers were fine-tuned for 150 epochs on 360p video through each front end, the GAN front ends reached 77.8\% (v1) and 76.9\% (v2) at 180p against 64.4\% for bicubic. A 2$\times$2 decomposition at 180p with SR-GAN v2, crossing clean or degraded pixels with clean or degraded landmarks, attributed 7.7 of the 10.5 points between the 180p and the clean result to degraded landmarks and 2.9 to degraded pixels (\evdir{runs/gan_study/diagnostics}{runs/gan_study/diagnostics/}), which locates the remaining headroom in hand-joint quality rather than in pixel texture.
 
 \subsection{Application integration and testing}\label{sec:res:app}
 
 Table~\ref{tab:ui} lists, for each model behind the application, how it is selected, how it was tested through the application, and its benchmark.
+
+\begin{figure*}[!t]
+\centering
+\noindent\hfil\parbox{4.92in}{\centering\includegraphics[width=4.92in]{figures/appfig_case_dress.png}\\[2pt]
+{\footnotesize\raggedright (a) A correct answer at lower confidence: Dress at 66\%, the lowest of the nine reliable demo clips, still above $\tau$ and so shown as recognised; hands were found in 94\% of frames.\par}}\hfil\par\medskip
+\noindent\hfil\parbox{4.92in}{\centering\includegraphics[width=4.92in]{figures/appfig_case_wide.png}\\[2pt]
+{\footnotesize\raggedright (b) The look-alike clip: the best guess (wide, 7\%) is below $\tau$, so the ring turns amber and the app offers its shortlist; hands were found in 86\% of frames, so missing hands do not explain the low confidence.\par}}\hfil\par\medskip
+\noindent\hfil\parbox{4.92in}{\centering\includegraphics[width=4.92in]{figures/appfig_case_cislr.png}\\[2pt]
+{\footnotesize\raggedright (c) A CISLR clip (300 pixels, another signer and camera): quiet at 91\%, but hands were found in only 17\% of frames and the left-hand crop is lost, so the app adds a red warning that the answer reflects the background more than the sign. This capture does not check the word.\par}}\hfil\par\medskip
+\caption{How the application shows different outcomes for different clips.}\label{fig:appcases1}
+\src{Screen \ev{islvit/ui/src/screens/capture.js}{capture.js}; clips \new{demo_samples/08_dress.mp4} (INCLUDE Clothes/38. Dress/MVI\_4868.MOV), \new{25_wide.mp4} (INCLUDE Adjectives/81. wide/MVI\_5277.MOV) and \new{CISLR/CISLR_v1.5-a_videos/LVx3EA_f0yo_1.mp4} (not redistributed). Raw files \new{app_04_capture_lower_confidence.png}, \new{app_05_capture_unsure.png}, \new{app_15_capture_cislr_low_detection.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}.}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\noindent\hfil\parbox{4.92in}{\centering\includegraphics[width=4.92in]{figures/appfig_case_180_bicubic.png}\\[2pt]
+{\footnotesize\raggedright (a) The 180p clip (Grey, JPEG quality 40) read with bicubic upscaling: the best guess is warm at 37\%, below $\tau$; the face crop is lost (0\%) and the app cautions that hands were found in 59\% of frames.\par}}\hfil\par\medskip
+\noindent\hfil\parbox{4.92in}{\centering\includegraphics[width=4.92in]{figures/appfig_case_180_srgan.png}\\[2pt]
+{\footnotesize\raggedright (b) The same file read by a server started with the SR-GAN v2 generator: Grey at 93\%, hands in 84\% and 75\% of frames, face in 100\%; reading took 28.7\,s against 6.4\,s on this CPU. The preview pane stayed empty for this stored lossless file.\par}}\hfil\par\medskip
+\caption{One low-resolution clip through two server configurations.}\label{fig:appcases2}
+\src{Servers: \ev{islvit/demo.py}{demo.py} with and without \texttt{--sr runs/sr\_gan/generator.pt} (generator \ev{islvit/sr/upscaler.py}{upscaler.py}). Clip \new{scratch_degraded180/Colours/56. Grey/MVI_4924.mkv}, written by \new{report/final/scripts/make_degraded_clips.py}; the same outcomes appear in \new{report/final/data/app_integration_int4_lm_s0_180p_bicubic.json} and \new{..._srgan_v2.json}. Raw files \new{app_13_capture_180p_bicubic.png} and \new{app_14_capture_180p_srgan_v2.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}.}
+\end{figure*}
 
 \begin{widetable}[t]
 \caption{Integration and testing of each model variant through the application.}\label{tab:ui}
@@ -516,6 +622,7 @@ Bicubic, SR-L1 and SR-GAN v2 front ends & \texttt{--sr} generator & 50 clips at 
 
 For each of the three classifiers, all 50 server answers had the same correctness as the offline evaluation of that model on that clip, including the clips the model gets wrong, and the same held for the three low-resolution front ends. The application therefore runs the evaluated computation: the same detector settings, 16 of 32 frames, six views and the 50-word restriction. The ordering of the front ends on these clips (SR-L1 39, SR-GAN v2 37, bicubic 32 correct) follows the full study. Screenshots of the seven screens are in \evdir{report/review3/assets}{report/review3/assets/}; the threshold chart on the Settings screen plots the gating curve in \ev{runs/gate_mixed.json}{runs/gate_mixed.json} (three pixel-only models: 88.7\% accuracy at 75.2\% coverage for $\tau=0.4$).
 
+\clearpage
 % ===========================================================================
 \section{Discussion and originality}\label{sec:discussion}
 % ===========================================================================
@@ -571,7 +678,6 @@ INCLUDE (Zenodo record 4010759), CISLR and iSign are available from their author
 \bmhead{Use of AI assistance}
 The audit scripts, figures and draft text of this paper were prepared with the assistance of an AI model and checked against the repository's result files.
 
-\clearpage
 \begin{appendices}
 
 \section{Experiment traceability}\label{app:trace}
