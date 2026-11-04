@@ -324,7 +324,7 @@ For final models, the validation clips (taken from training sessions at take-gro
 Top-1 and top-5 accuracy are the share of clips whose true word is ranked first or within the first five; balanced accuracy is the mean per-word recall (\ev{islvit/tta.py\#L65-L75}{tta.py:65}). \emph{Masked-50} applies Eq.~\eqref{eq:mask} with $\mathcal{D}$ the deployed words; \emph{wide-262} takes the argmax over all 262 outputs. Test-time augmentation (TTA) averages softmax probabilities over six views: three temporal phases (0.25, 0.5 and 0.75 of each sampling segment), each with and without a horizontal flip that swaps the hand streams (\ev{islvit/tta.py\#L46-L62}{tta.py:46}). Each headline figure is the mean of three seeds. Paired comparisons on identical clips use the exact two-sided McNemar test~\cite{mcnemar1947} on the discordant clips, per seed and pooled over seeds. Five seeds of one earlier configuration gave a top-1 standard deviation of 1.9 points on 1,010 clips (\ev{runs/sd263_ssl_foldval/summary.json}{runs/sd263_ssl_foldval*}); differences below about 5 points between single runs are therefore read as seed noise.
 
 \subsection{Application path}\label{sec:method:app}
-The application is a standard-library HTTP server (\ev{islvit/serve.py\#L102-L202}{serve.py:102}) and a seven-screen browser interface built into one page from \evdir{islvit/ui/src}{islvit/ui/src}. \texttt{POST /predict} receives raw video bytes and runs the same extraction, landmark and view functions as the offline evaluation (\ev{islvit/serve.py\#L50-L99}{serve.py:50}). The demo launcher (\ev{islvit/demo.py\#L69-L118}{demo.py:69}) replaces the server's classifier with one that applies the 50-word restriction exactly as in Eq.~\eqref{eq:mask}, and can bind a super-resolution generator into the frame reader. The model is chosen with \texttt{--run} at launch. A prediction whose confidence is below a threshold $\tau$ (default 0.40) goes to a screen listing five candidates, and a user's correction is appended to a log. Figure~\ref{fig:system} shows the offline and online paths.
+The application is a standard-library HTTP server (\ev{islvit/serve.py\#L102-L202}{serve.py:102}) and a seven-screen browser interface built into one page from \evdir{islvit/ui/src}{islvit/ui/src}. \texttt{POST /predict} receives raw video bytes and runs the same extraction, landmark and view functions as the offline evaluation (\ev{islvit/serve.py\#L50-L99}{serve.py:50}). The classifier behind this route applies the 50-word restriction exactly as in Eq.~\eqref{eq:mask}, and a super-resolution generator can be bound into the frame reader. The model is chosen with \texttt{--run} at launch. A prediction whose confidence is below a threshold $\tau$ (default 0.40) goes to a screen listing five candidates, and a user's correction is appended to a log. Figure~\ref{fig:system} shows the offline and online paths.
 
 \begin{widefigure}[t]
 \centering
@@ -352,27 +352,15 @@ The application is a standard-library HTTP server (\ev{islvit/serve.py\#L102-L20
 \draw[arr, dashed] (o6.south) |- node[lab, pos=0.25, right]{loaded at start} ([yshift=3mm]n4.north) -- (n4.north);
 \end{tikzpicture}}
 \caption{End-to-end system: offline training and compression, and the per-clip inference path shared by the evaluation and the application. Shaded boxes are learned stages.}\label{fig:system}
-\src{Source: online path \ev{islvit/predict.py\#L42-L107}{predict.py:42-107}, \ev{islvit/serve.py\#L50-L99}{serve.py:50-99}, \ev{islvit/demo.py\#L69-L118}{demo.py:69-118}; training commands \ev{run_isign_pipeline.sh}{run_isign_pipeline.sh}, \ev{run_landmarks.sh}{run_landmarks.sh}, \ev{run_lm_qat.sh}{run_lm_qat.sh}; release file \ev{islvit/release.py}{release.py}.}
+\src{Source: online path \ev{islvit/predict.py\#L42-L107}{predict.py:42-107}, \ev{islvit/serve.py\#L50-L99}{serve.py:50-99}; training commands \ev{run_isign_pipeline.sh}{run_isign_pipeline.sh}, \ev{run_landmarks.sh}{run_landmarks.sh}, \ev{run_lm_qat.sh}{run_lm_qat.sh}; release file \ev{islvit/release.py}{release.py}.}
 \end{widefigure}
 
 \begin{figure*}[!t]
 \centering
 \noindent\hfil\parbox{7.20in}{\centering\includegraphics[width=7.20in]{figures/appfig_idle.png}\\[2pt]
-{\footnotesize\raggedright (a) Capture before any clip. The header shows the live CPU server, $\tau=0.40$ and six views per clip; a clip comes from the camera (Record 3\,s), a chosen file or a dropped video, and the ring waits for a sign.\par}}\hfil\par\medskip
-\noindent\hfil\parbox{5.67in}{\centering\includegraphics[width=5.67in]{figures/appfig_reading.png}\\[2pt]
-{\footnotesize\raggedright (b) The server reading a demo clip (Brother). The video plays in the frame and the status line counts seconds; the ring shows no word until the six views have been averaged.\par}}\hfil\par\medskip
+{\footnotesize\raggedright Capture before any clip. The header shows the live CPU server, $\tau=0.40$ and six views per clip; a clip comes from the camera (Record 3\,s), a chosen file or a dropped video, and the ring waits for a sign.\par}}\hfil\par\medskip
 \caption{The application's Capture screen. The rail on the left lists the seven screens, switched with Alt 1 to 7. \emph{Capture} reads one clip and answers. \emph{Not sure} offers five candidates when the answer is below $\tau$ and logs a correction. \emph{Sentence} collects the accepted words. \emph{Settings} changes $\tau$ and the number of views. \emph{Detection} shows where each crop came from. \emph{Vocabulary} gives per-word recall. \emph{Enrolment} records takes from new signers.}\label{fig:appcapture}
-\src{Screens: \ev{islvit/ui/src/screens/capture.js}{capture.js}, \ev{islvit/ui/src/shell.html}{shell.html} (rail and header), \ev{islvit/ui/src/core.js}{core.js}; server \ev{islvit/demo.py}{demo.py} with the released model. Clip \new{demo_samples/05_brother.mp4} (INCLUDE People/66. Brother/MVI\_4955.MOV, listed in \new{demo_samples/manifest.json}). Captured by \new{report/final/scripts/capture_app_screens.js} and \new{crop_app_screens.py}; raw files \new{app_screens_raw/app_01_capture_idle.png} and \new{app_02_capture_reading.png} in \new{report/final/data/app_screens_raw/}; hashes and on-screen values in \new{report/final/data/app_screens_log.json}.}
-\end{figure*}
-
-\begin{figure*}[!t]
-\centering
-\noindent\hfil\parbox{5.67in}{\centering\includegraphics[width=5.67in]{figures/appfig_confident.png}\\[2pt]
-{\footnotesize\raggedright (a) A confident answer (Hello, 97\%, read in 4.4\,s). The ring lights 21 ticks, one per tracked hand joint, in proportion to confidence, with a notch at $\tau$; below it are the next candidates and the share of frames where each crop was a real detection.\par}}\hfil\par\medskip
-\noindent\hfil\parbox{5.65in}{\centering\includegraphics[width=5.65in]{figures/appfig_tray.png}\\[2pt]
-{\footnotesize\raggedright (b) The ten demo clips after five reads: four answered correctly (green) and the look-alike clip \emph{wide} marked Not sure. The clips are held-out INCLUDE test recordings that the server hands out read-only.\par}}\hfil\par\medskip
-\caption{Capture after a clip is read: a confident answer, and the demo-clip tray.}\label{fig:appanswer}
-\src{Screens: \ev{islvit/ui/src/screens/capture.js}{capture.js} (ring, health tiles, tray), \ev{islvit/demo_samples.py}{demo_samples.py} and \ev{islvit/demo.py}{demo.py} (read-only \texttt{/samples}). Clips \new{demo_samples/04_hello.mp4} (INCLUDE Greetings/48. Hello/MVI\_0037.MOV), \new{01_loud.mp4}, \new{05_brother.mp4}, \new{08_dress.mp4}, \new{25_wide.mp4}; outcomes in \new{demo_samples/manifest.json}. Raw files \new{app_03_capture_confident.png} and \new{app_05_capture_unsure.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}.}
+\src{Screens: \ev{islvit/ui/src/screens/capture.js}{capture.js}, \ev{islvit/ui/src/shell.html}{shell.html} (rail and header), \ev{islvit/ui/src/core.js}{core.js}. Captured by \new{report/final/scripts/capture_app_screens.js} and \new{crop_app_screens.py}; raw file \new{app_01_capture_idle.png} in \new{report/final/data/app_screens_raw/}; hashes and on-screen values in \new{report/final/data/app_screens_log.json}.}
 \end{figure*}
 
 \begin{figure*}[!t]
@@ -583,14 +571,10 @@ Table~\ref{tab:ui} lists, for each model behind the application, how it is selec
 
 \begin{figure*}[!t]
 \centering
-\noindent\hfil\parbox{4.92in}{\centering\includegraphics[width=4.92in]{figures/appfig_case_dress.png}\\[2pt]
-{\footnotesize\raggedright (a) A correct answer at lower confidence: Dress at 66\%, the lowest of the nine reliable demo clips, still above $\tau$ and so shown as recognised; hands were found in 94\% of frames.\par}}\hfil\par\medskip
-\noindent\hfil\parbox{4.92in}{\centering\includegraphics[width=4.92in]{figures/appfig_case_wide.png}\\[2pt]
-{\footnotesize\raggedright (b) The look-alike clip: the best guess (wide, 7\%) is below $\tau$, so the ring turns amber and the app offers its shortlist; hands were found in 86\% of frames, so missing hands do not explain the low confidence.\par}}\hfil\par\medskip
 \noindent\hfil\parbox{4.92in}{\centering\includegraphics[width=4.92in]{figures/appfig_case_cislr.png}\\[2pt]
-{\footnotesize\raggedright (c) A CISLR clip (300 pixels, another signer and camera): quiet at 91\%, but hands were found in only 17\% of frames and the left-hand crop is lost, so the app adds a red warning that the answer reflects the background more than the sign. This capture does not check the word.\par}}\hfil\par\medskip
-\caption{How the application shows different outcomes for different clips.}\label{fig:appcases1}
-\src{Screen \ev{islvit/ui/src/screens/capture.js}{capture.js}; clips \new{demo_samples/08_dress.mp4} (INCLUDE Clothes/38. Dress/MVI\_4868.MOV), \new{25_wide.mp4} (INCLUDE Adjectives/81. wide/MVI\_5277.MOV) and \new{CISLR/CISLR_v1.5-a_videos/LVx3EA_f0yo_1.mp4} (not redistributed). Raw files \new{app_04_capture_lower_confidence.png}, \new{app_05_capture_unsure.png}, \new{app_15_capture_cislr_low_detection.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}.}
+{\footnotesize\raggedright A CISLR clip (300 pixels, another signer and camera): quiet at 91\%, but hands were found in only 17\% of frames and the left-hand crop is lost, so the app adds a red warning that the answer reflects the background more than the sign. This capture does not check the word.\par}}\hfil\par\medskip
+\caption{How the application flags a clip with few detected hands.}\label{fig:appcases1}
+\src{Screen \ev{islvit/ui/src/screens/capture.js}{capture.js}; clip \new{CISLR/CISLR_v1.5-a_videos/LVx3EA_f0yo_1.mp4} (not redistributed). Raw file \new{app_15_capture_cislr_low_detection.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}.}
 \end{figure*}
 
 \begin{figure*}[!t]
@@ -600,7 +584,7 @@ Table~\ref{tab:ui} lists, for each model behind the application, how it is selec
 \noindent\hfil\parbox{4.92in}{\centering\includegraphics[width=4.92in]{figures/appfig_case_180_srgan.png}\\[2pt]
 {\footnotesize\raggedright (b) The same file read by a server started with the SR-GAN v2 generator: Grey at 93\%, hands in 84\% and 75\% of frames, face in 100\%; reading took 28.7\,s against 6.4\,s on this CPU. The preview pane stayed empty for this stored lossless file.\par}}\hfil\par\medskip
 \caption{One low-resolution clip through two server configurations.}\label{fig:appcases2}
-\src{Servers: \ev{islvit/demo.py}{demo.py} with and without \texttt{--sr runs/sr\_gan/generator.pt} (generator \ev{islvit/sr/upscaler.py}{upscaler.py}). Clip \new{scratch_degraded180/Colours/56. Grey/MVI_4924.mkv}, written by \new{report/final/scripts/make_degraded_clips.py}; the same outcomes appear in \new{report/final/data/app_integration_int4_lm_s0_180p_bicubic.json} and \new{..._srgan_v2.json}. Raw files \new{app_13_capture_180p_bicubic.png} and \new{app_14_capture_180p_srgan_v2.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}.}
+\src{Server with and without \texttt{--sr runs/sr\_gan/generator.pt} (generator \ev{islvit/sr/upscaler.py}{upscaler.py}). Clip \new{scratch_degraded180/Colours/56. Grey/MVI_4924.mkv}, written by \new{report/final/scripts/make_degraded_clips.py}; the same outcomes appear in \new{report/final/data/app_integration_int4_lm_s0_180p_bicubic.json} and \new{..._srgan_v2.json}. Raw files \new{app_13_capture_180p_bicubic.png} and \new{app_14_capture_180p_srgan_v2.png} in \new{report/final/data/app_screens_raw/}; log \new{report/final/data/app_screens_log.json}.}
 \end{figure*}
 
 \begin{widetable}[t]
@@ -617,7 +601,7 @@ Pixels-only FP32 (seed 0) & \nolinkurl{--run runs/f16_262w_s0} & 50 clips: 35 co
 Bicubic, SR-L1 and SR-GAN v2 front ends & \texttt{--sr} generator & 50 clips at 180p, JPEG 40: bicubic 32, SR-L1 39, SR-GAN v2 37 correct; 50 of 50 match the study's seed-0 result in each arm & yes, 3 seeds \\
 \botrule
 \end{tabularx}
-\footnotetext{Each test posts raw video to the server started by \texttt{islvit.demo} and compares the top word with the same model's per-clip outcome in its \texttt{masked50\_clean.json}. The 50 clips are the first test clip of each deployed word; 180p copies are stored losslessly (\new{report/final/scripts/make_degraded_clips.py}). Script \new{report/final/scripts/app_integration_test.py}; outputs \new{report/final/data/app_integration_*.json}.}
+\footnotetext{Each test posts raw video to the application server and compares the top word with the same model's per-clip outcome in its \texttt{masked50\_clean.json}. The 50 clips are the first test clip of each deployed word; 180p copies are stored losslessly (\new{report/final/scripts/make_degraded_clips.py}). Script \new{report/final/scripts/app_integration_test.py}; outputs \new{report/final/data/app_integration_*.json}.}
 \end{widetable}
 
 For each of the three classifiers, all 50 server answers had the same correctness as the offline evaluation of that model on that clip, including the clips the model gets wrong, and the same held for the three low-resolution front ends. The application therefore runs the evaluated computation: the same detector settings, 16 of 32 frames, six views and the 50-word restriction. The ordering of the front ends on these clips (SR-L1 39, SR-GAN v2 37, bicubic 32 correct) follows the full study. Screenshots of the seven screens are in \evdir{report/review3/assets}{report/review3/assets/}; the threshold chart on the Settings screen plots the gating curve in \ev{runs/gate_mixed.json}{runs/gate_mixed.json} (three pixel-only models: 88.7\% accuracy at 75.2\% coverage for $\tau=0.4$).
