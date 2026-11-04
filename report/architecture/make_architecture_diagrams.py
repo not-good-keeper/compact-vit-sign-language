@@ -20,6 +20,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 plt.rcParams["font.family"] = "sans-serif"
 plt.rcParams["font.sans-serif"] = ["Arial", "Helvetica", "DejaVu Sans"]
 plt.rcParams["hatch.linewidth"] = 0.8
+FONT_SCALE = 1.8  # the figures print at under half size, so labels are drawn this much larger
 
 INK = "#1F2933"
 MUTE = "#5B6670"
@@ -46,7 +47,7 @@ def canvas(w, h):
 
 
 def text(ax, x, y, s, size=9, weight="normal", color=INK, ha="center", va="center", style="normal", rot=0):
-    ax.text(x, y, s, rotation=rot, fontsize=size, fontweight=weight, color=color, ha=ha, va=va,
+    ax.text(x, y, s, rotation=rot, fontsize=size * FONT_SCALE, fontweight=weight, color=color, ha=ha, va=va,
             fontstyle=style, linespacing=1.25, zorder=10)
 
 
@@ -150,40 +151,40 @@ SHEET = {"stream": (PURP_L, PURP), "geom": (ORNG_L, ORNG), "land": (BLUE_L, BLUE
 
 # ----------------------------------------------------------------------------- Figure A
 def model_figure():
-    fig, ax = canvas(30.0, 15.0)
+    fig, ax = canvas(30.0, 15.4)
 
-    panel(ax, 0.2, 5.4, 12.1, 5.9, "Stage A · spatial ViT")
-    panel(ax, 12.5, 5.4, 11.6, 5.9, "Stage B · temporal ViT")
-    panel(ax, 24.3, 5.4, 5.5, 5.9, "Head")
+    panel(ax, 0.2, 5.05, 12.1, 6.25, "Stage A · spatial ViT")
+    panel(ax, 12.5, 5.05, 11.6, 6.25, "Stage B · temporal ViT")
+    panel(ax, 24.3, 5.05, 5.5, 6.25, "Head")
 
     # ---- Stage A: crops -> patches -> tokens -> four blocks -> one embedding
-    names = ["left hand", "right hand", "face"]
+    names = ["left\nhand", "right\nhand", "face"]
     for k, yc in enumerate([9.4, 8.0, 6.6]):
         ec, fc = STREAM[k]
         stack(ax, 0.6, yc - 0.475, 0.95, 0.95, 4, 0.12, "white", ec)
         text(ax, 2.15, yc, names[k], size=8, color=ec, ha="left")
         arrow(ax, (3.2, yc), (3.9, 8.1 + (yc - 8.1) * 0.4), color=GREY, lw=1.0, head=7)
-    text(ax, 1.6, 5.8, "3 streams × 16 frames\n64 × 64 px", size=8, color=MUTE)
+    text(ax, 2.05, 5.6, "3 streams × 16 frames\n64 × 64 px", size=7, color=MUTE)
 
     ax.add_patch(Rectangle((3.95, 7.2), 1.8, 1.8, fc="white", ec=INK, lw=1.1, zorder=3))
     for i in range(1, 4):
         line(ax, [(3.95 + 0.45 * i, 7.2), (3.95 + 0.45 * i, 9.0)], color=MUTE, lw=0.7)
         line(ax, [(3.95, 7.2 + 0.45 * i), (5.75, 7.2 + 0.45 * i)], color=MUTE, lw=0.7)
-    text(ax, 4.85, 6.85, "conv 16 × 16, stride 16", size=7.5, color=MUTE)
+    text(ax, 4.85, 6.72, "conv 16 × 16\nstride 16", size=7.5, color=MUTE)
     arrow(ax, (5.85, 8.1), (6.4, 8.1))
     cells(ax, 6.45, 9.7, 17, 0.5, 0.17, [CLS] + [TOK] * 16, vertical=True, gap=0.04)
-    text(ax, 6.7, 5.95, "[CLS] + 16\npatch tokens", size=7.5, color=MUTE)
+    text(ax, 6.7, 5.6, "[CLS] + 16\npatch tokens", size=7.5, color=MUTE)
     arrow(ax, (7.05, 8.1), (7.45, 8.1))
     plus(ax, 7.75, 8.1)
     rect(ax, 7.45, 9.05, 0.6, 0.5, fc=GREY_L, ec=GREY, r=0.06)
-    text(ax, 7.75, 9.3, "pos", size=7.5)
+    text(ax, 7.75, 9.3, "pos", size=7)
     arrow(ax, (7.75, 9.05), (7.75, 8.38), head=6, lw=1.0)
     arrow(ax, (8.05, 8.1), (8.45, 8.1))
     end = block_stack(ax, 8.5, 8.1, 4, 0.5, 0.12, 3.5, BLUE_L, BLUE)
-    text(ax, 9.65, 5.85, "Spatial ViT × 4", size=9.5, weight="bold", color=BLUE)
+    text(ax, 9.65, 5.55, "Spatial ViT × 4", size=9.5, weight="bold", color=BLUE)
     funnel(ax, end + 0.08, 8.1, 0.6, 3.5, 0.6, BLUE_L, BLUE)
     cells(ax, end + 0.9, 7.85, 1, 0.5, 0.5, [CLS])
-    text(ax, end + 1.15, 7.4, "z · 192-d", size=7.5, color=MUTE)
+    text(ax, end + 0.85, 6.75, "z\n192-d", size=7.5, color=MUTE)
     arrow(ax, (end + 1.45, 8.1), (12.95, 8.1))
 
     # ---- Stage B: the 3 x 16 token grid, the conditioning terms summed into it, four blocks, readout
@@ -200,8 +201,8 @@ def model_figure():
     text(ax, mx + 0.15, 9.3, "[CLS]", size=7.5, color=MUTE)
     arrow(ax, (mx + 0.8, 9.3), (mx + 5.4, 9.3), color=MUTE, lw=0.9, head=6)
     text(ax, mx + 3.1, 9.62, "frame 1 … 16", size=7.5, color=MUTE)
-    ax.add_patch(Rectangle((mx + 4.0, 6.62), 0.28, 0.2, fc="white", ec=RED, lw=0.8, hatch="//////", zorder=5))
-    text(ax, mx + 4.4, 6.72, "missing crop", size=7, color=MUTE, ha="left")
+    ax.add_patch(Rectangle((mx + 3.3, 6.62), 0.28, 0.2, fc="white", ec=RED, lw=0.8, hatch="//////", zorder=5))
+    text(ax, mx + 3.7, 6.72, "missing crop", size=7, color=MUTE, ha="left")
 
     sx = mx + 0.34 + 16 * 0.32 / 2
     plus(ax, sx, 6.45)
@@ -211,16 +212,16 @@ def model_figure():
     block_x = mx + 0.34 + 16 * 0.32 + 0.55
     arrow(ax, (mx + 0.34 + 16 * 0.32 + 0.1, 8.15), (block_x - 0.05, 8.15))
     end_b = block_stack(ax, block_x, 8.15, 4, 0.5, 0.12, 3.9, PURP_L, PURP)
-    text(ax, block_x + 1.15, 5.8, "Temporal ViT × 4", size=9.5, weight="bold", color=PURP)
+    text(ax, block_x + 1.15, 5.55, "Temporal ViT × 4", size=9.5, weight="bold", color=PURP)
     funnel(ax, end_b + 0.08, 8.15, 0.6, 3.9, 0.6, PURP_L, PURP)
     cells(ax, end_b + 0.9, 7.9, 1, 0.5, 0.5, [CLS])
     text(ax, end_b + 1.15, 7.45, "[CLS]", size=7.5, color=MUTE)
 
     # ---- Head
-    arrow(ax, (end_b + 1.45, 8.15), (24.75, 8.15))
-    rect(ax, 24.8, 7.55, 1.7, 1.2, fc="white", ec=INK, r=0.1)
-    text(ax, 25.65, 8.15, "Linear\n192 → 262", size=8.5)
-    arrow(ax, (26.55, 8.15), (27.0, 8.15))
+    arrow(ax, (end_b + 1.45, 8.15), (24.65, 8.15))
+    rect(ax, 24.7, 7.55, 1.95, 1.2, fc="white", ec=INK, r=0.1)
+    text(ax, 25.675, 8.15, "Linear\n192 → 262", size=7.5)
+    arrow(ax, (26.7, 8.15), (27.0, 8.15))
     heights = [0.2, 0.3, 0.15, 1.15, 0.28, 0.12, 0.38, 0.22, 0.1, 0.18]
     cols = [(GRN_L, GRN) if i == 3 else ("#D9DDE2", GREY) for i in range(len(heights))]
     bars(ax, 27.05, 7.6, heights, bw=0.13, gap=0.05, colors=cols)
@@ -237,24 +238,25 @@ def model_figure():
     for i, (lab, key) in enumerate(sheets):
         yc = fy + (0.25 if i == 0 else off * i + sh_ - off / 2)
         xr = fx + sw + off * i
-        line(ax, [(xr + 0.03, yc), (xr + 0.35, yc)], color=SHEET[key][1], lw=0.9)
-        text(ax, xr + 0.45, yc, lab, size=7.5, color=SHEET[key][1], ha="left")
+        yl = fy + 0.25 + 0.46 * i   # labels fan out a little; the sheets are closer together than a line of text
+        line(ax, [(xr + 0.03, yc), (xr + 0.35, yl)], color=SHEET[key][1], lw=0.9)
+        text(ax, xr + 0.45, yl, lab, size=7, color=SHEET[key][1], ha="left")
     top_x = fx + off * 3 + sw / 2
     arrow(ax, (sx, fy + off * 3 + sh_), (sx, 6.17), head=7)
-    text(ax, sx + 0.15, 4.95, "added to every crop token", size=7.5, color=MUTE, ha="left")
+    text(ax, sx + 0.15, 4.72, "added to every crop token", size=7.5, color=MUTE, ha="left")
 
     items = [("Stream, frame", "index", "Emb.", "stream"), ("Crop box", "x, y, size", "MLP", "geom"),
              ("Hand landmarks", "2 × 21 × 3", "MLP", "land"), ("Body keypoints", "7 × 3", "MLP", "land"),
              ("Detected", "0 / 1", "Emb.", "miss")]
-    w, gap = 1.9, 0.25
+    w, gap = 2.7, 0.15
     x0 = sx - (len(items) * w + (len(items) - 1) * gap) / 2
     bus_y = 2.3
     for i, (name, shape, kind, key) in enumerate(items):
         x = x0 + i * (w + gap)
         ec = SHEET[key][1]
-        rect(ax, x, 0.3, w, 0.85, fc="white", ec=ec, r=0.08)
-        text(ax, x + w / 2, 0.93, name, size=7.5, weight="bold")
-        text(ax, x + w / 2, 0.55, shape, size=7.5, color=MUTE)
+        rect(ax, x, 0.1, w, 1.05, fc="white", ec=ec, r=0.08)
+        text(ax, x + w / 2, 0.87, name, size=7, weight="bold")
+        text(ax, x + w / 2, 0.4, shape, size=7, color=MUTE)
         rect(ax, x + 0.3, 1.45, w - 0.6, 0.5, fc=SHEET[key][0] if key != "miss" else RED_L, ec=ec, r=0.08)
         text(ax, x + w / 2, 1.7, kind, size=8)
         arrow(ax, (x + w / 2, 1.15), (x + w / 2, 1.45), head=6, color=ec)
@@ -276,21 +278,21 @@ def model_figure():
         if n > 1e6:
             text(ax, cur + wd / 2, 3.8, f"{lab}  {n / 1e6:.2f} M", size=8, color=ec)
         cur += wd
-    text(ax, bx, 2.95, "landmark MLPs 0.09 M · geometry MLP 0.04 M · head 0.05 M · embeddings 4 k", size=7.5,
+    text(ax, bx, 2.75, "landmark MLPs 0.09 M · geometry MLP 0.04 M\nhead 0.05 M · embeddings 4 k", size=7,
          color=MUTE, ha="left")
-    text(ax, bx, 2.45, "4-bit release: groups of 128 weights, one FP16 scale per group · 1.97 MiB", size=7.5,
+    text(ax, bx, 1.2, "4-bit release: groups of 128 weights,\none FP16 scale per group · 1.97 MiB", size=7,
          color=MUTE, ha="left")
-    text(ax, bx, 1.3, "Output layers of the hand, pose and geometry MLPs start at zero, so training begins\n"
-                      "as a crops-only model and learns to use the side inputs.",
-         size=7.5, color=MUTE, ha="left", style="italic")
+    text(ax, 23.95, 2.6, "Output layers of the hand, pose\nand geometry MLPs start at zero,\n"
+                         "so training begins as a crops-only\nmodel and learns to use the\nside inputs.",
+         size=7, color=MUTE, ha="left", style="italic")
 
     # ---- inside one transformer block
-    ix, iy, iw, ih = 9.0, 11.7, 12.9, 3.15
+    ix, iy, iw, ih = 9.0, 11.7, 17.6, 3.5
     rect(ax, ix, iy, iw, ih, fc="white", ec=GREY, ls="--", lw=1.0, r=0.2, z=1)
     text(ax, ix + 0.25, iy + ih - 0.3, "Transformer block (pre-norm)", size=8.5, weight="bold", color=MUTE, ha="left")
-    text(ax, ix + iw - 0.25, iy + ih - 0.3, "d = 192 · 3 heads of 64 · MLP 768 · GELU · stochastic depth ≤ 0.1",
+    text(ax, ix + iw - 0.25, iy + ih - 0.3, "d = 192 · 3 heads · MLP 768 · GELU · drop path ≤ 0.1",
          size=7.5, color=MUTE, ha="right")
-    yc = iy + ih - 1.05
+    yc = iy + ih - 1.4
     parts_ = [("LayerNorm", BLUE_L, BLUE), ("MHSA", PURP_L, PURP), None, ("LayerNorm", BLUE_L, BLUE),
               ("MLP", PURP_L, PURP), None]
     pos, cur = [], ix + 0.6
@@ -300,10 +302,10 @@ def model_figure():
             pos.append((cur, cur + 0.54))
             cur += 0.54 + 0.55
         else:
-            rect(ax, cur, yc - 0.32, 1.45, 0.64, fc=p[1], ec=p[2], r=0.08)
-            text(ax, cur + 0.725, yc, p[0], size=8.5)
-            pos.append((cur, cur + 1.45))
-            cur += 1.45 + 0.55
+            rect(ax, cur, yc - 0.32, 2.15, 0.64, fc=p[1], ec=p[2], r=0.08)
+            text(ax, cur + 1.075, yc, p[0], size=8)
+            pos.append((cur, cur + 2.15))
+            cur += 2.15 + 0.55
     arrow(ax, (ix + 0.1, yc), (pos[0][0], yc), head=6)
     for a, b in zip(pos[:-1], pos[1:]):
         arrow(ax, (a[1], yc), (b[0], yc), head=6)
@@ -316,32 +318,32 @@ def model_figure():
     zh = 1.05
     # attention zoom
     zx = ix + 0.3
-    rect(ax, zx, zy, 6.6, zh + 0.35, fc="white", ec=PURP, ls=":", lw=0.9, r=0.1)
-    text(ax, zx + 0.2, zy + zh + 0.15, "multi-head self-attention", size=7.5, color=PURP, ha="left")
+    rect(ax, zx, zy, 9.0, zh + 0.35, fc="white", ec=PURP, ls=":", lw=0.9, r=0.1)
+    text(ax, zx + 0.2, zy + zh + 0.08, "multi-head self-attention", size=7, color=PURP, ha="left")
     cy_ = zy + 0.5
     rect(ax, zx + 0.2, cy_ - 0.28, 1.3, 0.56, fc=PURP_L, ec=PURP, r=0.06)
     for i, ch in enumerate("QKV"):
         ax.add_patch(Rectangle((zx + 0.3 + i * 0.4, cy_ - 0.17), 0.34, 0.34, fc="white", ec=PURP, lw=0.8, zorder=4))
-        text(ax, zx + 0.47 + i * 0.4, cy_, ch, size=8)
+        text(ax, zx + 0.47 + i * 0.4, cy_, ch, size=6.5)
     arrow(ax, (zx + 1.55, cy_), (zx + 1.9, cy_), head=6, lw=1.0)
-    rect(ax, zx + 1.95, cy_ - 0.28, 2.45, 0.56, fc="white", ec=PURP, r=0.06)
-    text(ax, zx + 3.175, cy_, "softmax(QKᵀ/√64) V  × 3", size=7.5)
-    arrow(ax, (zx + 4.45, cy_), (zx + 4.8, cy_), head=6, lw=1.0)
-    rect(ax, zx + 4.85, cy_ - 0.28, 0.75, 0.56, fc="white", ec=PURP, r=0.06)
-    text(ax, zx + 5.225, cy_, "concat", size=7.5)
-    arrow(ax, (zx + 5.65, cy_), (zx + 5.85, cy_), head=5, lw=1.0)
-    rect(ax, zx + 5.85, cy_ - 0.28, 0.65, 0.56, fc="white", ec=PURP, r=0.06)
-    text(ax, zx + 6.175, cy_, "W_O", size=7.5)
+    rect(ax, zx + 1.95, cy_ - 0.28, 3.95, 0.56, fc="white", ec=PURP, r=0.06)
+    text(ax, zx + 3.925, cy_, "softmax(QKᵀ/√64) V  × 3", size=7)
+    arrow(ax, (zx + 5.95, cy_), (zx + 6.2, cy_), head=6, lw=1.0)
+    rect(ax, zx + 6.25, cy_ - 0.28, 1.3, 0.56, fc="white", ec=PURP, r=0.06)
+    text(ax, zx + 6.9, cy_, "concat", size=7.5)
+    arrow(ax, (zx + 7.57, cy_), (zx + 7.73, cy_), head=5, lw=1.0)
+    rect(ax, zx + 7.75, cy_ - 0.28, 1.05, 0.56, fc="white", ec=PURP, r=0.06)
+    text(ax, zx + 8.275, cy_, "W_O", size=7.5)
     line(ax, [((pos[1][0] + pos[1][1]) / 2, yc - 0.32), ((pos[1][0] + pos[1][1]) / 2, zy + zh + 0.35)],
          color=PURP, lw=0.9, ls=":", z=2)
     # MLP zoom
-    mx2 = ix + 7.15
-    rect(ax, mx2, zy, 5.45, zh + 0.35, fc="white", ec=PURP, ls=":", lw=0.9, r=0.1)
-    text(ax, mx2 + 0.2, zy + zh + 0.15, "MLP", size=7.5, color=PURP, ha="left")
-    for i, (lab, wd) in enumerate([("Linear 192 → 768", 1.9), ("GELU", 0.85), ("Linear 768 → 192", 1.9)]):
-        xx = mx2 + 0.2 + [0, 2.15, 3.25][i]
+    mx2 = ix + 9.55
+    rect(ax, mx2, zy, 7.85, zh + 0.35, fc="white", ec=PURP, ls=":", lw=0.9, r=0.1)
+    text(ax, mx2 + 0.2, zy + zh + 0.08, "MLP", size=7, color=PURP, ha="left")
+    for i, (lab, wd) in enumerate([("Linear 192 → 768", 2.85), ("GELU", 1.25), ("Linear 768 → 192", 2.85)]):
+        xx = mx2 + 0.2 + [0, 3.1, 4.6][i]
         rect(ax, xx, cy_ - 0.28, wd, 0.56, fc="white", ec=PURP, r=0.06)
-        text(ax, xx + wd / 2, cy_, lab, size=7.5)
+        text(ax, xx + wd / 2, cy_, lab, size=7)
         if i < 2:
             arrow(ax, (xx + wd + 0.03, cy_), (xx + wd + 0.22, cy_), head=5, lw=1.0)
     line(ax, [((pos[4][0] + pos[4][1]) / 2, yc - 0.32), ((pos[4][0] + pos[4][1]) / 2, zy + zh + 0.35)],
@@ -358,8 +360,8 @@ def model_figure():
 
 # ----------------------------------------------------------------------------- Figure B
 def pipeline_figure():
-    fig, ax = canvas(30.0, 10.8)
-    top, ph = 4.7, 5.7
+    fig, ax = canvas(30.0, 11.1)
+    top, ph = 4.7, 6.0
 
     panel(ax, 0.2, top, 7.2, ph, "1 · Frames")
     panel(ax, 7.6, top, 8.0, ph, "2 · Landmarks")
@@ -371,7 +373,7 @@ def pipeline_figure():
     text(ax, 1.4, 8.15, "clip · 25 fps", size=8, color=MUTE)
     arrow(ax, (2.75, 9.0), (3.3, 9.0))
     stack(ax, 3.4, 8.7, 1.0, 0.6, 5, 0.1, "white", GREY)
-    text(ax, 3.85, 8.15, "32 frames, uniform", size=8, color=MUTE)
+    text(ax, 5.1, 9.1, "32 frames,\nuniform", size=7.5, color=MUTE, ha="left")
     text(ax, 2.55, 7.05, "H < 720 p", size=8, ha="right", color=INK)
     text(ax, 2.55, 5.65, "H ≥ 720 p", size=8, ha="right", color=INK)
     line(ax, [(3.0, 7.55), (3.0, 5.65)], color=GREY, lw=1.0)
@@ -379,16 +381,16 @@ def pipeline_figure():
     arrow(ax, (3.0, 7.05), (3.38, 7.05), head=6, lw=1.0)
     arrow(ax, (3.0, 5.65), (3.5, 5.65), head=6, lw=1.0)
     rect(ax, 3.55, 6.55, 1.15, 0.5, fc=BLUE_L, ec=BLUE, r=0.07)
-    text(ax, 4.125, 6.8, "bicubic", size=8)
+    text(ax, 4.125, 6.8, "bicubic", size=7)
     ax.add_patch(Polygon([(3.55, 7.3), (3.55, 7.55 - 0.0), (4.7, 7.75), (4.7, 7.1)], closed=True, fc=ORNG_L, ec=ORNG,
                          lw=1.2, zorder=3))
-    text(ax, 4.2, 7.42, "SR ×4", size=8)
+    text(ax, 4.2, 7.42, "SR ×4", size=7)
     rect(ax, 3.55, 5.4, 1.15, 0.5, fc=BLUE_L, ec=BLUE, r=0.07)
-    text(ax, 4.125, 5.65, "area ↓", size=8)
+    text(ax, 4.125, 5.65, "area ↓", size=7)
     # letterbox
     ax.add_patch(Rectangle((5.7, 5.9), 1.35, 1.0, fc=INK, ec=INK, lw=1.0, zorder=3))
     ax.add_patch(Rectangle((5.7, 6.12), 1.35, 0.56, fc="#C7D6EA", ec=BLUE, lw=1.0, zorder=4))
-    text(ax, 6.375, 5.6, "letterbox\n1280 × 720", size=8, color=MUTE)
+    text(ax, 6.3, 5.42, "letterbox\n1280 × 720", size=7, color=MUTE)
     for yy in (7.05, 6.8, 5.65):
         arrow(ax, (4.8 if yy != 5.65 else 4.8, yy), (5.65, 6.4 + (yy - 6.4) * 0.3), color=GREY, lw=1.0, head=6)
 
@@ -408,13 +410,13 @@ def pipeline_figure():
     hull(ax, rb, ORNG, 1.5)
     arrow(ax, (11.35, 8.4), (11.7, 8.4))
     funnel(ax, 11.75, 8.4, 1.35, 1.8, 1.0, PURP_L, PURP)
-    text(ax, 12.4, 8.4, "Holistic\ndetector", size=7.5, weight="bold", color=PURP)
+    text(ax, 12.4, 8.4, "Holistic\ndetector", size=6, weight="bold", color=PURP)
     arrow(ax, (13.15, 8.4), (13.45, 8.4))
-    for i, (lab, ec, fc) in enumerate([("face box\n× 1.3", GRN, GRN_L), ("hand box × 1.5\n21 joints", BLUE, BLUE_L),
+    for i, (lab, ec, fc) in enumerate([("face box\n× 1.3", GRN, GRN_L), ("hand × 1.5\n21 joints", BLUE, BLUE_L),
                                         ("pose\n7 keypoints", GREY, GREY_L)]):
         yy = 9.25 - i * 0.95
-        rect(ax, 13.5, yy - 0.37, 1.95, 0.74, fc=fc, ec=ec, r=0.08)
-        text(ax, 14.475, yy, lab, size=7.5)
+        rect(ax, 13.5, yy - 0.43, 1.95, 0.86, fc=fc, ec=ec, r=0.08)
+        text(ax, 14.475, yy, lab, size=7)
 
     rect(ax, 7.85, 4.8, 7.55, 1.75, fc="white", ec=GREY, ls="--", r=0.1)
     text(ax, 15.2, 6.3, "hand missing", size=8, weight="bold", ha="right")
@@ -422,25 +424,24 @@ def pipeline_figure():
     line(ax, [ex, wx], color=GREY, lw=1.4)
     ax.scatter([ex[0], wx[0]], [ex[1], wx[1]], s=14, color=INK, zorder=7, linewidths=0)
     ax.add_patch(Rectangle((wx[0] - 0.5, wx[1] - 0.5), 1.0, 1.0, fc="none", ec=ORNG, lw=1.2, ls=(0, (3, 2)), zorder=6))
-    text(ax, 8.9, 5.0, "2.8 × forearm", size=7, color=ORNG)
+    text(ax, 9.0, 5.03, "2.8 × forearm", size=6, color=ORNG)
     arrow(ax, (9.6, 5.65), (9.95, 5.65), head=6, lw=1.0)
     rect(ax, 10.0, 5.3, 0.45, 0.45, fc=ORNG_L, ec=ORNG, r=0.04)
     arrow(ax, (10.5, 5.52), (10.75, 5.52), head=5, lw=1.0)
     rect(ax, 10.8, 5.2, 0.7, 0.7, fc=ORNG_L, ec=ORNG, r=0.04)
-    text(ax, 11.15, 5.0, "256 px", size=7, color=ORNG)
+    text(ax, 11.15, 5.0, "256 px", size=6, color=ORNG)
     arrow(ax, (11.6, 5.55), (11.95, 5.55), head=6, lw=1.0)
     funnel(ax, 12.0, 5.55, 1.15, 0.95, 0.5, PURP_L, PURP, lw=1.1)
-    text(ax, 12.52, 5.55, "single\nhand", size=7)
-    arrow(ax, (13.2, 5.55), (13.55, 5.55), head=6, lw=1.0, color=RED, ls="--")
-    rect(ax, 13.6, 5.2, 1.65, 0.7, fc=RED_L, ec=RED, r=0.08)
-    text(ax, 14.425, 5.55, "nearest hold,\nflagged", size=7.5, color="#7A2E2C")
+    text(ax, 12.5, 5.55, "single\nhand", size=6)
+    arrow(ax, (13.17, 5.55), (13.4, 5.55), head=6, lw=1.0, color=RED, ls="--")
+    rect(ax, 13.43, 5.2, 1.87, 0.7, fc=RED_L, ec=RED, r=0.08)
+    text(ax, 14.365, 5.55, "nearest hold,\nflagged", size=6, color="#7A2E2C")
 
-    arrow(ax, (7.05, 6.4), (7.9, 6.4), head=0.01, lw=0.01)   # keeps the arrow bounding box tidy
     arrow(ax, (7.4, 7.9), (7.6, 7.9), head=7)
     arrow(ax, (15.6, 8.4), (15.8, 8.4), head=7)
 
     # ---- 3: views, sampling phases and the flip
-    text(ax, 18.4, 9.55, "one frame per segment, 16 segments", size=7.5, color=MUTE)
+    text(ax, 18.4, 9.6, "16 segments, one frame each", size=7, color=MUTE)
     seg = 0.285
     for r_, (ph_, yy) in enumerate([(0.25, 9.05), (0.5, 8.75), (0.75, 8.45)]):
         for i in range(16):
@@ -448,7 +449,7 @@ def pipeline_figure():
                                    ec="white", lw=0.5, zorder=3))
             line(ax, [(16.15 + (i + ph_) * seg,) * 2 and (16.15 + (i + ph_) * seg, yy), (16.15 + (i + ph_) * seg, yy + 0.24)],
                  color=INK, lw=1.3, z=5)
-    text(ax, 18.4, 8.1, "ticks at 0.25 · 0.5 · 0.75 of each segment", size=7.5, color=MUTE)
+    text(ax, 18.4, 8.1, "ticks at phases 0.25, 0.5, 0.75", size=7, color=MUTE)
     for k, (xx, mirror) in enumerate([(16.7, False), (19.0, True)]):
         ax.add_patch(Rectangle((xx, 6.1), 1.15, 1.15, fc="white", ec=GREY, lw=1.1, zorder=3))
         pts = [(xx + 0.2, 6.3), (xx + 0.95, 6.3), (xx + 0.95, 7.05)] if not mirror else \
@@ -456,14 +457,14 @@ def pipeline_figure():
         ax.add_patch(Polygon(pts, closed=True, fc=BLUE_L, ec=BLUE, lw=1.0, zorder=4))
     arrow(ax, (18.0, 6.7), (18.9, 6.7), head=7)
     text(ax, 18.45, 7.0, "flip", size=8)
-    text(ax, 18.45, 5.75, "left ↔ right streams swapped", size=7.5, color=MUTE)
+    text(ax, 18.45, 5.75, "left ↔ right streams swapped", size=7, color=MUTE)
     text(ax, 18.4, 5.2, "3 phases × 2 = 6 views", size=9, weight="bold", color=BLUE)
     arrow(ax, (21.0, 8.4), (21.2, 8.4), head=7)
 
     # ---- 4: inference
     funnel(ax, 21.55, 7.9, 1.5, 2.3, 0.8, PURP_L, PURP)
-    text(ax, 22.3, 7.9, "ISL-ViT\nTiny", size=8, weight="bold", color=PURP)
-    text(ax, 22.0, 6.45, "4-bit weights", size=7.5, color=MUTE)
+    text(ax, 22.25, 7.9, "ISL-ViT\nTiny", size=7, weight="bold", color=PURP)
+    text(ax, 22.2, 6.35, "4-bit\nweights", size=7.5, color=MUTE)
     arrow(ax, (23.15, 7.9), (23.5, 7.9), head=6)
     for r_ in range(2):
         for c_ in range(3):
@@ -471,14 +472,14 @@ def pipeline_figure():
     text(ax, 24.4, 6.85, "6 posteriors", size=7.5, color=MUTE)
     arrow(ax, (25.4, 7.9), (25.7, 7.9), head=6)
     plus(ax, 26.0, 7.9, r=0.25)
-    text(ax, 26.0, 7.35, "mean", size=7.5, color=MUTE)
+    text(ax, 26.0, 8.4, "mean", size=7.5, color=MUTE)
     arrow(ax, (26.3, 7.9), (26.6, 7.9), head=6)
     hts = [0.12, 0.2, 0.08, 0.15, 0.1, 0.1, 0.12, 0.7, 0.18, 0.1]
     cols = [(GREY_L, GREY)] * 4 + [(GRN_L, GRN) if i == 7 else ("#D9DDE2", GREY) for i in range(4, 10)]
     bars(ax, 26.65, 7.55, hts, bw=0.08, gap=0.03, colors=cols)
     for i in range(4):
         ax.add_patch(Rectangle((26.65 + i * 0.11, 7.55), 0.08, hts[i], fc="white", ec=GREY, lw=0.7, hatch="//////", zorder=5))
-    text(ax, 27.2, 7.1, "262 → 50 words", size=7.5, color=MUTE)
+    text(ax, 27.0, 7.1, "262 → 50\nwords", size=7, color=MUTE)
     arrow(ax, (27.9, 7.9), (28.2, 7.9), head=6)
     ax.add_patch(Circle((28.55, 7.9), 0.32, fc="white", ec=INK, lw=1.2, zorder=7))
     text(ax, 28.55, 7.9, "τ", size=11, style="italic")
@@ -486,8 +487,8 @@ def pipeline_figure():
     rect(ax, 27.75, 6.1, 1.6, 0.8, fc=GRN_L, ec=GRN, r=0.1)
     text(ax, 28.55, 6.5, "word", size=8.5, weight="bold", color=GRN)
     arrow(ax, (28.55, 8.22), (28.55, 8.85), head=7, color=GREY)
-    rect(ax, 27.75, 8.9, 1.6, 0.8, fc=RED_L, ec=RED, r=0.1)
-    text(ax, 28.55, 9.3, "abstain\ntop-5", size=8, color="#7A2E2C")
+    rect(ax, 27.75, 8.88, 1.6, 1.0, fc=RED_L, ec=RED, r=0.1)
+    text(ax, 28.55, 9.38, "abstain\ntop-5", size=8, color="#7A2E2C")
 
     # ---- offline training
     panel(ax, 0.2, 0.3, 29.6, 4.1, "Offline training")
@@ -507,43 +508,43 @@ def pipeline_figure():
         line(ax, [(6.15 + 0.25 * i, 1.7), (6.15 + 0.25 * i, 2.7)], color="white", lw=0.8)
         line(ax, [(6.15, 1.7 + 0.25 * i), (7.15, 1.7 + 0.25 * i)], color="white", lw=0.8)
     text(ax, 4.9, 3.1, "encoder", size=7.5, color=BLUE)
-    text(ax, 5.3, 1.1, "masked image modelling · 75 % of patches hidden", size=8, color=MUTE)
+    text(ax, 4.9, 1.1, "masked image modelling\n75 % of patches hidden", size=7.5, color=MUTE)
     arrow(ax, (7.3, 2.2), (9.35, 2.2))
-    text(ax, 8.3, 2.5, "pre-trained encoder", size=7.5, color=MUTE)
-    rect(ax, 9.4, 1.65, 2.7, 1.1, fc=BLUE_L, ec=BLUE, r=0.12)
-    text(ax, 10.75, 2.2, "Supervised\nlabel smoothing · EMA", size=8.5)
+    text(ax, 8.3, 2.75, "pre-trained\nencoder", size=7.5, color=MUTE)
+    rect(ax, 9.4, 1.65, 3.9, 1.1, fc=BLUE_L, ec=BLUE, r=0.12)
+    text(ax, 11.35, 2.2, "Supervised\nlabel smoothing · EMA", size=7.5)
     cylinder(ax, 10.2, 3.0, 0.9, 0.9, GREY_L, GREY)
     text(ax, 11.25, 3.45, "labelled clips,\nsession-disjoint", size=7.5, color=MUTE, ha="left")
     arrow(ax, (10.65, 3.0), (10.65, 2.78), head=6, lw=1.0)
-    text(ax, 10.75, 1.3, "flip + stream swap · mixup · jitter", size=7.5, color=MUTE)
-    arrow(ax, (12.2, 2.2), (12.75, 2.2))
-    rect(ax, 12.8, 1.65, 2.7, 1.1, fc=BLUE_L, ec=BLUE, r=0.12)
-    text(ax, 14.15, 2.2, "Quantisation-aware\ntraining · 4-bit", size=8.5)
-    arrow(ax, (15.6, 2.2), (16.2, 2.2))
-    rect(ax, 16.25, 1.65, 2.3, 1.1, fc=GRN_L, ec=GRN, r=0.12)
-    text(ax, 17.4, 2.2, "Deployed\n4-bit weights", size=8.5, weight="bold", color=GRN)
-    line(ax, [(18.6, 2.2), (23.0, 2.2)], color=GRN, lw=1.3, ls="--")
+    text(ax, 11.35, 1.3, "flip + stream swap · mixup · jitter", size=7, color=MUTE)
+    arrow(ax, (13.4, 2.2), (13.8, 2.2))
+    rect(ax, 13.85, 1.65, 3.5, 1.1, fc=BLUE_L, ec=BLUE, r=0.12)
+    text(ax, 15.6, 2.2, "Quantisation-aware\ntraining · 4-bit", size=7.5)
+    arrow(ax, (17.45, 2.2), (17.9, 2.2))
+    rect(ax, 17.95, 1.65, 3.0, 1.1, fc=GRN_L, ec=GRN, r=0.12)
+    text(ax, 19.45, 2.2, "Deployed\n4-bit weights", size=8.5, weight="bold", color=GRN)
+    line(ax, [(21.0, 2.2), (23.0, 2.2)], color=GRN, lw=1.3, ls="--")
     arrow(ax, (23.0, 2.2), (23.0, 7.3), color=GRN, lw=1.3, ls="--")
-    text(ax, 23.15, 4.6, "weights", size=8, color=GRN, ha="left")
+    text(ax, 23.15, 5.2, "weights", size=8, color=GRN, ha="left")
 
     # ---- zoom: group quantisation
     zx, zy, zw, zh = 23.6, 0.55, 6.1, 3.35
     rect(ax, zx, zy, zw, zh, fc="white", ec=GREY, ls="--", lw=1.0, r=0.15, z=1)
-    text(ax, zx + 0.25, zy + zh - 0.3, "4-bit group quantisation", size=8.5, weight="bold", color=MUTE, ha="left")
-    line(ax, [(14.15, 2.78), (14.15, 3.65), (zx, 3.65)], color=GREY, lw=0.9, ls=":", z=2)
+    text(ax, zx + 0.25, zy + zh - 0.27, "4-bit group quantisation", size=8.5, weight="bold", color=MUTE, ha="left")
+    line(ax, [(15.6, 2.78), (15.6, 3.65), (zx, 3.65)], color=GREY, lw=0.9, ls=":", z=2)
     codes = ["−3", "5", "0", "2", "−6"]
     for g in range(2):
         gx = zx + 0.3 + g * 2.85
         cells(ax, gx, 2.45, 5, 0.4, 0.42, ("#F2F3F5", GREY), gap=0.03)
         cells(ax, gx, 1.2, 5, 0.4, 0.42, (BLUE_L, BLUE), gap=0.03)
         for i, cc in enumerate(codes if g == 0 else codes[::-1]):
-            text(ax, gx + 0.2 + i * 0.43, 1.41, cc, size=7)
+            text(ax, gx + 0.2 + i * 0.43, 1.41, cc, size=6.5)
         rect(ax, gx + 2.25, 2.43, 0.45, 0.46, fc=ORNG_L, ec=ORNG, r=0.05)
         text(ax, gx + 2.475, 2.66, "s", size=8, color=ORNG, style="italic")
         arrow(ax, (gx + 1.1, 2.4), (gx + 1.1, 1.7), head=6, lw=1.0)
-        text(ax, gx + 1.3, 2.05, "÷ s, round", size=7, color=MUTE, ha="left")
-    text(ax, zx + 3.05, 3.2, "weights in groups of 128 · FP16", size=7.5, color=MUTE)
-    text(ax, zx + 3.05, 0.85, "one FP16 scale per group · 4-bit codes", size=7.5, color=MUTE)
+        text(ax, gx + 1.25, 2.05, "÷ s, round", size=6.5, color=MUTE, ha="left")
+    text(ax, zx + 3.05, 3.12, "weights in groups of 128 · FP16", size=7, color=MUTE)
+    text(ax, zx + 3.05, 0.85, "FP16 scale per group · 4-bit codes", size=7, color=MUTE)
 
     for ext in ("png", "pdf", "svg"):
         fig.savefig(OUT / f"fig_pipeline_architecture.{ext}", dpi=220 if ext == "png" else None)
