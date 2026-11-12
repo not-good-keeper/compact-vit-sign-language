@@ -121,28 +121,28 @@ The contributions are:
 
 Table~\ref{tab:lit} places the closest works beside this project. Numbers are as reported by each paper; datasets, vocabularies and splits differ, so the column is not a ranking.
 
-\begin{widetable}[t]
+\begin{table*}[t]
 \caption{Closest prior work. Results are as reported by each source.}\label{tab:lit}
 \scriptsize
 \setlength{\tabcolsep}{2.5pt}
-\begin{tabularx}{\textwidth}{@{}L{1.7cm}L{2.0cm}L{2.4cm}YL{2.3cm}@{}}
+\begin{tabularx}{\textwidth}{@{}L{2.5cm}L{3.3cm}L{3.6cm}YL{3.3cm}@{}}
 \toprule
 Work & Data and task & Model and input & Protocol and reported result & Relation to this project \\
 \midrule
-INCLUDE~\cite{sridhar2020include} & ISL, 263 and 50 words & pretrained extractor and encoder, trained decoder; RGB video & dataset split; 85.6\% (263), 94.5\% (50) & same corpus; we hold out sessions \\
-OpenHands~\cite{selvaraj2022openhands} & 6 sign languages incl.\ INCLUDE & LSTM, BERT, ST-GCN, SL-GCN; pose keypoints & INCLUDE: 93.5\% (SL-GCN), 94.7\% with pretraining & keypoints only; dataset split \\
-CISLR~\cite{joshi2022cislr} & ISL, about 4,700 words & prototype one-shot; I3D features & 16.81\% top-1 (v1.0-a) & our cross-corpus test set \\
-SPOTER~\cite{bohacek2022spoter} & American WLASL, Argentinian LSA64 & Transformer; 2D pose & WLASL100 63.18\%; LSA64 100\% & normalised hand pose, as in our features \\
-SAM-SLR~\cite{jiang2021samslr} & Turkish AUTSL & GCN and CNN ensemble; skeleton, RGB, depth & signer-independent challenge; 98.42\% (RGB track) & multimodal fusion; much larger \\
-AUTSL~\cite{sincan2020autsl} & Turkish, 226 signs & CNN and LSTM; RGB and depth & 95.95\% random vs 62.02\% user-independent & split changes the conclusion \\
-Tiny\-MSLR~\cite{lamaakal2026tinymslr} & 20 classes from German PHOENIX-2014T and Chinese Sign Language (CSL) & ConvNeXt-Tiny and Swin, distilled; RGB & signer-independent; 99.01\% validation; under 2.7\,M parameters, 7.2\,MB & edge target; smaller task \\
-Kannada study~\cite{venkatappa2026kannada} & Kannada Sign Language, 33 words & LSTM, bidirectional LSTM, Transformer; MediaPipe landmarks & 94.19 to 95.71\%; 1,098\,KB on phone & phone deployment \\
+INCLUDE~\cite{sridhar2020include} & ISL, 263 and 50 words & pretrained extractor and encoder, trained decoder; RGB video & dataset split; 85.6\% (263), 94.5\% (50) & same corpus; we hold out sessions \\\addlinespace[2.5pt]
+OpenHands~\cite{selvaraj2022openhands} & 6 sign languages incl.\ INCLUDE & LSTM, BERT, ST-GCN, SL-GCN; pose keypoints & INCLUDE: 93.5\% (SL-GCN), 94.7\% with pretraining & keypoints only; dataset split \\\addlinespace[2.5pt]
+CISLR~\cite{joshi2022cislr} & ISL, about 4,700 words & prototype one-shot; I3D features & 16.81\% top-1 (v1.0-a) & our cross-corpus test set \\\addlinespace[2.5pt]
+SPOTER~\cite{bohacek2022spoter} & American WLASL, Argentinian LSA64 & Transformer; 2D pose & WLASL100 63.18\%; LSA64 100\% & normalised hand pose, as in our features \\\addlinespace[2.5pt]
+SAM-SLR~\cite{jiang2021samslr} & Turkish AUTSL & GCN and CNN ensemble; skeleton, RGB, depth & signer-independent challenge; 98.42\% (RGB track) & multimodal fusion; much larger \\\addlinespace[2.5pt]
+AUTSL~\cite{sincan2020autsl} & Turkish, 226 signs & CNN and LSTM; RGB and depth & 95.95\% random vs 62.02\% user-independent & split changes the conclusion \\\addlinespace[2.5pt]
+Tiny\-MSLR~\cite{lamaakal2026tinymslr} & 20 classes from German PHOENIX-2014T and Chinese Sign Language (CSL) & ConvNeXt-Tiny and Swin, distilled; RGB & signer-independent; 99.01\% validation; under 2.7\,M parameters, 7.2\,MB & edge target; smaller task \\\addlinespace[2.5pt]
+Kannada study~\cite{venkatappa2026kannada} & Kannada Sign Language, 33 words & LSTM, bidirectional LSTM, Transformer; MediaPipe landmarks & 94.19 to 95.71\%; 1,098\,KB on phone & phone deployment \\\addlinespace[2.5pt]
 Nedungadi et al.~\cite{nedungadi2025vit} & ISL, domain dataset & CNN and ViT; RGB & 97.5\% under optimised conditions & ISL system; protocol differs \\
 \midrule
 This work & ISL INCLUDE, 262 trained, 50 deployed & factorised ViT, 4-bit; 3 crops and hand landmarks & held-out sessions; 85.9\% masked-50, 3 seeds; 2,069,700\,B & -- \\
 \botrule
 \end{tabularx}
-\end{widetable}
+\end{table*}
 
 % ===========================================================================
 \section{Methodology}\label{sec:method}
@@ -339,11 +339,11 @@ Table~\ref{tab:setup} lists the settings of the principal experiments. Results i
 \toprule
 Experiment & Models compared & Test set & Seeds & Metric \\
 \midrule
-Main result and variants & pixel FP32; landmark FP32; landmark PTQ INT4; landmark QAT INT4 (released) & 472 clips, 50 words, held-out sessions & 3 each & masked-50, 6-view TTA \\
-Protocol comparison & one 50-word pixel recipe on random-video and session-disjoint splits & 200 and 472 clips (each protocol's own test set) & 1 and 2 & top-1, single view \\
-Temporal length & 8, 16, 24, 32 frames from one 32-frame cache, 50-word pixel recipe & 472 clips & 1 (16 frames: 2) & top-1, single view and TTA \\
-Crop resolution & 64, 112, 128 pixel input, early 8-frame recipe & INCLUDE-50 take-group, 159 clips & 1 & top-1 \\
-Cross-corpus & released models on CISLR & 609 CISLR clips & 3 & top-1 \\
+Main result and variants & pixel FP32; landmark FP32; landmark PTQ INT4; landmark QAT INT4 (released) & 472 clips, 50 words, held-out sessions & 3 each & masked-50, 6-view TTA \\\addlinespace[2.5pt]
+Protocol comparison & one 50-word pixel recipe on random-video and session-disjoint splits & 200 and 472 clips (each protocol's own test set) & 1 and 2 & top-1, single view \\\addlinespace[2.5pt]
+Temporal length & 8, 16, 24, 32 frames from one 32-frame cache, 50-word pixel recipe & 472 clips & 1 (16 frames: 2) & top-1, single view and TTA \\\addlinespace[2.5pt]
+Crop resolution & 64, 112, 128 pixel input, early 8-frame recipe & INCLUDE-50 take-group, 159 clips & 1 & top-1 \\\addlinespace[2.5pt]
+Cross-corpus & released models on CISLR & 609 CISLR clips & 3 & top-1 \\\addlinespace[2.5pt]
 Super-resolution & bicubic, SR-L1, SR-GAN v1, v2, v3, v3 control; frozen INT4 classifiers & 472 clips degraded to 360p, 240p, 180p & 3 & masked-50, TTA; McNemar \\
 \botrule
 \end{tabularx}
@@ -399,8 +399,8 @@ Landmarks, QAT (released) & INT4, group 128 & 3,894,214 & 2,069,700\,B & 85.9 & 
 \toprule
 Quantity & Value & Timing boundary and method \\
 \midrule
-Parameters (landmark model, 262 outputs) & 3,894,214 & counted on the instantiated network; spatial encoder 1,930,944, temporal blocks 1,779,456, landmark projections 91,008 \\
-Multiply--accumulates per view & 1.65\,G (16 frames); 0.82\,G (8 frames) & \texttt{torch.utils.flop\_counter}; matrix products and convolutions only \\
+Parameters (landmark model, 262 outputs) & 3,894,214 & counted on the instantiated network; spatial encoder 1,930,944, temporal blocks 1,779,456, landmark projections 91,008 \\\addlinespace[2.5pt]
+Multiply--accumulates per view & 1.65\,G (16 frames); 0.82\,G (8 frames) & \texttt{torch.utils.flop\_counter}; matrix products and convolutions only \\\addlinespace[2.5pt]
 Model forward pass, one view, CPU & \LATMS\ median (interquartile range \LATIQR) & released seed-0 file, batch 1, FP32 arithmetic, 6 threads, 100 runs after warm-up, idle machine \\
 \botrule
 \end{tabularx}
@@ -437,19 +437,19 @@ The released file is also small for what it holds: 3.89\,M parameters in 2.07\,M
 Method & Input & Corpus, words & Split & Top-1 & Size \\
 \midrule
 \multicolumn{6}{@{}l}{\textit{Same corpus (INCLUDE)}} \\
-INCLUDE baseline~\cite{sridhar2020include} & RGB video & INCLUDE, 263 & dataset split & 85.6 & -- \\
-INCLUDE baseline~\cite{sridhar2020include} & RGB video & INCLUDE-50 & dataset split & 94.5 & -- \\
-OpenHands SL-GCN~\cite{selvaraj2022openhands} & pose keypoints & INCLUDE, 263 & dataset split & 93.5 & -- \\
-OpenHands, pretrained~\cite{selvaraj2022openhands} & pose keypoints & INCLUDE, 263 & dataset split & 94.7 & -- \\
-This work, 8 frames & crops & INCLUDE, 262 & random-video & \textbf{94.5} & -- \\
-This work, 16 frames & crops & INCLUDE, 50 & random-video & \textbf{98.5} & -- \\
-This work, INT4 & crops, landmarks & INCLUDE, 262 & held-out sessions & \textbf{64.7} & \textbf{2.07\,MB} \\
+INCLUDE baseline~\cite{sridhar2020include} & RGB video & INCLUDE, 263 & dataset split & 85.6 & -- \\\addlinespace[2.5pt]
+INCLUDE baseline~\cite{sridhar2020include} & RGB video & INCLUDE-50 & dataset split & 94.5 & -- \\\addlinespace[2.5pt]
+OpenHands SL-GCN~\cite{selvaraj2022openhands} & pose keypoints & INCLUDE, 263 & dataset split & 93.5 & -- \\\addlinespace[2.5pt]
+OpenHands, pretrained~\cite{selvaraj2022openhands} & pose keypoints & INCLUDE, 263 & dataset split & 94.7 & -- \\\addlinespace[2.5pt]
+This work, 8 frames & crops & INCLUDE, 262 & random-video & \textbf{94.5} & -- \\\addlinespace[2.5pt]
+This work, 16 frames & crops & INCLUDE, 50 & random-video & \textbf{98.5} & -- \\\addlinespace[2.5pt]
+This work, INT4 & crops, landmarks & INCLUDE, 262 & held-out sessions & \textbf{64.7} & \textbf{2.07\,MB} \\\addlinespace[2.5pt]
 This work, INT4 & crops, landmarks & INCLUDE, 50 & held-out sessions & \textbf{85.9} & \textbf{2.07\,MB} \\
 \midrule
 \multicolumn{6}{@{}l}{\textit{Other corpora}} \\
-SPOTER~\cite{bohacek2022spoter} & 2D pose & WLASL100 & dataset split & 63.18 & -- \\
-SAM-SLR~\cite{jiang2021samslr} & skeleton, RGB, depth & AUTSL, 226 & signer-independent & 98.42$^{a}$ & -- \\
-TinyMSLR~\cite{lamaakal2026tinymslr} & RGB & PHOENIX-2014T and CSL, 20 & signer-independent & 99.01$^{b}$ & 7.2\,MB \\
+SPOTER~\cite{bohacek2022spoter} & 2D pose & WLASL100 & dataset split & 63.18 & -- \\\addlinespace[2.5pt]
+SAM-SLR~\cite{jiang2021samslr} & skeleton, RGB, depth & AUTSL, 226 & signer-independent & 98.42$^{a}$ & -- \\\addlinespace[2.5pt]
+TinyMSLR~\cite{lamaakal2026tinymslr} & RGB & PHOENIX-2014T and CSL, 20 & signer-independent & 99.01$^{b}$ & 7.2\,MB \\\addlinespace[2.5pt]
 Kannada study~\cite{venkatappa2026kannada} & MediaPipe landmarks & Kannada Sign Language, 33 & -- & 94.19 to 95.71 & 1,098\,KB \\
 \botrule
 \end{tabularx}
@@ -542,9 +542,9 @@ After the classifiers were fine-tuned for 150 epochs on 360p video through each 
 \toprule
 Contribution & Closest prior approach & Evidence in this project \\
 \midrule
-Crops and landmarks in one token stream & pose-only models~\cite{selvaraj2022openhands,bohacek2022spoter}; multimodal ensembles~\cite{jiang2021samslr} & +12.8 points over pixels only, 3 seeds, paired $p\le5\times10^{-9}$ per seed (Fig.~\ref{fig:variants}) \\
-2\,MB 4-bit model & QAT~\cite{jacob2018quant}; group scales~\cite{shen2020qbert,frantar2023gptq} & 2,069,700\,B; PTQ 83.4\% vs QAT 85.9\%, pooled $p=0.0012$; QAT level with FP32 (pooled $p=0.44$) \\
-Session-aware evaluation & user-independent benchmark split~\cite{sincan2020autsl} & 13 blocks, none crossing train/test; 98.5\% vs 70.1\% for one recipe \\
+Crops and landmarks in one token stream & pose-only models~\cite{selvaraj2022openhands,bohacek2022spoter}; multimodal ensembles~\cite{jiang2021samslr} & +12.8 points over pixels only, 3 seeds, paired $p\le5\times10^{-9}$ per seed (Fig.~\ref{fig:variants}) \\\addlinespace[2.5pt]
+2\,MB 4-bit model & QAT~\cite{jacob2018quant}; group scales~\cite{shen2020qbert,frantar2023gptq} & 2,069,700\,B; PTQ 83.4\% vs QAT 85.9\%, pooled $p=0.0012$; QAT level with FP32 (pooled $p=0.44$) \\\addlinespace[2.5pt]
+Session-aware evaluation & user-independent benchmark split~\cite{sincan2020autsl} & 13 blocks, none crossing train/test; 98.5\% vs 70.1\% for one recipe \\\addlinespace[2.5pt]
 GAN with a no-GAN control & task-driven SR~\cite{haris2018taskdriven}; SR for vision tasks~\cite{dai2016srhelpful} & learned SR +14 to +15 points at 180p; adversarial term +1.5 to +2.4 at 240p \\
 \botrule
 \end{tabularx}
@@ -576,30 +576,32 @@ The audit scripts, figures and draft text of this paper were prepared with the a
 
 \section{Experiment traceability}\label{app:trace}
 
-\begin{widetable}[tb]
+Table~\ref{tab:trace} lists, for each experiment reported in this paper, the question it answers and the single change it controls, the launch script, the raw result files, and the table, figure or section where the result appears. Every link is pinned to the audited commit, so each number can be traced to the file it was read from.
+
+\begin{table*}[tb]
 \caption{Experiment traceability. Links are pinned to commit \texttt{3330b87}.}\label{tab:trace}
 \scriptsize
 \setlength{\tabcolsep}{2.5pt}
-\begin{tabularx}{\textwidth}{@{}L{0.5cm}L{2.5cm}L{2.5cm}YL{1.4cm}@{}}
+\begin{tabularx}{\textwidth}{@{}L{0.7cm}L{3.6cm}L{4.1cm}YL{1.7cm}@{}}
 \toprule
 ID & Question; controlled change & Launch & Raw result & Shown in \\
 \midrule
-E1 & Landmark gain; landmark stream on or off & \ev{run_landmarks.sh}{run_landmarks.sh} & \ev{runs/f16_262w_s0/masked50_clean.json}{f16_262w_s*/masked50_clean.json}, \ev{runs/f16_262w_lm_s0/masked50_clean.json}{f16_262w_lm_s*/masked50_clean.json} & Tab.~\ref{tab:variants}, Fig.~\ref{fig:variants} \\
-E2 & 4-bit cost; PTQ or QAT & \ev{run_lm_qat.sh}{run_lm_qat.sh} & \ev{runs/f16_262w_lm_s0/ptq4_clean.json}{f16_262w_lm_s*/ptq4_clean.json}, \ev{runs/f16_262w_lm_s0_qat4/masked50_clean.json}{f16_262w_lm_s*_qat4/masked50_clean.json} & Tab.~\ref{tab:variants} \\
-E3 & Clean test cache; fresh detector per video & \ev{run_clean_test.sh}{run_clean_test.sh} & \ev{runs/f16_262w_lm_s0/masked50_fresh.json}{masked50_fresh.json} vs \texttt{\_clean} & Sec.~\ref{sec:method:pre} \\
-E4 & Leakage size; split protocol & \ev{run_frames32.sh}{run_frames32.sh} & \ev{runs/baseline_random_s0/summary.json}{baseline_random_s0}, \ev{runs/f16_clean_s0/summary.json}{f16_clean_s0}, \ev{runs/f16_clean_s1/summary.json}{f16_clean_s1} & Fig.~\ref{fig:protocol}a \\
-E5 & Protocol ladder; split protocol & \ev{run_phase2.sh}{run_phase2.sh} & \ev{runs/full263_v2__random-video/summary.json}{full263_v2__random-video}, \ev{runs/full263_v2__take-group/summary.json}{full263_v2__take-group}, \ev{runs/sd_full263/summary.json}{sd_full263} & Fig.~\ref{fig:protocol}b \\
-E6 & Checkpoint choice, folding; last vs best-val, validation folded & \ev{run_iter3.sh}{run_iter3.sh} & \ev{runs/sd263_lastsel/summary.json}{sd263_lastsel}, \ev{runs/sd263_foldval/summary.json}{sd263_foldval} & Sec.~\ref{sec:method:train} \\
-E7 & Seed noise; seed only (5 seeds) & \ev{run_lever2.sh}{run_lever2.sh} & \ev{runs/sd263_ssl_foldval/summary.json}{sd263_ssl_foldval}, \texttt{\_s1} to \texttt{\_s4} & Sec.~\ref{sec:method:metrics} \\
-E8 & Temporal length; frames drawn & \ev{run_frames32.sh}{run_frames32.sh} & \ev{runs/f8_clean_s0/summary.json}{f8_clean_s0}, \ev{runs/f24_clean_s0/summary.json}{f24_clean_s0}, \ev{runs/f32_clean_s0/summary.json}{f32_clean_s0} & Fig.~\ref{fig:ablation}a \\
-E9 & Crop size; input pixels & \ev{run_ablation_res.sh}{run_ablation_res.sh} & \ev{runs/abl64__take-group/summary.json}{abl64__take-group}, \ev{runs/abl112__take-group/summary.json}{abl112__take-group}, \ev{runs/abl128__take-group/summary.json}{abl128__take-group} & Fig.~\ref{fig:ablation}b \\
-E10 & Training length; epochs & \ev{run_longtrain.sh}{run_longtrain.sh}, \ev{run_push75.sh}{run_push75.sh} & \ev{runs/long2000_s1/summary.json}{long2000_s1}, \ev{runs/grok_wd005/summary.json}{grok_wd005}, \ev{runs/f16_long4k_s0/summary.json}{f16_long4k_s0} & Sec.~\ref{sec:res:ablation} \\
-E11 & Super-resolution; front end & \ev{run_gan_study.sh}{run_gan_study.sh}, \ev{run_gan_v3_test.sh}{run_gan_v3_test.sh} & \evdir{runs/gan_study}{runs/gan_study/}, \evdir{runs/gan_study_v1}{runs/gan_study_v1/} & Fig.~\ref{fig:ganres}, Tab.~\ref{tab:gan} \\
+E1 & Landmark gain; landmark stream on or off & \ev{run_landmarks.sh}{run_landmarks.sh} & \ev{runs/f16_262w_s0/masked50_clean.json}{f16_262w_s*/masked50_clean.json}, \ev{runs/f16_262w_lm_s0/masked50_clean.json}{f16_262w_lm_s*/masked50_clean.json} & Tab.~\ref{tab:variants}, Fig.~\ref{fig:variants} \\\addlinespace[2.5pt]
+E2 & 4-bit cost; PTQ or QAT & \ev{run_lm_qat.sh}{run_lm_qat.sh} & \ev{runs/f16_262w_lm_s0/ptq4_clean.json}{f16_262w_lm_s*/ptq4_clean.json}, \ev{runs/f16_262w_lm_s0_qat4/masked50_clean.json}{f16_262w_lm_s*_qat4/masked50_clean.json} & Tab.~\ref{tab:variants} \\\addlinespace[2.5pt]
+E3 & Clean test cache; fresh detector per video & \ev{run_clean_test.sh}{run_clean_test.sh} & \ev{runs/f16_262w_lm_s0/masked50_fresh.json}{masked50_fresh.json} vs \texttt{\_clean} & Sec.~\ref{sec:method:pre} \\\addlinespace[2.5pt]
+E4 & Leakage size; split protocol & \ev{run_frames32.sh}{run_frames32.sh} & \ev{runs/baseline_random_s0/summary.json}{baseline_random_s0}, \ev{runs/f16_clean_s0/summary.json}{f16_clean_s0}, \ev{runs/f16_clean_s1/summary.json}{f16_clean_s1} & Fig.~\ref{fig:protocol}a \\\addlinespace[2.5pt]
+E5 & Protocol ladder; split protocol & \ev{run_phase2.sh}{run_phase2.sh} & \ev{runs/full263_v2__random-video/summary.json}{full263_v2__random-video}, \ev{runs/full263_v2__take-group/summary.json}{full263_v2__take-group}, \ev{runs/sd_full263/summary.json}{sd_full263} & Fig.~\ref{fig:protocol}b \\\addlinespace[2.5pt]
+E6 & Checkpoint choice, folding; last vs best-val, validation folded & \ev{run_iter3.sh}{run_iter3.sh} & \ev{runs/sd263_lastsel/summary.json}{sd263_lastsel}, \ev{runs/sd263_foldval/summary.json}{sd263_foldval} & Sec.~\ref{sec:method:train} \\\addlinespace[2.5pt]
+E7 & Seed noise; seed only (5 seeds) & \ev{run_lever2.sh}{run_lever2.sh} & \ev{runs/sd263_ssl_foldval/summary.json}{sd263_ssl_foldval}, \texttt{\_s1} to \texttt{\_s4} & Sec.~\ref{sec:method:metrics} \\\addlinespace[2.5pt]
+E8 & Temporal length; frames drawn & \ev{run_frames32.sh}{run_frames32.sh} & \ev{runs/f8_clean_s0/summary.json}{f8_clean_s0}, \ev{runs/f24_clean_s0/summary.json}{f24_clean_s0}, \ev{runs/f32_clean_s0/summary.json}{f32_clean_s0} & Fig.~\ref{fig:ablation}a \\\addlinespace[2.5pt]
+E9 & Crop size; input pixels & \ev{run_ablation_res.sh}{run_ablation_res.sh} & \ev{runs/abl64__take-group/summary.json}{abl64__take-group}, \ev{runs/abl112__take-group/summary.json}{abl112__take-group}, \ev{runs/abl128__take-group/summary.json}{abl128__take-group} & Fig.~\ref{fig:ablation}b \\\addlinespace[2.5pt]
+E10 & Training length; epochs & \ev{run_longtrain.sh}{run_longtrain.sh}, \ev{run_push75.sh}{run_push75.sh} & \ev{runs/long2000_s1/summary.json}{long2000_s1}, \ev{runs/grok_wd005/summary.json}{grok_wd005}, \ev{runs/f16_long4k_s0/summary.json}{f16_long4k_s0} & Sec.~\ref{sec:res:ablation} \\\addlinespace[2.5pt]
+E11 & Super-resolution; front end & \ev{run_gan_study.sh}{run_gan_study.sh}, \ev{run_gan_v3_test.sh}{run_gan_v3_test.sh} & \evdir{runs/gan_study}{runs/gan_study/}, \evdir{runs/gan_study_v1}{runs/gan_study_v1/} & Fig.~\ref{fig:ganres}, Tab.~\ref{tab:gan} \\\addlinespace[2.5pt]
 E12 & Released model on CISLR; corpus & \new{run_crosscorpus_release.sh}$^{*}$ & \new{report/final/data/crosscorpus_release_s*.json}$^{*}$ & Sec.~\ref{sec:res:cross} \\
 \botrule
 \end{tabularx}
-\footnotetext{$^{*}$New in this report (\texttt{report/final/}). Evaluator for E1 to E3 and E11: \ev{islvit/mask50.py\#L56-L108}{mask50.py}; for E4 to E10: \ev{islvit/train.py\#L244-L730}{train.py}, which scores the test split at the end of training.}
-\end{widetable}
+\src{$^{*}$New in this report (\texttt{report/final/}). Evaluator for E1 to E3 and E11: \ev{islvit/mask50.py\#L56-L108}{mask50.py}; for E4 to E10: \ev{islvit/train.py\#L244-L730}{train.py}, which scores the test split at the end of training.}
+\end{table*}
 
 
 \section{Architecture design and model iterations}\label{app:design}
@@ -624,11 +626,11 @@ The self-supervised initialisation follows SimMIM~\cite{xie2022simmim} rather th
 \toprule
 Component & Source & Kept & Changed \\
 \midrule
-Factorised encoder & ViViT Model~2~\cite{arnab2021vivit} & spatial Transformer per image, [CLS] readout, temporal Transformer over the readouts & the image is a hand or face crop, not a frame; 48 tokens per clip with stream embeddings \\
-Patch embedding, [CLS], position embedding, pre-norm block & ViT~\cite{dosovitskiy2021vit} & all, unchanged & 64-pixel input gives a $4\times4$ grid of 16 patches \\
-Width 192, 3 heads, MLP 768 & DeiT-Tiny~\cite{touvron2021deit} & dimensions and the first four pretrained blocks & four blocks per stage instead of twelve \\
-Masked image modelling & SimMIM~\cite{xie2022simmim} & learned mask token inside the encoder, pixel regression on masked patches & mask drawn across time, stream and space; crops without a real detection excluded from the loss \\
-Stochastic depth & Huang et al.~\cite{huang2016stochdepth} & drop rate rising to 0.1 with depth & -- \\
+Factorised encoder & ViViT Model~2~\cite{arnab2021vivit} & spatial Transformer per image, [CLS] readout, temporal Transformer over the readouts & the image is a hand or face crop, not a frame; 48 tokens per clip with stream embeddings \\\addlinespace[2.5pt]
+Patch embedding, [CLS], position embedding, pre-norm block & ViT~\cite{dosovitskiy2021vit} & all, unchanged & 64-pixel input gives a $4\times4$ grid of 16 patches \\\addlinespace[2.5pt]
+Width 192, 3 heads, MLP 768 & DeiT-Tiny~\cite{touvron2021deit} & dimensions and the first four pretrained blocks & four blocks per stage instead of twelve \\\addlinespace[2.5pt]
+Masked image modelling & SimMIM~\cite{xie2022simmim} & learned mask token inside the encoder, pixel regression on masked patches & mask drawn across time, stream and space; crops without a real detection excluded from the loss \\\addlinespace[2.5pt]
+Stochastic depth & Huang et al.~\cite{huang2016stochdepth} & drop rate rising to 0.1 with depth & -- \\\addlinespace[2.5pt]
 Token conditioning & this work & -- & crop geometry, missing-detection flag, hand-landmark and body-pose vectors added to the crop tokens through zero-initialised MLPs \\
 \botrule
 \end{tabularx}
@@ -659,21 +661,21 @@ The FP32 model reached 86.5\% only after more than 80 recorded training and pret
 Step & Change & Top-1 (\%) & Seeds & Run \\
 \midrule
 \multicolumn{5}{@{}l}{\textit{262 words, 1,010 test clips, single view}} \\
-1 & Factorised crop ViT, 8 frames, ImageNet initialisation, best-validation checkpoint & 22.1 & 1 & \ev{runs/sd_full263/summary.json}{sd_full263} \\
-2 & Final weights kept; validation clips folded into training (1,957 to 2,845 clips) & 33.0 & 1 & \ev{runs/sd263_foldval/summary.json}{sd263_foldval} \\
-3 & Masked image modelling on CISLR; resolution jitter during fine-tuning & 39.9 & 2 & \ev{runs/sd263_ssl_rj_s0/summary.json}{sd263_ssl_rj_s*} \\
+1 & Factorised crop ViT, 8 frames, ImageNet initialisation, best-validation checkpoint & 22.1 & 1 & \ev{runs/sd_full263/summary.json}{sd_full263} \\\addlinespace[2.5pt]
+2 & Final weights kept; validation clips folded into training (1,957 to 2,845 clips) & 33.0 & 1 & \ev{runs/sd263_foldval/summary.json}{sd263_foldval} \\\addlinespace[2.5pt]
+3 & Masked image modelling on CISLR; resolution jitter during fine-tuning & 39.9 & 2 & \ev{runs/sd263_ssl_rj_s0/summary.json}{sd263_ssl_rj_s*} \\\addlinespace[2.5pt]
 4 & Masked image modelling on 17,896 iSign clips instead & 42.1 & 2 & \ev{runs/sd263_isign_rj_s0/summary.json}{sd263_isign_rj_s*} \\
 \midrule
 \multicolumn{5}{@{}l}{\textit{50 words, 472 test clips, single view}} \\
-5 & Step 4 recipe on the 50-word tier, 250 epochs & 51.7 & 2 & \ev{runs/vocab50_s0/summary.json}{vocab50_s*} \\
-6 & 2,000 epochs & 59.6 & 2 & \ev{runs/long2000_s1/summary.json}{long2000_s1}, \ev{runs/grok_wd005/summary.json}{grok_wd005} \\
-7 & 16 frames instead of 8 & 66.1 & 2 & \ev{runs/cap_16f64/summary.json}{cap_16f64}, \ev{runs/cap_16f64_s1/summary.json}{cap_16f64_s1} \\
+5 & Step 4 recipe on the 50-word tier, 250 epochs & 51.7 & 2 & \ev{runs/vocab50_s0/summary.json}{vocab50_s*} \\\addlinespace[2.5pt]
+6 & 2,000 epochs & 59.6 & 2 & \ev{runs/long2000_s1/summary.json}{long2000_s1}, \ev{runs/grok_wd005/summary.json}{grok_wd005} \\\addlinespace[2.5pt]
+7 & 16 frames instead of 8 & 66.1 & 2 & \ev{runs/cap_16f64/summary.json}{cap_16f64}, \ev{runs/cap_16f64_s1/summary.json}{cap_16f64_s1} \\\addlinespace[2.5pt]
 8 & 16 frames drawn from a 32-frame cache; CISLR clips removed from training & 70.1 & 2 & \ev{runs/f16_clean_s0/summary.json}{f16_clean_s*} \\
 \midrule
 \multicolumn{5}{@{}l}{\textit{262 words trained, restricted to 50 at test, 472 test clips, six-view TTA}} \\
-9 & Train on all 262 words, 1,000 epochs & 73.7 & 3 & \ev{runs/f16_262w_s0/masked50_clean.json}{f16_262w_s*} \\
-10 & Hand-landmark and body-pose inputs & 86.5 & 3 & \ev{runs/f16_262w_lm_s0/masked50_clean.json}{f16_262w_lm_s*} \\
-11 & 4-bit, rounded after training & 83.4 & 3 & \ev{runs/f16_262w_lm_s0/ptq4_clean.json}{ptq4_clean.json} \\
+9 & Train on all 262 words, 1,000 epochs & 73.7 & 3 & \ev{runs/f16_262w_s0/masked50_clean.json}{f16_262w_s*} \\\addlinespace[2.5pt]
+10 & Hand-landmark and body-pose inputs & 86.5 & 3 & \ev{runs/f16_262w_lm_s0/masked50_clean.json}{f16_262w_lm_s*} \\\addlinespace[2.5pt]
+11 & 4-bit, rounded after training & 83.4 & 3 & \ev{runs/f16_262w_lm_s0/ptq4_clean.json}{ptq4_clean.json} \\\addlinespace[2.5pt]
 12 & 4-bit, quantisation-aware training (released, 2,069,700 bytes) & 85.9 & 3 & \ev{runs/f16_262w_lm_s0_qat4/masked50_clean.json}{f16_262w_lm_s*_qat4} \\
 \botrule
 \end{tabularx}
