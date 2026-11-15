@@ -1,0 +1,13 @@
+# Copied in by report/final/scripts/make_srep_version.py; the sources live in ../latex/
+figures/
+sn-jnl.cls
+sn-mathphys-num.bst
+references.bib
+# LaTeX build output; the finished PDFs are copied to report/final/ISL_ViT_Tiny_SciRep_*.pdf
+*.aux
+*.log
+*.bbl
+*.blg
+*.out
+main.pdf
+supp.pdf

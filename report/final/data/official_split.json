@@ -1,0 +1,112 @@
+{
+  "include50": {
+    "name": "INCLUDE-50",
+    "fp32": {
+      "seeds": [
+        0
+      ],
+      "n": 191,
+      "mean": {
+        "plain": {
+          "top1": 97.9,
+          "top5": 99.5,
+          "balanced": 98.8
+        },
+        "tta": {
+          "top1": 97.9,
+          "top5": 100.0,
+          "balanced": 98.8
+        }
+      },
+      "per_seed_top1": {
+        "plain": [
+          97.9
+        ],
+        "tta": [
+          97.9
+        ]
+      }
+    },
+    "int4_qat": {
+      "seeds": [
+        0
+      ],
+      "n": 191,
+      "mean": {
+        "plain": {
+          "top1": 97.4,
+          "top5": 99.5,
+          "balanced": 98.5
+        },
+        "tta": {
+          "top1": 97.9,
+          "top5": 100.0,
+          "balanced": 98.8
+        }
+      },
+      "per_seed_top1": {
+        "plain": [
+          97.4
+        ],
+        "tta": [
+          97.9
+        ]
+      }
+    }
+  },
+  "full263": {
+    "name": "INCLUDE, 262 words",
+    "fp32": {
+      "seeds": [
+        0
+      ],
+      "n": 816,
+      "mean": {
+        "plain": {
+          "top1": 98.8,
+          "top5": 99.4,
+          "balanced": 98.9
+        },
+        "tta": {
+          "top1": 98.8,
+          "top5": 99.5,
+          "balanced": 98.9
+        }
+      },
+      "per_seed_top1": {
+        "plain": [
+          98.8
+        ],
+        "tta": [
+          98.8
+        ]
+      }
+    },
+    "int4_qat": {
+      "seeds": [
+        0
+      ],
+      "n": 816,
+      "mean": {
+        "plain": {
+          "top1": 98.8,
+          "top5": 99.4,
+          "balanced": 98.9
+        },
+        "tta": {
+          "top1": 98.5,
+          "top5": 99.3,
+          "balanced": 98.7
+        }
+      },
+      "per_seed_top1": {
+        "plain": [
+          98.8
+        ],
+        "tta": [
+          98.5
+        ]
+      }
+    }
+  }
+}

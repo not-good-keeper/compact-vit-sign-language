@@ -1,0 +1,29 @@
+{
+ "n_blocks_corpus": 13,
+ "include50__official.csv": {
+  "counts": {
+   "test": 191,
+   "val": 77,
+   "train": 675
+  },
+  "words": 50,
+  "take_groups_straddling_train_test": 152,
+  "test_clips_with_a_train_take_in_same_group": 184,
+  "test_clips": 191,
+  "blocks_with_rows": 11,
+  "blocks_on_both_sides": 11
+ },
+ "full263__official.csv": {
+  "counts": {
+   "train": 3101,
+   "test": 816,
+   "val": 340
+  },
+  "words": 262,
+  "take_groups_straddling_train_test": 651,
+  "test_clips_with_a_train_take_in_same_group": 767,
+  "test_clips": 816,
+  "blocks_with_rows": 13,
+  "blocks_on_both_sides": 13
+ }
+}

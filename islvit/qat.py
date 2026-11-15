@@ -108,6 +108,9 @@ def main() -> None:
                              "onto the quantisation grid, it does not retrain it")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--resolution-jitter", type=float, default=0.5)
+    parser.add_argument("--deployed-split", type=str, default=None,
+                        help="split whose words and test rows the masked check scores; "
+                             "defaults to the 50 deployed words")
     args = parser.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -211,7 +214,8 @@ def main() -> None:
         path.unlink(missing_ok=True)
 
     after = evaluate(final, test_loader, device)
-    masked = evaluate_masked(final, config, classes, device, name=tag)
+    masked = (evaluate_masked(final, config, classes, device, args.deployed_split, name=tag)
+              if args.deployed_split else evaluate_masked(final, config, classes, device, name=tag))
     summary = {
         "tag": tag, "source": source.name, "split_file": config["split_file"],
         "n_frames": config["n_frames"], "img_size": config["img_size"], "seed": args.seed,
