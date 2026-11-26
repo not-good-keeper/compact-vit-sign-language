@@ -3,7 +3,7 @@
 # WinError 1455 when the commit limit runs out). Every stage is resume-safe, so a
 # restart continues from the last 25-epoch checkpoint. Gives up after 6 restarts
 # so a deterministic failure is reported instead of looping.
-cd /d/nn_dl_prac || exit 1
+cd "$(dirname "$0")" || exit 1
 restarts=0
 while true; do
   if grep -q "official all done" official_all.log 2>/dev/null; then
