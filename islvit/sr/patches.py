@@ -16,8 +16,8 @@ session-disjoint test sessions and is used to measure image quality, never to tr
 
 Usage::
 
-    python -m islvit.sr.patches --split train --out C:/isl_gan_work/hr_train.npy
-    python -m islvit.sr.patches --split heldout --crops 600 --frames-videos 75 --out C:/isl_gan_work/hr_heldout.npy
+    python -m islvit.sr.patches --split train --out gan_work/hr_train.npy
+    python -m islvit.sr.patches --split heldout --crops 600 --frames-videos 75 --out gan_work/hr_heldout.npy
 """
 
 from __future__ import annotations

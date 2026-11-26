@@ -10,7 +10,7 @@
 # re-extraction. T scales the spatial-encoder pass count linearly, so T=16 costs
 # roughly 2x T=8.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 
 for T in 4 8 12 16; do

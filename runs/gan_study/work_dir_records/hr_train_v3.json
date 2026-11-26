@@ -1,0 +1,10 @@
+{
+  "split": "train",
+  "split_file": "splits/full263__session-disjoint.csv",
+  "clips": 1957,
+  "crop_patches": 16000,
+  "frame_patches": 16000,
+  "patch": 128,
+  "seed": 0,
+  "cache": "cache128_f32"
+}

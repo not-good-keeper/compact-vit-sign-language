@@ -1,7 +1,7 @@
-cd /d/nn_dl_prac
-export PYTHONPATH=/d/nn_dl_prac PYTHONDONTWRITEBYTECODE=1
-PYX=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
-D=C:/isl_gan_work/diag
+cd "$(dirname "$0")/../../.." || exit 1
+export PYTHONPATH=$PWD PYTHONDONTWRITEBYTECODE=1
+PYX=${PY:-python}
+D=${GAN_WORK:-gan_work}/diag
 echo "[$(date +%H:%M:%S)] crops L3 srgan"
 $PYX -m islvit.data.crops --corpus include --cache-dir $D/crops_L3_srgan --crop-size 128 --frames 32 --restrict-to splits/_test472_paths.csv --workers 6 --degrade 180:40 --sr runs/sr_gan/generator.pt 2>&1 | grep -E "done|videos ->" | tail -n 2
 echo "[$(date +%H:%M:%S)] crops L3 bicubic"

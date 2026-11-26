@@ -3,8 +3,9 @@
 # downstream treatment as seeds 0 and 1: clean-test scoring, fixed-epoch QAT,
 # clean-test scoring of the INT4 model. Training and QAT read the training
 # cache; only scoring uses the fresh-detector test caches.
-export PYTHONPATH=/d/nn_dl_prac
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD
+PY=${PY:-python}
 TRAIN="ISLVIT_CACHE=cache128_f32"
 CLEAN="ISLVIT_CACHE=cache128_f32_test ISLVIT_CACHE_LM=cache_lm_f32_test"
 env $TRAIN $PY -m islvit.train --config configs/full263_v2.yaml \

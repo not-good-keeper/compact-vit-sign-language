@@ -18,7 +18,7 @@ detector finds it and the classifier reads it, which the downstream study measur
 
 Usage::
 
-    python -m islvit.sr.evaluate --bank C:/isl_gan_work/hr_heldout.npy \\
+    python -m islvit.sr.evaluate --bank gan_work/hr_heldout.npy \\
         --sr-l1 runs/sr_l1/generator.pt --sr-gan runs/sr_gan/generator.pt --out runs/gan_study/sr_quality.json
 """
 

@@ -31,8 +31,8 @@ because power cuts have killed long runs here before.
 
 Usage::
 
-    python -m islvit.sr.train --stage l1  --bank C:/isl_gan_work/hr_train.npy --iters 100000 --out runs/sr_l1
-    python -m islvit.sr.train --stage gan --bank C:/isl_gan_work/hr_train.npy --iters 100000 \\
+    python -m islvit.sr.train --stage l1  --bank gan_work/hr_train.npy --iters 100000 --out runs/sr_l1
+    python -m islvit.sr.train --stage gan --bank gan_work/hr_train.npy --iters 100000 \\
         --init runs/sr_l1/generator.pt --out runs/sr_gan
 """
 

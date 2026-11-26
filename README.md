@@ -180,26 +180,29 @@ to read it) see [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md).
 
 ## What is deliberately not in this repository
 
-No source video, no preprocessed caches, and no training checkpoints -- only the three shipped INT4 models in `release/` (~2 MB each). The rest is large and reproducible:
+No source video and no preprocessed caches; the three shipped INT4 models are in `release/` (~2 MB each), and the training checkpoints are attached to the GitHub release `v1.0`. The rest is large and reproducible:
 
-| Excluded | Size | How to get it back |
+| Excluded from git | Size | How to get it back |
 |---|---|---|
-| Source corpora (INCLUDE, CISLR, iSign, ISL-CSLTR) | ~57 GB | Download from the original sources below |
-| Crop caches (`cache*/`) | ~70 GB | Regenerate with `islvit.data.crops` |
-| Training checkpoints (`runs/*/best.pt`) | ~1 GB | Retrain via the `run_*.sh` script for that experiment |
+| Source corpora (INCLUDE, CISLR, iSign, ISL-CSLTR) | ~57 GB | Download from the original sources ([REPRODUCE.md](REPRODUCE.md) §3) |
+| Crop caches (`cache*/`) | ~70 GB | Regenerate with `islvit.data.crops` ([REPRODUCE.md](REPRODUCE.md) §4) |
+| Training checkpoints (`runs/*/best.pt`, `pretrained.pt`, `generator.pt`) | 1.9 GB | `checkpoints_core.zip` and `checkpoints_experiments.zip` on the `v1.0` release, or retrain via the `run_*.sh` script for that experiment |
+| GAN study work directory (`$GAN_WORK`) | ~13 GB | Rebuilt by the GAN scripts; its small records are in `runs/gan_study/work_dir_records/` |
 
-What *is* tracked is everything needed to verify the claims: all code, all configs, all 22 split definitions, and per-run `summary.json` / `history.csv` and scoring JSON for every run — most accuracy values in the reports are read directly from those files (docs/PROJECT_CONTEXT.md §14.3 lists the few that are not). See §19.2 of the report for the full reproduction sequence.
+What *is* tracked is everything needed to verify the claims: all code, all configs, all 22 split definitions, and per-run `summary.json` / `history.csv` and scoring JSON for every run — most accuracy values in the reports are read directly from those files (docs/PROJECT_CONTEXT.md §14.3 lists the few that are not). **[REPRODUCE.md](REPRODUCE.md) is the full reproduction sequence**, from a fresh clone to every number in the paper.
 
 ## Data sources
 
 - **INCLUDE** — Sridhar et al., ACM MM 2020. Zenodo record 4010759. CC-BY-4.0. 4,257 clips, 262 word-level signs, 1920×1080 @ 25 fps, single studio in Chennai.
-- **CISLR** — pretraining corpus and cross-corpus test set.
-- **iSign** — 18,000 clips, each from a different source video (of 18,139 available; 127,237 segments in all), of which 17,896 pass the hand-detection filter and are used for scaled pretraining.
+- **CISLR** — Joshi et al., EMNLP 2022. Hugging Face `Exploration-Lab/CISLR`. AFL-3.0. Pretraining corpus and cross-corpus test set.
+- **iSign** — Joshi et al., 2024. Hugging Face `Exploration-Lab/iSign`. CC-BY-NC-SA-4.0. 18,000 clips, each from a different source video (of 18,139 available; 127,237 segments in all), of which 17,896 pass the hand-detection filter and are used for scaled pretraining.
 - **ISL-CSLTR** — continuous-signing corpus, used for auxiliary experiments.
 
 Each is obtained from its original source under its own licence; no source video or preprocessed cache is redistributed here. **Exception:** a small number of illustrative figures (`docs/figures/fig16_crop_montage.png`, `fig19_walkthrough.png`, the case-study images in `report/case_study/assets/`, `docs/figures/fig23_gan_montage.png`, the interface screenshots in `report/review3/assets/`, and documents embedding them) show frames and crops of an INCLUDE signer. These are reproduced from INCLUDE (Sridhar et al., ACM MM 2020, Zenodo 4010759) under CC-BY-4.0, with attribution.
 
 ## Environment
+
+`conda env create -f environment.yml` installs the exact versions below (`requirements-lock.txt` is the full freeze). The scripts run under the active environment, or under `$PY` if set.
 
 | | |
 |---|---|

@@ -25,7 +25,7 @@
 #   long2000_s1  8f/64px, baseline aug, seed 1 -> 57.4 % / 62.1 % TTA
 # Every cell below differs from those in exactly one respect.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub\|TensorFlow\|oneDNN\|absl"
 SPLIT=splits/vocab50+cislr__session-disjoint.csv

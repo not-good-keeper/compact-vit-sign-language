@@ -10,9 +10,10 @@
 # After each arm: development metrics with real MediaPipe on 200 clips from the held-out
 # *validation* sessions at 180p and 240p. The 472 test clips are not touched here.
 # Resume-safe: rerun after any interruption.
-export PYTHONPATH=/d/nn_dl_prac PYTHONDONTWRITEBYTECODE=1
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
-W=C:/isl_gan_work
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD PYTHONDONTWRITEBYTECODE=1
+PY=${PY:-python}
+W=${GAN_WORK:-gan_work}
 COMMON="--bank $W/hr_train_v3.npy --hands $W/hands_train_v3.npy --codec-prob 0.5 --channels-last --workers 10
         --hand-proxy runs/hand_proxy/proxy.pt --val-hands $W/hp_val.npz --resume"
 stamp() { echo "[$(date +%H:%M:%S)] $*"; }

@@ -18,7 +18,7 @@
 # temporally upsampled in the 24f and 32f cells and not in the control. The test
 # set is byte-identical to the one behind every other 50-word number here.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128_f32
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub\|TensorFlow\|oneDNN\|absl"
 SPLIT=splits/vocab50clean__session-disjoint.csv

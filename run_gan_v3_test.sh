@@ -5,9 +5,10 @@
 # run_gan_study.sh (bicubic, SR-L1 and the earlier GAN are reused from runs/gan_study/).
 # Front ends run in parallel lanes (LANES x WORKERS MediaPipe workers; every worker also holds a CUDA
 # context, so LANES*WORKERS is bounded by GPU memory). Resume-safe: finished steps are skipped.
-export PYTHONPATH=/d/nn_dl_prac PYTHONDONTWRITEBYTECODE=1
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
-W=C:/isl_gan_work; OUT=runs/gan_study
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD PYTHONDONTWRITEBYTECODE=1
+PY=${PY:-python}
+W=${GAN_WORK:-gan_work}; OUT=runs/gan_study
 LANES=${LANES:-3}; WORKERS=${WORKERS:-3}
 export ISLVIT_SR_FP16=1   # half-precision upscaling: 1.8x faster, <= 1/255 pixel difference (see islvit/sr/upscaler.py)
 LEVELS=${LEVELS:-"L3 L2"}

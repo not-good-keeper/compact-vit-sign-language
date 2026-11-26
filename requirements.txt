@@ -1,0 +1,20 @@
+# Exact versions of the environment every reported result was produced in
+# (Python 3.11.15, Windows 11, CUDA 12.4 driver stack, RTX 3060 12 GB).
+# PyTorch comes from the CUDA 12.4 wheel index:
+#   pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu124
+torch==2.6.0+cu124
+torchvision==0.21.0+cu124
+timm==1.0.28
+mediapipe==1.0.0
+numpy==2.4.4
+opencv-python==5.0.0.93
+av==18.0.0
+pyarrow==25.0.0
+pandas==3.0.5
+PyYAML==6.0.3
+pillow==12.2.0
+matplotlib==3.11.1
+einops==0.8.2
+tqdm==4.70.0
+huggingface_hub==1.26.1
+safetensors==0.8.0

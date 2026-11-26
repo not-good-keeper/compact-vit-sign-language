@@ -1,0 +1,8 @@
+{
+  "degrade": [
+    180,
+    40
+  ],
+  "sr": "runs/sr_l1/generator.pt",
+  "sr_sha256": "f2466f5296921d43916e75e6b8fa64b9b20097970d660bce4067b3cc4ac8e9a2"
+}

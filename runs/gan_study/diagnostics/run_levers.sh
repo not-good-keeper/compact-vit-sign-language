@@ -1,7 +1,7 @@
-cd /d/nn_dl_prac
-export PYTHONPATH=/d/nn_dl_prac PYTHONDONTWRITEBYTECODE=1
-PYX=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
-D=C:/isl_gan_work/diag
+cd "$(dirname "$0")/../../.." || exit 1
+export PYTHONPATH=$PWD PYTHONDONTWRITEBYTECODE=1
+PYX=${PY:-python}
+D=${GAN_WORK:-gan_work}/diag
 for v in lowconf bigroi multiroi all; do
   [ -f $D/L3srgan_$v/FRONTEND.json ] && continue
   echo "[$(date +%H:%M:%S)] extract $v"

@@ -10,7 +10,7 @@
 # Nothing else in the queue depends on these, so they are the cheapest remaining
 # way to make the existing results interpretable rather than merely larger.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub"
 

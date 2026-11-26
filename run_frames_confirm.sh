@@ -14,7 +14,7 @@
 # retesting at 16 frames rather than discarding, because it was measured at the
 # frame count we now know was the binding constraint.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub\|TensorFlow\|oneDNN\|absl"
 SPLIT=splits/vocab50+cislr__session-disjoint.csv

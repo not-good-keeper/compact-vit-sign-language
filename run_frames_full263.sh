@@ -11,7 +11,7 @@
 # T=16 is the candidate (best top-5 there by 12 points); T=4 is the cheap end
 # worth bracketing against. T=8 is already measured as sd_full263.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 
 for T in 16 4; do

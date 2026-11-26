@@ -1,0 +1,9 @@
+{
+  "degrade": [
+    240,
+    50
+  ],
+  "sr": "runs/sr3_gan_task/generator.pt",
+  "sr_sha256": "397dc30ff8949ee9cad444b6c2383f14eeeda5eefac63a8bb16575492f82186c",
+  "sr_precision": "fp16"
+}

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Landmark stream: the f16_262w recipe exactly, plus --landmarks. Two seeds,
 # paired against f16_262w_s0/s1. Waits for the narrow chain to free the GPU.
-export PYTHONPATH=/d/nn_dl_prac ISLVIT_CACHE=cache128_f32
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD ISLVIT_CACHE=cache128_f32
+PY=${PY:-python}
 until [ -f runs/f16_262w_s2_narrow/summary.json ]; do sleep 60; done
 sleep 30
 COMMON="--config configs/full263_v2.yaml --split-file splits/full263__session-disjoint-foldval.csv

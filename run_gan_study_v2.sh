@@ -12,9 +12,10 @@
 #   B  degraded test front ends (frozen INT4/FP32 scoring, detection) -> CISLR detection
 # then the retrained models are scored on lane B's test caches, and the report is rebuilt.
 # Resume-safe like run_gan_study.sh: rerun after any interruption.
-export PYTHONPATH=/d/nn_dl_prac PYTHONDONTWRITEBYTECODE=1
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
-export GAN_WORK=${GAN_WORK:-C:/isl_gan_work}
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD PYTHONDONTWRITEBYTECODE=1
+PY=${PY:-python}
+export GAN_WORK=${GAN_WORK:-gan_work}
 WORK=$GAN_WORK
 OUT=runs/gan_study
 SRL1=runs/sr_l1/generator.pt

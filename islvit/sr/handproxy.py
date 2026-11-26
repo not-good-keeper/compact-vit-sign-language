@@ -15,9 +15,9 @@ Training clips are the *original* train sessions of full263__session-disjoint.cs
 the original val sessions are held out here and in generator training, and are what
 development decisions are made on. The 472 test clips are never touched.
 
-    python -m islvit.sr.handproxy build --split train --out C:/isl_gan_work/hp_train.npz
-    python -m islvit.sr.handproxy build --split val   --out C:/isl_gan_work/hp_val.npz --per-clip 6
-    python -m islvit.sr.handproxy train --train C:/isl_gan_work/hp_train.npz --val C:/isl_gan_work/hp_val.npz --out runs/hand_proxy
+    python -m islvit.sr.handproxy build --split train --out gan_work/hp_train.npz
+    python -m islvit.sr.handproxy build --split val   --out gan_work/hp_val.npz --per-clip 6
+    python -m islvit.sr.handproxy train --train gan_work/hp_train.npz --val gan_work/hp_val.npz --out runs/hand_proxy
 """
 
 from __future__ import annotations

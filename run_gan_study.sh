@@ -12,9 +12,10 @@
 #      and the retrained models; detection and landmark agreement against clean
 #   4  CISLR (natively 300 px): detection rates per arm
 #   5  image quality on held-out patches, then the report
-export PYTHONPATH=/d/nn_dl_prac PYTHONDONTWRITEBYTECODE=1
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
-export GAN_WORK=${GAN_WORK:-C:/isl_gan_work}
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD PYTHONDONTWRITEBYTECODE=1
+PY=${PY:-python}
+export GAN_WORK=${GAN_WORK:-gan_work}
 WORK=$GAN_WORK
 OUT=runs/gan_study
 SRL1=runs/sr_l1/generator.pt

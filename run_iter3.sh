@@ -12,7 +12,7 @@
 # the same mistake that made the labelled-merge result unreadable until McNemar
 # separated it out.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub"
 

@@ -5,9 +5,10 @@
 #
 # Lane B starts once lane A has moved from landmark extraction (many CUDA workers) to
 # fine-tuning (one process), and uses fewer workers. Resume-safe.
-export PYTHONPATH=/d/nn_dl_prac PYTHONDONTWRITEBYTECODE=1
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
-WORK=${GAN_WORK:-C:/isl_gan_work}
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD PYTHONDONTWRITEBYTECODE=1
+PY=${PY:-python}
+WORK=${GAN_WORK:-gan_work}
 OUT=runs/gan_study
 SRL1=runs/sr_l1/generator.pt
 SRGAN=runs/sr_gan/generator.pt

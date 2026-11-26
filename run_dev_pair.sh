@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Targeted levers from the validation error analysis, each on top of --lm-aug 1.0
 # and compared against dev_lm_aug_s0. Waits for run_dev_aug.sh to free the GPU.
-export PYTHONPATH=/d/nn_dl_prac ISLVIT_CACHE=cache128_f32 ISLVIT_CACHE_LM=cache_lm_f32
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD ISLVIT_CACHE=cache128_f32 ISLVIT_CACHE_LM=cache_lm_f32
+PY=${PY:-python}
 until [ -f runs/dev_lm_aug2_s0/val50.json ]; do sleep 120; done
 BASE="--config configs/full263_v2.yaml --split-file splits/full263__session-disjoint.csv
   --init-from runs/isign_mim/pretrained.pt --resolution-jitter 0.5 --select last

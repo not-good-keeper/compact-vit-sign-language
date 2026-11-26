@@ -8,7 +8,7 @@
 # lucky draw. Two more seeds is the minimum to tell those apart -- four points
 # gives an actual distribution rather than a coin flip between two readings.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub"
 SPLIT=splits/full263__session-disjoint-foldval.csv

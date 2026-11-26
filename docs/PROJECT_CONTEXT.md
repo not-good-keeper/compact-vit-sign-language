@@ -244,7 +244,7 @@ Tracked and sufficient to **verify** every number: all code, all configs, all sp
 
 ### 2.4 The off-repo work directory `C:/isl_gan_work` (13 GB)
 
-Everything the GAN study needs that is too large or too transient for git: high-resolution patch banks (`hr_train.npy`, `hr_train_v3.npy`, `hr_heldout.npy`, `hands_train_v3.npy`, `hp_train.npz`, `hp_val.npz`), temporary degraded extraction caches (`test_L*_*`, `cislr_*`), the validation-session development caches (`dev/`), and detector-lever caches (`diag/`). Set by `GAN_WORK` (default `C:/isl_gan_work`). `python -m islvit.sr.study drop` deletes only `crops.npy`, only inside this root, only from a directory carrying `FRONTEND.json`; it exists because earlier clean-up steps deleted 54 GB twice without checking.
+Everything the GAN study needs that is too large or too transient for git: high-resolution patch banks (`hr_train.npy`, `hr_train_v3.npy`, `hr_heldout.npy`, `hands_train_v3.npy`, `hp_train.npz`, `hp_val.npz`), temporary degraded extraction caches (`test_L*_*`, `cislr_*`), the validation-session development caches (`dev/`), and detector-lever caches (`diag/`). Set by `GAN_WORK` (`C:/isl_gan_work` when the study ran; the scripts now default to `gan_work/` in the repository root). Its small records (cache manifests, front-end descriptions, diagnostic scores) are kept in `runs/gan_study/work_dir_records/`, with the commands for the three banks no script builds. `python -m islvit.sr.study drop` deletes only `crops.npy`, only inside this root, only from a directory carrying `FRONTEND.json`; it exists because earlier clean-up steps deleted 54 GB twice without checking.
 
 ### 2.5 Environment
 
@@ -258,7 +258,8 @@ Everything the GAN study needs that is too large or too transient for git: high-
 | MediaPipe | 1.0.0 (Tasks API) |
 | timm | 1.0.28; OpenCV 5.0.0; NumPy 2.4.4; PyAV 18.0.0 (H.264 degradation) |
 | Seeds | 0, 1, 2 (training), 1337 (split construction) |
-| Shell | Git Bash; scripts use `/c/Users/ADMIN/anaconda3/envs/islvit/python.exe` |
+| Shell | Git Bash; scripts use `${PY:-python}` and `cd` to the repository root themselves |
+| Install | `conda env create -f environment.yml` (pinned); `requirements-lock.txt` is the full freeze; see `REPRODUCE.md` |
 
 Windows-specific facts that shaped the code: processes *spawn* rather than fork, so every command-line override must be forwarded into worker processes (`crops.py:386 init_worker` lists them all); and each MediaPipe worker holds a CUDA context, so worker counts are bounded by GPU memory.
 

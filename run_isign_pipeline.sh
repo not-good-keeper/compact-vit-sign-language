@@ -6,13 +6,13 @@
 # double-jitter pretraining variant was tested and REJECTED, sd 4.2 with a
 # lower mean -- do not repeat that mistake here).
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub"
 SPLIT=splits/full263__session-disjoint-foldval.csv
 
 echo "waiting for iSign video download to finish..."
-until grep -q "ALL PARTS DOWNLOADED" /d/nn_dl_prac/isign_download.log 2>/dev/null; do
+until grep -q "ALL PARTS DOWNLOADED" isign_download.log 2>/dev/null; do
   sleep 120
 done
 echo "download complete."

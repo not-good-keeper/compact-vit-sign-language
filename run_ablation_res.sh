@@ -10,7 +10,7 @@
 #   112px -> 49 tokens, 2.34 GMACs
 #   128px -> 64 tokens, ~3.0 GMACs
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 
 for SIZE in 64 112 128; do

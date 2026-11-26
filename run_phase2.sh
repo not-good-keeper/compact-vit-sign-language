@@ -3,7 +3,7 @@
 # pretrained-init ablation. Same recipe everywhere -- only the split moves --
 # so the spread between schemes is attributable to take leakage alone.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 CFG=configs/include50.yaml
 
 run () {

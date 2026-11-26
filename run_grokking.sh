@@ -26,7 +26,7 @@
 # that a null is then MEASURED rather than assumed, and the curve shape tells us
 # whether longer training is worth any further GPU time at all.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub"
 SPLIT=splits/vocab50+cislr__session-disjoint.csv

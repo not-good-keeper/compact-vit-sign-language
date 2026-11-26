@@ -1,6 +1,6 @@
-import json, csv, numpy as np
+import json, csv, os, numpy as np
 from pathlib import Path
-W=Path('C:/isl_gan_work'); R=Path('runs/gan_study')
+W=Path(os.environ.get('GAN_WORK', 'gan_work')); R=Path('runs/gan_study')
 def hits(path_tpl, fam='frozen_int4'):
     out=None
     for s in range(3):

@@ -1,0 +1,57 @@
+{
+  "clean_check": {
+    "present": 0.88359375,
+    "clean_present": 0.88359375,
+    "missed": 0.01484375,
+    "extra": 0.01484375,
+    "wrist_err_med": 0.0006532983388751745,
+    "misplaced": 0.00625,
+    "points_err_med": 0.0009283180115744472,
+    "points_err_mean": 0.0028667058795690536,
+    "jitter_corr": 0.17612119436288043
+  },
+  "L3_bicubic": {
+    "present": 0.433203125,
+    "clean_present": 0.882734375,
+    "missed": 0.475625,
+    "extra": 0.02609375,
+    "wrist_err_med": 0.01567916013300419,
+    "misplaced": 0.11984375,
+    "points_err_med": 0.023225653916597366,
+    "points_err_mean": 0.03853213042020798,
+    "jitter_corr": 0.5091969382771282
+  },
+  "L3_srl1": {
+    "present": 0.645859375,
+    "clean_present": 0.882734375,
+    "missed": 0.26953125,
+    "extra": 0.03265625,
+    "wrist_err_med": 0.007824546657502651,
+    "misplaced": 0.077890625,
+    "points_err_med": 0.012976153753697872,
+    "points_err_mean": 0.02298668399453163,
+    "jitter_corr": 0.479737674273879
+  },
+  "L3_srgan_v1": {
+    "present": 0.619140625,
+    "clean_present": 0.882734375,
+    "missed": 0.295859375,
+    "extra": 0.032265625,
+    "wrist_err_med": 0.007824546657502651,
+    "misplaced": 0.06515625,
+    "points_err_med": 0.013108644634485245,
+    "points_err_mean": 0.02162064239382744,
+    "jitter_corr": 0.4739143425618483
+  },
+  "L3_srgan_v2": {
+    "present": 0.632890625,
+    "clean_present": 0.882734375,
+    "missed": 0.281875,
+    "extra": 0.03203125,
+    "wrist_err_med": 0.007795149926096201,
+    "misplaced": 0.062734375,
+    "points_err_med": 0.012984608300030231,
+    "points_err_mean": 0.020952610298991203,
+    "jitter_corr": 0.4391621984514673
+  }
+}

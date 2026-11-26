@@ -16,7 +16,7 @@
 # 304 clips is only +8% data, so a large gain would mean domain exposure matters
 # far more than data volume -- which is exactly the question.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub"
 MIX=splits/crosscorpus__cislr-test-mix50.csv

@@ -1,0 +1,8 @@
+{
+  "degrade": [
+    360,
+    60
+  ],
+  "sr": "runs/sr_gan/generator.pt",
+  "sr_sha256": "6f3d17891cb723d948485d21f0c43b660b006b452edbbd04bddc00fba5937f71"
+}

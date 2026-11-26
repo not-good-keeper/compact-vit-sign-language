@@ -24,7 +24,7 @@
 #                 competitive. The two hypotheses disagree sharply, which is the
 #                 point -- and it is also the cheapest cell to run.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128_f32
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub\|TensorFlow\|oneDNN\|absl"
 SPLIT=splits/vocab50clean__session-disjoint.csv

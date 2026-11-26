@@ -11,8 +11,9 @@
 # One run at a time: two concurrent runs exhaust the Windows commit limit
 # (WinError 1455). Resume-safe: rerun the same command after an interruption.
 set -u
-export PYTHONPATH=/d/nn_dl_prac ISLVIT_CACHE=cache128_f32
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD ISLVIT_CACHE=cache128_f32
+PY=${PY:-python}
 BENCH=$1
 SEEDS=${2:-0 1 2}
 SPLIT=splits/${BENCH}__official.csv

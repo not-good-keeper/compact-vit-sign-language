@@ -10,7 +10,7 @@
 # If this doesn't beat 39.9%, finetune-time jitter was already sufficient and
 # this checkpoint isn't worth carrying into the iSign pretraining.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub"
 SPLIT=splits/full263__session-disjoint-foldval.csv

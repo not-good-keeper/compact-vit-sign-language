@@ -4,9 +4,10 @@
 # does them as soon as each generator exists. It uses 4 MediaPipe workers (the machine has 12
 # cores and training takes ~40 %), and the SR inference it needs is a few ms per frame.
 # Nothing here feeds back into training, so quality is unaffected; only wall-clock changes.
-export PYTHONPATH=/d/nn_dl_prac PYTHONDONTWRITEBYTECODE=1
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
-W=C:/isl_gan_work
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD PYTHONDONTWRITEBYTECODE=1
+PY=${PY:-python}
+W=${GAN_WORK:-gan_work}
 stamp() { echo "[$(date +%H:%M:%S)] $*"; }
 ext() {  # outdir degrade [generator]
   $PY -m islvit.sr.diag_detector extract --variant base --split val --n 200 --ref-cache cache128_f32 \

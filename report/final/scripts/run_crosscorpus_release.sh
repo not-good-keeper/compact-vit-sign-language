@@ -9,7 +9,7 @@
 # the other caches). Results: report/final/data/crosscorpus_release_s{0,1,2}.json
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
-PY=${PY:-/c/Users/ADMIN/anaconda3/envs/islvit/python.exe}
+PY=${PY:-python}
 export PYTHONPATH=.
 
 if [ ! -f cache_lm_cislr_f32/done.npy ]; then

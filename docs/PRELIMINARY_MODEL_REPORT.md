@@ -2353,6 +2353,8 @@ docs/figures/        generated figures
 
 ### 19.2 Reproduction sequence
 
+*Superseded:* this sequence reproduces the early 8-frame pixel-only models. The released model (landmarks, iSign initialisation, 16 frames, 4-bit QAT) and every result in the paper are reproduced by `REPRODUCE.md` in the repository root.
+
 ```bash
 # 1. Environment (Python 3.11)
 conda create -n islvit python=3.11 -y

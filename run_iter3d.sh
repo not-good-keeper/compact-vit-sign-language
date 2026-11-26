@@ -12,7 +12,7 @@
 #    guessed rather than measured. Three seeds give a spread, which decides
 #    whether small deltas like SSL's +1.9 mean anything at all.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub"
 

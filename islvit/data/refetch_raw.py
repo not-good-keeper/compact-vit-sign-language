@@ -18,6 +18,7 @@ Run as a module::
 
 from __future__ import annotations
 
+import argparse
 import json
 import shutil
 import time
@@ -102,11 +103,17 @@ def extract_videos(archive_path: Path) -> int:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Download INCLUDE archives from Zenodo and keep the 1080p videos")
+    parser.add_argument("--all", action="store_true",
+                        help="fetch every archive in the record (a fresh copy of INCLUDE), not only the nine repaired ones")
+    args = parser.parse_args()
+
     with urllib.request.urlopen(ZENODO_RECORD) as response:
         record = json.load(response)
 
-    files = {item["key"]: item for item in record["files"] if item["key"] in NEEDED}
-    missing = NEEDED - files.keys()
+    wanted = {item["key"] for item in record["files"] if item["key"].endswith(".zip")} if args.all else NEEDED
+    files = {item["key"]: item for item in record["files"] if item["key"] in wanted}
+    missing = wanted - files.keys()
     if missing:
         raise SystemExit(f"Zenodo record is missing: {sorted(missing)}")
 

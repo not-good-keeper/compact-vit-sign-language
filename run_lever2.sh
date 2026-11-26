@@ -10,7 +10,7 @@
 # Waits for lever 1 rather than running beside it: both are GPU-bound and would
 # only slow each other down.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 
 echo "waiting for sd263_cislr to finish..."

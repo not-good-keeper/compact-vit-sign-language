@@ -20,7 +20,7 @@
 # because three of this project's conclusions have been overturned by follow-ups
 # that turned out to have moved two things at once.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128_f32
 export ISLVIT_CACHE_CISLR=cache_cislr_f32   # 32-frame CISLR: matches INCLUDE's headroom
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub\|TensorFlow\|oneDNN\|absl"

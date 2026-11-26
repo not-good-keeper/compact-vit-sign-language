@@ -9,7 +9,7 @@ Subcommands::
 
 ``drop`` exists because this project has lost 54 GB twice to clean-up steps that
 did not check what they were deleting. It removes only ``crops.npy``, only inside
-the study work root (GAN_WORK, default C:/isl_gan_work), and only from a
+the study work root (GAN_WORK, default gan_work), and only from a
 directory carrying a FRONTEND.json, i.e. one the study's own extraction wrote.
 Everything small enough to keep for later analysis -- sources, geometry, index,
 landmarks -- stays.
@@ -48,7 +48,7 @@ def cislr_paths() -> list[str]:
 
 
 def drop(cache: str) -> None:
-    work = Path(os.environ.get("GAN_WORK", "C:/isl_gan_work")).resolve()
+    work = Path(os.environ.get("GAN_WORK", "gan_work")).resolve()
     target = Path(cache).resolve()
     if work not in target.parents:
         raise SystemExit(f"refusing: {target} is not inside the study work root {work}")

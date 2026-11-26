@@ -2,8 +2,9 @@
 # Screening on the ORIGINAL split: train 1,957 clips, choose on the 888-clip
 # validation set (154 of them deployed words). Test is not touched here.
 # Each run differs from dev_lm_base_s0 by exactly one change.
-export PYTHONPATH=/d/nn_dl_prac ISLVIT_CACHE=cache128_f32 ISLVIT_CACHE_LM=cache_lm_f32
-PY=/c/Users/ADMIN/anaconda3/envs/islvit/python.exe
+cd "$(dirname "$0")" || exit 1
+export PYTHONPATH=$PWD ISLVIT_CACHE=cache128_f32 ISLVIT_CACHE_LM=cache_lm_f32
+PY=${PY:-python}
 BASE="--config configs/full263_v2.yaml --split-file splits/full263__session-disjoint.csv
   --init-from runs/isign_mim/pretrained.pt --resolution-jitter 0.5 --select last
   --n-frames 16 --landmarks --seed 0 --val-every 50 --resume"

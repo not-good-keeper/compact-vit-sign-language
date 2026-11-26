@@ -12,6 +12,7 @@ from __future__ import annotations
 import csv
 import json
 import math
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -229,7 +230,7 @@ def figures() -> list[str]:
 
 
 def montage() -> str | None:
-    bank_path = Path("C:/isl_gan_work/hr_heldout.npy")
+    bank_path = Path(os.environ.get("GAN_WORK", "gan_work")) / "hr_heldout.npy"
     gens = [("SR-L1", RUNS / "sr_l1/generator.pt"), ("v3 without GAN", RUNS / "sr3_l1_task/generator.pt"),
             ("SR-GAN v1", RUNS / "sr_gan_v1/generator.pt"), ("SR-GAN v2", RUNS / "sr_gan/generator.pt"),
             ("SR-GAN v3", RUNS / "sr3_gan_task/generator.pt")]

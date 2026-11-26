@@ -1,0 +1,10 @@
+{
+  "split": "heldout",
+  "split_file": "splits/full263__session-disjoint-foldval.csv",
+  "clips": 1412,
+  "crop_patches": 600,
+  "frame_patches": 1200,
+  "patch": 128,
+  "seed": 0,
+  "cache": "cache128_f32"
+}

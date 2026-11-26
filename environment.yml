@@ -1,0 +1,10 @@
+# conda env create -f environment.yml && conda activate islvit
+name: islvit
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.15
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu124
+      - -r requirements.txt

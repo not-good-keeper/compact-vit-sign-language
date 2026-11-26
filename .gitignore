@@ -61,3 +61,25 @@ runs/_val_probs/
 
 # Demo clips are INCLUDE test videos: rebuild them with `python -m islvit.demo_samples`
 demo_samples/
+
+# LaTeX build output (the PDFs that matter are copied to report/final/)
+report/final/latex/*.aux
+report/final/latex/*.bbl
+report/final/latex/*.blg
+report/final/latex/*.log
+report/final/latex/*.out
+report/final/srep/*.aux
+report/final/srep/*.bbl
+report/final/srep/*.blg
+report/final/srep/*.log
+report/final/srep/*.out
+report/final/srep/*.pdf
+
+# Submission bundles are built from the tracked sources on demand
+report/final/*.zip
+
+# Corrections logged by the local UI (per-user data)
+runs/corrections.jsonl
+
+# GAN study work directory (patch banks and extraction caches; see runs/gan_study/work_dir_records)
+gan_work/

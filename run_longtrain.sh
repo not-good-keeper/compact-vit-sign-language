@@ -16,7 +16,7 @@
 # Arm 4 is the weight-decay arm the previous probe failed to run: --weight-decay
 # now exists and was verified to reach the optimiser groups.
 set -u
-PY="/c/Users/ADMIN/anaconda3/envs/islvit/python.exe"
+PY="${PY:-python}"
 export ISLVIT_CACHE=cache128
 FILTER="UserWarning\|warnings.warn\|symlink\|Developer Mode\|huggingface_hub"
 SPLIT=splits/vocab50+cislr__session-disjoint.csv
