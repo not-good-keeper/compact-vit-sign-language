@@ -1,8 +1,8 @@
 """Extract every hyperlink from the report PDF and check that it resolves.
 
-GitHub blob/tree links pinned to the audited commit are checked against the
-local git object store (the commit is on origin/main, so a path present in the
-commit is present on GitHub); their #L anchors are checked against the file's
+GitHub blob/tree links pinned to the release tag are checked against the
+local git object store (the tag is pushed to origin, so a path present in the
+tagged tree is present on GitHub); their #L anchors are checked against the file's
 line count. All other links (DOI, arXiv, repository root) are requested over
 HTTP. Output: report/final/data/link_check.json.
 
@@ -19,7 +19,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-PIN = "3330b87d607eac34615517c092f79fc3e3abf1b6"
+PIN = "v1.0"
 PREFIXES = (f"https://github.com/not-good-keeper/compact-vit-sign-language/blob/{PIN}/",
             f"https://github.com/not-good-keeper/compact-vit-sign-language/tree/{PIN}/")
 

@@ -69,7 +69,7 @@ def fig_variants(a: dict) -> None:
     ax.set_yticks(range(70, 91, 5))
     ax.set_xlim(-0.5, len(variants) - 0.35)
     ax.legend(loc="lower right", fontsize=7, handletextpad=0.2, ncol=3, columnspacing=0.8)
-    ax.set_title("(a) Masked-50, 6-view TTA, 472 test clips", fontsize=7.6, loc="left", color=INK)
+    ax.set_title("(a) 50-word restriction, 6-view TTA, 472 test clips", fontsize=7.6, loc="left", color=INK)
 
     comps = [("paired_landmark_vs_pixel", "Landmarks vs pixels only"),
              ("paired_qat_vs_ptq", "QAT INT4 vs post-training INT4"),
@@ -116,7 +116,7 @@ def fig_protocol(a: dict) -> None:
     ax.set_ylim(0, 115)
     ax.set_yticks(range(0, 101, 20))
     ax.set_ylabel("Top-1 accuracy (%)")
-    ax.set_title("(a) Same 50-word recipe, two split protocols", fontsize=7.6, loc="left")
+    ax.set_title("(a) Same 50-word configuration, two split protocols", fontsize=7.6, loc="left")
 
     lad = a["protocol_ladder_8frame"]
     keys = [("full263_v2__random-video", "Random-video"), ("full263_v2__take-group", "Take-group"),
@@ -129,7 +129,7 @@ def fig_protocol(a: dict) -> None:
     bx.set_xticks(range(3), [k[1] for k in keys])
     bx.set_ylim(0, 115)
     bx.set_yticks(range(0, 101, 20))
-    bx.set_title("(b) Early 8-frame recipe, INCLUDE 262 words", fontsize=7.6, loc="left")
+    bx.set_title("(b) Early 8-frame configuration, INCLUDE 262 words", fontsize=7.6, loc="left")
     fig.tight_layout(w_pad=2)
     save(fig, "fig_protocol")
 
@@ -149,7 +149,7 @@ def fig_ablation(a: dict) -> None:
                 for d in by[f]:
                     ax.scatter(f, pct(d[key]["top1"]), color=col, s=8, alpha=0.8, zorder=4)
     ax.set_xticks(frames)
-    ax.set_xlabel("Frames per clip (sampled from a 32-frame cache)")
+    ax.set_xlabel("Frames per clip (sampled from 32 stored frames)")
     ax.set_ylabel("Top-1 accuracy (%)")
     ax.legend(loc="lower right", fontsize=7)
     ax.set_title("(a) Temporal length, 50 words, 472 clips", fontsize=7.6, loc="left")
@@ -188,7 +188,7 @@ def fig_gan(a: dict) -> None:
     ax.set_title("(a) Frozen INT4 model, mean of 3 seeds", fontsize=7.6, loc="left")
 
     pairs = [("srgan_v1", "srl1", "v1 vs SR-L1"), ("srgan", "srl1", "v2 vs SR-L1"),
-             ("sr3_gan_task", "sr3_l1_task", "v3 vs v3 w/o GAN")]
+             ("sr3_gan_task", "sr3_l1_task", "v3 vs v3 without GAN")]
     p = a["gan"]["paired_frozen_int4"]
     y, yt, yl = 0, [], []
     for lv, lvname in (("L1", "360p"), ("L2", "240p"), ("L3", "180p")):
@@ -209,8 +209,8 @@ def fig_gan(a: dict) -> None:
     bx.invert_yaxis()
     bx.set_xlim(-4, 6)
     bx.set_xlabel("Change in top-1 from adding the GAN loss (points)")
-    bx.set_title("(b) Each GAN against its own no-GAN control", fontsize=7.6, loc="left")
-    bx.scatter([], [], s=30, marker="D", color=C[2], label="meets 'helps' rule")
+    bx.set_title("(b) Effect of adding the adversarial loss", fontsize=7.6, loc="left")
+    bx.scatter([], [], s=30, marker="D", color=C[2], label="meets the fixed criterion")
     bx.scatter([], [], s=30, marker="D", color=INK2, label="no reliable difference")
     bx.scatter([], [], s=7, color=INK2, label="individual seeds")
     bx.legend(fontsize=6.4, loc="upper center", bbox_to_anchor=(0.45, -0.2), ncol=3, columnspacing=0.8)

@@ -97,10 +97,10 @@ def main() -> None:
     # ---- citations: every display item is cited, main items in order ----
     tex = once(tex, "all from the original 1080p sources.",
                "all from the original 1080p sources (Supplementary Fig.~" + B + "ref{fig:exdata}).")
-    tex = once(tex, "One code path builds the training cache and the test cache (",
-               "One code path builds the training cache and the test cache (Supplementary Fig.~" + B + "ref{fig:excrops}; ")
-    tex = once(tex, "Figure~" + B + "ref{fig:model} shows the network (",
-               "Supplementary Fig.~" + B + "ref{fig:model} and Fig.~" + B + "ref{fig:archmodel} show the network (")
+    tex = once(tex, "Training and test clips go through the same preprocessing.",
+               "Training and test clips go through the same preprocessing (Supplementary Fig.~" + B + "ref{fig:excrops}).")
+    tex = once(tex, "Figure~" + B + "ref{fig:model} shows the network.",
+               "Supplementary Fig.~" + B + "ref{fig:model} and Fig.~" + B + "ref{fig:archmodel} show the network.")
     tex = once(tex, "Figure~" + B + "ref{fig:gan} shows the comparison design.",
                "Supplementary Fig.~" + B + "ref{fig:gan} shows the comparison design, and Supplementary Fig.~"
                + B + "ref{fig:exgan} shows what each front end does to the hand region of a 180p clip.")
@@ -115,8 +115,14 @@ def main() -> None:
     tex = once(tex, "for SR-L1).", "for SR-L1; Supplementary Fig.~" + B + "ref{fig:exdetect}).")
     tex = once(tex, "The matched 50-word comparison gave",
                "The matched 50-word comparison (Fig.~" + B + "ref{fig:protocol}a) gave")
-    tex = once(tex, "With the early 8-frame recipe on 262 words, accuracy fell",
-               "With the early 8-frame recipe on 262 words (Fig.~" + B + "ref{fig:protocol}b), accuracy fell")
+    tex = once(tex, "With the early 8-frame configuration on 262 words, accuracy fell",
+               "With the early 8-frame configuration on 262 words (Fig.~" + B + "ref{fig:protocol}b), accuracy fell")
+
+    # The journal asks for any use of a large language model to be stated in the Methods.
+    tex = once(tex, B + "section{Results}" + B + "label{sec:results}",
+               B + "paragraph{Use of AI tools.} Claude (Anthropic) assisted with writing and reviewing code and with "
+               "editing the manuscript text; the authors checked all results and take full responsibility for the content.\n\n"
+               + B + "section{Results}" + B + "label{sec:results}")
 
     # References to items now in the SI.
     for label in SI_LABELS:
@@ -140,15 +146,22 @@ def main() -> None:
 
     # Declarations the journal requires.
     tail = tex[tex.index(B + "backmatter"):]
-    tail = once(tail, B + "bmhead{Use of AI assistance}",
-                B + "bmhead{Author contributions}\n"
-                "[To be completed by the authors: the contribution of each author.]\n\n"
+    tail = once(tail, "The repository does not redistribute video.",
+                "The repository does not redistribute video.\n\n"
+                + B + "bmhead{Author contributions}\n"
+                "N.K.K. developed the vision transformer methodology, implemented the model and its training pipeline, "
+                "conducted the corresponding experiments, analysed the results and prepared the associated figures. "
+                "Y.K. designed and conducted the GAN-based super-resolution study, including its implementation, "
+                "experiments, analysis and figures. "
+                "D.R.M. independently verified the reported results and validated the model across multiple computing platforms. "
+                "B.T. supervised the project and critically reviewed the manuscript.\n\n"
                 + B + "bmhead{Competing interests}\nThe authors declare no competing interests.\n\n"
-                + B + "bmhead{Funding}\nThis work received no external funding.\n\n"
-                + B + "bmhead{Use of AI assistance}")
+                + B + "bmhead{Funding}\nThis work received no external funding.")
 
     xr = "\n" + B + "usepackage{xr-hyper}\n"
-    main_tex = preamble + xr + B + "externaldocument{supp}\n\n" + tex[tex.index(B + "begin{document}"):tex.index(B + "backmatter")] + tail
+    # Line numbers help reviewers point at a sentence; the journal does not add them itself.
+    numbered = once(preamble, "[pdflatex,sn-mathphys-num,twocolumn]{sn-jnl}", "[pdflatex,sn-mathphys-num,twocolumn,lineno]{sn-jnl}")
+    main_tex = numbered + xr +B + "externaldocument{supp}\n\n" + tex[tex.index(B + "begin{document}"):tex.index(B + "backmatter")] + tail
     (OUT / "main.tex").write_bytes(main_tex.replace("\n", "\r\n").encode("utf-8"))
 
     # ---- Supplementary Information ----
@@ -171,9 +184,9 @@ def main() -> None:
         S + "{Supplementary figures and tables}" + B + "label{supp:items}\n"
         "Each supplementary figure and table extends a section of the main text, as follows.\n"
         + B + "begin{itemize}" + B + "setlength{" + B + "itemsep}{1pt}" + B + "setlength{" + B + "parskip}{0pt}\n"
-        + entry("Closest prior work.", "Supplementary Table~" + B + "ref{tab:lit} places the closest works beside this project; "
+        + entry("Closest prior work.", "Supplementary Table~" + B + "ref{tab:lit} places the closest works beside this work; "
                 "numbers are as reported by each paper (main text, Section~" + B + "ref{sec:related}).")
-        + entry("Data and region extraction.", "Supplementary Fig.~" + B + "ref{fig:exdata} shows frames from INCLUDE and CISLR, and "
+        + entry("Data and region extraction.", "Supplementary Fig.~" + B + "ref{fig:exdata} shows frames from INCLUDE, and "
                 "Supplementary Fig.~" + B + "ref{fig:excrops} shows the hand and face crops that region extraction produces "
                 "(Sections~" + B + "ref{sec:method:data} and~" + B + "ref{sec:method:pre}).")
         + entry("Model overview.", "Supplementary Fig.~" + B + "ref{fig:model} summarises the network of Section~"
@@ -185,14 +198,16 @@ def main() -> None:
                 + B + "ref{sec:res:ablation} and~" + B + "ref{sec:res:perclass}).")
         + entry("Super-resolution study.", "Supplementary Fig.~" + B + "ref{fig:gan} shows the design of the study, Supplementary Figs.~"
                 + B + "ref{fig:exgan} and~" + B + "ref{fig:exdetect} show what each front end does to a 180p clip, and Supplementary "
-                "Table~" + B + "ref{tab:gan} gives the results of every arm (Sections~" + B + "ref{sec:method:sr} and~"
+                "Table~" + B + "ref{tab:gan} gives the results of every condition (Sections~" + B + "ref{sec:method:sr} and~"
                 + B + "ref{sec:res:gan}).")
-        + entry("Claimed contributions.", "Supplementary Table~" + B + "ref{tab:contrib} ties each claim of Section~"
+        + entry("Contributions.", "Supplementary Table~" + B + "ref{tab:contrib} links each contribution in Section~"
                 + B + "ref{sec:discussion} to its evidence.")
         + B + "end{itemize}\n\n"
         + items("tab:lit", "fig:exdata", "fig:excrops", "fig:model", "tab:setup", "fig:variants", "fig:ablation",
                 "fig:perclass", "fig:gan", "fig:exgan", "tab:gan", "fig:exdetect", "tab:contrib")
-        + "\n"
+        # Keep every supplementary float ahead of the appendix text, so the
+        # figures follow the list that introduces them and citations number in reading order.
+        + B + "FloatBarrier\n\n"
         + appendices.strip("\n") + "\n\n")
     # The supplement is set in one column and is mostly large figures with a
     # sentence or two of text each, so floats are free to pack together

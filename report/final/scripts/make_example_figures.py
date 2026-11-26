@@ -22,7 +22,6 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
 
 ROOT = Path(__file__).resolve().parents[3]
 os.chdir(ROOT)
@@ -159,7 +158,8 @@ def figure_dataset(out):
     cats = ["Adjectives", "Animals", "Clothes", "Colours", "Days_and_Time", "Greetings", "Home", "Jobs", "People", "Places"]
     picks = [rng.choice(by_cat[c]) for c in cats]
 
-    sheet = Sheet(W_IN, 5.0)
+    # INCLUDE only: CISLR frames show identifiable signers whose release terms we could not confirm.
+    sheet = Sheet(W_IN, 3.33)
     sheet.text(0.05, 0.03, "(a) INCLUDE", 7.5, weight="bold")
     tw, th, gap = 1.38, 0.78, 0.075
     for i, row in enumerate(picks):
@@ -175,15 +175,6 @@ def figure_dataset(out):
     sw, sh, sgap = 0.8, 0.45, 0.07
     for i, frame in enumerate(strip):
         sheet.image(0.05 + i * (sw + sgap), y0 + 0.24, sw, sh, fit(frame, 360))
-
-    y1 = y0 + 0.24 + sh + 0.22
-    sheet.text(0.05, y1, "(c) CISLR", 7.5, weight="bold")
-    names = sorted(p.name for p in crops.CISLR_DIR.glob("*.mp4"))
-    cis = [crops.CISLR_DIR / n for n in random.Random(5).sample(names, 6)]
-    cw = 1.0
-    for i, path in enumerate(cis):
-        frame = frames_at(path, [0.5])[0]
-        sheet.image(0.05 + i * (cw + 0.2), y1 + 0.24, cw, cw, fit(frame, 300))
     sheet.save(out / "fig_ex_dataset.png")
 
 
@@ -294,7 +285,7 @@ def figure_gan(out, picks):
         ref = clean[t][y0:y1, x0:x1]
         deg = cv2.resize(clean[t], (320, 180), interpolation=cv2.INTER_AREA)
         deg = cv2.imdecode(cv2.imencode(".jpg", deg, [cv2.IMWRITE_JPEG_QUALITY, 40])[1], cv2.IMREAD_COLOR)
-        lowres = cv2.resize(deg[y0 // 4:max(y0 // 4 + 2, y1 // 4), x0 // 4:max(x0 // 4 + 2, x1 // 4)], (tile_px := 220, 220), interpolation=cv2.INTER_NEAREST)
+        lowres = cv2.resize(deg[y0 // 4:max(y0 // 4 + 2, y1 // 4), x0 // 4:max(x0 // 4 + 2, x1 // 4)], (220, 220), interpolation=cv2.INTER_NEAREST)
         tiles = [(cv2.resize(ref, (220, 220), interpolation=cv2.INTER_AREA), None), (lowres, None)]
         for kind in kinds[2:]:
             frame = frontend_frames(clip, kind)[t]
